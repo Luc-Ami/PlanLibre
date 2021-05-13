@@ -1,0 +1,14 @@
+PlanLibre is a planning utility under GPL v3 licence.
+PlanLibre is written in C language, using Gtk3.0 toolkit.
+In order to compile, please install all required dependencies (binaries + header files ; for example, libgtk3.0 + libgtk3.0-dev)
+
+Dependancies :
+- autotools
+- gettext packages for internationalization
+- libgtk3.0
+- libglib2.0
+- uui
+- goocanvas2.0
+- json-glib
+- lib-gnome-jeyring
+
