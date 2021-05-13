@@ -1,0 +1,2150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
+<interface>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkAdjustment" id="adjHP1E">
+    <property name="upper">23</property>
+    <property name="value">12</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP1S">
+    <property name="upper">23</property>
+    <property name="value">8</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP2E">
+    <property name="upper">23</property>
+    <property name="value">18</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP2S">
+    <property name="upper">23</property>
+    <property name="value">14</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP3E">
+    <property name="upper">23</property>
+    <property name="value">20</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP3S">
+    <property name="upper">23</property>
+    <property name="value">19</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP4E">
+    <property name="upper">23</property>
+    <property name="value">23</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjHP4S">
+    <property name="upper">23</property>
+    <property name="value">21</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP1E">
+    <property name="upper">59</property>
+    <property name="value">15</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP1S">
+    <property name="upper">59</property>
+    <property name="value">30</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP2E">
+    <property name="upper">59</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP2S">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP3E">
+    <property name="upper">59</property>
+    <property name="value">15</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP3S">
+    <property name="upper">59</property>
+    <property name="value">15</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP4E">
+    <property name="upper">59</property>
+    <property name="value">50</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjMP4S">
+    <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkDialog" id="dialogCalendars">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Calendars</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="margin_left">4</property>
+        <property name="margin_right">4</property>
+        <property name="margin_top">2</property>
+        <property name="margin_bottom">2</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="margin_left">4</property>
+            <property name="margin_right">4</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="buttonCancel">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Click here to revert all changes</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button2">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">4</property>
+            <property name="margin_right">4</property>
+            <property name="margin_top">2</property>
+            <property name="margin_bottom">2</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="label8">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">4</property>
+                <property name="margin_right">4</property>
+                <property name="margin_top">2</property>
+                <property name="margin_bottom">2</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">&lt;b&gt;Summary :&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="box9">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">8</property>
+                <property name="margin_right">8</property>
+                <child>
+                  <object class="GtkLabel" id="label11">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">4</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Starting date :</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="labelProjStart">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">4</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">----</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label14">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">16</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Ending date :</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="labelProjEnd">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">4</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">----</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label7">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">12</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Cur. cal. non-working days :</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="labelNwDays">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="tooltip_text" translatable="yes">Total number of non-working days defined</property>
+                    <property name="margin_left">4</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">0</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="buttonReset">
+                    <property name="visible">True</property>
+                    <property name="sensitive">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="margin_left">4</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <signal name="clicked" handler="on_calendars_reset_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkBox" id="box7">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkImage" id="image4">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
+                            <property name="margin_top">4</property>
+                            <property name="margin_bottom">4</property>
+                            <property name="stock">gtk-clear</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label5">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="tooltip_text" translatable="yes">By clicking this button, all marked days will be removed</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
+                            <property name="margin_top">4</property>
+                            <property name="margin_bottom">4</property>
+                            <property name="label" translatable="yes">Reset all marked days</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">6</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFrame" id="frame2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">4</property>
+                <property name="margin_right">4</property>
+                <property name="margin_top">2</property>
+                <property name="margin_bottom">2</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkAlignment" id="alignment2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkNotebook" id="notebook1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <child>
+                          <object class="GtkBox" id="box2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_right">4</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="box12">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkBox" id="box10">
+                                    <property name="width_request">200</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
+                                    <child>
+                                      <object class="GtkScrolledWindow" id="scrolledwindow1">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="margin_left">4</property>
+                                        <property name="margin_right">4</property>
+                                        <property name="margin_top">2</property>
+                                        <property name="margin_bottom">2</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="vexpand">True</property>
+                                        <property name="shadow_type">in</property>
+                                        <property name="min_content_height">200</property>
+                                        <child>
+                                          <object class="GtkViewport" id="viewportCal">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox" id="box11">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_left">4</property>
+                                        <child>
+                                          <object class="GtkButton" id="btnAdd">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Add a new empty calendar</property>
+                                            <signal name="clicked" handler="on_calendars_add_clicked" swapped="no"/>
+                                            <child>
+                                              <object class="GtkImage" id="image5">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="margin_left">4</property>
+                                                <property name="margin_right">4</property>
+                                                <property name="margin_top">2</property>
+                                                <property name="margin_bottom">2</property>
+                                                <property name="stock">gtk-add</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="btnRemove">
+                                            <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Remove selected calendar</property>
+                                            <signal name="clicked" handler="on_calendars_remove_clicked" swapped="no"/>
+                                            <child>
+                                              <object class="GtkImage" id="image6">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="margin_left">4</property>
+                                                <property name="margin_right">4</property>
+                                                <property name="margin_top">2</property>
+                                                <property name="margin_bottom">2</property>
+                                                <property name="stock">gtk-remove</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkSeparator" id="separator3">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="margin_left">8</property>
+                                            <property name="margin_right">8</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonClone">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">New calendar copied from default calendar</property>
+                                            <signal name="clicked" handler="on_calendars_clone_clicked" swapped="no"/>
+                                            <child>
+                                              <object class="GtkImage" id="image1">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="tooltip_text" translatable="yes">Add a new calendar based on main calendar. 
+All currently marked days in main calendar will be cloned.</property>
+                                                <property name="margin_left">4</property>
+                                                <property name="margin_right">4</property>
+                                                <property name="margin_top">2</property>
+                                                <property name="margin_bottom">2</property>
+                                                <property name="stock">gtk-new</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">3</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkCalendar" id="calendar1">
+                                    <property name="name">calendar1</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Double-Click on a day to set it as a special day.
+Double-Click again to remove this marking.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="year">2019</property>
+                                    <property name="month">8</property>
+                                    <property name="day">15</property>
+                                    <property name="show_week_numbers">True</property>
+                                    <property name="detail_width_chars">8</property>
+                                    <property name="detail_height_rows">1</property>
+                                    <signal name="day-selected-double-click" handler="calendars_day_double_click" swapped="no"/>
+                                    <signal name="month-changed" handler="calendars_month_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label15">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">2</property>
+                                <property name="margin_bottom">2</property>
+                                <property name="xalign">0.89999997615814209</property>
+                                <property name="label" translatable="yes">&lt;i&gt;&lt;small&gt;non-working days are outlined&lt;/small&gt;&lt;/i&gt;</property>
+                                <property name="use_markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label16">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">2</property>
+                                <property name="margin_bottom">2</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Mark non-working days as :&lt;/b&gt;</property>
+                                <property name="use_markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="box6">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">4</property>
+                                <child>
+                                  <object class="GtkRadioButton" id="radiobuttonNw">
+                                    <property name="label" translatable="yes">standard</property>
+                                    <property name="name">togNW</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">mark a day when the ressource isn't working, for various reasons</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="draw_indicator">False</property>
+                                    <property name="group">radiobuttonHolidays</property>
+                                    <signal name="toggled" handler="on_nworking_toggled" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="radiobuttonWE">
+                                    <property name="label" translatable="yes"> day off </property>
+                                    <property name="name">togWE</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">mark day as non-worked</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="draw_indicator">False</property>
+                                    <property name="group">radiobuttonHolidays</property>
+                                    <signal name="toggled" handler="on_weekend_toggled" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="radiobuttonHolidays">
+                                    <property name="label" translatable="yes"> holidays </property>
+                                    <property name="name">togHO</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">mark day as non-worked for vacations or holy-days</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="active">True</property>
+                                    <property name="draw_indicator">False</property>
+                                    <signal name="toggled" handler="on_holidays_toggled" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="radiobuttonAbsent">
+                                    <property name="label" translatable="yes"> Away </property>
+                                    <property name="name">togAW</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">mark days, for example for medical reasons, kids keeping and so on</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="draw_indicator">False</property>
+                                    <property name="group">radiobuttonHolidays</property>
+                                    <signal name="toggled" handler="on_absent_toggled" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRadioButton" id="radiobuttonPubHol">
+                                    <property name="label" translatable="yes"> Public holiday </property>
+                                    <property name="name">togPO</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="tooltip_text" translatable="yes">mark days, for example for medical reasons, kids keeping and so on</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="draw_indicator">False</property>
+                                    <property name="group">radiobuttonHolidays</property>
+                                    <signal name="toggled" handler="on_public_holiday_toggled" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">5</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="box16">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">4</property>
+                                <child>
+                                  <object class="GtkBox" id="box17">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label19">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="tooltip_text" translatable="yes">you can mark at the same time more than one day</property>
+                                        <property name="margin_left">4</property>
+                                        <property name="margin_right">4</property>
+                                        <property name="margin_top">2</property>
+                                        <property name="margin_bottom">2</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;for every ...&lt;/b&gt;</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkGrid" id="grid1">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="row_homogeneous">True</property>
+                                        <property name="column_homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkButton" id="buttonMonday">
+                                            <property name="label" translatable="yes">Mon.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all mondays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_monday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonTuesday">
+                                            <property name="label" translatable="yes">Tue.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all tuesdays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_tuesday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonWednesday">
+                                            <property name="label" translatable="yes">Wed.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all wednesdays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_wednesday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">2</property>
+                                            <property name="top_attach">0</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonThursday">
+                                            <property name="label" translatable="yes">Thu.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all thursdays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_thursday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">3</property>
+                                            <property name="top_attach">0</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonFriday">
+                                            <property name="label" translatable="yes">Fri.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all fridays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_friday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonSaturday">
+                                            <property name="label" translatable="yes">Sat.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all saturdays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_saturday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonSunday">
+                                            <property name="label" translatable="yes">Sun.</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Mark all sundays between start and end date</property>
+                                            <property name="margin_right">4</property>
+                                            <signal name="clicked" handler="on_sunday_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">2</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="width">1</property>
+                                            <property name="height">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <placeholder/>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label18">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">8</property>
+                                    <property name="margin_right">8</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">&lt;i&gt;or ...&lt;/i&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox" id="box18">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkLabel" id="label20">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="tooltip_text" translatable="yes">you can mark at the same time more than one day</property>
+                                        <property name="margin_left">12</property>
+                                        <property name="margin_right">4</property>
+                                        <property name="margin_top">2</property>
+                                        <property name="margin_bottom">2</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;for period ...&lt;/b&gt;</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox" id="box19">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkButton" id="buttonDateStart">
+                                            <property name="label" translatable="yes">date ...</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Click here to change starting date</property>
+                                            <signal name="clicked" handler="on_period_start_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="label21">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="margin_left">4</property>
+                                            <property name="margin_right">4</property>
+                                            <property name="label" translatable="yes">to</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkButton" id="buttonDateEnd">
+                                            <property name="label" translatable="yes">date ...</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <property name="tooltip_text" translatable="yes">Click here to change ending date</property>
+                                            <signal name="clicked" handler="on_period_end_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="buttonMarkPeriod">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="tooltip_text" translatable="yes">Click here to mark period between those dates</property>
+                                        <property name="yalign">0.50999999046325684</property>
+                                        <signal name="clicked" handler="on_period_apply_clicked" swapped="no"/>
+                                        <child>
+                                          <object class="GtkBox" id="box15">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <child>
+                                              <object class="GtkImage" id="image7">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="margin_left">4</property>
+                                                <property name="margin_right">4</property>
+                                                <property name="stock">gtk-edit</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">True</property>
+                                                <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="label22">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="label" translatable="yes">mark this period</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">5</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="tab">
+                          <object class="GtkLabel" id="label1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Non-worked days</property>
+                          </object>
+                          <packing>
+                            <property name="tab_fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box14">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkBox" id="box20">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkImage" id="image9">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">4</property>
+                                    <property name="margin_bottom">4</property>
+                                    <property name="icon_name">help-contents</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label12">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">8</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">&lt;i&gt;Here, you can set-up daily schedules for &lt;b&gt;every&lt;/b&gt; days, even for non-working days.
+Those schedules are only &lt;b&gt;indicatives&lt;/b&gt;, so they don't affect costs computation. and are only used
+for a human readable display in Icalendars (ICS) /agendas.
+You can define up to four (4) periods by day. For example, 9:00 to 12:30 for period #1and 14:00 to 18:00 for period #2&lt;/i&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator" id="separator5">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_top">2</property>
+                                <property name="margin_bottom">2</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="box21">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkLabel" id="label36">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;Day : &lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkComboBoxText" id="comboboxtext1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Click here to choose the week day that you want to change schedule</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="active">0</property>
+                                    <items>
+                                      <item translatable="yes">Monday</item>
+                                      <item translatable="yes">Tuesday</item>
+                                      <item translatable="yes">Wednesday</item>
+                                      <item translatable="yes">Thursday</item>
+                                      <item translatable="yes">Friday</item>
+                                      <item translatable="yes">Saturday</item>
+                                      <item translatable="yes">Sunday</item>
+                                    </items>
+                                    <signal name="changed" handler="on_combo_day_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid" id="grid2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">4</property>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP1S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the first period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP1S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">30</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p1s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">3</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP1E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when ends the first period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP1E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">12</property>
+                                    <signal name="value-changed" handler="on_spin_p1e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">5</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP1E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when ends the first period (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP1E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">30</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p1e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">6</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label32">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Those two columns to define hours and minutes when period starts</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">From</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label33">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Those two columns to define hours and minutes when period ends</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">To</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">5</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP3S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the third period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP3S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">19</property>
+                                    <signal name="value-changed" handler="on_spin_p3s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP3E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the second period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP3E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">20</property>
+                                    <signal name="value-changed" handler="on_spin_p3e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">5</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP3S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the third period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP3S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p3s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">3</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP3E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the second period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP3E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">8</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p3e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">6</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP1S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the first period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP1S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">8</property>
+                                    <signal name="value-changed" handler="on_spin_p1s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP2S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the second period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP2S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="value-changed" handler="on_spin_p2s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP2S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the second period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="text" translatable="yes">30</property>
+                                    <property name="adjustment">adjMP2S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">30</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p2s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">3</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP2E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when ends the first period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="text" translatable="yes">12</property>
+                                    <property name="adjustment">adjHP2E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">18</property>
+                                    <signal name="value-changed" handler="on_spin_p2e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">5</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP2E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when ends the first period (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="text" translatable="yes">30</property>
+                                    <property name="adjustment">adjMP2E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">30</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p2e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">6</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP4S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the fourth period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP4S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="value-changed" handler="on_spin_p4s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP4S">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the fourth period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP4S</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <property name="value">5</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p4s_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">3</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonHP4E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the hour when starts the second period (from 0 to 23)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjHP4E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="value-changed" handler="on_spin_p4e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">5</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="spinbuttonMP4E">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">Type here the minute when starts the second period  (from 0 to 59)</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="adjustment">adjMP4E</property>
+                                    <property name="numeric">True</property>
+                                    <property name="wrap">True</property>
+                                    <signal name="output" handler="on_min_spin_output" swapped="no"/>
+                                    <signal name="value-changed" handler="on_spin_p4e_hour_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">6</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelp1">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="xalign">1</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;First period&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelp2">
+                                    <property name="name">labelp2</property>
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="xalign">1</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;Second period&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelp3">
+                                    <property name="name">labelp3</property>
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="xalign">1</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;Third period&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelp4">
+                                    <property name="name">labelp4</property>
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="xalign">1</property>
+                                    <property name="label" translatable="yes">&lt;b&gt;Fourth period&lt;/b&gt;</property>
+                                    <property name="use_markup">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">2</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="switchP2">
+                                    <property name="name">switchP2</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">activate/desactivate usage of this period.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <signal name="notify::active" handler="on_switch_period2_event" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">7</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="switchP3">
+                                    <property name="name">switchP3</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">activate/desactivate usage of this period.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <signal name="notify::active" handler="on_switch_period3_event" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">7</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="switchP4">
+                                    <property name="name">switchP4</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">activate/desactivate usage of this period.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <signal name="notify::active" handler="on_switch_period4_event" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">7</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSeparator" id="separator4">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">8</property>
+                                    <property name="margin_right">8</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="orientation">vertical</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">4</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="width">1</property>
+                                    <property name="height">5</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="switchP1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="tooltip_text" translatable="yes">activate/desactivate usage of this period.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <signal name="notify::active" handler="on_switch_period1_event" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">7</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label23">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Those two columns to define hours and minutes when period ends</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">Use</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">7</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox" id="boxErrP2">
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">4</property>
+                                    <property name="margin_bottom">4</property>
+                                    <child>
+                                      <object class="GtkImage" id="image10">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">dialog-warning</property>
+                                        <property name="icon_size">2</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label24">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_left">4</property>
+                                        <property name="label" translatable="yes">&lt;small&gt;No room for period #2&lt;/small&gt;</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">8</property>
+                                    <property name="top_attach">3</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox" id="boxErrP3">
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">4</property>
+                                    <property name="margin_bottom">4</property>
+                                    <child>
+                                      <object class="GtkImage" id="image11">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">dialog-warning</property>
+                                        <property name="icon_size">2</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label25">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_left">4</property>
+                                        <property name="label" translatable="yes">&lt;small&gt;No room for period #3&lt;/small&gt;</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">8</property>
+                                    <property name="top_attach">4</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox" id="boxErrP4">
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">4</property>
+                                    <property name="margin_bottom">4</property>
+                                    <child>
+                                      <object class="GtkImage" id="image12">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">dialog-warning</property>
+                                        <property name="icon_size">2</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="label26">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_left">4</property>
+                                        <property name="label" translatable="yes">&lt;small&gt;No room for period #4&lt;/small&gt;</property>
+                                        <property name="use_markup">True</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">8</property>
+                                    <property name="top_attach">5</property>
+                                    <property name="width">1</property>
+                                    <property name="height">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="box22">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">4</property>
+                                <property name="margin_right">4</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">4</property>
+                                <child>
+                                  <object class="GtkLabel" id="label6">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">It's a reminder. The project's default daily schedule is defined under :
+ project&gt;properties menu.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">Project default daily schedule :</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelDefStartTime">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Default daily starting time</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">9:00</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelCalName3">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">It's the name of current calendar. You can't modifiy the main project calendar name.</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">to</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="labelDefEndTime">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="tooltip_text" translatable="yes">Default daily ending time</property>
+                                    <property name="margin_left">4</property>
+                                    <property name="margin_right">4</property>
+                                    <property name="margin_top">2</property>
+                                    <property name="margin_bottom">2</property>
+                                    <property name="label" translatable="yes">17:00</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">3</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child type="tab">
+                          <object class="GtkLabel" id="label10">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Daily schedules</property>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                            <property name="tab_fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child type="tab">
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label">
+                  <object class="GtkBox" id="box8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkLabel" id="label9">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">4</property>
+                        <property name="margin_right">4</property>
+                        <property name="margin_top">2</property>
+                        <property name="margin_bottom">2</property>
+                        <property name="label" translatable="yes">Calendar :</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="labelCalName">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">It's the name of current calendar. You can't modifiy the main project calendar name.</property>
+                        <property name="margin_left">4</property>
+                        <property name="margin_right">4</property>
+                        <property name="margin_top">2</property>
+                        <property name="margin_bottom">2</property>
+                        <property name="label" translatable="yes">--------</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">2</property>
+                <property name="margin_bottom">2</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">14</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">buttonCancel</action-widget>
+      <action-widget response="1">button2</action-widget>
+    </action-widgets>
+  </object>
+</interface>

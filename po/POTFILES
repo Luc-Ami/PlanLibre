@@ -1,0 +1,4 @@
+	../src/main.c \
+	../src/misc.c \
+	../src/interface.c \
+	../src/support.c

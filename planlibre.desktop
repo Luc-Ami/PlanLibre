@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=0.1
+Name=PlanLibre
+Name[fr]=PlanLibre utilitaire de planification
+Name[ru]=PlanLibre
+Name[es]=PlanLibre
+Comment=Utilitie to take to plan various task, intended for highlevel, research, services projects.
+Comment[fr]=
+Comment[ru]=
+Comment[es]=
+Exec=planlibre
+Icon=planlibre
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=utilities;GTK

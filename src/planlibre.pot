@@ -1,0 +1,3994 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-17 13:16+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: report.c:1230
+#, c-format
+msgid "\t%s\t%.3f\n"
+msgstr ""
+
+#: report.c:1248
+#, c-format
+msgid ""
+"\tCost excl. non-working days, clamped :\t%.3f\n"
+"\n"
+msgstr ""
+
+#: report.c:1243
+#, c-format
+msgid ""
+"\tDuration : %d hour(s) and %d minute(s) (excl. non-working days, clamped).\n"
+msgstr ""
+
+#: report.c:1262
+msgid ""
+"\n"
+"\n"
+"Diagram 2 of 2 : repartition of worked days (excl. non-working days). \n"
+"\n"
+msgstr ""
+
+#: report.c:523
+#, c-format
+msgid ""
+"\n"
+"Diagram %d of %d\n"
+msgstr ""
+
+#: report.c:968
+msgid ""
+"\n"
+"Diagram : net duration repartition\n"
+msgstr ""
+
+#: report.c:507
+#, c-format
+msgid ""
+"\n"
+"Project \"%s\" has %d task(s),\n"
+msgstr ""
+
+#: report.c:1239
+msgid ""
+"\n"
+"Table 2 of 2 : global datas\n"
+msgstr ""
+
+#: report.c:308 report.c:931
+#, c-format
+msgid ""
+"\n"
+"The current project has %d task(s)\n"
+msgstr ""
+
+#: savestate.c:94 savestate.c:134
+#, c-format
+msgid " %s settings auto-generated - Do not edit!"
+msgstr ""
+
+#: timeshift.ui:221
+msgid " --"
+msgstr ""
+
+#: main.ui:3330
+msgid " <big><b>Completed </b></big>"
+msgstr ""
+
+#: main.ui:3152
+msgid " <big><b>In progress </b></big>"
+msgstr ""
+
+#: main.ui:3241
+msgid " <big><b>Overdue </b></big>"
+msgstr ""
+
+#: main.ui:3062
+msgid " <big><b>To do</b></big>"
+msgstr ""
+
+#: misc.c:39
+#, c-format
+msgid ""
+" <span font=\"11\" foreground=\"white\" background=\"#2C8A3C\"><b>SHIFT</b></"
+"span> + <span font=\"11\" foreground=\"white\" background=\"#15142B\"><b> %s "
+"</b></span>"
+msgstr ""
+
+#: calendars.ui:672
+msgid " Away "
+msgstr ""
+
+#: tasksdialogs.c:744
+msgid " Categ. "
+msgstr ""
+
+#: tasksdialogs.c:703
+msgid " Cost "
+msgstr ""
+
+#: mail.c:335
+msgid " Email "
+msgstr ""
+
+#: mail.c:326 tasksdialogs.c:711 tasksdialogs.c:760
+msgid " Id "
+msgstr ""
+
+#: main.ui:3086 main.ui:3176 main.ui:3265 main.ui:3354
+msgid " None "
+msgstr ""
+
+#: calendars.ui:693
+msgid " Public holiday "
+msgstr ""
+
+#: tasksdialogs.c:752
+msgid " Task name "
+msgstr ""
+
+#: calendars.ui:630
+msgid " day off "
+msgstr ""
+
+#: calendars.ui:651
+msgid " holidays "
+msgstr ""
+
+#: report.c:887
+#, c-format
+msgid "%.2dH%.2dm."
+msgstr ""
+
+#: ressources.c:95
+#, c-format
+msgid "%.2f <i>fixed</i>"
+msgstr ""
+
+#: ressources.c:83
+#, c-format
+msgid "%.2f <i>per day</i>"
+msgstr ""
+
+#: ressources.c:79
+#, c-format
+msgid "%.2f <i>per hour</i>"
+msgstr ""
+
+#: ressources.c:91
+#, c-format
+msgid "%.2f <i>per month</i>"
+msgstr ""
+
+#: ressources.c:87
+#, c-format
+msgid "%.2f <i>per week</i>"
+msgstr ""
+
+#: ressources.c:99
+#, c-format
+msgid "%.2f per unknown rate"
+msgstr ""
+
+#: report.c:392
+#, c-format
+msgid "%.2f%%"
+msgstr ""
+
+#: report.c:1151
+#, c-format
+msgid "%.3f %s"
+msgstr ""
+
+#: files.c:871 tasks.c:1796
+#, c-format
+msgid "%d day(s)"
+msgstr ""
+
+#: misc.c:552
+#, c-format
+msgid "%d day(s) and %d hour(s)."
+msgstr ""
+
+#: timeline.c:410
+#, c-format
+msgid "%d day(s) backward"
+msgstr ""
+
+#: timeline.c:412
+#, c-format
+msgid "%d day(s) forward"
+msgstr ""
+
+#: misc.c:549
+#, c-format
+msgid "%d day(s)."
+msgstr ""
+
+#: misc.c:545
+#, c-format
+msgid "%d hour(s)."
+msgstr ""
+
+#: assign.c:441
+#, c-format
+msgid "%d/%d task(s)"
+msgstr ""
+
+#: tasks.c:681
+#, c-format
+msgid "%s"
+msgstr ""
+
+#: report.c:962
+#, c-format
+msgid "%s costs (estimated excl. non-working days) : %s %.2f\n"
+msgstr ""
+
+#: report.c:323
+#, c-format
+msgid "%s has completed %d task(s)\n"
+msgstr ""
+
+#: report.c:335
+#, c-format
+msgid "%s if on go for %d task(s)\n"
+msgstr ""
+
+#: report.c:329
+#, c-format
+msgid "%s if overdue for %d task(s)\n"
+msgstr ""
+
+#: report.c:313 report.c:936
+#, c-format
+msgid "%s is assigned to %d task(s)\n"
+msgstr ""
+
+#: report.c:956
+#, c-format
+msgid ""
+"%s works (estimated excl. non-working days, using true effective schedule, "
+"clamped) %d hour(s) and %d minute(s)\n"
+msgstr ""
+
+#: import.c:518 tasks.c:895 tasks.c:988 tasks.c:1085 tasks.c:1789
+#: undoredo.c:674
+#, c-format
+msgid "%s, %d day(s)"
+msgstr ""
+
+#: files.c:866 tasks.c:490 tasks.c:680
+#, c-format
+msgid "%s, %s"
+msgstr ""
+
+#: mail.c:1665
+#, c-format
+msgid "%s/calendar-%s.ics"
+msgstr ""
+
+#: mail.c:1648
+#, c-format
+msgid "%s/report-%s.rtf"
+msgstr ""
+
+#: misc.c:449 misc.c:531 misc.c:574
+#, c-format
+msgid "%x"
+msgstr ""
+
+#: shortkeys.ui:1017
+msgid "&"
+msgstr ""
+
+#: ressources.ui:564
+msgid "(raw)materials"
+msgstr ""
+
+#: main.ui:2500
+msgid "--"
+msgstr ""
+
+#: tasksdialogs.c:967
+msgid "---"
+msgstr ""
+
+#: calendars.ui:215 calendars.ui:247
+msgid "----"
+msgstr ""
+
+#: calendars.ui:2103
+msgid "--------"
+msgstr ""
+
+#: shortkeys.ui:901
+msgid "/"
+msgstr ""
+
+#: calendars.ui:280 tasks.ui:428 tasks.ui:449
+msgid "0"
+msgstr ""
+
+#: properties.ui:541 ressources.ui:292 tasks.ui:554
+msgid "0,00"
+msgstr ""
+
+#: main.ui:4097
+msgid "00:00"
+msgstr ""
+
+#: taskrepeat.ui:461 taskrepeat.ui:1158
+msgid "1"
+msgstr ""
+
+#: taskrepeat.ui:623
+msgid "10"
+msgstr ""
+
+#: main.ui:1768
+msgid "100%"
+msgstr ""
+
+#: taskrepeat.ui:641
+msgid "11"
+msgstr ""
+
+#: calendars.ui:1469 taskrepeat.ui:659
+msgid "12"
+msgstr ""
+
+#: taskrepeat.ui:677
+msgid "13"
+msgstr ""
+
+#: taskrepeat.ui:695
+msgid "14"
+msgstr ""
+
+#: taskrepeat.ui:713
+msgid "15"
+msgstr ""
+
+#: main.ui:1767
+msgid "150%"
+msgstr ""
+
+#: taskrepeat.ui:731
+msgid "16"
+msgstr ""
+
+#: taskrepeat.ui:749
+msgid "17"
+msgstr ""
+
+#: calendars.ui:2033
+msgid "17:00"
+msgstr ""
+
+#: taskrepeat.ui:767
+msgid "18"
+msgstr ""
+
+#: taskrepeat.ui:785
+msgid "19"
+msgstr ""
+
+#: main.ui:2902 taskrepeat.ui:479
+msgid "2"
+msgstr ""
+
+#: taskrepeat.ui:803
+msgid "20"
+msgstr ""
+
+#: main.ui:1766
+msgid "200%"
+msgstr ""
+
+#: taskrepeat.ui:821
+msgid "21"
+msgstr ""
+
+#: taskrepeat.ui:839
+msgid "22"
+msgstr ""
+
+#: taskrepeat.ui:857
+msgid "23"
+msgstr ""
+
+#: taskrepeat.ui:875
+msgid "24"
+msgstr ""
+
+#: taskrepeat.ui:893
+msgid "25"
+msgstr ""
+
+#: taskrepeat.ui:911
+msgid "26"
+msgstr ""
+
+#: taskrepeat.ui:929
+msgid "27"
+msgstr ""
+
+#: taskrepeat.ui:947
+msgid "28"
+msgstr ""
+
+#: taskrepeat.ui:965
+msgid "29"
+msgstr ""
+
+#: taskrepeat.ui:497
+msgid "3"
+msgstr ""
+
+#: calendars.ui:1444 calendars.ui:1493 taskrepeat.ui:983
+msgid "30"
+msgstr ""
+
+#: taskrepeat.ui:1001
+msgid "31"
+msgstr ""
+
+#: taskrepeat.ui:515
+msgid "4"
+msgstr ""
+
+#: taskrepeat.ui:533
+msgid "5"
+msgstr ""
+
+#: main.ui:1770
+msgid "50%"
+msgstr ""
+
+#: taskrepeat.ui:551
+msgid "6"
+msgstr ""
+
+#: taskrepeat.ui:569
+msgid "7"
+msgstr ""
+
+#: main.ui:1769
+msgid "75%"
+msgstr ""
+
+#: taskrepeat.ui:587
+msgid "8"
+msgstr ""
+
+#: taskrepeat.ui:605
+msgid "9"
+msgstr ""
+
+#: calendars.ui:1999
+msgid "9:00"
+msgstr ""
+
+#: import.c:331
+#, c-format
+msgid ""
+"<b><big>%d</big></b> ressource(s)\n"
+"sucessfully appended."
+msgstr ""
+
+#: import.c:559
+#, c-format
+msgid ""
+"<b><big>%d</big></b> task(s)\n"
+"sucessfully appended.\n"
+"Dashboard will be updated <u>only</u> when ressoources are assigned to new "
+"task(s)."
+msgstr ""
+
+#: home.c:113 home.c:114 home.c:115 home.c:116 main.ui:884 main.ui:933
+#: main.ui:982 main.ui:1031
+msgid "<b><i>No</i></b>"
+msgstr ""
+
+#: home.c:130 home.c:149 home.c:167 home.c:185
+msgid "<b><i>done</i></b>"
+msgstr ""
+
+#: home.c:127 home.c:146 home.c:164 home.c:182
+msgid "<b><i>error</i></b>"
+msgstr ""
+
+#: main.ui:867
+msgid "<b>> for tasks overdue : </b>"
+msgstr ""
+
+#: main.ui:965
+msgid "<b>> tasks completed yesterday : </b>"
+msgstr ""
+
+#: main.ui:916
+msgid "<b>> tasks starting today : </b>"
+msgstr ""
+
+#: main.ui:1014
+msgid "<b>> tasks starting tomorrow : </b>"
+msgstr ""
+
+#: settings.ui:409
+msgid "<b>Automated emails</b>"
+msgstr ""
+
+#: properties.ui:502
+msgid "<b>Budget :</b>"
+msgstr ""
+
+#: tasks.c:2365
+msgid ""
+"<b>Can't do that !</b>\n"
+"\n"
+"Dates mismatch !\n"
+"This task has predecessor(s).\n"
+"Current task 'Starting' date must be <i>after</i> predecessor task 'Ending' "
+"date.\n"
+"\n"
+"Please check the dates, or modify predecessor's dates to solve this issue."
+msgstr ""
+
+#: tasks.c:2257
+msgid ""
+"<b>Can't do that !</b>\n"
+"\n"
+"Dates mismatch !\n"
+"This task is a predecessor for one or more other tasks.\n"
+"Current task 'Ending' date must be <i>before</i> children task 'Starting' "
+"date.\n"
+"\n"
+"Please check the dates, or modify children's dates to fix this issue."
+msgstr ""
+
+#: tasks.c:2477
+msgid ""
+"<b>Can't do that !</b>\n"
+"\n"
+"Dates mismatch !\n"
+"This task is a predecessor for one or more other tasks.\n"
+"Current task 'Ending' date must be <i>before</i> children task 'Starting' "
+"date.\n"
+"\n"
+"Please check the dates, or modify children's dates to solve this issue."
+msgstr ""
+
+#: tasks.c:136
+#, c-format
+msgid ""
+"<b>Can't do that !</b>\n"
+"\\Ressources conflict !\n"
+"This task can't use same ressource(s) than other task(s). \n"
+"Check if ressource(s) :\n"
+"<b>%s</b>\n"
+"isn't used on the same period by an other task, in order to solve this issue."
+msgstr ""
+
+#: timeshift.ui:132
+msgid "<b>Current starting date</b>"
+msgstr ""
+
+#: ressources.ui:674
+msgid "<b>Date and Time management :</b>"
+msgstr ""
+
+#: calendars.ui:1138
+msgid "<b>Day : </b>"
+msgstr ""
+
+#: properties.ui:228 ressources.ui:237
+msgid "<b>Description :</b>"
+msgstr ""
+
+#: shortkeys.ui:484
+msgid "<b>Edition</b>"
+msgstr ""
+
+#: tasksdialogs.c:236
+msgid ""
+"<b>Error !</b>\n"
+"\n"
+"You can't set a <i>don't start before</i> date <u>after</u> <i><b>task start "
+"date</b></i> date!\n"
+"Planlibre has automatically changed due date."
+msgstr ""
+
+#: tasksdialogs.c:228
+msgid ""
+"<b>Error !</b>\n"
+"\n"
+"You can't set a date+duration <i>after</i> task's deadline date!\n"
+"Please, change deadline date or task duration."
+msgstr ""
+
+#: tasks.c:2468
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch !\n"
+" Current task 'Ending' date must be <i>after</i> task's 'Starting' date.\n"
+"\n"
+"Please check the dates, or modify tasks's dates."
+msgstr ""
+
+#: properties.c:140
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Ending' date must be <i>after</i> 'Starting' date.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: calendars.c:2256
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Ending' date must be <i>after</i> 'period' starting date.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: calendars.c:2250
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Ending' date must be <i>inside</i> 'project' limits.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: properties.c:105
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Starting' date must be <i>before</i> 'Ending' date.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: calendars.c:2219
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Starting' date must be <i>before</i> 'period' ending "
+"date.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: calendars.c:2213
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! 'Starting' date must be <i>inside</i> 'project' limits.\n"
+"\n"
+"Please check the dates."
+msgstr ""
+
+#: tasksdialogs.c:294
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! Date and date+duration must be <i>before</i> project's "
+"'Ending' date.\n"
+"\n"
+"Please check the dates or modify project's properties."
+msgstr ""
+
+#: tasksdialogs.c:202
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! Date must be <i>before</i> project's 'Ending' date.\n"
+"\n"
+"Please check the dates or modify project's properties."
+msgstr ""
+
+#: tasksdialogs.c:459
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Dates mismatch ! Starting date+duration must be <i>before</i> project's "
+"'Ending' date.\n"
+"\n"
+"Please check the dates or modify project's properties."
+msgstr ""
+
+#: ressources.c:1318
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Problem with choosen image !\n"
+"The icon remains unchanged."
+msgstr ""
+
+#: properties.c:215
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"Problem with choosen image !\n"
+"The logo remains unchanged."
+msgstr ""
+
+#: tasksdialogs.c:321
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"This task is a <b>linked and dependant</b> to one or more task(s).\n"
+"You can't <i>overlap</i> linked task's ending date!\n"
+"Please, change current task starting date."
+msgstr ""
+
+#: tasksdialogs.c:314
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"This task is a <b>predecessor</b> of one or more task(s).\n"
+"You can't <i>overlap</i> linked task's starting date!\n"
+"Please, change current task starting date or duration."
+msgstr ""
+
+#: tasksdialogs.c:466
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"This task is a <b>predecessor</b> of one or more task(s).\n"
+"You can't set a duration <i>overlaping</i> linked task's starting date!\n"
+"Please, change current task starting date or duration."
+msgstr ""
+
+#: timeline.c:318
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You can't place a new milestone <b>outside</b>project's starting or ending "
+"date.\n"
+"You can change this starting and ending date in <i>project's properties</"
+"i>.\n"
+"Please, have a look on <b>Properties</b> menu."
+msgstr ""
+
+#: timeline.c:290
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You can't place a new task <b>outside</b>project's starting or ending date.\n"
+"You can change this starting and ending date in <i>project's properties</"
+"i>.\n"
+"Please, have a look on <b>Properties</b> menu."
+msgstr ""
+
+#: tasksdialogs.c:209 tasksdialogs.c:302
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You can't set a date <i>before</i> project's starting date!\n"
+"Please, change project properties if you are sure (see <b>File menu</b>). "
+msgstr ""
+
+#: tasksdialogs.c:331 tasksdialogs.c:475
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You can't set a date+duration <i>after</i> task's deadline date!\n"
+"Please, change deadline date or task duration."
+msgstr ""
+
+#: tasksdialogs.c:339
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You can't set a start date <i>before</i> project's <i><b>don't start before</"
+"b></i> date!\n"
+"Planlibre has automatically changed start date."
+msgstr ""
+
+#: tasksdialogs.c:1356
+msgid ""
+"<b>Error!</b>\n"
+"\n"
+"You've asked to place a task <i>after</i> project's end.\n"
+"\n"
+"\n"
+"Please check the dates, or modify project's properties to unlock dates."
+msgstr ""
+
+#: taskrepeat.ui:338
+msgid "<b>Every :</b>"
+msgstr ""
+
+#: shortkeys.ui:66
+msgid "<b>Files</b>"
+msgstr ""
+
+#: calendars.ui:1609
+msgid "<b>First period</b>"
+msgstr ""
+
+#: calendars.ui:1672
+msgid "<b>Fourth period</b>"
+msgstr ""
+
+#: properties.ui:98
+msgid "<b>Identification :</b>"
+msgstr ""
+
+#: calendars.ui:591
+msgid "<b>Mark non-working days as :</b>"
+msgstr ""
+
+#: freemail.ui:239 reportmail.ui:300
+msgid "<b>Message :</b>"
+msgstr ""
+
+#: shortkeys.ui:563
+msgid "<b>Navigation</b>"
+msgstr ""
+
+#: timeshift.ui:168
+msgid "<b>New starting date</b>"
+msgstr ""
+
+#: taskrepeat.ui:422
+msgid "<b>On the :</b>"
+msgstr ""
+
+#: tasks.c:2243 tasks.c:2517
+msgid ""
+"<b>Please note!</b>\n"
+"\n"
+"Current task 'Ending' date should be <i>before</i> project's 'Ending' date.\n"
+"\n"
+"PlanLibre has automatically updated project's ending date."
+msgstr ""
+
+#: tasks.c:2354
+msgid ""
+"<b>Please note!</b>\n"
+"\n"
+"Current task 'Starting' date should be <i>after or equal</i>   project's "
+"'Starting' date.\n"
+"\n"
+"PlanLibre has automatically updated project's starting date."
+msgstr ""
+
+#: settings.ui:672
+msgid "<b>Productivity timer</b>"
+msgstr ""
+
+#: taskrepeat.ui:441
+msgid "<b>Repeat :</b>"
+msgstr ""
+
+#: tasks.ui:199
+msgid "<b>Ressources required : </b>"
+msgstr ""
+
+#: shortkeys.ui:1048
+msgid "<b>Ressources</b>"
+msgstr ""
+
+#: calendars.ui:1630
+msgid "<b>Second period</b>"
+msgstr ""
+
+#: settings.ui:1012
+msgid "<b>Security</b>"
+msgstr ""
+
+#: settings.ui:903
+msgid "<b>Server parameters</b>"
+msgstr ""
+
+#: timeshift.ui:203
+msgid "<b>Shift</b>"
+msgstr ""
+
+#: calendars.ui:176
+msgid "<b>Summary :</b>"
+msgstr ""
+
+#: taskrepeat.ui:129
+msgid "<b>Task to repeat, used as a pattern :</b>"
+msgstr ""
+
+#: main.ui:1407
+msgid "<b>Tasks completed :</b>"
+msgstr ""
+
+#: main.ui:1258
+msgid "<b>Tasks overdue :</b>"
+msgstr ""
+
+#: tasks.ui:276
+msgid "<b>Tasks required : </b>"
+msgstr ""
+
+#: main.ui:1109
+msgid "<b>Tasks running :</b>"
+msgstr ""
+
+#: main.ui:1184
+msgid "<b>Tasks starting today :</b>"
+msgstr ""
+
+#: main.ui:1332
+msgid "<b>Tasks starting tomorrow :</b>"
+msgstr ""
+
+#: shortkeys.ui:737
+msgid "<b>Tasks</b>"
+msgstr ""
+
+#: properties.ui:915
+msgid "<b>Team :</b>"
+msgstr ""
+
+#: calendars.ui:1651
+msgid "<b>Third period</b>"
+msgstr ""
+
+#: misc.c:336
+msgid "<b>Today :</b>"
+msgstr ""
+
+#: main.ui:1465
+msgid "<b>Today's milestones :</b>"
+msgstr ""
+
+#: taskrepeat.ui:1115
+msgid "<b>Up to  :</b>"
+msgstr ""
+
+#: calendars.ui:741
+msgid "<b>for every ...</b>"
+msgstr ""
+
+#: calendars.ui:923
+msgid "<b>for period ...</b>"
+msgstr ""
+
+#: main.ui:800
+msgid "<big><b><i>none</i></b></big>"
+msgstr ""
+
+#: home.c:119 home.c:138 home.c:157 home.c:175
+#, c-format
+msgid "<big><b><i>on the way (%d of %d)</i></b></big>"
+msgstr ""
+
+#: home.c:88
+msgid "<big><b><i>yes</i></b></big>"
+msgstr ""
+
+#: password.ui:101
+msgid "<big><b>A password if required in order to connect to server</b></big>"
+msgstr ""
+
+#: callbacks.c:637
+msgid ""
+"<big><b>Can't access to online wiki !</b></big>\n"
+"Please, check your Internet connection\n"
+" and/or your desfault desktop file browser parameters."
+msgstr ""
+
+#: main.ui:783
+msgid "<big><b>Last auto-mailing : </b></big>"
+msgstr ""
+
+#: ressources.ui:181
+msgid "<big><b>Ressource</b></big>"
+msgstr ""
+
+#: reportmail.ui:157
+msgid "<big><b>Send a report by email</b></big>"
+msgstr ""
+
+#: main.ui:832
+msgid "<big><b>Sending auto-mails : </b></big>"
+msgstr ""
+
+#: main.ui:751 main.ui:1131 main.ui:1206 main.ui:1280 main.ui:1354
+#: main.ui:1424 main.ui:1482
+msgid "<big><big><big>0</big></big></big>"
+msgstr ""
+
+#: main.ui:651
+msgid "<big><big><big><i>1 Aou 2019</i></big></big></big>"
+msgstr ""
+
+#: main.ui:684
+msgid "<big><big><big>Project : </big></big></big>"
+msgstr ""
+
+#: main.ui:734
+msgid "<big><big><big>Total Tasks : </big></big></big>"
+msgstr ""
+
+#: main.ui:701
+msgid "<big><big><big>noname</big></big></big>"
+msgstr ""
+
+#: main.ui:4015
+msgid "<i> Here you can see various tips </i>"
+msgstr ""
+
+#: tasksutils.c:594
+#, c-format
+msgid "<i>%d day(s)</i>"
+msgstr ""
+
+#: tasksutils.c:453 tasksutils.c:522
+#, c-format
+msgid "<i>%s, %d day(s)</i>"
+msgstr ""
+
+#: tasks.c:493
+#, c-format
+msgid "<i>%s</i>"
+msgstr ""
+
+#: calendars.ui:573
+msgid "<i><small>non-working days are outlined</small></i>"
+msgstr ""
+
+#: settings.ui:808
+msgid ""
+"<i>After each work time, timer is paused and a counter appears in order to "
+"remind you how much rest time remains</i>"
+msgstr ""
+
+#: reportmail.ui:195
+msgid ""
+"<i>Click on recipients page to refine recipients' list. It's better to type "
+"a short\n"
+"message to inform recipients about the attached file.</i>"
+msgstr ""
+
+#: timeline.c:473
+msgid "<i>Define the new <b>starting date</b> of current group.</i>"
+msgstr ""
+
+#: timeshift.ui:74
+msgid "<i>Define the new <b>starting date</b> of your project.</i>"
+msgstr ""
+
+#: tasksutils.c:596
+msgid "<i>Empty</i>"
+msgstr ""
+
+#: ressources.ui:194
+msgid ""
+"<i>Here, you can add a <b>new</b> ressource or <b>modify</b> an existing one."
+"</i>"
+msgstr ""
+
+#: calendars.ui:1094
+msgid ""
+"<i>Here, you can set-up daily schedules for <b>every</b> days, even for non-"
+"working days.\n"
+"Those schedules are only <b>indicatives</b>, so they don't affect costs "
+"computation. and are only used\n"
+"for a human readable display in Icalendars (ICS) /agendas.\n"
+"You can define up to four (4) periods by day. For example, 9:00 to 12:30 for "
+"period #1and 14:00 to 18:00 for period #2</i>"
+msgstr ""
+
+#: taskrepeat.ui:96
+msgid ""
+"<i>Please note that all cloned tasks are unlinked with any \n"
+"predecessor defined in source task.\n"
+"Conversely, ressources are unchanged in cloned tasks.</i>"
+msgstr ""
+
+#: password.ui:119
+msgid ""
+"<i>Please, type this password. It will be requested only once \n"
+"during this session.</i>"
+msgstr ""
+
+#: reportmail.ui:176
+msgid ""
+"<i>The <u>current</u> report will be sent. By default, report is sent to\n"
+"<u>all</u> recipients. </i>"
+msgstr ""
+
+#: timeshift.ui:92
+msgid ""
+"<i>Then <b>all</b> the tasks will be shifted forward or backward, according "
+"to the new date.</i>"
+msgstr ""
+
+#: taskrepeat.ui:1028
+msgid "<i>of :</i>"
+msgstr ""
+
+#: calendars.ui:900
+msgid "<i>or ...</i>"
+msgstr ""
+
+#: properties.ui:362
+msgid "<i>to</i>"
+msgstr ""
+
+#: password.ui:213
+msgid "<small><i>Password will be hiden during typing</i></small>"
+msgstr ""
+
+#: settings.ui:500
+msgid ""
+"<small><i>automated emails will be sent to partners only once a day</i></"
+"small>"
+msgstr ""
+
+#: settings.ui:1180
+msgid "<small><i>your password isn't stored between sessions</i></small>"
+msgstr ""
+
+#: calendars.ui:1817
+msgid "<small>No room for period #2</small>"
+msgstr ""
+
+#: calendars.ui:1859
+msgid "<small>No room for period #3</small>"
+msgstr ""
+
+#: calendars.ui:1901
+msgid "<small>No room for period #4</small>"
+msgstr ""
+
+#: calendars.c:1845
+msgid ""
+"<span foreground=\"black\" background=\"#1ED110\"><small> day off </small></"
+"span>"
+msgstr ""
+
+#: calendars.c:1849
+msgid ""
+"<span foreground=\"black\" background=\"#F7CB16\"><small> holidays </small></"
+"span>"
+msgstr ""
+
+#: calendars.c:1857
+msgid ""
+"<span foreground=\"black\" background=\"#F7CB16\"><small> publ. hol. </"
+"small></span>"
+msgstr ""
+
+#: misc.c:70
+msgid "<span foreground=\"green\">Ready</span>"
+msgstr ""
+
+#: misc.c:66
+msgid "<span foreground=\"red\">Modified</span>"
+msgstr ""
+
+#: calendars.c:1837
+msgid ""
+"<span foreground=\"white\" background=\"#2E2A72\"><small>force working </"
+"small></span>"
+msgstr ""
+
+#: calendars.c:1841
+msgid ""
+"<span foreground=\"white\" background=\"#5E1C71\"><small> misc. </small></"
+"span>"
+msgstr ""
+
+#: calendars.c:1853
+msgid ""
+"<span foreground=\"white\" background=\"red\"><small> away </small></span>"
+msgstr ""
+
+#: main.ui:2367
+msgid ">||"
+msgstr ""
+
+#: misc.c:1295
+msgid "??"
+msgstr ""
+
+#: main.ui:553
+msgid "About PlanLibre ..."
+msgstr ""
+
+#: calendars.ui:501
+msgid ""
+"Add a new calendar based on main calendar. \n"
+"All currently marked days in main calendar will be cloned."
+msgstr ""
+
+#: calendars.ui:431
+msgid "Add a new empty calendar"
+msgstr ""
+
+#: properties.ui:524
+msgid "Amount : "
+msgstr ""
+
+#: ressources.c:160 ressources.ui:561
+msgid "Animal work force"
+msgstr ""
+
+#: callbacks.c:1826 callbacks.c:1860
+msgid "Append PlanLibre ressources from file ..."
+msgstr ""
+
+#: main.ui:2568
+msgid "Append from file"
+msgstr ""
+
+#: main.ui:326
+msgid "Append ressources from a PlanLibre file"
+msgstr ""
+
+#: main.ui:335
+msgid "Append ressources from spreadsheet CSV file"
+msgstr ""
+
+#: import.c:585
+msgid "Append tasks from file ..."
+msgstr ""
+
+#: main.ui:350
+msgid "Append tasks from spreadsheet CSV file"
+msgstr ""
+
+#: settings.ui:247
+msgid "Application"
+msgstr ""
+
+#: misc.c:1216 taskrepeat.ui:1047
+msgid "April"
+msgstr ""
+
+#: mail.c:591 mail.c:672 mail.c:746 mail.c:820
+#, c-format
+msgid "As a member of project %s, \r\n"
+msgstr ""
+
+#: settings.ui:106
+msgid "Ask before quit "
+msgstr ""
+
+#: main.ui:3733
+msgid "Assignments"
+msgstr ""
+
+#: report.c:297
+msgid "Assignments for Ressource "
+msgstr ""
+
+#: report.c:502
+#, c-format
+msgid ""
+"Assignments for the %d Ressources \n"
+"\n"
+msgstr ""
+
+#: misc.c:1232 taskrepeat.ui:1051
+msgid "August"
+msgstr ""
+
+#: settings.ui:146
+msgid "Auto save every 5 minutes"
+msgstr ""
+
+#: main.ui:4041
+msgid "Autosaving is activated"
+msgstr ""
+
+#: mail.c:308 tasksdialogs.c:686
+msgid "Avatar"
+msgstr ""
+
+#: report.c:573
+msgid "Avg"
+msgstr ""
+
+#: ressources.ui:466
+msgid "Belongs to : "
+msgstr ""
+
+#: mail.c:595 mail.c:676 mail.c:750 mail.c:824
+msgid "Best regards.\r\n"
+msgstr ""
+
+#: settings.ui:552
+msgid ""
+"By activating this switch, PlanLibre will check if tasks are finishing "
+"today.\n"
+"If yes, an email will be sent as a reminder to project's participants "
+"assigned to those tasks."
+msgstr ""
+
+#: settings.ui:533
+msgid ""
+"By activating this switch, PlanLibre will check if tasks are overdue today.\n"
+"If yes, an email will be sent as a reminder to project's participants "
+"assigned to those tasks."
+msgstr ""
+
+#: settings.ui:514
+msgid ""
+"By activating this switch, PlanLibre will check if tasks are starting "
+"tomorrow.\n"
+"If yes, an email will be sent as a reminder to project's participants "
+"assigned to those tasks."
+msgstr ""
+
+#: settings.ui:571
+msgid ""
+"By activating this switch, PlanLibre will check if tasks have neen "
+"completed.\n"
+"If yes, an email will be sent as a reminder to project's participants "
+"assigned to those tasks."
+msgstr ""
+
+#: calendars.ui:323
+msgid "By clicking this button, all marked days will be removed"
+msgstr ""
+
+#: reportmail.ui:390
+msgid ""
+"By default, all ressoources will receive this email.\n"
+"<b>Uncheck</b> those you don't want to get the message."
+msgstr ""
+
+#: shortkeys.ui:100 shortkeys.ui:165 shortkeys.ui:230 shortkeys.ui:295
+#: shortkeys.ui:374 shortkeys.ui:439 shortkeys.ui:518 shortkeys.ui:597
+#: shortkeys.ui:662 shortkeys.ui:822 shortkeys.ui:887 shortkeys.ui:1003
+msgid "CTRL"
+msgstr ""
+
+#: assign.c:125 timeline.c:539 timeline.c:627
+msgid "C_ancel"
+msgstr ""
+
+#: calendars.ui:2086
+msgid "Calendar :"
+msgstr ""
+
+#: ressources.ui:894
+msgid "Calendar : "
+msgstr ""
+
+#: callbacks.c:806
+msgid "Calendar/agenda files"
+msgstr ""
+
+#: calendars.c:1786 calendars.ui:101
+msgid "Calendars"
+msgstr ""
+
+#: calendars.c:1905
+msgid "Calendars & schedules"
+msgstr ""
+
+#: settings.c:359
+msgid ""
+"Can't do that !\n"
+"\n"
+"Servers <b>request</b> a password.\n"
+"Mail sending aborted."
+msgstr ""
+
+#: files.c:1801 files.c:1848 misc.c:369
+msgid "Cancel"
+msgstr ""
+
+#: tasks.ui:345
+msgid "Category : "
+msgstr ""
+
+#: ressources.ui:687
+msgid "Check or uncheck day(s) according to ressource's schedule"
+msgstr ""
+
+#: milestone.ui:224 tasks.ui:301
+msgid "Check or uncheck to use or not a predecessor task"
+msgstr ""
+
+#: tasks.ui:225
+msgid "Check or uncheck to use or not a ressource"
+msgstr ""
+
+#: taskrepeat.ui:1129
+msgid "Check this button in order to set a limit to repeating process"
+msgstr ""
+
+#: ressources.ui:599
+msgid "Choose a color to identify this ressource"
+msgstr ""
+
+#: taskrepeat.ui:393
+msgid "Choose a frequency"
+msgstr ""
+
+#: taskrepeat.ui:1041
+msgid "Choose a month in order to define a valid date"
+msgstr ""
+
+#: ressources.ui:906
+msgid ""
+"Choose here a calendar (is nothing is chhosen, the default main calendar "
+"will be used)"
+msgstr ""
+
+#: ressources.ui:339
+msgid ""
+"Choose here the rate for computing ressource's costs.\n"
+"For weeks and months, we use standard accounting conventions."
+msgstr ""
+
+#: taskrepeat.ui:351
+msgid "Choose repeat frequency"
+msgstr ""
+
+#: callbacks.c:1662
+msgid "Clic on a task, and drag'n'drop it to change its status"
+msgstr ""
+
+#: freemail.ui:262 reportmail.ui:323
+msgid "Click here and type your message."
+msgstr ""
+
+#: main.ui:1851 main.ui:3666
+msgid "Click here for more export options"
+msgstr ""
+
+#: main.ui:2540
+msgid ""
+"Click here to append tasks from a spreadsheet\n"
+"CSV file"
+msgstr ""
+
+#: calendars.ui:972
+msgid "Click here to change ending date"
+msgstr ""
+
+#: calendars.ui:943
+msgid "Click here to change starting date"
+msgstr ""
+
+#: milestone.ui:159
+msgid "Click here to change this date"
+msgstr ""
+
+#: tasks.ui:612
+msgid ""
+"Click here to choose a color for curretn task. Color will be used in all "
+"displays."
+msgstr ""
+
+#: settings.ui:328
+msgid "Click here to choose a font"
+msgstr ""
+
+#: tasks.ui:719
+msgid "Click here to choose a group ; default : none"
+msgstr ""
+
+#: main.ui:2084
+msgid "Click here to choose a group for current task"
+msgstr ""
+
+#: tasks.ui:464
+msgid "Click here to choose task time constraint (as soon as or deadline)"
+msgstr ""
+
+#: tasks.ui:573
+msgid "Click here to choose the deadline date"
+msgstr ""
+
+#: calendars.ui:1151
+msgid "Click here to choose the week day that you want to change schedule"
+msgstr ""
+
+#: main.ui:1757
+msgid ""
+"Click here to choose zoom level for timeline.\n"
+"200% means double size,\n"
+"100% normal size."
+msgstr ""
+
+#: main.ui:2853
+msgid ""
+"Click here to clone more than 1 time the selected ressource.\n"
+"<i>This button is inactive until a ressource is selected.</i>"
+msgstr ""
+
+#: main.ui:2800
+msgid ""
+"Click here to clone the selected ressource.\n"
+"<i>This button is inactive until a ressource is selected.</i>"
+msgstr ""
+
+#: tasks.ui:684
+msgid ""
+"Click here to define (it's mandatory) a starting date. If not, the project's "
+"starting date is used as default."
+msgstr ""
+
+#: tasks.ui:400
+msgid ""
+"Click here to define a priority. A convenient icon will be displayed near "
+"the task"
+msgstr ""
+
+#: calendars.ui:993
+msgid "Click here to mark period between those dates"
+msgstr ""
+
+#: main.ui:2734
+msgid ""
+"Click here to modify or remove\n"
+"the selected ressource.\n"
+"A dialog will be displayed.\n"
+"<i>This button is inactive until a \n"
+"ressource is selected.</i>\n"
+"Shortcut <b>[f2]</b>"
+msgstr ""
+
+#: main.ui:2105
+msgid ""
+"Click here to modify the current task.\n"
+"<i>This button is inactive until a \n"
+"task is selected.</i>\n"
+"Shortcut <b>[f2]</b>"
+msgstr ""
+
+#: main.ui:2290
+msgid ""
+"Click here to move down the current task.\n"
+"<i>This button is inactive until a \n"
+"task is selected.</i>"
+msgstr ""
+
+#: main.ui:2263
+msgid ""
+"Click here to move up the current task.\n"
+"<i>This button is inactive until a \n"
+"task is selected.</i>"
+msgstr ""
+
+#: main.ui:2145
+msgid ""
+"Click here to repeat the current task.\n"
+"<i>This button is inactive until a \n"
+"task is selected.</i>"
+msgstr ""
+
+#: calendars.ui:126
+msgid "Click here to revert all changes"
+msgstr ""
+
+#: main.ui:2684
+msgid ""
+"Click here to set-up a new ressource.\n"
+"A dialog will be displayed.\n"
+"Shortcut <b>[f3]</b>"
+msgstr ""
+
+#: main.ui:2199
+msgid ""
+"Click here to shift current group\n"
+"and all its tasks.\n"
+"<i>This button is inactive until a group is selected.</i>"
+msgstr ""
+
+#: main.ui:2337
+msgid ""
+"Click here to start/pause timer for selected task.\n"
+"<i>This button is inactive until a \n"
+"task is selected.</i>\n"
+"Shortcut : <b>[CTRL] [ * ]</b>"
+msgstr ""
+
+#: main.ui:1094 main.ui:1174 main.ui:1248 main.ui:1322 main.ui:1397
+msgid "Click here to switch to dashboard"
+msgstr ""
+
+#: settings.ui:293
+msgid "Click here yo choose a color"
+msgstr ""
+
+#: taskrepeat.ui:454
+msgid "Click on a date to (un) check one or more date(s) of month"
+msgstr ""
+
+#: taskrepeat.ui:192
+msgid ""
+"Click on a day of week to (un)check it.\n"
+"You can select one or more day(s)."
+msgstr ""
+
+#: main.ui:2003
+msgid ""
+"Click on the button to set-up a new group of tasks.\n"
+"Shortcut <b>[CTRL] [G]</b>"
+msgstr ""
+
+#: main.ui:2040
+msgid ""
+"Click on the button to set-up a new milestone.\n"
+"Shortcut <b>[CTRL] [/]</b>"
+msgstr ""
+
+#: main.ui:1966
+msgid ""
+"Click on the button to set-up a new task. \n"
+"Shortcut <b>[f3]</b>"
+msgstr ""
+
+#: main.ui:3533
+msgid "Click this buton to jump to next month"
+msgstr ""
+
+#: main.ui:3469
+msgid "Click this buton to jump to previous month"
+msgstr ""
+
+#: properties.ui:266 properties.ui:396 timeshift.ui:181
+msgid "Click this button to change date"
+msgstr ""
+
+#: ressources.ui:309
+msgid "Click this button to choose or change ressource's icon"
+msgstr ""
+
+#: main.ui:1801
+msgid "Click this button to export current timeline page as a PDF file"
+msgstr ""
+
+#: main.ui:2453
+msgid "Click this button to jump to next hit"
+msgstr ""
+
+#: main.ui:2415
+msgid "Click this button to jump to previous hit"
+msgstr ""
+
+#: main.ui:2825
+msgid "Clone"
+msgstr ""
+
+#: settings.ui:640
+msgid "Collaborate"
+msgstr ""
+
+#: ressources.ui:581 tasks.ui:598
+msgid "Color : "
+msgstr ""
+
+#: tasks.ui:515
+msgid "Completed"
+msgstr ""
+
+#: ressources.ui:401
+msgid "Cost : "
+msgstr ""
+
+#: report.c:1190
+#, c-format
+msgid ""
+"Cost for the %d Ressources \n"
+"\n"
+msgstr ""
+
+#: report.c:920
+msgid "Costs for Ressource "
+msgstr ""
+
+#: support.c:123 support.c:147
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: calendars.ui:263
+msgid "Cur. cal. non-working days :"
+msgstr ""
+
+#: timeshift.ui:150
+msgid "DD:MM:YY"
+msgstr ""
+
+#: calendars.ui:2057
+msgid "Daily schedules"
+msgstr ""
+
+#: main.ui:3428
+msgid "Dashboard"
+msgstr ""
+
+#: milestone.ui:155 tasks.ui:680
+msgid "Date ..."
+msgstr ""
+
+#: milestone.ui:108
+msgid "Date : "
+msgstr ""
+
+#: tasksdialogs.c:1343
+msgid "Date : ? "
+msgstr ""
+
+#: timeline.c:448
+msgid "Date shift"
+msgstr ""
+
+#: mail.c:590 mail.c:671 mail.c:745 mail.c:819
+msgid "Dear participant,\r\n"
+msgstr ""
+
+#: misc.c:1248 taskrepeat.ui:1055
+msgid "December"
+msgstr ""
+
+#: settings.ui:1104
+msgid "Default : 465"
+msgstr ""
+
+#: calendars.ui:2028
+msgid "Default daily ending time"
+msgstr ""
+
+#: calendars.ui:1994
+msgid "Default daily starting time"
+msgstr ""
+
+#: properties.ui:421
+msgid "Default schedule : <i>from</i>"
+msgstr ""
+
+#: timeshift.ui:7
+msgid "Define a date shift"
+msgstr ""
+
+#: timeline.c:449
+msgid "Define a timeshift for whole project or current group."
+msgstr ""
+
+#: calendars.c:1906
+msgid "Define and modify project's calendars and daily schudules."
+msgstr ""
+
+#: properties.c:249
+msgid "Define and modify project's properties and various global values."
+msgstr ""
+
+#: settings.c:68
+msgid "Define global settings for PlanLibre."
+msgstr ""
+
+#: tasksdialogs.c:1107
+msgid "Define or modify a group of tasks"
+msgstr ""
+
+#: tasksdialogs.c:1165
+msgid "Define or modify a milestone"
+msgstr ""
+
+#: tasksdialogs.c:1003
+msgid "Define or modify a task."
+msgstr ""
+
+#: taskrepeat.ui:21
+msgid "Define recurring task"
+msgstr ""
+
+#: report.c:1253
+msgid ""
+"Diagram 1 of 2 : repartition of monetary cost (excl. non-working days, "
+"clamped). \n"
+"\n"
+msgstr ""
+
+#: mail.c:675
+msgid "Do not hesitate to let us know if you have any needs .\r\n"
+msgstr ""
+
+#: calendars.c:1582
+msgid ""
+"Do tou really want to remove this calendar ?\n"
+"This operation isn't cancellable ..."
+msgstr ""
+
+#: callbacks.c:1128
+msgid "Do you really want to quit this program ?"
+msgstr ""
+
+#: calendars.c:2071
+msgid ""
+"Do you really want to remove ALL marked days ?\n"
+"This operation isn't cancellable ..."
+msgstr ""
+
+#: assign.c:852 timeline.c:1654
+msgid "Documents PDF files"
+msgstr ""
+
+#: mail.c:823
+msgid "Don't hesitate to let us know if you have any needs.\r\n"
+msgstr ""
+
+#: calendars.ui:536
+msgid ""
+"Double-Click on a day to set it as a special day.\n"
+"Double-Click again to remove this marking."
+msgstr ""
+
+#: callbacks.c:1667
+msgid ""
+"Double-click on a ressource to modify it, right-click for other options "
+msgstr ""
+
+#: tasks.ui:651
+msgid "Due : "
+msgstr ""
+
+#: tasks.ui:634
+msgid "Duration (days, hours) : "
+msgstr ""
+
+#: tasksdialogs.c:959
+msgid "E>>E"
+msgstr ""
+
+#: tasksdialogs.c:951
+msgid "E>>S"
+msgstr ""
+
+#: main.ui:220
+msgid "E_dit"
+msgstr ""
+
+#: shortkeys.ui:1119
+msgid "Edit selected  ressource"
+msgstr ""
+
+#: shortkeys.ui:938
+msgid "Edit selected task, group, milestone"
+msgstr ""
+
+#: tasks.c:1799 tasks.c:2173
+msgid "Empty"
+msgstr ""
+
+#: calendars.ui:231
+msgid "Ending date :"
+msgstr ""
+
+#: properties.ui:381
+msgid "Ending date : "
+msgstr ""
+
+#: ressources.c:164 ressources.ui:562
+msgid "Equipment"
+msgstr ""
+
+#: mail.c:1423 mail.c:1694
+msgid ""
+"Error !\n"
+"\n"
+"Mail sending aborted because there\n"
+"isn't any recipient !"
+msgstr ""
+
+#: mail.c:1699
+msgid ""
+"Error !\n"
+"\n"
+"Mail sending aborted partially or totally.\n"
+"Please try again after checking your Internet connection and accounts "
+"settings."
+msgstr ""
+
+#: savestate.c:395
+#, c-format
+msgid "Error saving %s: %s\n"
+msgstr ""
+
+#: taskrepeat.ui:402
+msgid "Every year by date"
+msgstr ""
+
+#: main.ui:58
+msgid "Export as Image"
+msgstr ""
+
+#: main.ui:1829 main.ui:3644
+msgid "Export as PDF"
+msgstr ""
+
+#: main.ui:303
+msgid "Export as calendar/agenda file ..."
+msgstr ""
+
+#: main.ui:68
+msgid "Export as drawing"
+msgstr ""
+
+#: main.ui:3615
+msgid "Export assignments as PDF"
+msgstr ""
+
+#: assign.c:853
+msgid "Export current assignments to a PDF file"
+msgstr ""
+
+#: assign.c:865
+msgid "Export current assignments to a PNG file"
+msgstr ""
+
+#: assign.c:859
+msgid "Export current assignments to a SVG file"
+msgstr ""
+
+#: callbacks.c:810
+msgid "Export current project tasks agenda as a Icalendar compatible file"
+msgstr ""
+
+#: main.ui:431
+msgid "Export current report to word processor"
+msgstr ""
+
+#: timeline.c:1655
+msgid "Export current timeline to a PDF file"
+msgstr ""
+
+#: timeline.c:1667
+msgid "Export current timeline to a PNG file"
+msgstr ""
+
+#: timeline.c:1661
+msgid "Export current timeline to a SVG file"
+msgstr ""
+
+#: main.ui:88
+msgid "Export timeline as Image"
+msgstr ""
+
+#: main.ui:365
+msgid "Export timeline as PDF"
+msgstr ""
+
+#: main.ui:98 main.ui:383
+msgid "Export timeline as drawing"
+msgstr ""
+
+#: main.ui:374
+msgid "Export timeline as image"
+msgstr ""
+
+#: main.ui:3795
+msgid "Export to file"
+msgstr ""
+
+#: misc.c:1208 taskrepeat.ui:1045
+msgid "February"
+msgstr ""
+
+#: main.ui:2488
+msgid "Found : "
+msgstr ""
+
+#: misc.c:1283 taskrepeat.ui:268
+msgid "Fr"
+msgstr ""
+
+#: calendars.ui:826
+msgid "Fri."
+msgstr ""
+
+#: calendars.ui:1162 ressources.ui:802
+msgid "Friday"
+msgstr ""
+
+#: calendars.ui:1269
+msgid "From"
+msgstr ""
+
+#: ressources.c:128
+msgid "From non-profit organization"
+msgstr ""
+
+#: ressources.c:136
+msgid "From public administration"
+msgstr ""
+
+#: shortkeys.ui:836
+msgid "G"
+msgstr ""
+
+#: properties.ui:328
+msgid "GPS coordinates  : "
+msgstr ""
+
+#: main.ui:406
+msgid "Global activity analysis"
+msgstr ""
+
+#: main.ui:415
+msgid "Global cost analysis"
+msgstr ""
+
+#: main.ui:294
+msgid "Global dates shift"
+msgstr ""
+
+#: tasks.ui:706
+msgid "Group : "
+msgstr ""
+
+#: group.ui:122
+msgid "Group Name : "
+msgstr ""
+
+#: tasksdialogs.c:1106
+msgid "Group of tasks"
+msgstr ""
+
+#: settings.ui:883
+msgid ""
+"Here you can specify how your messages will be sent.\n"
+"<i>These settings are for advanced users or administrators.</i>"
+msgstr ""
+
+#: tasks.ui:407
+msgid "High"
+msgstr ""
+
+#: main.ui:1545
+msgid "Home"
+msgstr ""
+
+#: ressources.ui:962
+msgid "Hrs."
+msgstr ""
+
+#: ressources.c:156 ressources.ui:560
+msgid "Human work force"
+msgstr ""
+
+#: properties.c:190 ressources.c:1294
+msgid "Image files"
+msgstr ""
+
+#: properties.c:191
+msgid "Import organization logo ..."
+msgstr ""
+
+#: ressources.c:1295
+msgid "Import ressource logo ..."
+msgstr ""
+
+#: main.ui:316
+msgid "Import/export"
+msgstr ""
+
+#: tasks.ui:514
+msgid "In Progress"
+msgstr ""
+
+#: tasksutils.c:1507
+msgid ""
+"In order to set-up linked tasks,\n"
+"PlanLibre changed project ending date.\n"
+"You can check new ending date under <b>project/properties</b> menu."
+msgstr ""
+
+#: report.c:270
+msgid "In progress"
+msgstr ""
+
+#: timeline.c:529
+msgid "Increase duration by one day "
+msgstr ""
+
+#: ressources.ui:487
+msgid "Independant"
+msgstr ""
+
+#: ressources.c:120
+msgid "Independant, self employed"
+msgstr ""
+
+#: tasks.ui:365
+msgid "Intellectual"
+msgstr ""
+
+#: tasksutils.c:1514
+msgid ""
+"It isn't possible to shift a <b>fixed task</b> !\n"
+"Now, you have requested to link it to a task ending <b>too late</b>.\n"
+"You should modify one or more ending date."
+msgstr ""
+
+#: tasksutils.c:1521
+msgid ""
+"It isn't possible to shift this <b>task with deadline</b> !\n"
+"Now, you have requested to link it to a task ending <b>too late</b>.\n"
+"You should modify deadline date."
+msgstr ""
+
+#: calendars.ui:1976
+msgid ""
+"It's a reminder. The project's default daily schedule is defined under :\n"
+" project>properties menu."
+msgstr ""
+
+#: settings.ui:1156
+msgid ""
+"It's important to know if the server uses an\n"
+"authentification. In case your mails aren't sent, please change this option."
+msgstr ""
+
+#: calendars.ui:2011 calendars.ui:2098
+msgid ""
+"It's the name of current calendar. You can't modifiy the main project "
+"calendar name."
+msgstr ""
+
+#: misc.c:1204 taskrepeat.ui:1044
+msgid "January"
+msgstr ""
+
+#: misc.c:1228 taskrepeat.ui:1050
+msgid "July"
+msgstr ""
+
+#: main.ui:1580
+msgid "Jump backward 1 year from current date"
+msgstr ""
+
+#: main.ui:1702
+msgid "Jump forward 1 year from current date"
+msgstr ""
+
+#: main.ui:1660
+msgid "Jump to Next page"
+msgstr ""
+
+#: main.ui:1620
+msgid "Jump to Previous page"
+msgstr ""
+
+#: misc.c:1224 taskrepeat.ui:1049
+msgid "June"
+msgstr ""
+
+#: callbacks.c:665 main.ui:544
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: callbacks.c:1958
+#, c-format
+msgid "L%d"
+msgstr ""
+
+#: callbacks.c:1694
+#, c-format
+msgid "L%d/%d"
+msgstr ""
+
+#: callbacks.c:1613 callbacks.c:1704 callbacks.c:2009 main.ui:3985
+msgid "L--"
+msgstr ""
+
+#: tasksdialogs.c:768
+msgid "Link"
+msgstr ""
+
+#: callbacks.c:666
+msgid "List of keyboard shortcuts used by PLanLibre"
+msgstr ""
+
+#: properties.ui:291
+msgid "Location  : "
+msgstr ""
+
+#: milestone.ui:126
+msgid "Location : "
+msgstr ""
+
+#: properties.ui:304
+msgid "Location in human readable form"
+msgstr ""
+
+#: tasks.c:2046
+msgid "Location unknown"
+msgstr ""
+
+#: tasks.ui:409
+msgid "Low"
+msgstr ""
+
+#: ressources.ui:368
+msgid "Mail : "
+msgstr ""
+
+#: calendars.c:1483 undoredo.c:994
+msgid "Main Calendar"
+msgstr ""
+
+#: calendars.c:1754
+msgid "Main calendar"
+msgstr ""
+
+#: main.ui:279
+msgid "Manage calendars and working hours"
+msgstr ""
+
+#: properties.ui:644
+msgid "Manager's mail : "
+msgstr ""
+
+#: properties.ui:662
+msgid "Manager's phone : "
+msgstr ""
+
+#: misc.c:1212 taskrepeat.ui:1046
+msgid "March"
+msgstr ""
+
+#: calendars.ui:830
+msgid "Mark all fridays between start and end date"
+msgstr ""
+
+#: calendars.ui:762
+msgid "Mark all mondays between start and end date"
+msgstr ""
+
+#: calendars.ui:847
+msgid "Mark all saturdays between start and end date"
+msgstr ""
+
+#: calendars.ui:864
+msgid "Mark all sundays between start and end date"
+msgstr ""
+
+#: calendars.ui:813
+msgid "Mark all thursdays between start and end date"
+msgstr ""
+
+#: calendars.ui:779
+msgid "Mark all tuesdays between start and end date"
+msgstr ""
+
+#: calendars.ui:796
+msgid "Mark all wednesdays between start and end date"
+msgstr ""
+
+#: ressources.c:172 tasks.ui:364
+msgid "Material"
+msgstr ""
+
+#: ressources.ui:928
+msgid "Maximum daily working time : "
+msgstr ""
+
+#: misc.c:1220 taskrepeat.ui:1048
+msgid "May"
+msgstr ""
+
+#: tasks.ui:408
+msgid "Medium"
+msgstr ""
+
+#: reportmail.ui:364
+msgid "Message"
+msgstr ""
+
+#: tasksdialogs.c:1164
+msgid "Milestone"
+msgstr ""
+
+#: ressources.ui:995
+msgid "Min."
+msgstr ""
+
+#: misc.c:1267 taskrepeat.ui:200
+msgid "Mo"
+msgstr ""
+
+#: main.ui:2763
+msgid "Modify"
+msgstr ""
+
+#: tasksdialogs.c:1126
+msgid "Modify a Group"
+msgstr ""
+
+#: tasksdialogs.c:1183
+msgid "Modify a Milestone"
+msgstr ""
+
+#: ressources.c:1372
+msgid "Modify a ressource"
+msgstr ""
+
+#: tasksdialogs.c:1069
+msgid "Modify a task"
+msgstr ""
+
+#: calendars.ui:758
+msgid "Mon."
+msgstr ""
+
+#: calendars.ui:1158 ressources.ui:718
+msgid "Monday"
+msgstr ""
+
+#: taskrepeat.ui:401
+msgid "Monthly by day(s) of month"
+msgstr ""
+
+#: timeline.c:509
+msgid "Move _Up "
+msgstr ""
+
+#: timeline.c:512
+msgid "Move _down "
+msgstr ""
+
+#: timeline.c:519
+msgid "Move one day _backward "
+msgstr ""
+
+#: timeline.c:522
+msgid "Move one day _forward "
+msgstr ""
+
+#: main.ui:2878
+msgid "Multiply"
+msgstr ""
+
+#: shortkeys.ui:114
+msgid "N"
+msgstr ""
+
+#: milestone.ui:90 ressources.ui:384 tasks.ui:155
+msgid "Name : "
+msgstr ""
+
+#: tasksdialogs.c:1338
+msgid "Name: ? "
+msgstr ""
+
+#: main.ui:2710
+msgid "New"
+msgstr ""
+
+#: calendars.c:1555 calendars.c:1557
+msgid "New Calendar"
+msgstr ""
+
+#: calendars.c:1636 calendars.c:1638
+msgid "New Calendar from main"
+msgstr ""
+
+#: tasksdialogs.c:1131
+msgid "New Group"
+msgstr ""
+
+#: tasksdialogs.c:1188
+msgid "New Milestone"
+msgstr ""
+
+#: calendars.ui:495
+msgid "New calendar copied from default calendar"
+msgstr ""
+
+#: shortkeys.ui:808
+msgid "New group"
+msgstr ""
+
+#: shortkeys.ui:873
+msgid "New milestone"
+msgstr ""
+
+#: main.ui:138 shortkeys.ui:86
+msgid "New project"
+msgstr ""
+
+#: ressources.c:1376 shortkeys.ui:1068
+msgid "New ressource"
+msgstr ""
+
+#: tasksdialogs.c:1074 shortkeys.ui:757
+msgid "New task"
+msgstr ""
+
+#: main.ui:3573
+msgid "Next month"
+msgstr ""
+
+#: report.c:1184
+msgid "No datas for computations !"
+msgstr ""
+
+#: report.c:498
+msgid "No datas for reporting ! Quit."
+msgstr ""
+
+#: report.c:319 report.c:942
+msgid "No more operations - Ressource hasn't any task !"
+msgstr ""
+
+#: timeline.c:406
+msgid "No shift"
+msgstr ""
+
+#: freemail.ui:216 reportmail.ui:277
+msgid "No subject"
+msgstr ""
+
+#: files.c:1925
+msgid "No summary"
+msgstr ""
+
+#: ressources.c:1359
+msgid "Nobody"
+msgstr ""
+
+#: ressources.ui:489
+msgid "Non profit organization"
+msgstr ""
+
+#: calendars.ui:1055
+msgid "Non-worked days"
+msgstr ""
+
+#: callbacks.c:1282 ressources.c:813 ressources.c:1073
+msgid "Noname"
+msgstr ""
+
+#: tasks.c:2146
+msgid "Noname Group"
+msgstr ""
+
+#: tasks.c:2045
+msgid "Noname Milestone"
+msgstr ""
+
+#: files.c:975
+msgid "Noname calendar"
+msgstr ""
+
+#: import.c:384
+msgid "Noname imported task"
+msgstr ""
+
+#: tasks.c:614 tasks.c:1213
+msgid "Noname task"
+msgstr ""
+
+#: callbacks.c:600 callbacks.c:1108 callbacks.c:1202 callbacks.c:1314
+#: callbacks.c:1393 callbacks.c:1511
+msgid "Noname.plibre"
+msgstr ""
+
+#: tasks.c:1211
+msgid "Nonane group"
+msgstr ""
+
+#: tasks.c:1212
+msgid "Nonane milestone"
+msgstr ""
+
+#: callbacks.c:1966 tasksdialogs.c:1040
+msgid "None"
+msgstr ""
+
+#: undoredo.c:346 undoredo.c:361 undoredo.c:1140 main.ui:231
+msgid "Nothing to undo"
+msgstr ""
+
+#: misc.c:1244 taskrepeat.ui:1054
+msgid "November"
+msgstr ""
+
+#: shortkeys.ui:179
+msgid "O"
+msgstr ""
+
+#: misc.c:1240 taskrepeat.ui:1053
+msgid "October"
+msgstr ""
+
+#: misc.c:377
+msgid "Ok"
+msgstr ""
+
+#: main.ui:535
+msgid "Online Wiki"
+msgstr ""
+
+#: files.c:1809
+msgid "Open"
+msgstr ""
+
+#: callbacks.c:1329
+msgid "Open PlanLibre project ..."
+msgstr ""
+
+#: callbacks.c:1429
+msgid "Open a previous project."
+msgstr ""
+
+#: shortkeys.ui:151
+msgid "Open a project"
+msgstr ""
+
+#: shortkeys.ui:216
+msgid "Open a recent file"
+msgstr ""
+
+#: main.ui:148
+msgid "Open project ..."
+msgstr ""
+
+#: properties.ui:680
+msgid "Organization : "
+msgstr ""
+
+#: properties.ui:838
+msgid "Organization logo : "
+msgstr ""
+
+#: properties.ui:765
+msgid "Organization/project website :"
+msgstr ""
+
+#: ressources.ui:485
+msgid "Our Organization"
+msgstr ""
+
+#: report.c:266 tasks.ui:516
+msgid "Overdue"
+msgstr ""
+
+#: assign.c:864 timeline.c:1666
+msgid "PNG image files"
+msgstr ""
+
+#: settings.ui:1066
+msgid "Password"
+msgstr ""
+
+#: shortkeys.ui:676
+msgid "PgNext"
+msgstr ""
+
+#: shortkeys.ui:611
+msgid "PgPrev"
+msgstr ""
+
+#: ressources.ui:509
+msgid "Phone : "
+msgstr ""
+
+#: ressources.ui:417
+msgid "Photo : "
+msgstr ""
+
+#: main.ui:109
+msgid "PlanLibre"
+msgstr ""
+
+#: settings.ui:27
+msgid "PlanLibre Settings"
+msgstr ""
+
+#: callbacks.c:464 callbacks.c:1300 callbacks.c:1411
+msgid "PlanLibre files"
+msgstr ""
+
+#: interface.c:181
+msgid "PlanLibre logos + main icon :"
+msgstr ""
+
+#: settings.ui:1079
+msgid ""
+"PlanLibre never store your passwords. For that reason, you  must enter your "
+"password at each session"
+msgstr ""
+
+#: callbacks.c:1546 callbacks.c:1822
+msgid "PlanLibre xml files"
+msgstr ""
+
+#: interface.c:193
+msgid "Planning utility written in GTK+ and licensed under GPL v.3"
+msgstr ""
+
+#: ressources.c:140 ressources.ui:492
+msgid "Platform worker"
+msgstr ""
+
+#: report.c:1194
+msgid ""
+"Please Note !\n"
+"Datas are ONLY estimated costs by durations, and converted to money.\n"
+"Be careful when you use them.\n"
+"\n"
+msgstr ""
+
+#: ressources.ui:940
+msgid ""
+"Please type here how nany hours are worked by day (only the \"hour\" part). "
+msgstr ""
+
+#: settings.ui:959
+msgid "Port"
+msgstr ""
+
+#: main.ui:3481
+msgid "Prev. month"
+msgstr ""
+
+#: tasks.ui:387
+msgid "Priority : "
+msgstr ""
+
+#: ressources.ui:486
+msgid "Profit organization"
+msgstr ""
+
+#: tasks.ui:537
+msgid "Progress (%) :"
+msgstr ""
+
+#: main.ui:4129
+msgid "Progress : "
+msgstr ""
+
+#: main.ui:260
+msgid "Project"
+msgstr ""
+
+#: interface.c:180
+msgid "Project Manager:"
+msgstr ""
+
+#: calendars.ui:1982
+msgid "Project default daily schedule :"
+msgstr ""
+
+#: mail.c:603
+#, c-format
+msgid "Project information about task %s"
+msgstr ""
+
+#: callbacks.c:768
+msgid "Project main calendar"
+msgstr ""
+
+#: files.c:1920
+msgid "Project without title"
+msgstr ""
+
+#: properties.c:273
+msgid "Project's GPS location - optionnal"
+msgstr ""
+
+#: properties.c:272
+msgid "Project's main location"
+msgstr ""
+
+#: properties.ui:626
+msgid "Project's manager : "
+msgstr ""
+
+#: properties.c:248
+msgid "Project's properties"
+msgstr ""
+
+#: settings.ui:187
+msgid "Prompt before overwrite an existing file"
+msgstr ""
+
+#: main.ui:270 properties.ui:24
+msgid "Properties"
+msgstr ""
+
+#: ressources.ui:491
+msgid "Public administration"
+msgstr ""
+
+#: shortkeys.ui:453
+msgid "Q"
+msgstr ""
+
+#: main.ui:206
+msgid "Quit"
+msgstr ""
+
+#: shortkeys.ui:425
+msgid "Quit PlanLibre"
+msgstr ""
+
+#: shortkeys.ui:244
+msgid "R"
+msgstr ""
+
+#: callbacks.c:1428
+msgid "Recent PlanLibre projects"
+msgstr ""
+
+#: main.ui:164
+msgid "Recent files ..."
+msgstr ""
+
+#: reportmail.ui:458
+msgid "Recipients"
+msgstr ""
+
+#: freemail.ui:145
+msgid "Recipients :"
+msgstr ""
+
+#: tasksdialogs.c:1319
+msgid "Recurring task"
+msgstr ""
+
+#: timeline.c:532
+msgid "Reduce duration by one day "
+msgstr ""
+
+#: ressources.ui:433
+msgid "Reminder : "
+msgstr ""
+
+#: ressources.ui:75
+msgid "Remove ressource"
+msgstr ""
+
+#: calendars.ui:457
+msgid "Remove selected calendar"
+msgstr ""
+
+#: tasks.ui:70
+msgid "Remove task"
+msgstr ""
+
+#: shortkeys.ui:989
+msgid "Repeat selected task"
+msgstr ""
+
+#: main.ui:396 main.ui:3917 settings.ui:378
+msgid "Reports"
+msgstr ""
+
+#: calendars.ui:328
+msgid "Reset all marked days"
+msgstr ""
+
+#: properties.ui:882
+msgid "Reset logo"
+msgstr ""
+
+#: mail.c:317 tasksdialogs.c:694
+msgid "Ressource name "
+msgstr ""
+
+#: tasks.c:428 main.ui:2995
+msgid "Ressources"
+msgstr ""
+
+#: settings.ui:710
+msgid "Rest time"
+msgstr ""
+
+#: callbacks.c:554
+#, c-format
+msgid "Rest time %.2d:%.2d"
+msgstr ""
+
+#: callbacks.c:1625
+msgid ""
+"Right-click on a task for various options, or left-click and drag and drop "
+"to move a task along time"
+msgstr ""
+
+#: shortkeys.ui:309 shortkeys.ui:388
+msgid "S"
+msgstr ""
+
+#: tasksdialogs.c:963
+msgid "S>>E"
+msgstr ""
+
+#: tasksdialogs.c:955
+msgid "S>>S"
+msgstr ""
+
+#: shortkeys.ui:360
+msgid "SHIFT"
+msgstr ""
+
+#: assign.c:858 timeline.c:1660
+msgid "SVG drawings files"
+msgstr ""
+
+#: misc.c:1287 taskrepeat.ui:285
+msgid "Sa"
+msgstr ""
+
+#: calendars.ui:843
+msgid "Sat."
+msgstr ""
+
+#: calendars.ui:1163 ressources.ui:823
+msgid "Saturday"
+msgstr ""
+
+#: files.c:1856
+msgid "Save"
+msgstr ""
+
+#: shortkeys.ui:281
+msgid "Save current project"
+msgstr ""
+
+#: shortkeys.ui:346
+msgid "Save current project and choose a name"
+msgstr ""
+
+#: callbacks.c:472 callbacks.c:1550
+msgid "Save current project as ..."
+msgstr ""
+
+#: report.c:1293
+msgid "Save current report to a Rich Text Format file"
+msgstr ""
+
+#: main.ui:180
+msgid "Save project"
+msgstr ""
+
+#: main.ui:190
+msgid "Save project as ..."
+msgstr ""
+
+#: ressources.c:132
+msgid "Scholar"
+msgstr ""
+
+#: ressources.ui:490
+msgid "Schollar organization"
+msgstr ""
+
+#: misc.c:314
+msgid "Select Date..."
+msgstr ""
+
+#: freemail.ui:81 reportmail.ui:80
+msgid "Send"
+msgstr ""
+
+#: main.ui:497
+msgid "Send a free email to participants ..."
+msgstr ""
+
+#: main.ui:488
+msgid "Send a report to participants ..."
+msgstr ""
+
+#: main.ui:3844
+msgid "Send by email"
+msgstr ""
+
+#: main.ui:512
+msgid "Send calendar/agenda to participants ..."
+msgstr ""
+
+#: main.ui:472
+msgid "Send mails for completed tasks ..."
+msgstr ""
+
+#: main.ui:463
+msgid "Send mails for incoming tasks ..."
+msgstr ""
+
+#: main.ui:454
+msgid "Send mails for overdue tasks ..."
+msgstr ""
+
+#: mail.c:299
+msgid "Send to"
+msgstr ""
+
+#: misc.c:1236 taskrepeat.ui:1052
+msgid "September"
+msgstr ""
+
+#: settings.ui:1258
+msgid "Server"
+msgstr ""
+
+#: password.ui:178
+msgid "Server access Password"
+msgstr ""
+
+#: settings.ui:941
+msgid "Server adress"
+msgstr ""
+
+#: settings.ui:922
+msgid "Server name "
+msgstr ""
+
+#: settings.ui:1142
+msgid "Server securized by SSL/TLS"
+msgstr ""
+
+#: settings.c:67 main.ui:247
+msgid "Settings"
+msgstr ""
+
+#: tasks.ui:366
+msgid "Social/relationnal"
+msgstr ""
+
+#: assign.c:974
+msgid ""
+"Sorry !\n"
+"An error happened during assignment exporting.\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: mail.c:1689
+msgid ""
+"Sorry !\n"
+"An error happened during attached file generation.\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: report.c:1324
+msgid ""
+"Sorry !\n"
+"An error happened during file exporting.\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: callbacks.c:1834 callbacks.c:1869 import.c:594
+msgid ""
+"Sorry !\n"
+"An error happened during file importation.\n"
+"Operation finished with errors. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: callbacks.c:1355 callbacks.c:1475
+msgid ""
+"Sorry !\n"
+"An error happened during file loading.\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: timeline.c:1771
+msgid ""
+"Sorry !\n"
+"An error happened during timeline exporting.\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: callbacks.c:951
+msgid ""
+"Sorry !\n"
+"Can't do that.\n"
+"Requested date after shift (included tasks duration) is\n"
+"outside of project's bounding dates.\n"
+"You can try again, after updating project's properties."
+msgstr ""
+
+#: callbacks.c:1482
+msgid ""
+"Sorry !\n"
+"I can't retrieve the file !\n"
+"Operation aborted. You can try again, or\n"
+"check your system."
+msgstr ""
+
+#: report.c:45
+msgid ""
+"Sorry !\n"
+"In order to report something, you must assign.\n"
+"at least <u>ONE</u> ressource to <u>ONE</u> task.\n"
+"Please, check <b>ressources</b> page and <b>tasks</b> page.\n"
+"Operation aborted."
+msgstr ""
+
+#: mail.c:1236
+msgid ""
+"Sorry !\n"
+"Mail sending requires a valid email adress for project manager.\n"
+"Operation aborted. Please, see :\n"
+"<b>File>properties</b> menu."
+msgstr ""
+
+#: home.c:92 mail.c:1272
+msgid ""
+"Sorry !\n"
+"Server settings are wrong or incomplete.\n"
+"Operation aborted. Please, see :\n"
+"<b>Edition>settings</b> menu."
+msgstr ""
+
+#: mail.c:163
+#, c-format
+msgid ""
+"Sorry !\n"
+"There isn't any task %s.\n"
+"Operation aborted."
+msgstr ""
+
+#: timeline.c:913
+msgid ""
+"Sorry !\n"
+"When you click on the timeline, you can ...\n"
+"<i>right-click</i> on an <b>existing</b> task to edit it.\n"
+" ... Or right-click on a line <b>without</b> any task to add a new task."
+msgstr ""
+
+#: timeline.c:767
+msgid ""
+"Sorry !\n"
+"You <b>can't move a fixed task</b> along the timeline.\n"
+"You can change fixed date or\n"
+"modify task duration mode."
+msgstr ""
+
+#: timeline.c:759
+msgid ""
+"Sorry !\n"
+"You <b>can't move a task that is in <u>not before</u> mode</b> at this "
+"position. Please, check task dates or modify its duration."
+msgstr ""
+
+#: timeline.c:751
+msgid ""
+"Sorry !\n"
+"You <b>can't move a task with a deadline</b> at this position. Please, check "
+"task dates or modify its duration."
+msgstr ""
+
+#: callbacks.c:1856 import.c:581
+msgid "Spreadsheets CSV files"
+msgstr ""
+
+#: calendars.ui:199 tasks.ui:669
+msgid "Starting date :"
+msgstr ""
+
+#: properties.ui:251
+msgid "Starting date : "
+msgstr ""
+
+#: tasks.ui:494
+msgid "Status :"
+msgstr ""
+
+#: misc.c:1291 taskrepeat.ui:302
+msgid "Su"
+msgstr ""
+
+#: freemail.ui:200 reportmail.ui:261
+msgid "Subject : "
+msgstr ""
+
+#: properties.ui:144
+msgid "Summary : "
+msgstr ""
+
+#: calendars.ui:860
+msgid "Sun."
+msgstr ""
+
+#: calendars.ui:1164 ressources.ui:843
+msgid "Sunday"
+msgstr ""
+
+#: ressources.ui:563
+msgid "Surface"
+msgstr ""
+
+#: ressources.c:168
+msgid "Surface or building"
+msgstr ""
+
+#: shortkeys.ui:648
+msgid "Switch to next notebook page"
+msgstr ""
+
+#: shortkeys.ui:583
+msgid "Switch to previous notebook page"
+msgstr ""
+
+#: report.c:1198
+#, c-format
+msgid ""
+"Table 1 of 2 : Cost per ressource (excl. non-working days, clamped), %s \n"
+"\n"
+msgstr ""
+
+#: mail.c:744 mail.c:818
+msgid "Task(s) completed yesterday"
+msgstr ""
+
+#: mail.c:589
+msgid "Task(s) overdue"
+msgstr ""
+
+#: mail.c:670
+msgid "Task(s) starting tomorrow"
+msgstr ""
+
+#: main.ui:2647
+msgid "Tasks"
+msgstr ""
+
+#: report.c:580
+msgid "Tasks by ressources"
+msgstr ""
+
+#: tasks.c:435
+msgid "Tasks required"
+msgstr ""
+
+#: milestone.ui:199
+msgid "Tasks required : "
+msgstr ""
+
+#: settings.ui:278
+msgid "Text color "
+msgstr ""
+
+#: settings.ui:313
+msgid "Text font (except diagrams)"
+msgstr ""
+
+#: misc.c:1279 taskrepeat.ui:251
+msgid "Th"
+msgstr ""
+
+#: report.c:342
+msgid ""
+"The average progress for his/her task(s) is %.2f %\n"
+"\n"
+msgstr ""
+
+#: callbacks.c:830
+#, c-format
+msgid ""
+"The file :\n"
+"%s\n"
+" already exists !\n"
+"Do you really want to overwrite this ICalendar (ICS) file ?"
+msgstr ""
+
+#: callbacks.c:505
+#, c-format
+msgid ""
+"The file :\n"
+"%s\n"
+" already exists !\n"
+"Do you really want to overwrite this PlanLibre file ?"
+msgstr ""
+
+#: report.c:1313
+#, c-format
+msgid ""
+"The file :\n"
+"%s\n"
+" already exists !\n"
+"Do you really want to overwrite this RTF file ?"
+msgstr ""
+
+#: assign.c:915 timeline.c:1717
+#, c-format
+msgid ""
+"The file :\n"
+"%s\n"
+" already exists !\n"
+"Do you really want to overwrite this file ?"
+msgstr ""
+
+#: callbacks.c:1574
+#, c-format
+msgid ""
+"The file :\n"
+"%s already exists !\n"
+"Do you really want to Overwrite an existing PlanLibre file ?"
+msgstr ""
+
+#: taskrepeat.ui:142
+msgid "The name of task to duplicate and repeat"
+msgstr ""
+
+#: tasksdialogs.c:1320
+msgid "The task will be repeated, according to your choices."
+msgstr ""
+
+#: report.c:94
+msgid ""
+"There isn't any report for now.\n"
+"This area is editable, you can type ideas, append them to reports, paste "
+"text from other applications, and so on ...\n"
+msgstr ""
+
+#: timeshift.ui:145
+msgid "This is the CURRENT starting date for the whole project"
+msgstr ""
+
+#: timeshift.ui:162
+msgid "This is the NEW starting date for the whole project"
+msgstr ""
+
+#: callbacks.c:1672
+msgid "This page displays last report. You can export it, see top buttons."
+msgstr ""
+
+#: callbacks.c:1618
+msgid "This page displays project information summary"
+msgstr ""
+
+#: mail.c:749
+msgid "This task is completed since yesterday.\r\n"
+msgstr ""
+
+#: timeshift.ui:216
+msgid "This the date shift in day(s)"
+msgstr ""
+
+#: calendars.ui:1282 calendars.ui:1778
+msgid "Those two columns to define hours and minutes when period ends"
+msgstr ""
+
+#: calendars.ui:1264
+msgid "Those two columns to define hours and minutes when period starts"
+msgstr ""
+
+#: calendars.ui:809
+msgid "Thu."
+msgstr ""
+
+#: calendars.ui:1161 ressources.ui:781
+msgid "Thursday"
+msgstr ""
+
+#: main.ui:1925
+msgid "Timeine"
+msgstr ""
+
+#: main.ui:1925
+msgid "Timeline"
+msgstr ""
+
+#: settings.ui:853
+msgid "Timer"
+msgstr ""
+
+#: main.ui:4079
+msgid "Timer : "
+msgstr ""
+
+#: properties.ui:127
+msgid "Title :"
+msgstr ""
+
+#: files.c:1929
+#, c-format
+msgid ""
+"Title : %s\n"
+"Summary : %s"
+msgstr ""
+
+#: calendars.ui:1287
+msgid "To"
+msgstr ""
+
+#: report.c:268 tasks.ui:517
+msgid "To go"
+msgstr ""
+
+#: misc.c:577
+msgid "Today"
+msgstr ""
+
+#: misc.c:581
+msgid "Tomorrow"
+msgstr ""
+
+#: calendars.ui:275
+msgid "Total number of non-working days defined"
+msgstr ""
+
+#: interface.c:200
+msgid "Translators credits"
+msgstr ""
+
+#: misc.c:1271 taskrepeat.ui:217
+msgid "Tu"
+msgstr ""
+
+#: calendars.ui:775
+msgid "Tue."
+msgstr ""
+
+#: calendars.ui:1159 ressources.ui:739
+msgid "Tuesday"
+msgstr ""
+
+#: properties.ui:576
+msgid "Type a currency identifier, for example USD, EUR ..."
+msgstr ""
+
+#: main.ui:2436
+msgid "Type here a word or a part of word."
+msgstr ""
+
+#: main.ui:2899
+msgid ""
+"Type here how much times\n"
+"current ressource should be cloned (minimum = 2)"
+msgstr ""
+
+#: ressources.ui:974
+msgid "Type here the \"minutes\" part if relevant, between 0 and 59."
+msgstr ""
+
+#: calendars.ui:1218 calendars.ui:1464
+msgid "Type here the hour when ends the first period (from 0 to 23)"
+msgstr ""
+
+#: calendars.ui:1394
+msgid "Type here the hour when starts the first period (from 0 to 23)"
+msgstr ""
+
+#: calendars.ui:1513
+msgid "Type here the hour when starts the fourth period (from 0 to 23)"
+msgstr ""
+
+#: calendars.ui:1324 calendars.ui:1417 calendars.ui:1559
+msgid "Type here the hour when starts the second period (from 0 to 23)"
+msgstr ""
+
+#: calendars.ui:1301
+msgid "Type here the hour when starts the third period (from 0 to 23)"
+msgstr ""
+
+#: calendars.ui:1241 calendars.ui:1488
+msgid "Type here the minute when ends the first period (from 0 to 59)"
+msgstr ""
+
+#: calendars.ui:1194
+msgid "Type here the minute when starts the first period  (from 0 to 59)"
+msgstr ""
+
+#: calendars.ui:1535
+msgid "Type here the minute when starts the fourth period  (from 0 to 59)"
+msgstr ""
+
+#: calendars.ui:1370 calendars.ui:1439 calendars.ui:1581
+msgid "Type here the minute when starts the second period  (from 0 to 59)"
+msgstr ""
+
+#: calendars.ui:1347
+msgid "Type here the minute when starts the third period  (from 0 to 59)"
+msgstr ""
+
+#: freemail.ui:8 reportmail.ui:7
+msgid "Type your e-mail"
+msgstr ""
+
+#: undoredo.c:258
+msgid "Undo advance task"
+msgstr ""
+
+#: undoredo.c:238
+msgid "Undo append task from CSV"
+msgstr ""
+
+#: undoredo.c:266
+msgid "Undo decrease task duration"
+msgstr ""
+
+#: undoredo.c:262
+msgid "Undo delay task"
+msgstr ""
+
+#: undoredo.c:246
+msgid "Undo global tasks timeshift"
+msgstr ""
+
+#: undoredo.c:250
+msgid "Undo group of tasks timeshift"
+msgstr ""
+
+#: undoredo.c:270
+msgid "Undo increase task duration"
+msgstr ""
+
+#: undoredo.c:319
+msgid "Undo insert last appended ressource"
+msgstr ""
+
+#: undoredo.c:254
+msgid "Undo insert last repeated task"
+msgstr ""
+
+#: undoredo.c:323
+msgid "Undo insert new cloned ressource"
+msgstr ""
+
+#: undoredo.c:286
+msgid "Undo insert new group"
+msgstr ""
+
+#: undoredo.c:298
+msgid "Undo insert new milestone"
+msgstr ""
+
+#: undoredo.c:310
+msgid "Undo insert new ressource"
+msgstr ""
+
+#: undoredo.c:230
+msgid "Undo insert new task"
+msgstr ""
+
+#: shortkeys.ui:504
+msgid "Undo last operation"
+msgstr ""
+
+#: undoredo.c:335
+msgid "Undo modify calendars"
+msgstr ""
+
+#: undoredo.c:290
+msgid "Undo modify group"
+msgstr ""
+
+#: undoredo.c:302
+msgid "Undo modify milestone"
+msgstr ""
+
+#: undoredo.c:331
+msgid "Undo modify properties"
+msgstr ""
+
+#: undoredo.c:327
+msgid "Undo modify ressource"
+msgstr ""
+
+#: undoredo.c:242
+msgid "Undo modify task"
+msgstr ""
+
+#: undoredo.c:339
+msgid "Undo modify task status on dashboard"
+msgstr ""
+
+#: undoredo.c:282
+msgid "Undo modify task's group"
+msgstr ""
+
+#: undoredo.c:278
+msgid "Undo move group"
+msgstr ""
+
+#: undoredo.c:274
+msgid "Undo move task"
+msgstr ""
+
+#: undoredo.c:294
+msgid "Undo remove group"
+msgstr ""
+
+#: undoredo.c:306
+msgid "Undo remove milestone"
+msgstr ""
+
+#: undoredo.c:314
+msgid "Undo remove ressource"
+msgstr ""
+
+#: undoredo.c:234
+msgid "Undo remove task"
+msgstr ""
+
+#: properties.ui:563
+msgid "Units : "
+msgstr ""
+
+#: ressources.c:144
+msgid "Unknown affiliation"
+msgstr ""
+
+#: tasks.c:1214
+msgid "Unknown location"
+msgstr ""
+
+#: ressources.c:176
+msgid "Unknown type"
+msgstr ""
+
+#: tasksdialogs.c:677 tasksdialogs.c:736 calendars.ui:1783
+msgid "Use"
+msgstr ""
+
+#: timeshift.ui:244
+msgid "Use this calendar to choose the new starting date"
+msgstr ""
+
+#: settings.ui:1031
+msgid "User identifier "
+msgstr ""
+
+#: ressources.c:124 ressources.ui:488
+msgid "Voluntary"
+msgstr ""
+
+#: settings.c:213
+msgid ""
+"Warning !\n"
+"\n"
+"You've activated one or more auto-mailing settings.\n"
+"Now, you should launch <b>manually</b> your mailings (see menu "
+"<b>collaborate</b>),\n"
+"or wait until tomorrow for <b>automatic</b> mailings."
+msgstr ""
+
+#: misc.c:1275 taskrepeat.ui:234
+msgid "We"
+msgstr ""
+
+#: mail.c:594
+msgid "We hope that a significant progress will be accomplished.\r\n"
+msgstr ""
+
+#: mail.c:822
+msgid "We want to remind you that this task should be completed today.\r\n"
+msgstr ""
+
+#: mail.c:674
+msgid "We want to remind you that this task will start tomorrow.\r\n"
+msgstr ""
+
+#: mail.c:748
+msgid "We want to thank you.\r\n"
+msgstr ""
+
+#: mail.c:593
+msgid "We've noticed that this task is, today, overdue.\r\n"
+msgstr ""
+
+#: calendars.ui:792
+msgid "Wed."
+msgstr ""
+
+#: calendars.ui:1160 ressources.ui:760
+msgid "Wednesday"
+msgstr ""
+
+#: taskrepeat.ui:400
+msgid "Weekly by day(s) of week"
+msgstr ""
+
+#: report.c:1289
+msgid "Word Processors RTF files"
+msgstr ""
+
+#: settings.ui:693
+msgid "Work time"
+msgstr ""
+
+#: ressources.ui:702
+msgid "Working days : "
+msgstr ""
+
+#: tasks.ui:423
+msgid "You can type any value between 0 and 1000 days."
+msgstr ""
+
+#: tasks.ui:444
+msgid "You can type any value between 0 and 23 hours."
+msgstr ""
+
+#: mail.c:186
+msgid ""
+"Your current message is empty.\n"
+"Do you want to send it anyway ?"
+msgstr ""
+
+#: misc.c:600
+msgid ""
+"Your current project is modified.\n"
+"Do you want to save it before\n"
+"clearing all datas ?"
+msgstr ""
+
+#: mail.c:596 mail.c:677 mail.c:751 mail.c:825
+msgid "Your project manager.\r\n"
+msgstr ""
+
+#: shortkeys.ui:532
+msgid "Z"
+msgstr ""
+
+#: callbacks.c:1415
+msgid "_Cancel"
+msgstr ""
+
+#: main.ui:444
+msgid "_Collaborate"
+msgstr ""
+
+#: main.ui:128
+msgid "_File"
+msgstr ""
+
+#: main.ui:525
+msgid "_Help"
+msgstr ""
+
+#: timeline.c:502
+msgid "_Modify ... "
+msgstr ""
+
+#: assign.c:108
+msgid "_Modify ressource ... "
+msgstr ""
+
+#: timeline.c:620
+msgid "_New milestone ... "
+msgstr ""
+
+#: timeline.c:617
+msgid "_New task ... "
+msgstr ""
+
+#: callbacks.c:1417
+msgid "_Open"
+msgstr ""
+
+#: assign.c:112
+msgid "_Ressource charge ... "
+msgstr ""
+
+#: assign.c:116
+msgid "_Ressource cost ... "
+msgstr ""
+
+#: calendars.ui:1687 calendars.ui:1706 calendars.ui:1725 calendars.ui:1760
+msgid "activate/desactivate usage of this period."
+msgstr ""
+
+#: freemail.ui:164
+msgid "all participants"
+msgstr ""
+
+#: tasks.ui:471
+msgid "as soon as possible"
+msgstr ""
+
+#: timeshift.ui:186
+msgid "change ..."
+msgstr ""
+
+#: callbacks.c:1657
+msgid "click on a ressource to select it "
+msgstr ""
+
+#: callbacks.c:1644
+msgid "click on a task to select it"
+msgstr ""
+
+#: report.c:264
+msgid "completed"
+msgstr ""
+
+#: mail.c:145
+msgid "completed yesterday"
+msgstr ""
+
+#: taskrepeat.ui:165
+msgid "date"
+msgstr ""
+
+#: calendars.ui:939 calendars.ui:968 properties.ui:262 properties.ui:392
+#: tasks.ui:568
+msgid "date ..."
+msgstr ""
+
+#: tasks.ui:472
+msgid "don't end after ..."
+msgstr ""
+
+#: shortkeys.ui:952 shortkeys.ui:1133
+msgid "f2"
+msgstr ""
+
+#: shortkeys.ui:771 shortkeys.ui:1082
+msgid "f3"
+msgstr ""
+
+#: ressources.ui:351
+msgid "fixed"
+msgstr ""
+
+#: dashboard.c:539 dashboard.c:552 dashboard.c:565 dashboard.c:578
+#: dashboard.c:736 dashboard.c:747 dashboard.c:758 dashboard.c:769
+#, c-format
+msgid "from %s to %s"
+msgstr ""
+
+#: ressources.c:116
+msgid "from other profit organization"
+msgstr ""
+
+#: ressources.c:112
+msgid "from our organization"
+msgstr ""
+
+#: properties.ui:693
+msgid "his/her name"
+msgstr ""
+
+#: calendars.ui:615
+msgid "mark a day when the ressource isn't working, for various reasons"
+msgstr ""
+
+#: calendars.ui:635
+msgid "mark day as non-worked"
+msgstr ""
+
+#: calendars.ui:656
+msgid "mark day as non-worked for vacations or holy-days"
+msgstr ""
+
+#: calendars.ui:677 calendars.ui:698
+msgid "mark days, for example for medical reasons, kids keeping and so on"
+msgstr ""
+
+#: calendars.ui:1018
+msgid "mark this period"
+msgstr ""
+
+#: settings.ui:727 settings.ui:744
+msgid "minute(s)"
+msgstr ""
+
+#: tasksdialogs.c:1279
+msgid "month(s)"
+msgstr ""
+
+#: tasks.ui:474
+msgid "must start on ..."
+msgstr ""
+
+#: taskrepeat.ui:148
+msgid "name"
+msgstr ""
+
+#: callbacks.c:1805
+msgid "no"
+msgstr ""
+
+#: home.c:225
+msgid "noname"
+msgstr ""
+
+#: callbacks.c:1768
+msgid "none after"
+msgstr ""
+
+#: callbacks.c:1737
+msgid "none before"
+msgstr ""
+
+#: freemail.ui:166
+msgid "only for participants ended tasks since yesterday"
+msgstr ""
+
+#: freemail.ui:168
+msgid "only for participants ending a task today"
+msgstr ""
+
+#: freemail.ui:165
+msgid "only for participants overdue"
+msgstr ""
+
+#: freemail.ui:167
+msgid "only for participants starting a task tomorrow"
+msgstr ""
+
+#: mail.c:138
+msgid "overdue"
+msgstr ""
+
+#: ressources.ui:348
+msgid "per day"
+msgstr ""
+
+#: ressources.ui:347
+msgid "per hour"
+msgstr ""
+
+#: ressources.ui:350
+msgid "per month (30 days)"
+msgstr ""
+
+#: ressources.ui:349
+msgid "per week (5 days)"
+msgstr ""
+
+#: settings.ui:482
+msgid "send for completed tasks"
+msgstr ""
+
+#: settings.ui:446
+msgid "send for overdue tasks"
+msgstr ""
+
+#: settings.ui:464
+msgid "send for tasks ending today"
+msgstr ""
+
+#: settings.ui:428
+msgid "send for tasks starting tomorrow"
+msgstr ""
+
+#: main.ui:4146
+msgid "sending mails"
+msgstr ""
+
+#: main.ui:2228
+msgid "shift"
+msgstr ""
+
+#: settings.ui:993
+msgid "smtp.server.com"
+msgstr ""
+
+#: calendars.ui:610
+msgid "standard"
+msgstr ""
+
+#: tasks.ui:473
+msgid "start no earlier than ..."
+msgstr ""
+
+#: mail.c:152
+msgid "starting tomorrow"
+msgstr ""
+
+#: home.c:56
+msgid "there isn't any auto mailing for now"
+msgstr ""
+
+#: main.ui:2918 taskrepeat.ui:1177
+msgid "times"
+msgstr ""
+
+#: properties.c:271
+msgid "title"
+msgstr ""
+
+#: calendars.ui:958 calendars.ui:2016
+msgid "to"
+msgstr ""
+
+#: ressources.ui:541
+msgid "type : "
+msgstr ""
+
+#: settings.ui:976
+msgid "type a name as you want"
+msgstr ""
+
+#: taskrepeat.ui:1153
+msgid ""
+"type here a limit, thus the repeating process will cease even if the "
+"project's ending time isn't reached"
+msgstr ""
+
+#: milestone.ui:181
+msgid "type here an optionnal location"
+msgstr ""
+
+#: milestone.ui:144
+msgid "type here the milestone name"
+msgstr ""
+
+#: mail.c:158
+msgid "uncategorized"
+msgstr ""
+
+#: timeline.c:1530
+#, c-format
+msgid "week %d of %d"
+msgstr ""
+
+#: assign.c:547
+#, c-format
+msgid "week %d of %d - %s"
+msgstr ""
+
+#: assign.c:543
+#, c-format
+msgid "week %d of %d - %s/%s"
+msgstr ""
+
+#: timeline.c:1532
+#, c-format
+msgid "week %d of %d-%s"
+msgstr ""
+
+#: tasksdialogs.c:1269 taskrepeat.ui:373
+msgid "week(s)"
+msgstr ""
+
+#: report.c:512
+#, c-format
+msgid "with an average of %.2f task(s) by ressource.\n"
+msgstr ""
+
+#: tasksdialogs.c:1286
+msgid "year(s)"
+msgstr ""
+
+#: callbacks.c:1730 callbacks.c:1761 callbacks.c:1800
+msgid "yes"
+msgstr ""
+
+#: calendars.ui:736 calendars.ui:918
+msgid "you can mark at the same time more than one day"
+msgstr ""
+
+#: mail.c:592 mail.c:673
+#, c-format
+msgid "you're assigned to task : %s.\r\n"
+msgstr ""
+
+#: mail.c:747 mail.c:821
+#, c-format
+msgid "you've been assigned to task : %s.\r\n"
+msgstr ""
+
+#: settings.ui:1048
+msgid "your id or email"
+msgstr ""
+
+#: settings.ui:1086
+msgid "your password on mail server"
+msgstr ""

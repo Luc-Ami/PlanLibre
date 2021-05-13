@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg884"
+   version="1.1"
+   viewBox="0 0 13.99228 13.992282"
+   height="13.992282mm"
+   width="13.992281mm">
+  <defs
+     id="defs878" />
+  <metadata
+     id="metadata881">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-36.754682,-47.281653)"
+     id="layer1">
+    <g
+       transform="matrix(0.26972787,0,0,0.26458333,33.038751,37.300314)"
+       id="g1032">
+      <g
+         id="g885">
+        <rect
+           style="color:#bebebe;fill:none"
+           height="32"
+           width="32"
+           y="48.166851"
+           x="23.714367"
+           id="rect833" />
+        <path
+           id="path859"
+           d="m 39.661266,44.170729 c -0.946,0.0134 -1.85,0.3953 -2.519,1.0644 l -16.362,16.362 c -1.4211,1.4203 -1.4211,3.724 0,5.1443 l 16.362,16.363 c 1.4203,1.4211 3.7239,1.4211 5.1442,0 l 16.362,-16.363 c 1.4211,-1.4203 1.4211,-3.724 0,-5.1443 l -16.362,-16.362 c -0.695,-0.6952 -1.642,-1.0791 -2.625,-1.0646 z"
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#aaa109;stroke-width:2.12245703;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+        <rect
+           transform="matrix(0.70026604,0.71388197,-0.70026604,0.71388197,0,0)"
+           ry="1.1348662"
+           rx="0.89723116"
+           y="-0.89852995"
+           x="55.814724"
+           height="34.968208"
+           width="34.968208"
+           id="rect821"
+           style="opacity:0.90100002;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.74365759;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" />
+      </g>
+    </g>
+  </g>
+</svg>
