@@ -12,3 +12,23 @@ Dependancies :
 - json-glib
 - lib-gnome-jeyring
 
+
+How to compile ?
+----------------
+sh autogen.sh
+./configure
+if no error :
+make
+then (required !) install PlanLibre :
+sudo make install
+
+type planlibre to launch software from a terminal, or use your favorite application launcher in graphical mode.
+
+Please note :
+-------------
+you can launch LOCALLY PlanLibre from within current directory by typing :
+
+./src/planlibre
+
+BUT, only after a successfull sudo make install, because required GUI files, icons, and so on MUST be installed system wide.
+
