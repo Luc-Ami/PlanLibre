@@ -70,6 +70,7 @@ void tasks_move_forward (gint nbDays, gint position, APP_data *data);
 void tasks_move_backward (gint nbDays, gint position, APP_data *data);
 void tasks_change_duration (gint nbDays, gint position, APP_data *data);
 
+void tasks_modify_widget (gint position, APP_data *data);
 
 void tasks_remove_widgets (GtkWidget *container);
 

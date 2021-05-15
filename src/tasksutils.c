@@ -824,6 +824,7 @@ void tasks_get_ressource_datas (gint position, tasks_data *tmp, APP_data *data)
      tmp->category = tmp_tasks_datas->category;
      tmp->group = tmp_tasks_datas->group;
      tmp->color = tmp_tasks_datas->color;
+     tmp->color.alpha = 1.0;/* required, because no default value */
      tmp->progress = tmp_tasks_datas->progress;
      tmp->start_nthDay = tmp_tasks_datas->start_nthDay;
      tmp->start_nthMonth = tmp_tasks_datas->start_nthMonth;
