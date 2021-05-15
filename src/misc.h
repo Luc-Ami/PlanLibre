@@ -286,7 +286,7 @@ void misc_init_spell_checker (GtkTextView *view, APP_data *data );
 
 void misc_prepare_timeouts (APP_data *data );
 void misc_set_font_color_settings (APP_data *data );
-void miscErrorDialog (GtkWidget *widget, const gchar* msg);
+void misc_ErrorDialog (GtkWidget *widget, const gchar* msg);
 void misc_InfoDialog (GtkWidget *widget, const gchar* msg);
 void misc_display_app_status (gboolean modified, APP_data *data );
 void misc_display_tips_status (const gchar *str, APP_data *data );

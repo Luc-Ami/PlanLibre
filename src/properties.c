@@ -17,6 +17,9 @@
 #include "dashboard.h"
 #include "undoredo.h"
 #include "tasksutils.h"
+#include "home.h"
+#include "files.h"
+#include "savestate.h"
 
 /*#########################
 
@@ -87,7 +90,7 @@ void on_IntervalStartBtn_clicked  (GtkButton  *button,  APP_data *data)
   gchar* newDate = misc_getDate(gtk_button_get_label(GTK_BUTTON(dateEntry)), win);
   gtk_button_set_label (GTK_BUTTON(dateEntry), newDate);
 
- /* we must check if dates aren't inverted */
+  /* we must check if dates aren't inverted */
 
   const gchar *endDate=NULL;
   endDate = gtk_button_get_label(GTK_BUTTON(endEntry));
@@ -212,7 +215,7 @@ void properties_choose_organization_logo (GtkButton *button, APP_data *data)
     }
     else {
         g_error_free (err);
-        misc_ErrorDialog (GTK_WINDOW(dlg), _("<b>Error!</b>\n\nProblem with choosen image !\nThe logo remains unchanged."));
+        misc_ErrorDialog (GTK_WIDGET(dlg), _("<b>Error!</b>\n\nProblem with choosen image !\nThe logo remains unchanged."));
     }
     /* cleaning */
     g_free (filename);
@@ -294,7 +297,8 @@ void properties_modify (APP_data *data)
   GtkWidget *startRange, *endRange, *btnStartDate, *btnEndDate;
   GKeyFile *keyString;
   struct lconv *locali;
-  gchar *startDate = NULL, *endDate = NULL;
+  const gchar *startDate = NULL;
+  const gchar *endDate = NULL;
   GdkPixbuf *pix = NULL;
 
   locali = localeconv ();
@@ -320,13 +324,13 @@ void properties_modify (APP_data *data)
   buttonLogo = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesLogo"));
   entryProjWebsite = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryProjectWebsite"));
 
-  entryUnits = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryPropertiesUnits"));
-  spinBudget = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonPropertiesBudget"));
+  entryUnits 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryPropertiesUnits"));
+  spinBudget 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonPropertiesBudget"));
 
-  btnStartDate = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesStartDate"));
-  btnEndDate = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesEndDate"));
-  startRange = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleStart"));
-  endRange = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleEnd"));
+  btnStartDate 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesStartDate"));
+  btnEndDate 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesEndDate"));
+  startRange 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleStart"));
+  endRange 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleEnd"));
   /* set current values  */
   /* project */
   if(data->properties.title)
@@ -377,28 +381,28 @@ void properties_modify (APP_data *data)
       tmp_value->opCode = OP_MODIFY_PROP;
       rsc_properties *tmp;
       tmp = g_malloc (sizeof(rsc_properties));
-      tmp->title = g_strdup_printf ("%s", data->properties.title);
-      tmp->summary = g_strdup_printf ("%s", data->properties.summary);
-      tmp->location = g_strdup_printf ("%s", data->properties.location);
-      tmp->gps = g_strdup_printf ("%s", data->properties.gps);
-      tmp->units = g_strdup_printf ("%s", data->properties.units);
+      tmp->title 	= g_strdup_printf ("%s", data->properties.title);
+      tmp->summary 	= g_strdup_printf ("%s", data->properties.summary);
+      tmp->location 	= g_strdup_printf ("%s", data->properties.location);
+      tmp->gps 		= g_strdup_printf ("%s", data->properties.gps);
+      tmp->units 	= g_strdup_printf ("%s", data->properties.units);
       tmp->manager_name = g_strdup_printf ("%s", data->properties.manager_name);
       tmp->manager_mail = g_strdup_printf ("%s", data->properties.manager_mail);
       tmp->manager_phone = g_strdup_printf ("%s", data->properties.manager_phone);
-      tmp->org_name = g_strdup_printf ("%s", data->properties.org_name);
+      tmp->org_name 	= g_strdup_printf ("%s", data->properties.org_name);
       tmp->proj_website = g_strdup_printf ("%s", data->properties.proj_website);
-      tmp->budget = data->properties.budget;
+      tmp->budget 	= data->properties.budget;
       tmp->scheduleStart = data->properties.scheduleStart;
-      tmp->scheduleEnd = data->properties.scheduleEnd;
-      tmp->start_date = g_strdup_printf ("%s", data->properties.start_date);
-      tmp->end_date = g_strdup_printf ("%s", data->properties.end_date);
+      tmp->scheduleEnd 	= data->properties.scheduleEnd;
+      tmp->start_date 	= g_strdup_printf ("%s", data->properties.start_date);
+      tmp->end_date 	= g_strdup_printf ("%s", data->properties.end_date);
       tmp->start_nthDay = data->properties.start_nthDay;
       tmp->start_nthMonth = data->properties.start_nthMonth;
       tmp->start_nthYear = data->properties.start_nthYear;
-      tmp->end_nthDay = data->properties.end_nthDay;
+      tmp->end_nthDay 	= data->properties.end_nthDay;
       tmp->end_nthMonth = data->properties.end_nthMonth;
-      tmp->end_nthYear = data->properties.end_nthYear;
-      tmp->logo = NULL;
+      tmp->end_nthYear 	= data->properties.end_nthYear;
+      tmp->logo 	= NULL;
       if(pix!=NULL) {/* previous pixbuf alreday duplicated */
           tmp->logo = pix;
       }
@@ -477,12 +481,12 @@ printf ("unités =%s \n", data->properties.units );
         fEndDateChanged = TRUE;
 
       /* explode dates into components nthDay, nthMonth, year */
-      data->properties.start_nthDay = g_date_get_day (&date_interval1);
-      data->properties.start_nthMonth = g_date_get_month (&date_interval1);
-      data->properties.start_nthYear = g_date_get_year (&date_interval1);
-      data->properties.end_nthDay = g_date_get_day (&date_interval2);
-      data->properties.end_nthMonth = g_date_get_month (&date_interval2);
-      data->properties.end_nthYear = g_date_get_year (&date_interval2);
+      data->properties.start_nthDay 	= g_date_get_day (&date_interval1);
+      data->properties.start_nthMonth 	= g_date_get_month (&date_interval1);
+      data->properties.start_nthYear 	= g_date_get_year (&date_interval1);
+      data->properties.end_nthDay 	= g_date_get_day (&date_interval2);
+      data->properties.end_nthMonth 	= g_date_get_month (&date_interval2);
+      data->properties.end_nthYear 	= g_date_get_year (&date_interval2);
       /* main icon */
       if(data->properties.fRemIcon == TRUE) {
           g_object_unref (data->properties.logo);
@@ -513,6 +517,7 @@ printf ("unités =%s \n", data->properties.units );
   }
 
   g_object_unref (data->tmpBuilder);
+  home_project_infos (data);
   gtk_widget_destroy (GTK_WIDGET(dialog));  /* please note : with a Builder, you can only use destroy in case of the properties 'destroy with parent' isn't activated for the dualog */
 }
 
