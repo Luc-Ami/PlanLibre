@@ -94,8 +94,8 @@ static void tasks_update_links (GtkWidget *win, gint id, APP_data *data)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
-  gboolean valid, status;
-  gint i, link, ret = -1, sender;
+  gboolean valid, status, flag;
+  gint i, link, ret = -1, sender, rep;
   GList *l;
   tasks_data *tmp_tsk_datas;
   GDate date_task_start, date_task_end;
@@ -136,21 +136,34 @@ static void tasks_update_links (GtkWidget *win, gint id, APP_data *data)
              if(status) {
                  /* now we test if there is a concurrent usage of the same resseource */
                  gint conflict =  links_test_concurrent_rsc_usage (id, sender, -1, date_task_start, date_task_end, data);
-                 if(conflict == 0) {
+                 if(conflict == 0) {/* here we test if concurrent usage is allowed TODO */
                //     printf("comme status activé, je crée le lien \n");
                     links_append_element (id, sender, LINK_TYPE_TSK_RSC, LINK_END_START, data);
                  }
-                 else {
-                    gchar *msg;                   
-                    msg = g_strdup_printf (_("<b>Can't do that !</b>\n\Ressources conflict !\nThis task can't use same ressource(s) than other task(s). \nCheck if ressource(s) :\n<b>%s</b>\nisn't used on the same period by an other task, in order to solve this issue.") , rsc_get_name (conflict, data));
-                    misc_ErrorDialog (win, msg);
+                 else {/* here we can define a specific message when concurrent usage of ressource is allowed */
+                    gchar *msg;
+                    /* is concurrent usage is allowed for current ressource ? */
+                    flag =  rsc_get_concurrent_status_for_id (sender, data);
+                    if(flag) {
+                        msg = g_strdup_printf (_("<b>Warning !</b>\n\Ressources conflict !\nYou have authorized concurrent usage of\na ressource for more than ONE task.\nAre you sure to really use ressource(s) :\n<b>%s</b>\non several tasks for the same period ?") , 
+						rsc_get_name (conflict, data));
+                        rep =  misc_QuestionDialog (win, msg);
+                        if(rep == GTK_RESPONSE_YES) {
+						  links_append_element (id, sender, LINK_TYPE_TSK_RSC, LINK_END_START, data);	
+					    }
+                    }   
+                    else {
+						msg = g_strdup_printf (_("<b>Can't do that !</b>\n\Ressources conflict !\nThis task can't use same ressource(s) than other task(s). \nCheck if ressource(s) :\n<b>%s</b>\nisn't used on the same period by an other task, in order to solve this issue.") , 
+						rsc_get_name (conflict, data));
+                        misc_ErrorDialog (win, msg);
+                    }
                     g_free (msg);
-                 }
+                 }/* elseif */
              }
          }
          else {
          //    printf(" existe déjà un lien entre %d et %d \n", id, sender);
-             if(!status) {
+             if(!status) {/* can't find ressource */
               //   printf("comme status désactivé, je supprime le lien \n");
                  links_free_at (link, data);
              }
@@ -1477,7 +1490,7 @@ printf ("lim date =%s \n", limDate);
             g_date_set_parse (&interval1, startDate);
 
         }
-        /* we store datas - we use temporrary variable */
+        /* we store datas - we use temporary variable */
         newTasks.name = name;
         newTasks.location = NULL;
         newTasks.group = tasks_get_group_id (curGroup, data);/* previous value in temp.group */
@@ -1486,8 +1499,9 @@ printf ("lim date =%s \n", limDate);
         newTasks.category = curCateg;
         newTasks.progress = progress;
         /* test if progress = 100 % */
-        if(progress == 100)
+        if(progress == 100) {
             curStatus = TASKS_STATUS_DONE;
+        }
         newTasks.status = curStatus; 
         newTasks.days = curDays;
         newTasks.hours = curHours;
@@ -1498,8 +1512,9 @@ printf ("lim date =%s \n", limDate);
         endDate = gtk_button_get_label (GTK_BUTTON(pButton));
         g_date_set_parse (&interval1, startDate);
         g_date_set_parse (&interval2, startDate);
-        if(curDays>1) /* because when task last one day or less, start and date are identical */
+        if(curDays>1) {/* because when task last one day or less, start and date are identical */
             g_date_add_days (&interval2, curDays-1); 
+        }
         newTasks.start_nthDay = g_date_get_day (&interval1);
         newTasks.start_nthMonth = g_date_get_month (&interval1);
         newTasks.start_nthYear = g_date_get_year (&interval1);
@@ -1532,13 +1547,13 @@ printf ("lim date =%s \n", limDate);
 
         /* update dates according to due date mode */
         rc = 0;
-	t_links = links_check_task_linked (temp.id, data);
+	    t_links = links_check_task_linked (temp.id, data);
         s_links = links_check_task_successors (temp.id, data);
-	/* if t_links >0 ther is at least one predecessor task */
-	if(t_links>=0 || s_links>=0) {// TODO change to wider function !!! 
-            rc = tasks_compute_dates_for_all_linked_task (temp.id, curDuration, curDays, iRow, 
-                                                                    &interval1, t_links, s_links, TRUE, dialog, data);
-	}/* endif links */
+		/* if t_links >0 ther is at least one predecessor task */
+		if(t_links>=0 || s_links>=0) {// TODO change to wider function !!! 
+				rc = tasks_compute_dates_for_all_linked_task (temp.id, curDuration, curDays, iRow, 
+																		&interval1, t_links, s_links, TRUE, dialog, data);
+		}/* endif links */
 
         /* ressources - first we remove all children from rscBox */
         tasks_remove_widgets (temp.cRscBox);
@@ -1554,7 +1569,7 @@ printf ("lim date =%s \n", limDate);
            }
         }
         /* if group has changed, we shall 'move' widget */
-        if(temp.group!=newTasks.group) {
+        if(temp.group != newTasks.group) {
            insertion_row = task_get_selected_row (data);
            gint newRow = tasks_compute_valid_insertion_point (insertion_row, newTasks.group, FALSE, data);
            tasks_move (insertion_row, newRow, FALSE, FALSE, data);

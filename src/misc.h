@@ -278,9 +278,9 @@ typedef struct {
 /***************************
   functions
 ***************************/
-void misc_colorinvert_picture(GdkPixbuf *pb);
-gchar *misc_get_pango_string(const gchar *key, const gint modifier);
-void undo_popup_menu(GtkWidget *attach_widget, GtkMenu *menu);
+void misc_colorinvert_picture (GdkPixbuf *pb);
+gchar *misc_get_pango_string (const gchar *key, const gint modifier);
+void undo_popup_menu (GtkWidget *attach_widget, GtkMenu *menu);
 
 void misc_init_vars (APP_data *data );
 void misc_init_spell_checker (GtkTextView *view, APP_data *data );
@@ -289,6 +289,9 @@ void misc_prepare_timeouts (APP_data *data );
 void misc_set_font_color_settings (APP_data *data );
 void misc_ErrorDialog (GtkWidget *widget, const gchar* msg);
 void misc_InfoDialog (GtkWidget *widget, const gchar* msg);
+
+gint misc_QuestionDialog (GtkWidget *widget, const gchar* msg);
+
 void misc_display_app_status (gboolean modified, APP_data *data );
 void misc_display_tips_status (const gchar *str, APP_data *data );
 

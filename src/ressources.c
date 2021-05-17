@@ -1792,6 +1792,33 @@ gint rsc_get_rank_for_id (gint id, APP_data *data)
   return ret;
 }
 
+/*******************************
+  PUBLIC : known ressource ID,
+  returns it's allow concirrent
+  usage
+*******************************/
+gboolean rsc_get_concurrent_status_for_id (gint id, APP_data *data)
+{
+  gint ret = -1; 
+  gint i = 0;
+  gboolean flag = FALSE;
+  GList *l;
+  rsc_datas *tmp_rsc_datas;
+
+  while((i<g_list_length (data->rscList)) && (ret<0)) {
+      l = g_list_nth (data->rscList, i);
+      tmp_rsc_datas = (rsc_datas *) l->data;
+      if(tmp_rsc_datas->id == id) {
+          ret = i;
+          flag = tmp_rsc_datas->fAllowConcurrent;
+      }
+      i++;
+  }
+  return flag;
+}
+
+
+
 /*****************************************
  PUBLIC : autoscroll a display
  arguments : pointer on a scrolled window

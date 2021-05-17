@@ -266,6 +266,26 @@ void misc_InfoDialog (GtkWidget *widget, const gchar* msg)
    gtk_widget_destroy (dialog);
 }
 
+
+/****************************************************
+  display an info:confirm/dismisss dialog
+****************************************************/
+gint misc_QuestionDialog (GtkWidget *widget, const gchar* msg)
+{ 
+   GtkWidget *dialog;
+   gint ret;
+
+   dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW(widget),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_INFO,
+                                           GTK_BUTTONS_YES_NO,
+                                           msg, NULL);
+   ret = gtk_dialog_run (GTK_DIALOG (dialog));
+   gtk_widget_destroy (dialog);
+   return ret;
+}
+
+
 /*******************************************
   converts a gdkcolor to a string in 
   hexadecimal, compatible with CSS
