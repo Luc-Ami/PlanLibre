@@ -299,6 +299,7 @@ gchar *misc_getDate (const gchar *curDate, GtkWidget *win);
 gchar *misc_convert_date_to_str (gint dd, gint mm, gint yy);
 GDate misc_get_earliest_date (APP_data *data);
 GDate misc_get_latest_date (APP_data *data);
+gint misc_get_highest_id (APP_data *data);
 gchar *misc_convert_date_to_locale_str (GDate *date);
 gboolean misc_alert_before_clearing (APP_data *data);
 gdouble misc_date_to_duration (GDate *date1, GDate *date2);

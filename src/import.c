@@ -20,13 +20,16 @@ excellent site en français sur xml : https://www.julp.fr/articles/1-1-presentat
 #include <glib.h>
 #include <string.h>
 #include <glib/gstdio.h> /* g_fopen, etc */
-#include "support.h" /* glade requirement */
+#include "support.h" /* glade requirement  */
 #include "misc.h"
 #include "tasks.h"
 #include "files.h"
 #include "ressources.h" 
 #include "import.h"
 #include "undoredo.h"
+#include "timeline.h"
+#include "dashboard.h"
+#include "tasksutils.h"
 
 /****************************
 
@@ -155,6 +158,8 @@ gint import_csv_file_to_rsc (gchar *path_to_file, APP_data *data)
       newRsc.fWorkFriday = TRUE;
       newRsc.fWorkSaturday = FALSE;
       newRsc.fWorkSunday = FALSE;
+	  /* allow concurrent usage of a ressource - should be modified in 0.2 TODO */
+      newRsc.fAllowConcurrent = TRUE;      
       /* calendar */
       newRsc.calendar = 0; /* default */
       newRsc.day_hours = 8;

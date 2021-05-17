@@ -23,6 +23,12 @@
 #include "tasks.h"
 #include "calendars.h"
 #include "undoredo.h"
+#include "timeline.h"
+#include "files.h"
+#include "report.h"
+#include "tasks.h"
+#include "tasksutils.h"
+#include "tasksdialogs.h"
 
 /*#########################
  functions for list, see the 
@@ -197,6 +203,7 @@ void rsc_get_ressource_datas (gint position, rsc_datas *rsc, APP_data *data)
      rsc_datas *tmp_rsc_datas;
      tmp_rsc_datas = (rsc_datas *)l->data;
      
+     rsc->fAllowConcurrent = tmp_rsc_datas->fAllowConcurrent; /* should be modified in 0.2 TODO */     
      /* get datas strings */
      rsc->name = tmp_rsc_datas->name;
      rsc->mail = tmp_rsc_datas->mail;     
@@ -681,7 +688,7 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
      rsc->fPersoIcon = TRUE;
   }
   else {
-    if(imgFromXml==FALSE) {
+    if(imgFromXml == FALSE) {
        img = gtk_image_new_from_icon_name ("gtk-orientation-portrait", GTK_ICON_SIZE_DIALOG);
        //data->rsc.pix = NULL;
        //data->rsc.fPersoIcon = FALSE;
@@ -689,7 +696,7 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
        rsc->fPersoIcon = FALSE;
     }
     else {printf("I set an image from xml */\n");
-          if(pixxml!=NULL) {
+          if(pixxml != NULL) {
              img = gtk_image_new_from_pixbuf (pixxml);
              //data->rsc.pix = pixxml;
             // data->rsc.fPersoIcon = TRUE;// il faudra faire un double de pixxml !!! 
@@ -783,7 +790,7 @@ void rsc_new (APP_data *data)
   GtkListBox *box; 
   GtkListBoxRow *row;
 
-  box = GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxRsc"));
+  box = GTK_LIST_BOX(GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxRsc")));
   dialog = ressources_create_dialog (FALSE, data);
   /* working days are set by default */
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
@@ -1318,7 +1325,7 @@ void ressources_choose_ressource_logo (GtkButton *button, APP_data *data )
     }
     else {
         g_error_free (err);
-        misc_ErrorDialog (GTK_WINDOW (dlg), _("<b>Error!</b>\n\nProblem with choosen image !\nThe icon remains unchanged."));
+        misc_ErrorDialog (GTK_WIDGET (dlg), _("<b>Error!</b>\n\nProblem with choosen image !\nThe icon remains unchanged."));
     }
     /* cleaning */
     g_free (filename);
