@@ -6,6 +6,9 @@
 #include <libintl.h>
 #include <locale.h>
 
+#include <glib.h>
+#include <glib/gstdio.h>
+
 #include <stdlib.h>
 #include "string.h"
 #include <gio/gio.h>
@@ -40,6 +43,9 @@
 #include "undoredo.h"
 #include "secret.h"
 #include "trello.h"
+#include "home.h"
+#include "links.h"
+#include "savestate.h"
 
 /******************************
   PUBLIC : same CB
@@ -135,7 +141,7 @@ void on_btn_trello_token_clicked (GtkButton *button, APP_data *data)
      gtk_widget_set_sensitive (GTK_WIDGET(switchAllowTrelloAcess), TRUE);
      gtk_label_set_text (GTK_LABEL (labelTrelloBtn), ("Change user token ..."));  
      /* we update keyring */
-     store_my_trello_password (gtk_entry_get_text (GTK_ENTRY(entry)));
+     store_my_trello_password ((gchar *)gtk_entry_get_text (GTK_ENTRY(entry)));
      /* update config file */
 
   }
@@ -648,7 +654,7 @@ gboolean timeout_quick_save (APP_data *data)
 {
   GKeyFile *keyString;
   gchar *path_to_file;
-  static count=0;
+  static gint count = 0;
 
   /* re-entrant test */
   if(files_started_saving (data))

@@ -166,6 +166,7 @@ typedef struct {
   gboolean fWorkFriday;
   gboolean fWorkSaturday;
   gboolean fWorkSunday;
+  gboolean fAllowConcurrent;/* in order to allow a ressource to be assigned to more 1 task at same time */
   gint calendar;
 } rsc_datas;
 
