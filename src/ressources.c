@@ -452,6 +452,8 @@ void rsc_insert (gint position, rsc_datas *rsc, APP_data *data)
     tmp_rsc_datas->fWorkFriday = rsc->fWorkFriday;
     tmp_rsc_datas->fWorkSaturday = rsc->fWorkSaturday;
     tmp_rsc_datas->fWorkSunday = rsc->fWorkSunday;
+    /* concurrent usage */
+    tmp_rsc_datas->fAllowConcurrent = rsc->fAllowConcurrent; /* should be modified in 0.2 TODO */    
     /* calendar */
     tmp_rsc_datas->calendar = rsc->calendar;
     tmp_rsc_datas->day_hours = rsc->day_hours;
@@ -461,7 +463,7 @@ void rsc_insert (gint position, rsc_datas *rsc, APP_data *data)
     data->rscList = g_list_insert (data->rscList, tmp_rsc_datas, position);
   }
   else
-     printf("* PlanLibre critical : can't insert RSC datas at a negative position ! *\n");
+     printf ("* PlanLibre critical : can't insert RSC datas at a negative position ! *\n");
 }
 
 /***********************************
@@ -579,12 +581,13 @@ void rsc_store_to_app_data (gint position, gchar *name, gchar *mail, gchar *phon
       tmprsc->reminder = g_strdup_printf ("%s", "");
   tmprsc->location = NULL;
 
-  tmprsc->pix = pix;
-  tmprsc->color = color;
-  tmprsc->type = type;
+  tmprsc->fAllowConcurrent = TRUE; /* should be modified in 0.2 TODO */
+  tmprsc->pix		 = pix;
+  tmprsc->color		 = color;
+  tmprsc->type		 = type;
   tmprsc->affiliate = affi;
   tmprsc->cost_type = cost_type;
-  tmprsc->cost = cost;
+  tmprsc->cost 		= cost;
   if(incrCounter)
       tmprsc->id = data->objectsCounter; 
   else

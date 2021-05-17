@@ -440,6 +440,8 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
      newRsc.fWorkFriday = TRUE;
      newRsc.fWorkSaturday = FALSE;
      newRsc.fWorkSunday = FALSE;
+	 /* allow concurrent usage of a ressource - should be modified in 0.2 TODO */
+     newRsc.fAllowConcurrent = TRUE;	
      /* calendar */
      newRsc.calendar = 0; /* default */
      newRsc.day_hours = 8;
@@ -1551,6 +1553,11 @@ static gint save_ressources (xmlNodePtr rsc_node, APP_data *data)
      xmlNewProp (rsc_object, BAD_CAST "Color_green", BAD_CAST buffer);
      g_ascii_dtostr (buffer, 50, tmp_rsc_datas->color.blue );
      xmlNewProp (rsc_object, BAD_CAST "Color_blue", BAD_CAST buffer);
+     /* concurrent usage */
+     if(tmp_rsc_datas->fAllowConcurrent)     
+		xmlNewProp (rsc_object, BAD_CAST "concurrent_usage", BAD_CAST "1"); 
+	 else
+		xmlNewProp (rsc_object, BAD_CAST "concurrent_usage", BAD_CAST "0"); 	 
      /* working days */
      if(tmp_rsc_datas->fWorkMonday)
           xmlNewProp (rsc_object, BAD_CAST "working_monday", BAD_CAST "1");       
