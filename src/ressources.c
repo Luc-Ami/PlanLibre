@@ -216,7 +216,9 @@ void rsc_get_ressource_datas (gint position, rsc_datas *rsc, APP_data *data)
      rsc->day_hours = tmp_rsc_datas->day_hours;
      rsc->day_mins = tmp_rsc_datas->day_mins;
      rsc->cost_type = tmp_rsc_datas->cost_type;  
-     rsc->color = tmp_rsc_datas->color;    
+     rsc->color = tmp_rsc_datas->color;
+     /* fix for alpha channel */
+     rsc->color.alpha = 1.0;    
      rsc->cadre = tmp_rsc_datas->cadre;    
      rsc->fPersoIcon = tmp_rsc_datas->fPersoIcon;
      rsc->pix = tmp_rsc_datas->pix;
@@ -780,7 +782,10 @@ void rsc_new (APP_data *data)
   GtkWidget *dialog;
   gint ret=0, insertion_row, iCost, iAffi, iType, iCal;
   GdkRGBA color;
-  gchar *name, *mail, *phone, *reminder;
+  const gchar *name;
+  const gchar *mail;
+  const gchar *phone;
+  const gchar *reminder;
   GtkWidget *entryName, *entryMail, *entryPhone, *entryRemind;
   GtkWidget *comboCost, *comboAffi, *comboType, *pBtnColor, *spinBtnCost;
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
@@ -847,7 +852,7 @@ void rsc_new (APP_data *data)
     newRsc.day_mins = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON(pDayMins));
 
     /* we update the listbox */
-    cadres = rsc_new_widget (name, iType, iAffi, cost, iCost, color, data, FALSE, NULL, &newRsc);
+    cadres = rsc_new_widget ((gchar *)name, iType, iAffi, cost, iCost, color, data, FALSE, NULL, &newRsc);
     /* here we have datas on widgets stored in 'rsc' variable */
     listBoxRessources = GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxRsc"));
 
@@ -863,7 +868,7 @@ void rsc_new (APP_data *data)
     /* we store datas */
 if(newRsc.pix==NULL)
       printf ("dans new pix vaut null \n");
-    rsc_store_to_app_data (insertion_row, name, mail, phone, reminder, 
+    rsc_store_to_app_data (insertion_row, (gchar *) name,  (gchar *) mail,  (gchar *) phone,  (gchar *) reminder, 
                             iType, iAffi, cost, iCost, color, newRsc.pix,
                             data , -1, &newRsc, TRUE);
     rsc_insert (insertion_row, &newRsc, data);
@@ -960,7 +965,10 @@ void rsc_modify (APP_data *data)
   GtkWidget *pBtnColor, *buttonLogo, *spinBtnCost;
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
   rsc_datas tmpRsc, newRsc, *undoRsc;
-  gchar *name, *mail, *phone, *reminder;
+  const gchar *name;
+  const gchar  *mail;
+  const gchar *phone;
+  const gchar *reminder;
   GdkRGBA color;
   gint iCost, iAffi, iType, iCal;
   gdouble cost;
@@ -1034,6 +1042,7 @@ void rsc_modify (APP_data *data)
   gtk_combo_box_set_active (GTK_COMBO_BOX( comboAffi), tmpRsc.affiliate);
   gtk_combo_box_set_active (GTK_COMBO_BOX( comboCost), tmpRsc.cost_type);
   gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinBtnCost), tmpRsc.cost);
+
   gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER(pBtnColor), &tmpRsc.color);
   if(tmpRsc.pix) {/* there is already an user ùodified image */
      GtkWidget *tmpImage = gtk_image_new_from_pixbuf (tmpRsc.pix);
@@ -1059,8 +1068,8 @@ void rsc_modify (APP_data *data)
   /* display ressource's calendar - search for correct nth in calendar list, known calendar unique Id*/
   gtk_combo_box_set_active (GTK_COMBO_BOX(pCalendar), 
                             calendars_get_nth_for_id (tmpRsc.calendar, data));
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(pDayHours), tmpRsc.day_hours);
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(pDayMins), tmpRsc.day_mins);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(pDayHours), tmpRsc.day_hours);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(pDayMins), tmpRsc.day_mins);
 
   /* we run the dialog */
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
@@ -1120,10 +1129,10 @@ void rsc_modify (APP_data *data)
       }
       /* we store datas */
       newRsc.cadre = tmpRsc.cadre;
-      newRsc.name = name;
-      newRsc.mail = mail;
-      newRsc.phone = phone;
-      newRsc.reminder = reminder;
+      newRsc.name =  (gchar *) name;
+      newRsc.mail =  (gchar *) mail;
+      newRsc.phone =  (gchar *) phone;
+      newRsc.reminder = (gchar *) reminder;
       newRsc.location = NULL;
       newRsc.cost = cost;
       newRsc.affiliate = iAffi;
@@ -1386,6 +1395,8 @@ GtkWidget *ressources_create_dialog (gboolean modify, APP_data *data)
      gtk_window_set_title (GTK_WINDOW(dialog), _("New ressource" ));
   }
 
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));
   return dialog;
 }
 
