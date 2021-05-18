@@ -1756,7 +1756,7 @@ GtkTreeModel *calendars_create_and_fill_model (APP_data *data) {
   else {
     for(i=0;i<g_list_length (data->calendars);i++) {
       l = g_list_nth (data->calendars, i);
-      cal = (calendar_element *) l->data;
+      cal = (calendar *) l->data;
       if(i==0) {/* main calendar */
          gtk_tree_store_append (treestore, &toplevel, NULL);
          gtk_tree_store_set (treestore, &toplevel, CAL_COLUMN, cal->name, -1);
@@ -1942,6 +1942,9 @@ GtkWidget *calendars_dialog (APP_data *data)
   day_of_week = 0; /* monday by default */
   /* update schedules */
   calendars_update_schedules (0, day_of_week, data);/* keep as it, requires twice calls ! */
+
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));
 
   return dialog;
 }
