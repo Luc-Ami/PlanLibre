@@ -12,6 +12,7 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtkspell/gtkspell.h>
+
 #include "support.h"
 #include "misc.h"
 #include "links.h"
@@ -19,6 +20,10 @@
 #include "tasks.h"
 #include "ressources.h"
 #include "undoredo.h"
+#include "report.h"
+#include "timeline.h"
+#include "assign.h"
+#include "tasksutils.h"
 
 /* constants */
 
@@ -1167,6 +1172,8 @@ GtkWidget *tasks_create_dialog (GDate *date, gboolean modify, gint id, APP_data 
     gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("New task"));
   }
 
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));
   return dialog;
 }
 
@@ -1223,7 +1230,9 @@ GtkWidget *tasks_create_group_dialog (gboolean modify, gint id, APP_data *data)
    //  gtk_window_set_title (GTK_WINDOW(dialog),_("New Group" ));
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("New Group"));
   }
-
+  
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));
   return dialog;
 }
 
@@ -1292,7 +1301,8 @@ GtkWidget *tasks_create_milestone_dialog (gboolean modify, gint id, APP_data *da
   tasks_fill_list_tasks (modify, id, FALSE, data);
   /* we setup various default values */
 
-
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));
   return dialog;
 }
 
@@ -1435,6 +1445,9 @@ GtkWidget *tasks_create_repeat_dialog (gchar *name, gchar *strDate, APP_data *da
   else
       gtk_label_set_text (GTK_LABEL(lblDate), _("Date : ? "));
 
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));      
+
   return dialog;
 }
 
@@ -1447,7 +1460,7 @@ void task_repeat_error_dialog (GtkWidget *win)
 
   msg = g_strdup_printf ("%s",
          _("<b>Error!</b>\n\nYou've asked to place a task <i>after</i> project's end.\n\n\nPlease check the dates, or modify project's properties to unlock dates."));
-  misc_ErrorDialog (GTK_WINDOW(win), msg);
+  misc_ErrorDialog (GTK_WIDGET(win), msg);
   g_free (msg);
 }
 
@@ -1460,11 +1473,12 @@ void on_tasks_remove (APP_data *data)
   gint iRow=-1;
   tasks_data temp, newTasks, *undoTasks;
   undo_datas *tmp_value;
-  GtkWidget *boxTasks, *row;
+  GtkWidget *boxTasks;
+  GtkListBoxRow *row;
 
   boxTasks = GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxTasks"));
-  row = gtk_list_box_get_selected_row (boxTasks);
-  iRow  = gtk_list_box_row_get_index (row);
+  row = gtk_list_box_get_selected_row (GTK_LIST_BOX(boxTasks));
+  iRow  = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW(row));
   data->curTasks = iRow;
 
   /* we read current datas in memory */
@@ -1505,7 +1519,7 @@ void on_tasks_remove (APP_data *data)
   }
   undo_push (CURRENT_STACK_TASKS, tmp_value, data);
 
-  tasks_remove (iRow, boxTasks, data);  /* dashboard is managed inside - common for tasks, groups an milestones */
+  tasks_remove (iRow, GTK_LIST_BOX(boxTasks), data);  /* dashboard is managed inside - common for tasks, groups an milestones */
   /* update timeline - please note, the task is removed by 'task_remove()' function */
   timeline_remove_all_tasks (data);/* YES, for other tasks */
   timeline_draw_all_tasks (data);
