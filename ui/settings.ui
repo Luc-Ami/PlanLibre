@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAdjustment" id="adjPauseTimer">
@@ -102,14 +102,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Ask before quit </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -130,8 +128,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -142,14 +138,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Auto save every 5 minutes</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -170,8 +164,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -183,14 +175,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Prompt before overwrite an existing file</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -208,8 +198,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
               </object>
@@ -274,15 +262,13 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Text color </property>
                     <property name="ellipsize">end</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -297,8 +283,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -309,15 +293,13 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Text font (except diagrams)</property>
                     <property name="ellipsize">end</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -336,8 +318,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
               </object>
@@ -405,15 +385,13 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">&lt;b&gt;Automated emails&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -424,14 +402,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">send for tasks starting tomorrow</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -442,14 +418,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">send for overdue tasks</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -460,14 +434,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">send for tasks ending today</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -478,14 +450,12 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">send for completed tasks</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -496,15 +466,14 @@
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;automated emails will be sent to partners only once a day&lt;/i&gt;&lt;/small&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">5</property>
                     <property name="width">3</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -522,8 +491,6 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -541,8 +508,6 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -560,15 +525,13 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkSwitch" id="switchEmailCompleted">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="tooltip_text" translatable="yes">By activating this switch, PlanLibre will check if tasks have neen completed.
+                    <property name="tooltip_text" translatable="yes">By activating this switch, PlanLibre will check if tasks have been completed.
 If yes, an email will be sent as a reminder to project's participants assigned to those tasks.</property>
                     <property name="margin_left">4</property>
                     <property name="margin_right">4</property>
@@ -579,8 +542,6 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -668,9 +629,9 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                     <property name="margin_right">2</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">&lt;b&gt;Trello® account :&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -686,11 +647,11 @@ If yes, an email will be sent as a reminder to project's participants assigned t
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">Here you can indicate your personal user token required to allow access to your account.
 This token must be collected on Trello® website.
 &lt;i&gt;These settings are for advanced users or administrators.&lt;/i&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -710,14 +671,12 @@ This token must be collected on Trello® website.
                       <object class="GtkLabel" id="label31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0.89999997615814209</property>
                         <property name="label" translatable="yes">My user token :</property>
+                        <property name="xalign">0.89999997615814209</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -773,8 +732,6 @@ This token must be collected on Trello® website.
                       <packing>
                         <property name="left_attach">2</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -792,7 +749,6 @@ This token must be collected on Trello® website.
                         <property name="left_attach">2</property>
                         <property name="top_attach">1</property>
                         <property name="width">2</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -804,15 +760,13 @@ This token must be collected on Trello® website.
                         <property name="margin_right">4</property>
                         <property name="margin_top">2</property>
                         <property name="margin_bottom">2</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">&lt;i&gt;Not defined&lt;/i&gt;</property>
                         <property name="use_markup">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -941,9 +895,9 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">&lt;b&gt;Productivity timer&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -968,8 +922,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -985,8 +937,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1002,8 +952,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">2</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1019,8 +967,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">2</property>
                         <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1036,8 +982,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1053,8 +997,6 @@ a valid User token</property>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
                       </packing>
                     </child>
                   </object>
@@ -1161,7 +1103,6 @@ a valid User token</property>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
                     <property name="width">3</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1172,15 +1113,13 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">&lt;b&gt;Server parameters&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1191,15 +1130,13 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Server name </property>
                     <property name="single_line_mode">True</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1210,14 +1147,12 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Server adress</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1228,14 +1163,12 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Port</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1251,8 +1184,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1269,8 +1200,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1281,15 +1210,13 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">&lt;b&gt;Security&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">6</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1300,14 +1227,12 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">User identifier </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">7</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1323,8 +1248,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">7</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1335,14 +1258,12 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Password</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">8</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1362,8 +1283,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">8</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1379,8 +1298,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1399,8 +1316,6 @@ a valid User token</property>
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1411,14 +1326,12 @@ a valid User token</property>
                     <property name="margin_right">4</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Server securized by SSL/TLS</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">5</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1438,8 +1351,6 @@ authentification. In case your mails aren't sent, please change this option.</pr
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">5</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1456,8 +1367,6 @@ authentification. In case your mails aren't sent, please change this option.</pr
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">9</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
