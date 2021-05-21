@@ -1347,7 +1347,7 @@ printf ("lim date =%s \n", limDate);
   }
   if(ret==2) {/* remove */  // Gtk >=3.14 : gtk_list_box_unselect_all (box);  
       /* undo engine - part 2 of 3 - we just have to get a pointer on ID */
-  /*    tmp_value = g_malloc (sizeof(undo_datas));
+      tmp_value = g_malloc (sizeof(undo_datas));
       tmp_value->insertion_row = iRow;
       tmp_value->new_row = iRow;
       tmp_value->id = temp.id;
@@ -1356,14 +1356,14 @@ printf ("lim date =%s \n", limDate);
       tmp_value->groups = NULL;
       tmp_value->nbTasks = 0;
       /* duplicate links */
-  /*    tmp_value->list = links_copy_all (data);
+      tmp_value->list = links_copy_all (data);
       if(undoTasks->type == TASKS_TYPE_TASK) {
           tmp_value->opCode = OP_REMOVE_TASK;
       }
       if(undoTasks->type == TASKS_TYPE_GROUP) {
           tmp_value->opCode = OP_REMOVE_GROUP;
           /* now we build a GList of tasks using this group */
-  /*        tmp_value->groups = tasks_fill_list_groups_for_tasks (temp.id, data);
+          tmp_value->groups = tasks_fill_list_groups_for_tasks (temp.id, data);
       }
       if(undoTasks->type == TASKS_TYPE_MILESTONE) {
           tmp_value->opCode = OP_REMOVE_MILESTONE;
@@ -1372,13 +1372,13 @@ printf ("lim date =%s \n", limDate);
 
       tasks_remove (iRow, boxTasks, data);  /* dashboard is managed inside - common for tasks, groups an milestones */
       /* update timeline - please note, the task is removed by 'task_remove()' function */
-  /*    timeline_remove_all_tasks (data);/* YES, for other tasks */
-  /*    timeline_draw_all_tasks (data);
+      timeline_remove_all_tasks (data);/* YES, for other tasks */
+      timeline_draw_all_tasks (data);
       /* we update assignments */
-  /*    assign_remove_all_tasks (data);
+      assign_remove_all_tasks (data);
       assign_draw_all_visuals (data);
       report_clear_text (data->buffer, "left");
-      misc_display_app_status (TRUE, data);*/
+      misc_display_app_status (TRUE, data);
   }
   if(ret==1) {/* we get various useful values */
     tasks_utils_reset_errors (data);

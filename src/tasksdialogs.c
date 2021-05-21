@@ -1185,8 +1185,8 @@ GtkWidget *tasks_create_group_dialog (gboolean modify, gint id, APP_data *data)
 {
   GtkWidget *dialog;
   /* get datas from xml Glade file - CRITICAL : only in activate phase !!!! */
-  GtkBuilder *builder =NULL;
-  builder = gtk_builder_new();
+  GtkBuilder *builder = NULL;
+  builder = gtk_builder_new ();
   GError *err = NULL;
   GdkPixbuf *pix; 
 
@@ -1198,7 +1198,7 @@ GtkWidget *tasks_create_group_dialog (gboolean modify, gint id, APP_data *data)
   /* Get the dialog from the glade file. */
   gtk_builder_connect_signals (builder, data);
   dialog = GTK_WIDGET(gtk_builder_get_object (builder, "dialogGroup"));
-  data->tmpBuilder=builder;
+  data->tmpBuilder = builder;
 
  /* header bar */
   GtkWidget *hbar = gtk_header_bar_new ();
