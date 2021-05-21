@@ -2085,8 +2085,8 @@ void tasks_milestone_new (GDate *date, APP_data *data)
 {
   GtkWidget *dialog, *boxTasks, *entryName, *dateEntry, *locationEntry;
   GDate today, date_current;
-  gint ret=0, insertion_row;
-  gchar *name=NULL, *location=NULL, *human_date;
+  gint ret = 0, insertion_row;
+  gchar *name = NULL, *location = NULL, *human_date = NULL;
   tasks_data temp;
   GdkRGBA color = {0, 0, 1};
   const *currentDate;
@@ -2097,13 +2097,17 @@ void tasks_milestone_new (GDate *date, APP_data *data)
 
   dialog = tasks_create_milestone_dialog (FALSE, -1, data);
   dateEntry = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonDate"));
-  if(date==NULL) {
-      g_date_set_time_t (&today, time (NULL)); /* date of today */
+  if(date == NULL) {
+     //  g_date_set_time_t (&today, time (NULL)); /* date of today */
+      /* we get the project starting date by default */
+      g_date_set_dmy (&today, data->properties.start_nthDay, data->properties.start_nthMonth, 
+                              data->properties.start_nthYear);
       gtk_button_set_label (GTK_BUTTON(dateEntry), misc_convert_date_to_locale_str (&today));
   }
-  else
+  else {
       gtk_button_set_label (GTK_BUTTON(dateEntry), misc_convert_date_to_locale_str (date));
-
+  }
+  
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   if(ret==1) {
     tasks_utils_reset_errors (data);
@@ -2112,11 +2116,11 @@ void tasks_milestone_new (GDate *date, APP_data *data)
     locationEntry = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryMilestoneLocation")); 
     /* we get various useful values */
     name = gtk_entry_get_text (GTK_ENTRY(entryName));
-    if(strlen(name)==0) {
+    if(strlen (name) == 0) {
        name = fooStr;
     }
     location = gtk_entry_get_text (GTK_ENTRY(locationEntry));
-    if(strlen (location)==0) {
+    if(strlen (location) == 0) {
        location = fooStr2;
     }
 
