@@ -224,9 +224,12 @@ void properties_choose_organization_logo (GtkButton *button, APP_data *data)
     gtk_widget_destroy (GTK_WIDGET(dialog)); 
 }
 
-/****************************
+/****************************************
   main properties dialog
-****************************/
+  * at startup, start date and end date
+  * have already been defined by
+  * function misc_init_vars
+*****************************************/
 GtkWidget *properties_create_dialog (APP_data *data)
 {
   GtkWidget *dialog;
@@ -279,6 +282,9 @@ GtkWidget *properties_create_dialog (APP_data *data)
 
   gtk_range_set_value (GTK_RANGE(startRange), data->properties.scheduleStart);
   gtk_range_set_value (GTK_RANGE(endRange), data->properties.scheduleEnd);
+  
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));  
   return dialog;
 }
 
@@ -303,9 +309,10 @@ void properties_modify (APP_data *data)
 
   locali = localeconv ();
 
-  if(data->properties.units==NULL)
+  if(data->properties.units == NULL) {
         data->properties.units = g_strdup_printf ("%s", locali->int_curr_symbol);
-
+  }
+  
   data->properties.fRemIcon = FALSE;
 
   dialog = properties_create_dialog (data);
@@ -333,37 +340,49 @@ void properties_modify (APP_data *data)
   endRange 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleEnd"));
   /* set current values  */
   /* project */
-  if(data->properties.title)
+  if(data->properties.title) {
        gtk_entry_set_text (GTK_ENTRY(entryTitle), data->properties.title);
-  if(data->properties.summary)
+  }
+  if(data->properties.summary) {
        gtk_entry_set_text (GTK_ENTRY(entrySummary), data->properties.summary);
+  }
 
-  if(data->properties.location)
+  if(data->properties.location) {
        gtk_entry_set_text (GTK_ENTRY(locationEntry), data->properties.location);
-  if(data->properties.gps)
+  }
+  if(data->properties.gps) {
        gtk_entry_set_text (GTK_ENTRY(gpsEntry), data->properties.gps);
+  }
 
-  if(data->properties.units)
+  if(data->properties.units) {
        gtk_entry_set_text (GTK_ENTRY(entryUnits), data->properties.units);
-  if(data->properties.proj_website)
+  }
+  if(data->properties.proj_website) {
        gtk_entry_set_text (GTK_ENTRY(entryProjWebsite), data->properties.proj_website);
+  }
 
   gtk_spin_button_set_value (GTK_SPIN_BUTTON(spinBudget), data->properties.budget);
 
-  if(data->properties.start_date)
+  if(data->properties.start_date) {
          gtk_button_set_label (GTK_BUTTON(btnStartDate), data->properties.start_date);
-  if(data->properties.end_date)
+  }
+  if(data->properties.end_date) {
          gtk_button_set_label (GTK_BUTTON(btnEndDate), data->properties.end_date);
+  }
   /* manager */
-  if(data->properties.manager_name)
+  if(data->properties.manager_name) {
        gtk_entry_set_text (GTK_ENTRY(entryManager), data->properties.manager_name);
-  if(data->properties.manager_mail)
+  }
+  if(data->properties.manager_mail) {
        gtk_entry_set_text (GTK_ENTRY(entryManagerMail), data->properties.manager_mail);
-  if(data->properties.manager_phone)
+  }
+  if(data->properties.manager_phone) {
        gtk_entry_set_text (GTK_ENTRY(entryManagerPhone), data->properties.manager_phone);
+  }
   /* organization */
-  if(data->properties.org_name)
+  if(data->properties.org_name) {
        gtk_entry_set_text (GTK_ENTRY(entryOrgaName), data->properties.org_name);
+  }
   /* logo */
   if(data->properties.logo) {
      pix = gdk_pixbuf_copy (data->properties.logo);
@@ -374,7 +393,7 @@ void properties_modify (APP_data *data)
 
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   /* ret==1 for [OK] */
-  if(ret==1) {
+  if(ret == 1) {
       /* undo engine - we just have to get a pointer on ID */
       undo_datas *tmp_value;
       tmp_value = g_malloc (sizeof(undo_datas));
@@ -412,12 +431,14 @@ void properties_modify (APP_data *data)
       tmp_value->list = NULL;
       undo_push (CURRENT_STACK_MISC, tmp_value, data);
 
-      if(data->properties.title)
+      if(data->properties.title) {
             g_free (data->properties.title);
+      }
       data->properties.title = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryTitle)));
 
-      if(data->properties.summary)
+      if(data->properties.summary) {
             g_free (data->properties.summary);
+      }
       data->properties.summary = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entrySummary)));
       /* the summary is updated in 'savestate' module */
       keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
@@ -426,36 +447,44 @@ void properties_modify (APP_data *data)
                                      summary);
       g_free (summary);
 
-      if(data->properties.location)
+      if(data->properties.location) {
             g_free (data->properties.location);
+      }
       data->properties.location = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(locationEntry)));
 
-      if(data->properties.gps)
+      if(data->properties.gps) {
             g_free (data->properties.gps);
+      }
       data->properties.gps = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(gpsEntry)));
 
-      if(data->properties.units)
+      if(data->properties.units) {
             g_free (data->properties.units);
+      }
       data->properties.units = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryUnits)));
-printf ("unités =%s \n", data->properties.units );
-      if(data->properties.manager_name)
+
+      if(data->properties.manager_name) {
             g_free (data->properties.manager_name);
+      }
       data->properties.manager_name = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryManager)));
 
-      if(data->properties.manager_mail)
+      if(data->properties.manager_mail) {
             g_free (data->properties.manager_mail);
+      }
       data->properties.manager_mail = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryManagerMail)));
 
-      if(data->properties.manager_phone)
+      if(data->properties.manager_phone) {
             g_free (data->properties.manager_phone);
+      }
       data->properties.manager_phone = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryManagerPhone)));
 
-      if(data->properties.org_name)
+      if(data->properties.org_name) {
             g_free (data->properties.org_name);
+      }
       data->properties.org_name = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryOrgaName)));
 
-      if(data->properties.proj_website)
+      if(data->properties.proj_website) {
             g_free (data->properties.proj_website);
+      }
       data->properties.proj_website = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(entryProjWebsite)));
 
       data->properties.budget = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBudget));
@@ -475,18 +504,19 @@ printf ("unités =%s \n", data->properties.units );
       g_date_set_parse (&date_interval1, startDate);
       g_date_set_parse (&date_interval2, endDate);
       /* we check if dates are in limits */
-      if(g_date_compare (&date_interval1, &date_start)!=0)
+      if(g_date_compare (&date_interval1, &date_start) != 0) {
         fStartDatechanged = TRUE;
-      if(g_date_compare (&date_interval2, &date_end)!=0)
+      }
+      if(g_date_compare (&date_interval2, &date_end) != 0) {
         fEndDateChanged = TRUE;
-
+      }
       /* explode dates into components nthDay, nthMonth, year */
       data->properties.start_nthDay 	= g_date_get_day (&date_interval1);
       data->properties.start_nthMonth 	= g_date_get_month (&date_interval1);
       data->properties.start_nthYear 	= g_date_get_year (&date_interval1);
-      data->properties.end_nthDay 	= g_date_get_day (&date_interval2);
+      data->properties.end_nthDay 	    = g_date_get_day (&date_interval2);
       data->properties.end_nthMonth 	= g_date_get_month (&date_interval2);
-      data->properties.end_nthYear 	= g_date_get_year (&date_interval2);
+      data->properties.end_nthYear 	    = g_date_get_year (&date_interval2);
       /* main icon */
       if(data->properties.fRemIcon == TRUE) {
           g_object_unref (data->properties.logo);
@@ -497,22 +527,26 @@ printf ("unités =%s \n", data->properties.units );
 	  /* we update groups */
           gint nbTasks = g_list_length (data->tasksList);
           tasks_data *tmp;
-	  if(nbTasks>0) {
-	     for(i=0;i<nbTasks;i++) {
-		l = g_list_nth (data->tasksList, i);
-		tmp = (tasks_data *) l->data;
-		if(tmp->type == TASKS_TYPE_GROUP) {
-		   tasks_update_group_limits (tmp->id, tmp->id, tmp->id, data);/* update also widgets mainly used for empty groups */
-		}
-	     }/* next i */
-          }
-      }
-      /* if dates changed, we redraw the timeline */
-      GtkAdjustment *adjustment = GTK_ADJUSTMENT(gtk_builder_get_object (data->builder, "adjTasksTimeline"));
-      goo_canvas_item_remove (data->ruler);
-      timeline_draw_calendar_ruler (gtk_adjustment_get_value (adjustment), data);
-      timeline_remove_all_tasks (data);
-      timeline_draw_all_tasks (data);
+		  if(nbTasks>0) {
+      	    for(i = 0; i < nbTasks; i++) {
+			l = g_list_nth (data->tasksList, i);
+			tmp = (tasks_data *) l->data;
+				if(tmp->type == TASKS_TYPE_GROUP) {
+				   tasks_update_group_limits (tmp->id, tmp->id, tmp->id, data);/* update also widgets mainly used for empty groups */
+				}
+			 }/* next i */
+		  }/* endif */
+		  /* if dates changed, we redraw the timeline */
+		  timeline_remove_ruler (data);
+		  GtkAdjustment *adjustment
+		       = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW(gtk_builder_get_object (data->builder, "scrolledwindowTimeline")));
+        //  gtk_adjustment_set_value (GTK_ADJUSTMENT(adjustment), 0);
+          timeline_store_date (data->properties.start_nthDay, data->properties.start_nthMonth, data->properties.start_nthYear);
+          timeline_draw_calendar_ruler (timeline_get_ypos (data), data);
+		  timeline_remove_all_tasks (data);
+		  timeline_draw_all_tasks (data);		  
+      }/* endif dates */
+
       misc_display_app_status (TRUE, data);
   }
 

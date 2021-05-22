@@ -98,6 +98,9 @@ void
 on_button_export_image_clicked (GtkButton *button, APP_data *data);
 void
 on_button_export_drawing_clicked (GtkButton *button, APP_data *data);
+
+void on_button_TL_go_start_clicked (GtkButton *button, APP_data *data);
+
 void
 on_button_TL_prev_page_clicked (GtkButton *button, APP_data *data);
 void

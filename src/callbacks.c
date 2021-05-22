@@ -272,6 +272,26 @@ on_button_export_drawing_clicked (GtkButton *button, APP_data *data)
 /******************************* 
   timeline navigation callbacks 
 *******************************/
+void on_button_TL_go_start_clicked (GtkButton *button, APP_data *data)
+{
+
+  GtkAdjustment *adjustment
+		       = gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW(gtk_builder_get_object (data->builder, "scrolledwindowTimeline")));
+  gtk_adjustment_set_value (GTK_ADJUSTMENT(adjustment), 0);
+  timeline_store_date (data->properties.start_nthDay, data->properties.start_nthMonth, data->properties.start_nthYear);
+  timeline_remove_ruler (data);
+  timeline_remove_all_tasks (data);
+  /* update timeline */
+  timeline_draw_calendar_ruler (timeline_get_ypos (data), data);
+ // gtk_adjustment_set_value (GTK_ADJUSTMENT(vadj), timeline_get_ypos ());/* mandatory AFTER ruler's redraw */
+  timeline_draw_all_tasks (data);
+}
+
+
+
+/******************************* 
+  timeline navigation callbacks 
+*******************************/
 void on_button_TL_prev_year_clicked (GtkButton *button, APP_data *data)
 {
   gint dd=0, mm=0, yy=0;

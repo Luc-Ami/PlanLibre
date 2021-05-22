@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlanLibre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 20:15+0200\n"
+"POT-Creation-Date: 2021-05-22 08:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: amiluc_bis@yahoo;fr\n"
@@ -99,19 +99,19 @@ msgstr " %s settings auto-generated - Do not edit!"
 msgid " --"
 msgstr " --"
 
-#: ui/main_ribbon.ui:4135 ui/main.ui:3509
+#: ui/main_ribbon.ui:4135 ui/main.ui:3546
 msgid " <big><b>Completed </b></big>"
 msgstr " <big><b>Achevé </b></big>"
 
-#: ui/main_ribbon.ui:3957 ui/main.ui:3331
+#: ui/main_ribbon.ui:3957 ui/main.ui:3368
 msgid " <big><b>In progress </b></big>"
 msgstr " <big><b>En cours </b></big>"
 
-#: ui/main_ribbon.ui:4046 ui/main.ui:3420
+#: ui/main_ribbon.ui:4046 ui/main.ui:3457
 msgid " <big><b>Overdue </b></big>"
 msgstr " <big><b>En retard </b></big>"
 
-#: ui/main_ribbon.ui:3867 ui/main.ui:3241
+#: ui/main_ribbon.ui:3867 ui/main.ui:3278
 msgid " <big><b>To do</b></big>"
 msgstr " <big><b>En attente</b></big>"
 
@@ -147,8 +147,8 @@ msgid " Id "
 msgstr "Identifiant"
 
 #: ui/main_ribbon.ui:3891 ui/main_ribbon.ui:3981 ui/main_ribbon.ui:4070
-#: ui/main_ribbon.ui:4159 ui/main.ui:3265 ui/main.ui:3355 ui/main.ui:3444
-#: ui/main.ui:3533
+#: ui/main_ribbon.ui:4159 ui/main.ui:3302 ui/main.ui:3392 ui/main.ui:3481
+#: ui/main.ui:3570
 msgid " None "
 msgstr "Aucun"
 
@@ -327,7 +327,7 @@ msgstr "Matériaux"
 msgid "*PlanLibre critical : Error saving %s: %s*\n"
 msgstr "*PlanLibre : Erreur lors de l'enregistrement de %s: %s*\n"
 
-#: ui/main_ribbon.ui:3224 ui/main.ui:2659
+#: ui/main_ribbon.ui:3224 ui/main.ui:2696
 msgid "--"
 msgstr "--"
 
@@ -355,7 +355,7 @@ msgstr "0"
 msgid "0,00"
 msgstr "0,00"
 
-#: ui/main_ribbon.ui:4903 ui/main.ui:4358
+#: ui/main_ribbon.ui:4903 ui/main.ui:4395
 msgid "00:00"
 msgstr "00:00"
 
@@ -367,7 +367,7 @@ msgstr "1"
 msgid "10"
 msgstr "10"
 
-#: ui/main_ribbon.ui:2492 ui/main.ui:1913
+#: ui/main_ribbon.ui:2492 ui/main.ui:1950
 msgid "100%"
 msgstr "100%"
 
@@ -391,7 +391,7 @@ msgstr "14"
 msgid "15"
 msgstr "15"
 
-#: ui/main_ribbon.ui:2491 ui/main.ui:1912
+#: ui/main_ribbon.ui:2491 ui/main.ui:1949
 msgid "150%"
 msgstr "150%"
 
@@ -415,7 +415,7 @@ msgstr "18"
 msgid "19"
 msgstr "19"
 
-#: ui/main_ribbon.ui:3645 ui/main.ui:3047 ui/taskrepeat.ui:479
+#: ui/main_ribbon.ui:3645 ui/main.ui:3084 ui/taskrepeat.ui:479
 msgid "2"
 msgstr "2"
 
@@ -423,7 +423,7 @@ msgstr "2"
 msgid "20"
 msgstr "20"
 
-#: ui/main_ribbon.ui:2490 ui/main.ui:1911
+#: ui/main_ribbon.ui:2490 ui/main.ui:1948
 msgid "200%"
 msgstr "200%"
 
@@ -483,7 +483,7 @@ msgstr "4"
 msgid "5"
 msgstr "5"
 
-#: ui/main_ribbon.ui:2494 ui/main.ui:1915
+#: ui/main_ribbon.ui:2494 ui/main.ui:1952
 msgid "50%"
 msgstr "50%"
 
@@ -495,7 +495,7 @@ msgstr "6"
 msgid "7"
 msgstr "7"
 
-#: ui/main_ribbon.ui:2493 ui/main.ui:1914
+#: ui/main_ribbon.ui:2493 ui/main.ui:1951
 msgid "75%"
 msgstr "75%"
 
@@ -511,7 +511,7 @@ msgstr "9"
 msgid "9:00"
 msgstr "9:00"
 
-#: ui/main.ui:2581
+#: ui/main.ui:2618
 msgid "<"
 msgstr "<"
 
@@ -567,7 +567,7 @@ msgstr "<b>> tâches démarrant aujourd'hui : </b>"
 msgid "<b>> tasks starting tomorrow : </b>"
 msgstr "<b>> tâches démarrant demain : </b>"
 
-#: ui/settings.ui:409
+#: ui/settings.ui:388
 msgid "<b>Automated emails</b>"
 msgstr "<b>Courriels automatisés</b>"
 
@@ -1093,7 +1093,7 @@ msgstr ""
 "\n"
 "PlanLibre a automatiquement corrigé la date de début du projet."
 
-#: ui/settings.ui:945
+#: ui/settings.ui:898
 msgid "<b>Productivity timer</b>"
 msgstr "<b>Chronomètre de productivité</b>"
 
@@ -1113,11 +1113,11 @@ msgstr "<b>Ressources</b>"
 msgid "<b>Second period</b>"
 msgstr "<b>Seconde période</b>"
 
-#: ui/settings.ui:1285
+#: ui/settings.ui:1213
 msgid "<b>Security</b>"
 msgstr "<b>Sécurité</b>"
 
-#: ui/settings.ui:1176
+#: ui/settings.ui:1116
 msgid "<b>Server parameters</b>"
 msgstr "<b>Paramètres serveur</b>"
 
@@ -1181,7 +1181,7 @@ msgstr "<b>Aujourd'hui :</b>"
 msgid "<b>Today's milestones :</b>"
 msgstr "<b>Jalons ce jour :</b>"
 
-#: ui/settings.ui:672
+#: ui/settings.ui:632
 msgid "<b>Trello® account :</b>"
 msgstr "<b>Compte Trello® :</b>"
 
@@ -1293,7 +1293,7 @@ msgstr "<big><big><big>Nombre total de tâches : </big></big></big>"
 msgid "<big><big><big>noname</big></big></big>"
 msgstr "<big><big><big>sans_nom</big></big></big>"
 
-#: ui/main_ribbon.ui:4821 ui/main.ui:4276
+#: ui/main_ribbon.ui:4821 ui/main.ui:4313
 msgid "<i> Here you can see various tips </i>"
 msgstr "<i> Ici vous pouvez voir différentes astuces </i>"
 
@@ -1316,7 +1316,7 @@ msgstr "<i>%s</i>"
 msgid "<i><small>non-working days are outlined</small></i>"
 msgstr "<i><small>les jours non-travaillés sont surlignés</small></i>"
 
-#: ui/settings.ui:1081
+#: ui/settings.ui:1023
 msgid ""
 "<i>After each work time, timer is paused and a counter appears in order to "
 "remind you how much rest time remains</i>"
@@ -1372,7 +1372,7 @@ msgstr ""
 "Vous pouvez définir jusqu'à (4) périodes par jour. Par exemple, 9:00 à 12:30 "
 "pour la période #1 et 14:00 à 18:00 pour la période #2</i>"
 
-#: ui/settings.ui:808
+#: ui/settings.ui:763
 msgid "<i>Not defined</i>"
 msgstr "<i>Non défini</i>"
 
@@ -1446,13 +1446,13 @@ msgstr "<i>à</i>"
 msgid "<small><i>Password will be hiden during typing</i></small>"
 msgstr "<small><i>Le mot de passe sera caché durant la saisie</i></small>"
 
-#: ui/settings.ui:788
+#: ui/settings.ui:745
 msgid "<small><i>Your user token will be stored in keyring</i></small>"
 msgstr ""
 "<small><i>Votre jeton utilisateur sera stocké dans le trousseau de clefs</"
 "i></small>"
 
-#: ui/settings.ui:500
+#: ui/settings.ui:469
 msgid ""
 "<small><i>automated emails will be sent to partners only once a day</i></"
 "small>"
@@ -1460,7 +1460,7 @@ msgstr ""
 "<small><i>les courriels auto. ne seront envoyés aux partenaires qu'une fois "
 "par jour</i></small>"
 
-#: ui/settings.ui:1453
+#: ui/settings.ui:1364
 msgid "<small><i>your password isn't stored between sessions</i></small>"
 msgstr ""
 "<small><i>votre mot de passe n'est pas stocké en fin de session</i></small>"
@@ -1531,11 +1531,11 @@ msgid ""
 msgstr ""
 "<span foreground=\"white\" background=\"red\"><small> absent </small></span>"
 
-#: ui/main.ui:2615
+#: ui/main.ui:2652
 msgid ">"
 msgstr ">"
 
-#: ui/main_ribbon.ui:3091 ui/main.ui:2537
+#: ui/main_ribbon.ui:3091 ui/main.ui:2574
 msgid ">||"
 msgstr ">||"
 
@@ -1560,7 +1560,7 @@ msgstr ""
 msgid "Add a new empty calendar"
 msgstr "Ajouter un nouveau calendrier vide"
 
-#: ui/settings.ui:846
+#: ui/settings.ui:800
 msgid "Allow PlanLibre access to my Trello® account :"
 msgstr "Autoriser PlanLibre à accéder à mon compte Trello®:"
 
@@ -1600,7 +1600,7 @@ msgstr "Ajouter des ressources PlanLibre depuis les contacts de Thunderbird..."
 msgid "Append PlanLibre ressources from file ..."
 msgstr "Ajouter des ressources PlanLibre depuis un fichier ..."
 
-#: ui/main_ribbon.ui:3705 ui/main.ui:3107
+#: ui/main_ribbon.ui:3705 ui/main.ui:3144
 msgid "Append from PlanLibre file"
 msgstr "Ajouter depuis un fichier PlanLibre"
 
@@ -1608,7 +1608,7 @@ msgstr "Ajouter depuis un fichier PlanLibre"
 msgid "Append from Thunderbird contacts"
 msgstr "Ajouter à partir des contacts Thunderbird"
 
-#: ui/main_ribbon.ui:3292 ui/main.ui:2727
+#: ui/main_ribbon.ui:3292 ui/main.ui:2764
 msgid "Append from file"
 msgstr "Ajouter depuis un fichier"
 
@@ -1632,7 +1632,7 @@ msgstr "Ajouter tâches depuis un fichier ..."
 msgid "Append tasks from spreadsheet CSV file"
 msgstr "Ajouter des tâches depuis un fichier CSV de tableur"
 
-#: ui/settings.ui:247
+#: ui/settings.ui:235
 msgid "Application"
 msgstr "Application"
 
@@ -1645,11 +1645,11 @@ msgstr "Avril"
 msgid "As a member of project %s, \r\n"
 msgstr "Comme membre du projet %s, \r\n"
 
-#: ui/settings.ui:106
+#: ui/settings.ui:105
 msgid "Ask before quit "
 msgstr "Demander avant de quiter"
 
-#: ui/main_ribbon.ui:4538 ui/main.ui:3908
+#: ui/main_ribbon.ui:4538 ui/main.ui:3945
 msgid "Assignments"
 msgstr "Affectations"
 
@@ -1670,11 +1670,11 @@ msgstr ""
 msgid "August"
 msgstr "Août"
 
-#: ui/settings.ui:146
+#: ui/settings.ui:141
 msgid "Auto save every 5 minutes"
 msgstr "Enregistrement automatique toutes les 5 minutes"
 
-#: ui/main_ribbon.ui:4847 ui/main.ui:4302
+#: ui/main_ribbon.ui:4847 ui/main.ui:4339
 msgid "Autosaving is activated"
 msgstr "Sauvegarde automatique aciivée"
 
@@ -1694,7 +1694,7 @@ msgstr "Appartient à :"
 msgid "Best regards.\r\n"
 msgstr "Avec nos meilleures salutations.\r\n"
 
-#: ui/settings.ui:552
+#: ui/settings.ui:517
 msgid ""
 "By activating this switch, PlanLibre will check if tasks are finishing "
 "today.\n"
@@ -1706,7 +1706,7 @@ msgstr ""
 "Si oui, un courriel sera envoyé comme rappel aux participants au projet "
 "assignés à ces tâches."
 
-#: ui/settings.ui:533
+#: ui/settings.ui:500
 msgid ""
 "By activating this switch, PlanLibre will check if tasks are overdue today.\n"
 "If yes, an email will be sent as a reminder to project's participants "
@@ -1717,7 +1717,7 @@ msgstr ""
 "Si oui, un courriel sera envoyé comme rappel aux participants au projet "
 "assignés à ces tâches."
 
-#: ui/settings.ui:514
+#: ui/settings.ui:483
 msgid ""
 "By activating this switch, PlanLibre will check if tasks are starting "
 "tomorrow.\n"
@@ -1729,9 +1729,9 @@ msgstr ""
 "Si oui, un courriel sera envoyé comme rappel aux participants au projet "
 "assignés à ces tâches."
 
-#: ui/settings.ui:571
+#: ui/settings.ui:534
 msgid ""
-"By activating this switch, PlanLibre will check if tasks have neen "
+"By activating this switch, PlanLibre will check if tasks have been "
 "completed.\n"
 "If yes, an email will be sent as a reminder to project's participants "
 "assigned to those tasks."
@@ -1860,7 +1860,7 @@ msgstr "Choisissez la fréquence de répétition"
 msgid "Clic on a task, and drag'n'drop it to change its status"
 msgstr "Cliquez sur une tâche, et glissez-déposez pour modifier son statut"
 
-#: ui/settings.ui:762
+#: ui/settings.ui:721
 msgid "Click here"
 msgstr "Cliquer ici"
 
@@ -1868,8 +1868,8 @@ msgstr "Cliquer ici"
 msgid "Click here and type your message."
 msgstr "Cliquez ici puis tapez votre message"
 
-#: ui/main_ribbon.ui:2575 ui/main_ribbon.ui:4471 ui/main.ui:1996
-#: ui/main.ui:3841
+#: ui/main_ribbon.ui:2575 ui/main_ribbon.ui:4471 ui/main.ui:2033
+#: ui/main.ui:3878
 msgid "Click here for more export options"
 msgstr "Cliquez ici pour voir plus d'options d'exportation"
 
@@ -1881,7 +1881,7 @@ msgstr ""
 "Cliquez ici pour recharger la version précédente. PlanLibre rechargera une "
 "copie d'une de la version existant au démarrage du programme."
 
-#: ui/main_ribbon.ui:3264 ui/main.ui:2699
+#: ui/main_ribbon.ui:3264 ui/main.ui:2736
 msgid ""
 "Click here to append tasks from a spreadsheet\n"
 "CSV file"
@@ -1909,7 +1909,7 @@ msgstr ""
 "Cliquez ici pour choisir une couleur pour la tâche actuelle. La couleur sera "
 "utilisée dans tous les affichages."
 
-#: ui/settings.ui:328
+#: ui/settings.ui:310
 msgid "Click here to choose a font"
 msgstr "Cliquez ici pour choisir une fonte"
 
@@ -1917,7 +1917,7 @@ msgstr "Cliquez ici pour choisir une fonte"
 msgid "Click here to choose a group ; default : none"
 msgstr "Cliquez ici pour choisir un groupe ; défaut : aucun"
 
-#: ui/main_ribbon.ui:2808 ui/main.ui:2216
+#: ui/main_ribbon.ui:2808 ui/main.ui:2253
 msgid "Click here to choose a group for current task"
 msgstr "Cliquez ici pour affecter la tâche courante à un groupe"
 
@@ -1937,7 +1937,7 @@ msgstr ""
 "Cliquez ici pour choisir le jour de la semaine dont vous voulez changer "
 "l'horaire"
 
-#: ui/main_ribbon.ui:2481 ui/main.ui:1902
+#: ui/main_ribbon.ui:2481 ui/main.ui:1939
 msgid ""
 "Click here to choose zoom level for timeline.\n"
 "200% means double size,\n"
@@ -1947,7 +1947,7 @@ msgstr ""
 "200% signifie doubler la taille,\n"
 "100% taille normale."
 
-#: ui/main_ribbon.ui:3596 ui/main.ui:2998
+#: ui/main_ribbon.ui:3596 ui/main.ui:3035
 msgid ""
 "Click here to clone more than 1 time the selected ressource.\n"
 "<i>This button is inactive until a ressource is selected.</i>"
@@ -1955,7 +1955,7 @@ msgstr ""
 "Cliquez ici pour cloner plus d'1 fois la ressource sélectionnée.\n"
 "<i>Ce bouton est inactif tant qu'aucune ressource n'est sélectionnée.</i>"
 
-#: ui/main_ribbon.ui:3543 ui/main.ui:2945
+#: ui/main_ribbon.ui:3543 ui/main.ui:2982
 msgid ""
 "Click here to clone the selected ressource.\n"
 "<i>This button is inactive until a ressource is selected.</i>"
@@ -1979,7 +1979,7 @@ msgstr ""
 "Cliquez ici pour définir une priorité. Une icône appropriée sera affichée "
 "près de la tâche"
 
-#: ui/main_ribbon.ui:3314 ui/main.ui:2749
+#: ui/main_ribbon.ui:3314 ui/main.ui:2786
 msgid ""
 "Click here to export tasks\n"
 "to a spreadsheet in\n"
@@ -1993,7 +1993,7 @@ msgstr ""
 msgid "Click here to mark period between those dates"
 msgstr "Cliquez ici pour marquer la période entre les deux dates"
 
-#: ui/main_ribbon.ui:3477 ui/main.ui:2889
+#: ui/main_ribbon.ui:3477 ui/main.ui:2926
 msgid ""
 "Click here to modify or remove\n"
 "the selected ressource.\n"
@@ -2009,7 +2009,7 @@ msgstr ""
 "qu'une ressource soit sélectionnée.</i>\n"
 "Raccourci <b>[f2]</b>"
 
-#: ui/main_ribbon.ui:2829 ui/main.ui:2237
+#: ui/main_ribbon.ui:2829 ui/main.ui:2274
 msgid ""
 "Click here to modify the current task.\n"
 "<i>This button is inactive until a \n"
@@ -2021,7 +2021,7 @@ msgstr ""
 "qu'une tâche soit sélectionnée.</i>\n"
 "Raccourci <b>[f2]</b>"
 
-#: ui/main_ribbon.ui:3014 ui/main.ui:2460
+#: ui/main_ribbon.ui:3014 ui/main.ui:2497
 msgid ""
 "Click here to move down the current task.\n"
 "<i>This button is inactive until a \n"
@@ -2031,7 +2031,7 @@ msgstr ""
 "<i>Ce bouton restera inactif jusqu'à ce\n"
 "qu'une tâche soit sélectionnée.</i>"
 
-#: ui/main_ribbon.ui:2987 ui/main.ui:2433
+#: ui/main_ribbon.ui:2987 ui/main.ui:2470
 msgid ""
 "Click here to move up the current task.\n"
 "<i>This button is inactive until a \n"
@@ -2041,11 +2041,11 @@ msgstr ""
 "<i>Ce bouton restera inactif jusqu'à ce\n"
 "qu'une tâche soit sélectionnée.</i>"
 
-#: ui/main.ui:2277
+#: ui/main.ui:2314
 msgid "Click here to remove current row"
 msgstr "Cliquez ici pour supprimer la ligne actuelle"
 
-#: ui/main_ribbon.ui:2869 ui/main.ui:2315
+#: ui/main_ribbon.ui:2869 ui/main.ui:2352
 msgid ""
 "Click here to repeat the current task.\n"
 "<i>This button is inactive until a \n"
@@ -2059,7 +2059,7 @@ msgstr ""
 msgid "Click here to revert all changes"
 msgstr "Cliquez ici pour annuler tous les changements"
 
-#: ui/main_ribbon.ui:3427 ui/main.ui:2849
+#: ui/main_ribbon.ui:3427 ui/main.ui:2886
 msgid ""
 "Click here to set-up a new ressource.\n"
 "A dialog will be displayed.\n"
@@ -2069,7 +2069,7 @@ msgstr ""
 "Un dialogue sera affiché.\n"
 "Raccourci <b>[f3]</b>"
 
-#: ui/main_ribbon.ui:2923 ui/main.ui:2369
+#: ui/main_ribbon.ui:2923 ui/main.ui:2406
 msgid ""
 "Click here to shift current group\n"
 "and all its tasks.\n"
@@ -2079,7 +2079,7 @@ msgstr ""
 "ainsi que toutes ses tâches.\n"
 "<i>Ce bouton restera inactif jusqu'à ce qu'un groupe soit sélectionné.</i>"
 
-#: ui/main_ribbon.ui:3061 ui/main.ui:2507
+#: ui/main_ribbon.ui:3061 ui/main.ui:2544
 msgid ""
 "Click here to start/pause timer for selected task.\n"
 "<i>This button is inactive until a \n"
@@ -2097,7 +2097,7 @@ msgstr ""
 msgid "Click here to switch to dashboard"
 msgstr "Cliquez ici pour basculer vers le tableau"
 
-#: ui/settings.ui:293
+#: ui/settings.ui:279
 msgid "Click here yo choose a color"
 msgstr "Cliquez ici pour choisir une couleur"
 
@@ -2113,7 +2113,7 @@ msgstr ""
 "Cliquez sur un jour de la semaine pour le (dé)cocher.\n"
 "Vous pouvez sélectionner 1 jour ou plus."
 
-#: ui/main_ribbon.ui:2727 ui/main.ui:2135
+#: ui/main_ribbon.ui:2727 ui/main.ui:2172
 msgid ""
 "Click on the button to set-up a new group of tasks.\n"
 "Shortcut <b>[CTRL] [G]</b>"
@@ -2121,7 +2121,7 @@ msgstr ""
 "Cliquez sur ce bouton pour créer un nouveau groupe de tâches.\n"
 "Raccourci <b>[CTRL] [G]</b>"
 
-#: ui/main_ribbon.ui:2764 ui/main.ui:2172
+#: ui/main_ribbon.ui:2764 ui/main.ui:2209
 msgid ""
 "Click on the button to set-up a new milestone.\n"
 "Shortcut <b>[CTRL] [/]</b>"
@@ -2129,7 +2129,7 @@ msgstr ""
 "Cliquez sur ce bouton pour créer un nouveau jalon.\n"
 "Raccourci <b>[CTRL] [/]</b>"
 
-#: ui/main_ribbon.ui:2690 ui/main.ui:2098
+#: ui/main_ribbon.ui:2690 ui/main.ui:2135
 msgid ""
 "Click on the button to set-up a new task. \n"
 "Shortcut <b>[f3]</b>"
@@ -2137,11 +2137,11 @@ msgstr ""
 "Cliquez sur ce bouton pour définir une nouvelle tâche. \n"
 "Raccourci <b>[f3]</b>"
 
-#: ui/main_ribbon.ui:4338 ui/main.ui:3708
+#: ui/main_ribbon.ui:4338 ui/main.ui:3745
 msgid "Click this buton to jump to next month"
 msgstr "Cliquez sur ce bouton pour sauter au mois suivant"
 
-#: ui/main_ribbon.ui:4274 ui/main.ui:3644
+#: ui/main_ribbon.ui:4274 ui/main.ui:3681
 msgid "Click this buton to jump to previous month"
 msgstr "Cliquez sur ce bouton pour sauter au mois précédent"
 
@@ -2153,25 +2153,25 @@ msgstr "Cliquez ce bouton pour changer la date"
 msgid "Click this button to choose or change ressource's icon"
 msgstr "Cliquer sur ce bouton pour choisir ou changer l'icône de la ressource"
 
-#: ui/main_ribbon.ui:2525 ui/main.ui:1946
+#: ui/main_ribbon.ui:2525 ui/main.ui:1983
 msgid "Click this button to export current timeline page as a PDF file"
 msgstr ""
 "Cliquez ce bouton pour exporter la page actuelle de la chronologie comme "
 "fichier PDF"
 
-#: ui/main_ribbon.ui:3177 ui/main.ui:2620
+#: ui/main_ribbon.ui:3177 ui/main.ui:2657
 msgid "Click this button to jump to next hit"
 msgstr "Cliquez sur ce bouton pour sauter à la prochaine occurrence"
 
-#: ui/main_ribbon.ui:3139 ui/main.ui:2586
+#: ui/main_ribbon.ui:3139 ui/main.ui:2623
 msgid "Click this button to jump to previous hit"
 msgstr "Cliquez sur ce bouton pour sauter à la précédente occurrence"
 
-#: ui/main_ribbon.ui:3568 ui/main.ui:2970
+#: ui/main_ribbon.ui:3568 ui/main.ui:3007
 msgid "Clone"
 msgstr "Cloner"
 
-#: ui/main_ribbon.ui:1071 ui/settings.ui:640
+#: ui/main_ribbon.ui:1071 ui/settings.ui:601
 msgid "Collaborate"
 msgstr "Collaborer"
 
@@ -2221,7 +2221,7 @@ msgstr "JJ:MM:AA"
 msgid "Daily schedules"
 msgstr "Horaires quotidiens"
 
-#: ui/main_ribbon.ui:4233 ui/main.ui:3607
+#: ui/main_ribbon.ui:4233 ui/main.ui:3644
 msgid "Dashboard"
 msgstr "Tableau"
 
@@ -2249,7 +2249,7 @@ msgstr "Cher(e) participant(e),\r\n"
 msgid "December"
 msgstr "Décembre"
 
-#: ui/settings.ui:1377
+#: ui/settings.ui:1296
 msgid "Default : 465"
 msgstr "Par défaut : 465"
 
@@ -2447,8 +2447,8 @@ msgstr "Exporter Agenda"
 msgid "Export as Image"
 msgstr "Exporter comme image"
 
-#: ui/main_ribbon.ui:2553 ui/main_ribbon.ui:4449 ui/main.ui:1974
-#: ui/main.ui:3819
+#: ui/main_ribbon.ui:2553 ui/main_ribbon.ui:4449 ui/main.ui:2011
+#: ui/main.ui:3856
 msgid "Export as PDF"
 msgstr "Exporter comme PDF"
 
@@ -2460,7 +2460,7 @@ msgstr "Exporter comme fichier calendrier/agenda"
 msgid "Export as drawing"
 msgstr "Exporter comme croquis"
 
-#: ui/main_ribbon.ui:4420 ui/main.ui:3790
+#: ui/main_ribbon.ui:4420 ui/main.ui:3827
 msgid "Export assignments as PDF"
 msgstr "Exporter affectations comme PDF"
 
@@ -2530,7 +2530,7 @@ msgstr ""
 "Exportation vers Trello réussie.\n"
 "Félicitations !"
 
-#: ui/main_ribbon.ui:4601 ui/main.ui:4067
+#: ui/main_ribbon.ui:4601 ui/main.ui:4104
 msgid "Export to file"
 msgstr "Exporter vers fichier"
 
@@ -2546,7 +2546,7 @@ msgstr "Février"
 msgid "File"
 msgstr "Fichier"
 
-#: ui/main_ribbon.ui:3212 ui/main.ui:2647
+#: ui/main_ribbon.ui:3212 ui/main.ui:2684
 msgid "Found : "
 msgstr "Trouvé :"
 
@@ -2582,11 +2582,11 @@ msgstr "G"
 msgid "GPS coordinates  : "
 msgstr "Coordonnées GPS :"
 
-#: ui/main_ribbon.ui:481 ui/main.ui:494 ui/main.ui:3968
+#: ui/main_ribbon.ui:481 ui/main.ui:494 ui/main.ui:4005
 msgid "Global activity analysis"
 msgstr "Analyse globale de l'activité"
 
-#: ui/main_ribbon.ui:490 ui/main.ui:503 ui/main.ui:4016
+#: ui/main_ribbon.ui:490 ui/main.ui:503 ui/main.ui:4053
 msgid "Global cost analysis"
 msgstr "Analyse globale des coûts"
 
@@ -2598,7 +2598,7 @@ msgstr "Déplacement global des dates"
 msgid "Group : "
 msgstr "Groupe :"
 
-#: ui/group.ui:122
+#: ui/group.ui:86
 msgid "Group Name : "
 msgstr "Nom du groupe :"
 
@@ -2610,7 +2610,7 @@ msgstr "Groupe de tâches"
 msgid "Help"
 msgstr "Aide"
 
-#: ui/settings.ui:690
+#: ui/settings.ui:650
 msgid ""
 "Here you can indicate your personal user token required to allow access to "
 "your account.\n"
@@ -2623,7 +2623,7 @@ msgstr ""
 "<i>Ces réglages sont destinés aux utilisateurs avancés ou administrateurs.</"
 "i>"
 
-#: ui/settings.ui:1156
+#: ui/settings.ui:1098
 msgid ""
 "Here you can specify how your messages will be sent.\n"
 "<i>These settings are for advanced users or administrators.</i>"
@@ -2729,7 +2729,7 @@ msgstr ""
 "le menu :\n"
 "projet>propriétés."
 
-#: ui/settings.ui:1429
+#: ui/settings.ui:1342
 msgid ""
 "It's important to know if the server uses an\n"
 "authentification. In case your mails aren't sent, please change this option."
@@ -2754,19 +2754,19 @@ msgstr "Janvier"
 msgid "July"
 msgstr "Juillet"
 
-#: ui/main_ribbon.ui:2304 ui/main.ui:1726
+#: ui/main_ribbon.ui:2304 ui/main.ui:1763
 msgid "Jump backward 1 year from current date"
 msgstr "Reculer d'1 an depuis la date courante"
 
-#: ui/main_ribbon.ui:2426 ui/main.ui:1847
+#: ui/main_ribbon.ui:2426 ui/main.ui:1884
 msgid "Jump forward 1 year from current date"
 msgstr "Avancer d'1 an depuis la date courante"
 
-#: ui/main_ribbon.ui:2384 ui/main.ui:1805
+#: ui/main_ribbon.ui:2384 ui/main.ui:1842
 msgid "Jump to Next page"
 msgstr "Sauter à la page suivante"
 
-#: ui/main_ribbon.ui:2344 ui/main.ui:1765
+#: ui/main_ribbon.ui:2344 ui/main.ui:1802
 msgid "Jump to Previous page"
 msgstr "Sauter à la page précédente"
 
@@ -2789,7 +2789,7 @@ msgid "L%d/%d"
 msgstr "L%d/%d"
 
 #: callbacks.c:1813 callbacks.c:1907 callbacks.c:2280 ui/main_ribbon.ui:4791
-#: ui/main.ui:4246
+#: ui/main.ui:4283
 msgid "L--"
 msgstr "L--"
 
@@ -2957,11 +2957,15 @@ msgstr "Reculer d'une journée"
 msgid "Move one day _forward "
 msgstr "Avancer d'une journée"
 
-#: ui/main_ribbon.ui:3621 ui/main.ui:3023
+#: ui/main.ui:1726
+msgid "Move timeline  to project  starting date"
+msgstr "Déplacer la chronologie à la date du début du projet"
+
+#: ui/main_ribbon.ui:3621 ui/main.ui:3060
 msgid "Multiply"
 msgstr "Multiplier"
 
-#: ui/settings.ui:714
+#: ui/settings.ui:674
 msgid "My user token :"
 msgstr "Mon jeton utilisateur :"
 
@@ -3033,7 +3037,7 @@ msgstr "Nouvelle ressource"
 msgid "New task"
 msgstr "Nouvelle tâche"
 
-#: ui/main_ribbon.ui:4378 ui/main.ui:3748
+#: ui/main_ribbon.ui:4378 ui/main.ui:3785
 msgid "Next month"
 msgstr "Mois suivant"
 
@@ -3143,7 +3147,7 @@ msgstr "Ok"
 msgid "Online Wiki"
 msgstr "Wiki en ligne"
 
-#: ui/settings.ui:913
+#: ui/settings.ui:867
 msgid "Online services"
 msgstr "services en ligne"
 
@@ -3195,7 +3199,7 @@ msgstr "En retard"
 msgid "PNG image files"
 msgstr "Fichiers images PNG"
 
-#: ui/settings.ui:1339
+#: ui/settings.ui:1261
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -3231,7 +3235,7 @@ msgstr "Fichiers PlanLibre"
 msgid "PlanLibre logos + main icon :"
 msgstr "Logos PlanLibre  + icône principale :"
 
-#: ui/settings.ui:1352
+#: ui/settings.ui:1273
 msgid ""
 "PlanLibre never store your passwords. For that reason, you  must enter your "
 "password at each session"
@@ -3271,7 +3275,7 @@ msgstr ""
 "Veuillez saisir ici le nombre d'heures travaillées par jour (uniquement la "
 "partie \"heure\")."
 
-#: ui/settings.ui:859
+#: ui/settings.ui:813
 msgid ""
 "Please, switch this button in order to allow PlanLibre an access to your "
 "Trello® account.\n"
@@ -3283,11 +3287,11 @@ msgstr ""
 "Une fois en position marche, l'accès devient possible à condition que vous\n"
 "ayez stocké un jeton valide"
 
-#: ui/settings.ui:1232
+#: ui/settings.ui:1166
 msgid "Port"
 msgstr "Port"
 
-#: ui/main_ribbon.ui:4286 ui/main.ui:3656
+#: ui/main_ribbon.ui:4286 ui/main.ui:3693
 msgid "Prev. month"
 msgstr "Mois précéd."
 
@@ -3315,7 +3319,7 @@ msgstr "organisation à but lucratif"
 msgid "Progress (%) :"
 msgstr "Réalisé (%)"
 
-#: ui/main_ribbon.ui:4935 ui/main.ui:4390
+#: ui/main_ribbon.ui:4935 ui/main.ui:4427
 msgid "Progress : "
 msgstr "Réalisé"
 
@@ -3360,7 +3364,7 @@ msgstr "Gestionnaire du projet :"
 msgid "Project's properties"
 msgstr "Propriétés du projet"
 
-#: ui/settings.ui:187
+#: ui/settings.ui:178
 msgid "Prompt before overwrite an existing file"
 msgstr "Demander avant d'écraser un fichier existant"
 
@@ -3432,8 +3436,8 @@ msgstr "Enlever le calendrier sélectionné"
 msgid "Repeat selected task"
 msgstr "Répéter la tâche sélectionnée"
 
-#: ui/main_ribbon.ui:471 ui/main_ribbon.ui:4723 ui/main.ui:484 ui/main.ui:4178
-#: ui/settings.ui:378
+#: ui/main_ribbon.ui:471 ui/main_ribbon.ui:4723 ui/main.ui:484 ui/main.ui:4215
+#: ui/settings.ui:358
 msgid "Reports"
 msgstr "Rapports"
 
@@ -3449,11 +3453,11 @@ msgstr "R-A-Z du logo"
 msgid "Ressource name "
 msgstr "Nom de la ressource"
 
-#: tasks.c:450 ui/main_ribbon.ui:3800 ui/main.ui:3190
+#: tasks.c:450 ui/main_ribbon.ui:3800 ui/main.ui:3227
 msgid "Ressources"
 msgstr "Ressources"
 
-#: ui/settings.ui:983
+#: ui/settings.ui:935
 msgid "Rest time"
 msgstr "Temps de repos"
 
@@ -3562,7 +3566,7 @@ msgstr "Envoyer un rapport aux participants ..."
 msgid "Send agenda"
 msgstr "Envoyer agenda"
 
-#: ui/main_ribbon.ui:4650 ui/main.ui:4118
+#: ui/main_ribbon.ui:4650 ui/main.ui:4155
 msgid "Send by email"
 msgstr "Envoyer par courriel"
 
@@ -3598,7 +3602,7 @@ msgstr "Envoi vers Trello"
 msgid "September"
 msgstr "Septembre"
 
-#: ui/settings.ui:1531
+#: ui/settings.ui:1440
 msgid "Server"
 msgstr "Serveur"
 
@@ -3606,15 +3610,15 @@ msgstr "Serveur"
 msgid "Server access Password"
 msgstr "Mot de passe d'accès au serveur"
 
-#: ui/settings.ui:1214
+#: ui/settings.ui:1150
 msgid "Server adress"
 msgstr "Adresse serveur"
 
-#: ui/settings.ui:1195
+#: ui/settings.ui:1133
 msgid "Server name "
 msgstr "Nom serveur"
 
-#: ui/settings.ui:1415
+#: ui/settings.ui:1329
 msgid "Server securized by SSL/TLS"
 msgstr "Serveur sécurisé par SSL/TLS"
 
@@ -3916,7 +3920,7 @@ msgstr "Tâche(s) en retard"
 msgid "Task(s) starting tomorrow"
 msgstr "Tâche(s) commençant aujourd'hui"
 
-#: ui/main_ribbon.ui:3390 ui/main.ui:2813
+#: ui/main_ribbon.ui:3390 ui/main.ui:2850
 msgid "Tasks"
 msgstr "Tâches"
 
@@ -3932,11 +3936,11 @@ msgstr "Tâches nécessaires"
 msgid "Tasks required : "
 msgstr "Tâches nécessaires :"
 
-#: ui/settings.ui:278
+#: ui/settings.ui:265
 msgid "Text color "
 msgstr "Couleur texte"
 
-#: ui/settings.ui:313
+#: ui/settings.ui:296
 msgid "Text font (except diagrams)"
 msgstr "Fonte du texte (sauf diagrammes)"
 
@@ -4079,15 +4083,15 @@ msgstr "Fichier CSV de Thunderbird"
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: ui/main_ribbon.ui:2649 ui/main.ui:2057
+#: ui/main_ribbon.ui:2649 ui/main.ui:2094
 msgid "Timeline"
 msgstr "Chronologie"
 
-#: ui/settings.ui:1126
+#: ui/settings.ui:1068
 msgid "Timer"
 msgstr "Chrono"
 
-#: ui/main_ribbon.ui:4885 ui/main.ui:4340
+#: ui/main_ribbon.ui:4885 ui/main.ui:4377
 msgid "Timer : "
 msgstr "Chrono :"
 
@@ -4124,7 +4128,7 @@ msgstr "à venir"
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: ui/settings.ui:802
+#: ui/settings.ui:758
 msgid "Token status : not defined or stored in keyring"
 msgstr "Status du jeton : non défini ou stocké dans le trousseau de clés"
 
@@ -4156,11 +4160,11 @@ msgstr "Mardi"
 msgid "Type a currency identifier, for example USD, EUR ..."
 msgstr "Tapez un identifiant de devise, par exemple USD, EUR ..."
 
-#: ui/main_ribbon.ui:3160 ui/main.ui:2600
+#: ui/main_ribbon.ui:3160 ui/main.ui:2637
 msgid "Type here a word or a part of word."
 msgstr "Tapez ici un mot ou une partie de mot"
 
-#: ui/main_ribbon.ui:3642 ui/main.ui:3044
+#: ui/main_ribbon.ui:3642 ui/main.ui:3081
 msgid ""
 "Type here how much times\n"
 "current ressource should be cloned (minimum = 2)"
@@ -4248,7 +4252,7 @@ msgstr "Utiliser"
 msgid "Use this calendar to choose the new starting date"
 msgstr "Utilisez ce calendrier pour choisir la nouvelle date de début"
 
-#: ui/settings.ui:1304
+#: ui/settings.ui:1230
 msgid "User identifier "
 msgstr "Identifiant utilisateur"
 
@@ -4314,7 +4318,7 @@ msgstr "Hebdomadairement par jour(s) de la semaine"
 msgid "Word Processors RTF files"
 msgstr "Fichiers RTF pour traitement de texte"
 
-#: ui/settings.ui:966
+#: ui/settings.ui:920
 msgid "Work time"
 msgstr "Temps de travail"
 
@@ -4511,7 +4515,7 @@ msgstr ""
 msgid "mark this period"
 msgstr "marquer cette période"
 
-#: ui/settings.ui:1000 ui/settings.ui:1017
+#: ui/settings.ui:950 ui/settings.ui:965
 msgid "minute(s)"
 msgstr "minute(s)"
 
@@ -4587,23 +4591,23 @@ msgstr "par mois (30 jours)"
 msgid "per week (5 days)"
 msgstr "par semaine (5 jours)"
 
-#: ui/settings.ui:482
+#: ui/settings.ui:453
 msgid "send for completed tasks"
 msgstr "envoyer pour les tâches achevées"
 
-#: ui/settings.ui:446
+#: ui/settings.ui:421
 msgid "send for overdue tasks"
 msgstr "envoyer pour les tâches en retard"
 
-#: ui/settings.ui:464
+#: ui/settings.ui:437
 msgid "send for tasks ending today"
 msgstr "envoyer pour les tâches se terminant aujourd'hui"
 
-#: ui/settings.ui:428
+#: ui/settings.ui:405
 msgid "send for tasks starting tomorrow"
 msgstr "envoyer pour les tâches commençant demain"
 
-#: ui/main.ui:4407
+#: ui/main.ui:4444
 msgid "sending ..."
 msgstr "Envoi ..."
 
@@ -4611,11 +4615,11 @@ msgstr "Envoi ..."
 msgid "sending mails"
 msgstr "Envoi courriels"
 
-#: ui/main_ribbon.ui:2952 ui/main.ui:2398
+#: ui/main_ribbon.ui:2952 ui/main.ui:2435
 msgid "shift"
 msgstr "déplacer"
 
-#: ui/settings.ui:1266
+#: ui/settings.ui:1197
 msgid "smtp.server.com"
 msgstr "smtp.serveur.com"
 
@@ -4639,7 +4643,7 @@ msgstr "commençant demain"
 msgid "there isn't any auto mailing for now"
 msgstr "pas de courriel automatique pour le moment"
 
-#: ui/main_ribbon.ui:3662 ui/main.ui:3064 ui/taskrepeat.ui:1177
+#: ui/main_ribbon.ui:3662 ui/main.ui:3101 ui/taskrepeat.ui:1177
 msgid "times"
 msgstr "fois"
 
@@ -4655,7 +4659,7 @@ msgstr "à"
 msgid "type : "
 msgstr "type : "
 
-#: ui/settings.ui:1249
+#: ui/settings.ui:1182
 msgid "type a name as you want"
 msgstr "Tapez le nom de votre choix"
 
@@ -4730,11 +4734,11 @@ msgstr "vous êtes affecté(e) à la tâche : %s.\r\n"
 msgid "you've been assigned to task : %s.\r\n"
 msgstr "vous avez été affecté(e) à la tâche : %s.\r\n"
 
-#: ui/settings.ui:1321
+#: ui/settings.ui:1246
 msgid "your id or email"
 msgstr "Votre identifiant ou adresse de courriel"
 
-#: ui/settings.ui:1359
+#: ui/settings.ui:1280
 msgid "your password on mail server"
 msgstr "Votre mot de passe sur le serveur de courriel"
 
