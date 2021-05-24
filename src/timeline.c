@@ -29,6 +29,7 @@
 #include "tasksutils.h"
 #include "assign.h"
 #include "files.h"
+#include "calendars.h"
 #include "timeline.h"
 
 /* LOCAL global variables */
@@ -60,11 +61,12 @@ void timeline_draw_week_ends (GooCanvasItem *root, APP_data *data)
    data->week_endsTL = WE;
    /* draw text - weeks */
    i = 0;
-   while(ret==0) {/* 521 = 10 years 52 = 1 year*/
+   while(ret == 0) {/* 521 = 10 years 52 = 1 year*/
       /* we draw week_ends - not in ruler */
-      x_val = i*(zoom_factor*TIMELINE_CALENDAR_DAY_WIDTH*7 )+(5*zoom_factor*TIMELINE_CALENDAR_DAY_WIDTH);
-      if(x_val>TIMELINE_VIEW_MAX_WIDTH)
+      x_val = i*(zoom_factor*TIMELINE_CALENDAR_DAY_WIDTH*7) + (5*zoom_factor*TIMELINE_CALENDAR_DAY_WIDTH);
+      if(x_val>TIMELINE_VIEW_MAX_WIDTH) {
          ret = -1;
+      }
       GooCanvasItem *week_ends = goo_canvas_rect_new (WE, x_val, TIMELINE_CALENDAR_HEADER_HEIGHT, 
                                 (TIMELINE_CALENDAR_DAY_WIDTH*2*zoom_factor), 
                                 TIMELINE_VIEW_MAX_HEIGHT-TIMELINE_CALENDAR_HEADER_HEIGHT,
@@ -122,8 +124,8 @@ void on_combo_TL_zoom_changed (GtkComboBox *widget, APP_data *data)
                     GTK_SCROLLED_WINDOW(gtk_builder_get_object (data->builder, "scrolledwindowTimeline")));
 
   active = gtk_combo_box_get_active (GTK_COMBO_BOX(widget));
-  value = ABS(2*(active==0)+1.5*(active==1)+1*(active==2)+0.75*(active==3)+0.5*(active==4));/* old school, no ? */
-  if(value!=zoom_factor) {
+  value = ABS(2*(active == 0) + 1.5*(active == 1) + 1*(active ==2 ) + 0.75*(active ==3 ) + 0.5*(active == 4) + 0.33*(active == 5));/* old school, no ? */
+  if(value != zoom_factor) {
       timeline_store_zoom (value);
       /* we redraw all timeline */
       timeline_remove_ruler (data);
@@ -1485,6 +1487,7 @@ void timeline_draw_calendar_ruler (gdouble ypos, APP_data *data)
   const gchar *grey_day = "#3E3E3E";
   const gchar *blue_day = "#1DD6F2";
   const gchar *smallFnt = "Sans 8";
+  const gchar *microFnt = "Sans 5";
   const gchar *normalFnt = "Sans 10";
   GDate *date, current_date, start_ruler_date;
 
@@ -1533,11 +1536,17 @@ void timeline_draw_calendar_ruler (gdouble ypos, APP_data *data)
                                              "stroke-color", "#D7D7D7", "line-width", 1.5, NULL);  
   /* draw text - weeks */
   tmpFnt = normalFnt;
-  if(zoom_factor<1)
-     tmpFnt = smallFnt;
+  if(zoom_factor<1) {
+	 if(zoom_factor < 0.5) {
+	    tmpFnt = microFnt;
+	 }
+	 else {
+        tmpFnt = smallFnt;
+     }
+  }
   pos_x = 0;
   i = 0;
-  while(pos_x<TIMELINE_VIEW_MAX_WIDTH) {
+  while(pos_x < TIMELINE_VIEW_MAX_WIDTH) {
     if(week>52) {
        week = 1;
        year++;
@@ -1727,7 +1736,7 @@ gint timeline_export (gint type, APP_data *data)
 	      break;
 	    }
 	    case TIMELINE_EXPORT_PNG: {
-              if (!g_str_has_suffix (filename, ".png" ) && !g_str_has_suffix (filename, ".PNG" )) {
+              if (!g_str_has_suffix (filename, ".png") && !g_str_has_suffix (filename, ".PNG")) {
                   /* we correct the filename */
                   tmpFileName = g_strdup_printf ("%s.png", filename);
                   g_free (filename);
@@ -1739,7 +1748,7 @@ gint timeline_export (gint type, APP_data *data)
 
     /* we must check if a file with same name exists */
     if(g_file_test (filename, G_FILE_TEST_EXISTS) 
-        && g_key_file_get_boolean (keyString, "application", "prompt-before-overwrite",NULL )) {
+        && g_key_file_get_boolean (keyString, "application", "prompt-before-overwrite", NULL)) {
            /* dialog to avoid overwriting */
            alertDlg = gtk_message_dialog_new (GTK_WINDOW(dialog),
                           flags,
@@ -1747,11 +1756,11 @@ gint timeline_export (gint type, APP_data *data)
                           GTK_BUTTONS_OK_CANCEL,
                           _("The file :\n%s\n already exists !\nDo you really want to overwrite this file ?"),
                           filename);
-           if(gtk_dialog_run (GTK_DIALOG(alertDlg))==GTK_RESPONSE_CANCEL) {
+           if(gtk_dialog_run (GTK_DIALOG(alertDlg)) == GTK_RESPONSE_CANCEL) {
               gtk_widget_destroy (GTK_WIDGET(alertDlg));
               gtk_widget_destroy (GTK_WIDGET(dialog));
               g_free (filename);
-              return;
+              return 0;
            }
     }/* endif file exists */
 

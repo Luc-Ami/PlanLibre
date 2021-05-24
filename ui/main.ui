@@ -1950,6 +1950,7 @@
                           <item translatable="yes">100%</item>
                           <item translatable="yes">75%</item>
                           <item translatable="yes">50%</item>
+                          <item translatable="yes">33%</item>
                         </items>
                         <signal name="changed" handler="on_combo_TL_zoom_changed" swapped="no"/>
                       </object>
