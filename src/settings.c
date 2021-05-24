@@ -114,15 +114,15 @@ GtkWidget *settings_create_dialog (APP_data *data)
   if(password) {
      printf ("settings - token = %s \n", password);
      gtk_widget_set_sensitive (GTK_WIDGET(switchAllowTrelloAcess), TRUE);
-     gtk_label_set_markup (GTK_LABEL (labelTokenStatus), ("<i>Stored</i>"));
-     gtk_label_set_text (GTK_LABEL (labelTrelloBtn), ("Change user token ..."));     
+     gtk_label_set_markup (GTK_LABEL (labelTokenStatus),_ ("<i>Stored</i>"));
+     gtk_label_set_text (GTK_LABEL (labelTrelloBtn), _("Change user token ..."));     
      g_key_file_set_boolean (keyString, "application", "trello-user-token-defined", TRUE);
      g_free (password);
   }
   else {
      gtk_widget_set_sensitive (GTK_WIDGET(switchAllowTrelloAcess), FALSE);
-     gtk_label_set_markup (GTK_LABEL (labelTokenStatus), ("<i>Not defined</i>"));
-     gtk_label_set_text (GTK_LABEL (labelTrelloBtn), ("Define user token ..."));
+     gtk_label_set_markup (GTK_LABEL (labelTokenStatus), _("<i>Not defined</i>"));
+     gtk_label_set_text (GTK_LABEL (labelTrelloBtn), _("Define user token ..."));
      g_key_file_set_boolean (keyString, "application", "trello-user-token-defined", FALSE);
   }
 
@@ -156,7 +156,7 @@ GtkWidget *settings_create_dialog (APP_data *data)
            g_key_file_get_boolean (keyString, "server", "ssltls", NULL ) );
 
   tmpStr = g_key_file_get_string (keyString, "server", "id", NULL);
-  if(g_ascii_strncasecmp ((gchar*)  tmpStr,"?", sizeof(gchar))  !=  0 ) {
+  if(g_ascii_strncasecmp ((gchar*)  tmpStr, "?", sizeof(gchar))  !=  0 ) {
      gtk_entry_set_text (GTK_ENTRY(entryServId), tmpStr);
   }  
   if(tmpStr != NULL)
@@ -235,7 +235,7 @@ void settings (APP_data *data)
         || ((!fMailTom) && (g_key_file_get_boolean (keyString, "collaborate", "mail_tasks_start_tomorrow", NULL)))
        ) {
         tmpStr = g_strdup_printf ("%s", _("Warning !\n\nYou've activated one or more auto-mailing settings.\nNow, you should launch <b>manually</b> your mailings (see menu <b>collaborate</b>),\nor wait until tomorrow for <b>automatic</b> mailings."));
-        misc_ErrorDialog (GTK_WINDOW(dialog), tmpStr );
+        misc_ErrorDialog (GTK_WIDGET(dialog), tmpStr );
         g_free (tmpStr);
 
      }
@@ -344,15 +344,17 @@ void on_password_entry_changed (GtkEditable *editable, APP_data *data)
   str = gtk_entry_get_text (GTK_ENTRY(editable));
   /* we check entry and modify the right side icon */
   for(i=0; i<=strlen(str); i++) {
-    if(str[i]==' ')
+    if(str[i] == ' ') {
        fErr = TRUE;
-    if(str[i]<0)/* yes, we are ont signed shortint universe, and 128 == -1 */
+    }
+    if(str[i] < 0) {/* yes, we are ont signed shortint universe, and 128 == -1 */
        fErr = TRUE;
+    }
   }
   if(fErr)
-     gtk_image_set_from_icon_name (GTK_IMAGE(image),"gtk-dialog-warning", GTK_ICON_SIZE_MENU);
+     gtk_image_set_from_icon_name (GTK_IMAGE(image), "gtk-dialog-warning", GTK_ICON_SIZE_MENU);
   else
-     gtk_image_set_from_icon_name (GTK_IMAGE(image),"gtk-ok", GTK_ICON_SIZE_MENU);
+     gtk_image_set_from_icon_name (GTK_IMAGE(image), "gtk-ok", GTK_ICON_SIZE_MENU);
 
 }
 
@@ -383,24 +385,25 @@ gint settings_dialog_password (APP_data *data)
   /* Get the dialog from the glade file. */
   gtk_builder_connect_signals (builder, data);
   dialog = GTK_WIDGET(gtk_builder_get_object (builder, "dialogRequestPswd"));
-  data->tmpBuilder=builder;
+  data->tmpBuilder = builder;
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config"); 
 
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   if(ret==1) {
-     entry = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryPassWord")); 
+     entry = GTK_WIDGET (gtk_builder_get_object (data->tmpBuilder, "entryPassWord")); 
      /* some entry checking */
      entryStr = gtk_entry_get_text (GTK_ENTRY(entry));
-     if(strlen (entryStr)==0) {
+     if(strlen (entryStr) == 0) {
         ret = 0; /* in order to exit from mail sending process */
         tmpStr = g_strdup_printf ("%s", _("Can't do that !\n\nServers <b>request</b> a password.\nMail sending aborted."));
-        misc_ErrorDialog (GTK_WINDOW(dialog), tmpStr );
+        misc_ErrorDialog (GTK_WIDGET(dialog), tmpStr );
         g_free (tmpStr);
      }
      else {
-         if(mdpStr != NULL)
-            g_free( mdpStr );
+         if(mdpStr != NULL) {
+            g_free (mdpStr);
+         }
          mdpStr = g_strdup_printf ("%s", entryStr );
      }
   }

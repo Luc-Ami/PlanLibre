@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 08:47+0200\n"
+"POT-Creation-Date: 2021-05-24 17:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -549,7 +549,7 @@ msgstr ""
 msgid "<b>Budget :</b>"
 msgstr ""
 
-#: tasks.c:2414
+#: tasks.c:2418
 msgid ""
 "<b>Can't do that !</b>\n"
 "\n"
@@ -561,7 +561,7 @@ msgid ""
 "Please check the dates, or modify predecessor's dates to solve this issue."
 msgstr ""
 
-#: tasks.c:2526
+#: tasks.c:2530
 msgid ""
 "<b>Can't do that !</b>\n"
 "\n"
@@ -629,7 +629,7 @@ msgid ""
 "Please, change deadline date or task duration."
 msgstr ""
 
-#: tasks.c:2517
+#: tasks.c:2521
 msgid ""
 "<b>Error!</b>\n"
 "\n"
@@ -870,7 +870,7 @@ msgstr ""
 msgid "<b>On the :</b>"
 msgstr ""
 
-#: tasks.c:2292 tasks.c:2566
+#: tasks.c:2296 tasks.c:2570
 msgid ""
 "<b>Please note!</b>\n"
 "\n"
@@ -879,7 +879,7 @@ msgid ""
 "PlanLibre has automatically updated project's ending date."
 msgstr ""
 
-#: tasks.c:2403
+#: tasks.c:2407
 msgid ""
 "<b>Please note!</b>\n"
 "\n"
@@ -1029,7 +1029,7 @@ msgid ""
 "b></big>"
 msgstr ""
 
-#: callbacks.c:719
+#: callbacks.c:739
 msgid ""
 "<big><b>Can't access to online wiki !</b></big>\n"
 "Please, check your Internet connection\n"
@@ -1141,7 +1141,7 @@ msgid ""
 "period #1and 14:00 to 18:00 for period #2</i>"
 msgstr ""
 
-#: ui/settings.ui:763
+#: settings.c:124 ui/settings.ui:763
 msgid "<i>Not defined</i>"
 msgstr ""
 
@@ -1163,6 +1163,10 @@ msgstr ""
 msgid ""
 "<i>Please, type this password. It will be requested only once \n"
 "during this session.</i>"
+msgstr ""
+
+#: settings.c:117
+msgid "<i>Stored</i>"
 msgstr ""
 
 #: ui/reportmail.ui:176
@@ -1324,11 +1328,11 @@ msgstr ""
 msgid "Animal work force"
 msgstr ""
 
-#: callbacks.c:2119
+#: callbacks.c:2139
 msgid "Append PlanLibre ressources from Thunderbird contacts ..."
 msgstr ""
 
-#: callbacks.c:2026 callbacks.c:2073
+#: callbacks.c:2046 callbacks.c:2093
 msgid "Append PlanLibre ressources from file ..."
 msgstr ""
 
@@ -1484,7 +1488,7 @@ msgstr ""
 msgid "Calendar : "
 msgstr ""
 
-#: callbacks.c:888
+#: callbacks.c:908
 msgid "Calendar/agenda files"
 msgstr ""
 
@@ -1500,7 +1504,7 @@ msgstr ""
 msgid "Calendars ..."
 msgstr ""
 
-#: settings.c:397
+#: settings.c:399
 msgid ""
 "Can't do that !\n"
 "\n"
@@ -1514,6 +1518,10 @@ msgstr ""
 
 #: ui/tasks.ui:297
 msgid "Category : "
+msgstr ""
+
+#: settings.c:118
+msgid "Change user token ..."
 msgstr ""
 
 #: ui/ressources.ui:687
@@ -1560,7 +1568,7 @@ msgstr ""
 msgid "Choose repeat frequency"
 msgstr ""
 
-#: callbacks.c:1865
+#: callbacks.c:1885
 msgid "Clic on a task, and drag'n'drop it to change its status"
 msgstr ""
 
@@ -1916,7 +1924,7 @@ msgstr ""
 msgid "Define and modify project's calendars and daily schudules."
 msgstr ""
 
-#: properties.c:252
+#: properties.c:255
 msgid "Define and modify project's properties and various global values."
 msgstr ""
 
@@ -1940,6 +1948,10 @@ msgstr ""
 msgid "Define recurring task"
 msgstr ""
 
+#: settings.c:125
+msgid "Define user token ..."
+msgstr ""
+
 #: report.c:1253
 msgid ""
 "Diagram 1 of 2 : repartition of monetary cost (excl. non-working days, "
@@ -1957,7 +1969,7 @@ msgid ""
 "This operation isn't cancellable ..."
 msgstr ""
 
-#: callbacks.c:1232
+#: callbacks.c:1252
 msgid "Do you really want to quit this program ?"
 msgstr ""
 
@@ -1985,7 +1997,7 @@ msgid ""
 "Double-Click again to remove this marking."
 msgstr ""
 
-#: callbacks.c:1870
+#: callbacks.c:1890
 msgid ""
 "Double-click on a ressource to modify it, right-click for other options "
 msgstr ""
@@ -2018,7 +2030,7 @@ msgstr ""
 msgid "Edit selected task, group, milestone"
 msgstr ""
 
-#: tasks.c:1847 tasks.c:2222
+#: tasks.c:1847 tasks.c:2226
 msgid "Empty"
 msgstr ""
 
@@ -2092,7 +2104,7 @@ msgstr ""
 msgid "Export current assignments to a SVG file"
 msgstr ""
 
-#: callbacks.c:892
+#: callbacks.c:912
 msgid "Export current project tasks agenda as a Icalendar compatible file"
 msgstr ""
 
@@ -2359,21 +2371,21 @@ msgstr ""
 msgid "June"
 msgstr ""
 
-#: callbacks.c:747 ui/main_ribbon.ui:619 ui/main.ui:632
+#: callbacks.c:767 ui/main_ribbon.ui:619 ui/main.ui:632
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: callbacks.c:2228
+#: callbacks.c:2248
 #, c-format
 msgid "L%d"
 msgstr ""
 
-#: callbacks.c:1897
+#: callbacks.c:1917
 #, c-format
 msgid "L%d/%d"
 msgstr ""
 
-#: callbacks.c:1813 callbacks.c:1907 callbacks.c:2280 ui/main_ribbon.ui:4791
+#: callbacks.c:1833 callbacks.c:1927 callbacks.c:2300 ui/main_ribbon.ui:4791
 #: ui/main.ui:4283
 msgid "L--"
 msgstr ""
@@ -2382,7 +2394,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: callbacks.c:748
+#: callbacks.c:768
 msgid "List of keyboard shortcuts used by PLanLibre"
 msgstr ""
 
@@ -2660,11 +2672,11 @@ msgstr ""
 msgid "Non-worked days"
 msgstr ""
 
-#: callbacks.c:1401 ressources.c:828 ressources.c:1092
+#: callbacks.c:1421 ressources.c:828 ressources.c:1092
 msgid "Noname"
 msgstr ""
 
-#: tasks.c:2195
+#: tasks.c:2199
 msgid "Noname Group"
 msgstr ""
 
@@ -2688,8 +2700,8 @@ msgstr ""
 msgid "Noname tasks"
 msgstr ""
 
-#: callbacks.c:682 callbacks.c:1212 callbacks.c:1320 callbacks.c:1437
-#: callbacks.c:1521 callbacks.c:1642 callbacks.c:1759
+#: callbacks.c:702 callbacks.c:1232 callbacks.c:1340 callbacks.c:1457
+#: callbacks.c:1541 callbacks.c:1662 callbacks.c:1779
 msgid "Noname.plibre"
 msgstr ""
 
@@ -2701,7 +2713,7 @@ msgstr ""
 msgid "Nonane milestone"
 msgstr ""
 
-#: callbacks.c:2237 tasksdialogs.c:1140
+#: callbacks.c:2257 tasksdialogs.c:1140
 msgid "None"
 msgstr ""
 
@@ -2738,11 +2750,11 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: callbacks.c:1452
+#: callbacks.c:1472
 msgid "Open PlanLibre project ..."
 msgstr ""
 
-#: callbacks.c:1557
+#: callbacks.c:1577
 msgid "Open a previous project."
 msgstr ""
 
@@ -2810,7 +2822,7 @@ msgstr ""
 msgid "PlanLibre Settings"
 msgstr ""
 
-#: callbacks.c:546 callbacks.c:1421 callbacks.c:1539
+#: callbacks.c:566 callbacks.c:1441 callbacks.c:1559
 msgid "PlanLibre files"
 msgstr ""
 
@@ -2824,7 +2836,7 @@ msgid ""
 "password at each session"
 msgstr ""
 
-#: callbacks.c:1677 callbacks.c:2022
+#: callbacks.c:1697 callbacks.c:2042
 msgid "PlanLibre xml files"
 msgstr ""
 
@@ -2910,7 +2922,7 @@ msgstr ""
 msgid "Project information about task %s"
 msgstr ""
 
-#: callbacks.c:850
+#: callbacks.c:870
 msgid "Project main calendar"
 msgstr ""
 
@@ -2918,11 +2930,11 @@ msgstr ""
 msgid "Project without title"
 msgstr ""
 
-#: properties.c:276
+#: properties.c:279
 msgid "Project's GPS location - optionnal"
 msgstr ""
 
-#: properties.c:275
+#: properties.c:278
 msgid "Project's main location"
 msgstr ""
 
@@ -2930,7 +2942,7 @@ msgstr ""
 msgid "Project's manager : "
 msgstr ""
 
-#: properties.c:251
+#: properties.c:254
 msgid "Project's properties"
 msgstr ""
 
@@ -2962,7 +2974,7 @@ msgstr ""
 msgid "R"
 msgstr ""
 
-#: callbacks.c:1556
+#: callbacks.c:1576
 msgid "Recent PlanLibre projects"
 msgstr ""
 
@@ -3031,12 +3043,12 @@ msgstr ""
 msgid "Rest time"
 msgstr ""
 
-#: callbacks.c:636
+#: callbacks.c:656
 #, c-format
 msgid "Rest time %.2d:%.2d"
 msgstr ""
 
-#: callbacks.c:1825
+#: callbacks.c:1845
 msgid ""
 "Right-click on a task for various options, or left-click and drag and drop "
 "to move a task along time"
@@ -3090,7 +3102,7 @@ msgstr ""
 msgid "Save current project and choose a name"
 msgstr ""
 
-#: callbacks.c:554 callbacks.c:1681
+#: callbacks.c:574 callbacks.c:1701
 msgid "Save current project as ..."
 msgstr ""
 
@@ -3230,7 +3242,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:2034 callbacks.c:2082 callbacks.c:2128 import.c:599
+#: callbacks.c:2054 callbacks.c:2102 callbacks.c:2148 import.c:599
 msgid ""
 "Sorry !\n"
 "An error happened during file importation.\n"
@@ -3238,7 +3250,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1479 callbacks.c:1606
+#: callbacks.c:1499 callbacks.c:1626
 msgid ""
 "Sorry !\n"
 "An error happened during file loading.\n"
@@ -3246,7 +3258,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1797
+#: callbacks.c:1817
 msgid ""
 "Sorry !\n"
 "An error happened during file restoration.\n"
@@ -3261,7 +3273,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1033
+#: callbacks.c:1053
 msgid ""
 "Sorry !\n"
 "Can't do that.\n"
@@ -3270,7 +3282,7 @@ msgid ""
 "You can try again, after updating project's properties."
 msgstr ""
 
-#: callbacks.c:1613
+#: callbacks.c:1633
 msgid ""
 "Sorry !\n"
 "I can't retrieve the file !\n"
@@ -3341,7 +3353,7 @@ msgid ""
 "task dates or modify its duration."
 msgstr ""
 
-#: callbacks.c:2069 export.c:846 import.c:586
+#: callbacks.c:2089 export.c:846 import.c:586
 msgid "Spreadsheets CSV files"
 msgstr ""
 
@@ -3446,7 +3458,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: callbacks.c:912
+#: callbacks.c:932
 #, c-format
 msgid ""
 "The file :\n"
@@ -3455,7 +3467,7 @@ msgid ""
 "Do you really want to overwrite this ICalendar (ICS) file ?"
 msgstr ""
 
-#: callbacks.c:587
+#: callbacks.c:607
 #, c-format
 msgid ""
 "The file :\n"
@@ -3482,7 +3494,7 @@ msgid ""
 "Do you really want to overwrite this file ?"
 msgstr ""
 
-#: callbacks.c:1705
+#: callbacks.c:1725
 #, c-format
 msgid ""
 "The file :\n"
@@ -3513,11 +3525,11 @@ msgstr ""
 msgid "This is the NEW starting date for the whole project"
 msgstr ""
 
-#: callbacks.c:1875
+#: callbacks.c:1895
 msgid "This page displays last report. You can export it, see top buttons."
 msgstr ""
 
-#: callbacks.c:1818
+#: callbacks.c:1838
 msgid "This page displays project information summary"
 msgstr ""
 
@@ -3541,7 +3553,7 @@ msgstr ""
 msgid "Thu."
 msgstr ""
 
-#: callbacks.c:2115
+#: callbacks.c:2135
 msgid "Thunderbird CSV files"
 msgstr ""
 
@@ -3813,7 +3825,7 @@ msgstr ""
 msgid "Z"
 msgstr ""
 
-#: callbacks.c:1543
+#: callbacks.c:1563
 msgid "_Cancel"
 msgstr ""
 
@@ -3845,7 +3857,7 @@ msgstr ""
 msgid "_New task ... "
 msgstr ""
 
-#: callbacks.c:1545
+#: callbacks.c:1565
 msgid "_Open"
 msgstr ""
 
@@ -3878,11 +3890,11 @@ msgstr ""
 msgid "change ..."
 msgstr ""
 
-#: callbacks.c:1860
+#: callbacks.c:1880
 msgid "click on a ressource to select it "
 msgstr ""
 
-#: callbacks.c:1847
+#: callbacks.c:1867
 msgid "click on a task to select it"
 msgstr ""
 
@@ -3981,7 +3993,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: callbacks.c:2008
+#: callbacks.c:2028
 msgid "no"
 msgstr ""
 
@@ -3993,11 +4005,11 @@ msgstr ""
 msgid "noname"
 msgstr ""
 
-#: callbacks.c:1971
+#: callbacks.c:1991
 msgid "none after"
 msgstr ""
 
-#: callbacks.c:1940
+#: callbacks.c:1960
 msgid "none before"
 msgstr ""
 
@@ -4093,7 +4105,7 @@ msgstr ""
 msgid "times"
 msgstr ""
 
-#: properties.c:274
+#: properties.c:277
 msgid "title"
 msgstr ""
 
@@ -4160,7 +4172,7 @@ msgstr ""
 msgid "year(s)"
 msgstr ""
 
-#: callbacks.c:1933 callbacks.c:1964 callbacks.c:2003
+#: callbacks.c:1953 callbacks.c:1984 callbacks.c:2023
 msgid "yes"
 msgstr ""
 
