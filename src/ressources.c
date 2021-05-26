@@ -212,7 +212,8 @@ void rsc_get_ressource_datas (gint position, rsc_datas *rsc, APP_data *data)
      rsc->location = tmp_rsc_datas->location;
      rsc->affiliate = tmp_rsc_datas->affiliate;
      rsc->type = tmp_rsc_datas->type;  
-     rsc->cost = tmp_rsc_datas->cost;  
+     rsc->cost = tmp_rsc_datas->cost;
+     rsc->quantity = tmp_rsc_datas->quantity;  
      rsc->day_hours = tmp_rsc_datas->day_hours;
      rsc->day_mins = tmp_rsc_datas->day_mins;
      rsc->cost_type = tmp_rsc_datas->cost_type;  
@@ -355,6 +356,7 @@ void rsc_modify_datas (gint position, APP_data *data, rsc_datas *rsc)
      tmp_rsc_datas->type = rsc->type;
      tmp_rsc_datas->cost = rsc->cost;
      tmp_rsc_datas->cost_type = rsc->cost_type;
+     tmp_rsc_datas->quantity = rsc->quantity;
      tmp_rsc_datas->color = rsc->color;
      tmp_rsc_datas->pix = rsc->pix;
      tmp_rsc_datas->cadre = rsc->cadre;
@@ -418,7 +420,7 @@ void rsc_modify_widget (gint position, APP_data *data)
 ***************************************/
 void rsc_insert (gint position, rsc_datas *rsc, APP_data *data)
 {
-  if(position>=0) {
+  if(position >= 0) {
     /* we add datas to the GList */
     rsc_datas *tmp_rsc_datas;
     tmp_rsc_datas = g_malloc (sizeof (rsc_datas));
@@ -427,6 +429,7 @@ void rsc_insert (gint position, rsc_datas *rsc, APP_data *data)
     tmp_rsc_datas->affiliate = rsc->affiliate;
     tmp_rsc_datas->type = rsc->type;
     tmp_rsc_datas->cost = rsc->cost;
+    tmp_rsc_datas->quantity = rsc->quantity;    
     tmp_rsc_datas->cost_type = rsc->cost_type;
     tmp_rsc_datas->color = rsc->color;
     tmp_rsc_datas->cadre = rsc->cadre;
@@ -557,7 +560,7 @@ gint rsc_datas_len (APP_data *data )
   in "data.rsc" utlity variable
 ***********************************/
 void rsc_store_to_app_data (gint position, gchar *name, gchar *mail, gchar *phone, gchar *reminder, 
-                            gint  type,  gint affi, gdouble cost, gint cost_type,
+                            gint  type,  gint affi, gdouble cost, gint cost_type, gdouble quantity,
                             GdkRGBA  color, GdkPixbuf *pix, 
                             APP_data *data, gint id, rsc_datas *tmprsc, gboolean incrCounter)
 {
@@ -597,6 +600,7 @@ void rsc_store_to_app_data (gint position, gchar *name, gchar *mail, gchar *phon
   tmprsc->affiliate = affi;
   tmprsc->cost_type = cost_type;
   tmprsc->cost 		= cost;
+  tmprsc->quantity  = quantity;  
   if(incrCounter)
       tmprsc->id = data->objectsCounter; 
   else
@@ -678,7 +682,7 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
   gtk_grid_set_column_homogeneous (GTK_GRID(grid), FALSE);
   /* image part */
 
-  if((data->path_to_pixbuf) && (imgFromXml==FALSE)) {
+  if((data->path_to_pixbuf) && (imgFromXml == FALSE)) {
      printf("chemin vers pixbuf=%s\n",data->path_to_pixbuf );
      pixbuf = gdk_pixbuf_new_from_file_at_scale (data->path_to_pixbuf, -1, RSC_AVATAR_HEIGHT*0.8, TRUE, &err);
      g_free (data->path_to_pixbuf);
@@ -790,7 +794,7 @@ void rsc_new (APP_data *data)
   GtkWidget *comboCost, *comboAffi, *comboType, *pBtnColor, *spinBtnCost;
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
   GtkWidget *cadres, *listBoxRessources;
-  gdouble cost;
+  gdouble cost, quantity = 1;
   rsc_datas rsc, newRsc;
   GtkListBox *box; 
   GtkListBoxRow *row;
@@ -799,7 +803,7 @@ void rsc_new (APP_data *data)
   dialog = ressources_create_dialog (FALSE, data);
   /* working days are set by default */
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
-  if(ret==1) {
+  if(ret == 1) {
     /* yes, we want to add a new ressource */
     entryName = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscName"));
     entryMail =GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscMail"));
@@ -821,10 +825,10 @@ void rsc_new (APP_data *data)
     pFriday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkFriday"));
     pSaturday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkSaturday"));
     pSunday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkSunday"));
-
+// TODO quantity 
     /* we get various useful values */
     name = gtk_entry_get_text (GTK_ENTRY(entryName));
-    if(strlen(name)==0) {
+    if(strlen(name) == 0) {
        name = g_strdup_printf ("%s", _("Noname"));
     }
     mail = gtk_entry_get_text (GTK_ENTRY(entryMail));
@@ -836,6 +840,7 @@ void rsc_new (APP_data *data)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(pBtnColor), &color);
     cost = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBtnCost));
     newRsc.location = NULL;
+    newRsc.quantity = 1;/* default */
     /* working days */
     newRsc.fWorkMonday = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pMonday));
     newRsc.fWorkTuesday = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pTuesday));
@@ -859,20 +864,22 @@ void rsc_new (APP_data *data)
     /* new element is appended */
     /* we check cursor's position */
     data->curRsc = rsc_get_selected_row (data);
-    if(data->curRsc<0)
+    if(data->curRsc < 0) {
        insertion_row = rsc_datas_len (data);
-    else
-       insertion_row = data->curRsc+1;
-
+    }
+    else {
+       insertion_row = data->curRsc + 1;
+    }
+    
     gtk_list_box_insert (GTK_LIST_BOX(listBoxRessources), GTK_WIDGET(cadres), insertion_row);
     /* we store datas */
 if(newRsc.pix==NULL)
       printf ("dans new pix vaut null \n");
     rsc_store_to_app_data (insertion_row, (gchar *) name,  (gchar *) mail,  (gchar *) phone,  (gchar *) reminder, 
-                            iType, iAffi, cost, iCost, color, newRsc.pix,
+                            iType, iAffi, cost, iCost, quantity, color, newRsc.pix,
                             data , -1, &newRsc, TRUE);
     rsc_insert (insertion_row, &newRsc, data);
-    rsc_autoscroll ((gdouble)(insertion_row+1)/g_list_length (data->rscList), data);
+    rsc_autoscroll ((gdouble)(insertion_row+1) / g_list_length (data->rscList), data);
     /* we select the row */
     row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(box), insertion_row);
     gtk_list_box_select_row (GTK_LIST_BOX(box), row);
@@ -958,7 +965,7 @@ void rsc_modify_tasks_widgets (gint id, APP_data *data)
 void rsc_modify (APP_data *data)
 {
   GtkWidget *dialog;
-  gint ret=0, iRow=-1, i;
+  gint ret = 0, iRow = -1, i;
   GtkListBox *box;
   GtkListBoxRow *row;
   GtkWidget *entryName, *entryMail, *entryPhone, *entryRemind, *comboCost, *comboAffi, *comboType;
@@ -966,12 +973,12 @@ void rsc_modify (APP_data *data)
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
   rsc_datas tmpRsc, newRsc, *undoRsc;
   const gchar *name;
-  const gchar  *mail;
+  const gchar *mail;
   const gchar *phone;
   const gchar *reminder;
   GdkRGBA color;
   gint iCost, iAffi, iType, iCal;
-  gdouble cost;
+  gdouble cost, quantity = 1;
   GdkPixbuf *pixbuf;
   GError *err = NULL;
   undo_datas *tmp_value;
@@ -997,10 +1004,10 @@ void rsc_modify (APP_data *data)
   /* we must remove some chars forbidden in XML and g_markup - & < > " ' */
   if(tmpRsc.name) {
       undoRsc->name = g_strdup_printf ("%s", tmpRsc.name);
-
   }
-  else
+  else {
      undoRsc->name = NULL;
+  }
   if(tmpRsc.mail)
       undoRsc->mail = g_strdup_printf ("%s", tmpRsc.mail);
   else
@@ -1099,6 +1106,7 @@ void rsc_modify (APP_data *data)
       iType = gtk_combo_box_get_active (GTK_COMBO_BOX(comboType));/* of RSC, work force for example */
       gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(pBtnColor), &color);
       cost = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBtnCost));
+      
       /* default for images */
       newRsc.pix = NULL;
       newRsc.fPersoIcon = FALSE;
@@ -1129,8 +1137,8 @@ void rsc_modify (APP_data *data)
       }
       /* we store datas */
       newRsc.cadre = tmpRsc.cadre;
-      newRsc.name =  (gchar *) name;
-      newRsc.mail =  (gchar *) mail;
+      newRsc.name  =  (gchar *) name;
+      newRsc.mail  =  (gchar *) mail;
       newRsc.phone =  (gchar *) phone;
       newRsc.reminder = (gchar *) reminder;
       newRsc.location = NULL;
@@ -1138,6 +1146,7 @@ void rsc_modify (APP_data *data)
       newRsc.affiliate = iAffi;
       newRsc.type = iType;
       newRsc.cost_type = iCost;
+      newRsc.quantity = quantity;
       newRsc.color = color;
       /* working days */
       newRsc.fWorkMonday = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pMonday));
@@ -1259,7 +1268,7 @@ void rsc_clone (gint index, APP_data *data)
   /* we store datas */
   rsc_store_to_app_data (insertion_row, tmpStr, 
                             tmpRsc.mail, tmpRsc.phone, tmpRsc.reminder, 
-                            tmpRsc.type, tmpRsc.affiliate, tmpRsc.cost, tmpRsc.cost_type,
+                            tmpRsc.type, tmpRsc.affiliate, tmpRsc.cost, tmpRsc.cost_type, tmpRsc.quantity, 
                             tmpRsc.color, NULL,
                             data , -1, &tmpRsc, TRUE);
   rsc_insert (insertion_row, &tmpRsc, data);

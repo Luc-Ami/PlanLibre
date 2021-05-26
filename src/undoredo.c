@@ -28,6 +28,7 @@
 #include "links.h"
 #include "report.h"
 #include "dashboard.h"
+#include "home.h"
 
 /****************************
   protected local variables
@@ -509,7 +510,7 @@ static void undo_pop_rsc (gint op, APP_data *data)
           /* we update links - we have only to get preceding GList of links store in list field */
           links_free_all (data);
           data->linksList = NULL;
-          for(i=0;i<g_list_length (tmp_undo_datas->list);i++) {
+          for(i = 0; i < g_list_length (tmp_undo_datas->list); i++) {
             l1 = g_list_nth (tmp_undo_datas->list, i);
             tmp_links_datas = (link_datas *)l1->data;
             tmp = g_malloc (sizeof(link_datas));
@@ -532,7 +533,7 @@ static void undo_pop_rsc (gint op, APP_data *data)
               pix2 = gdk_pixbuf_copy (temp->pix);
 
           rsc_store_to_app_data (tmp_undo_datas->insertion_row, temp->name, temp->mail, temp->phone, temp->reminder, 
-                            temp->type, temp->affiliate, temp->cost, temp->cost_type, temp->color, pix2,
+                            temp->type, temp->affiliate, temp->cost, temp->cost_type, temp->quantity, temp->color, pix2,
                             data , temp->id, temp, FALSE);
           rsc_insert (tmp_undo_datas->insertion_row, temp, data);
           /* we update tasks display */

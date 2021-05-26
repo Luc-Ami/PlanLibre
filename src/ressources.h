@@ -47,7 +47,7 @@ void rsc_free_all (APP_data *data);
 
 gint rsc_datas_len (APP_data *data );
 void rsc_store_to_app_data (gint position, gchar *name, gchar *mail, gchar *phone, gchar *reminder, 
-                            gint  type,  gint affi, gdouble cost,  gint cost_type,
+                            gint  type,  gint affi, gdouble cost,  gint cost_type, gdouble quantity,
                             GdkRGBA  color, GdkPixbuf *pix, 
                             APP_data *data, gint id, rsc_datas *tmprsc, gboolean incrCounter);
 void 

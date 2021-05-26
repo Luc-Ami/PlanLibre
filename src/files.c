@@ -397,7 +397,7 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
   gint id, lenRsc = 0, hId, cal, hour_day, min_day;
   gchar *valeur2 = NULL, *name = NULL, *mail = NULL, *phone = NULL, *reminder = NULL, *location = NULL, *tmpStr;
   gint  type, affi, cost_type, work;
-  gdouble cost;
+  gdouble cost, quantity = 1;
   GdkRGBA  color;
   GdkPixbuf *pix = NULL; 
   GtkWidget *cadres, *listBoxRessources;
@@ -407,12 +407,12 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
   /* now, we read how many ressources are stored in file  */
 
   valeur2 = get_xml_value ("/PlanLibre/Ressources/Counter/text()", doc);
-  if(valeur2!=NULL) {
+  if(valeur2 != NULL) {
      nbRsc = g_ascii_strtod (g_strdup_printf ("%s", valeur2), NULL);
      g_free (valeur2);
   }
 
-  if(nbRsc<=0)
+  if(nbRsc <= 0)
      return -1;
  
   /* we do a loop to read all resources */
@@ -424,13 +424,13 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
   for(i = lenRsc; i<lenRsc+nbRsc; i++) {
      id = -1;
      /* resets */
-     type =0;
-     cost_type =0;
+     type = 0;
+     cost_type = 0;
      affi = 0;
      cost = 0;
-     color.red =0;
-     color.green =0;
-     color.blue =0;
+     color.red = 0;
+     color.green = 0;
+     color.blue = 0;
      newRsc.location = NULL;
      /* default working days */
      newRsc.fWorkMonday = TRUE;
@@ -453,7 +453,7 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
        g_free (valeur2);
        valeur2 = NULL;
      }
-     if(id<0)  {
+     if(id < 0)  {
          printf ("* Ressources : critical error, bad object identifier *\n");
          return -1;
      }
@@ -508,6 +508,14 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
      tmpStr = g_strdup_printf ("/PlanLibre/Ressources/Object%d/@Cost_value", i-lenRsc);
      cost = get_xml_rsc_as_double (doc, tmpStr, "Cost_value");
      g_free (tmpStr);
+     
+     tmpStr = g_strdup_printf ("/PlanLibre/Ressources/Object%d/@Quantity", i-lenRsc);
+     quantity = get_xml_rsc_as_double (doc, tmpStr, "Quantity");
+     printf ("valeur lue qty =%d \n", (gint) quantity);
+     if(quantity <1) {
+		 quantity = 1;
+     }
+     g_free (tmpStr);     
      /* working days */
      tmpStr = g_strdup_printf ("/PlanLibre/Ressources/Object%d/@working_monday", i-lenRsc);
      work = get_xml_rsc_as_int (doc, tmpStr, "working_monday");
@@ -618,7 +626,7 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
      gtk_list_box_insert (GTK_LIST_BOX(listBoxRessources), GTK_WIDGET(cadres), i);// TODO mode append attention à i
      /* store in memory */
      rsc_store_to_app_data (i, name, mail, phone, reminder, 
-                            type,  affi, cost,  cost_type,
+                            type,  affi, cost,  cost_type, quantity, 
                             color, pix,  data, id, &newRsc, FALSE); // TODO mode append attention à i
 
      /* finalize - i.e. datas are transfered from app to memory */
@@ -1546,6 +1554,9 @@ static gint save_ressources (xmlNodePtr rsc_node, APP_data *data)
      /*  cost value */
      g_ascii_dtostr (buffer, 50, tmp_rsc_datas->cost);
      xmlNewProp (rsc_object, BAD_CAST "Cost_value", BAD_CAST buffer);
+     /* quantity per resource - TODO */
+     g_ascii_dtostr (buffer, 50, tmp_rsc_datas->quantity);
+     xmlNewProp (rsc_object, BAD_CAST "Quantity", BAD_CAST buffer);     
      /* color */
      g_ascii_dtostr (buffer, 50, tmp_rsc_datas->color.red );
      xmlNewProp (rsc_object, BAD_CAST "Color_red", BAD_CAST buffer);

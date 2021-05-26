@@ -295,7 +295,7 @@ gint import_csv_file_to_rsc (gchar *path_to_file, APP_data *data)
         gtk_list_box_insert (GTK_LIST_BOX(listBoxRessources), GTK_WIDGET(cadres), rowIndex);
         /* store in memory */
         rsc_store_to_app_data (rowIndex, name, mail, phone, reminder, 
-                              type, affi, cost, cost_type, color, NULL, data, id, &newRsc, TRUE);
+                              type, affi, cost, cost_type, 1, color, NULL, data, id, &newRsc, TRUE);
         /* finalize - i.e. datas are transfered from app to memory */
         rsc_insert (rowIndex, &newRsc, data);
         /* undo engine */
@@ -819,7 +819,7 @@ gint import_adress_book_file_to_rsc (gchar *path_to_file, APP_data *data)
         gtk_list_box_insert (GTK_LIST_BOX(listBoxRessources), GTK_WIDGET(cadres), rowIndex);
         /* store in memory */
         rsc_store_to_app_data (rowIndex, name, mail, phone, reminder, 
-                              type, affi, cost, cost_type, color, NULL, data, id, &newRsc, TRUE);
+                              type, affi, cost, cost_type, 1, color, NULL, data, id, &newRsc, TRUE);
         /* finalize - i.e. datas are transfered from app to memory */
         rsc_insert (rowIndex, &newRsc, data);
         /* undo engine */
