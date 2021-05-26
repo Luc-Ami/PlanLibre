@@ -914,59 +914,62 @@ void tasks_insert (gint position, APP_data *data, tasks_data *tmp)
 {
   gint rsc_list_len = g_list_length (data->tasksList);
 
-  if(position>=0) {
+  if(position >= 0) {
     /* we add datas to the GList */
     tasks_data *tmp_tasks_datas;
     tmp_tasks_datas = g_malloc (sizeof(tasks_data));
     /* we transfer datas */
-    tmp_tasks_datas->id = tmp->id;
+    tmp_tasks_datas->id   = tmp->id;
     tmp_tasks_datas->type = tmp->type;
-    if(tmp->name==NULL)
+    if(tmp->name == NULL) {
        tmp_tasks_datas->name = NULL;
-    else
+    }
+    else {
        tmp_tasks_datas->name = g_strdup_printf ("%s", tmp->name);
-    if(tmp->location==NULL)
+    }
+    if(tmp->location == NULL)
         tmp_tasks_datas->location = NULL;
-    else
+    else {
         tmp_tasks_datas->location = g_strdup_printf ("%s", tmp->location);
-
+    }
+    
     tmp_tasks_datas->timer_val = tmp->timer_val;
-    tmp_tasks_datas->status = tmp->status;
-    tmp_tasks_datas->priority = tmp->priority;
-    tmp_tasks_datas->category = tmp->category;
-    tmp_tasks_datas->group = tmp->group;
-    tmp_tasks_datas->color = tmp->color;
-    tmp_tasks_datas->progress = tmp->progress;
-    tmp_tasks_datas->start_nthDay = tmp->start_nthDay;
+    tmp_tasks_datas->status    = tmp->status;
+    tmp_tasks_datas->priority  = tmp->priority;
+    tmp_tasks_datas->category  = tmp->category;
+    tmp_tasks_datas->group     = tmp->group;
+    tmp_tasks_datas->color     = tmp->color;
+    tmp_tasks_datas->progress  = tmp->progress;
+    tmp_tasks_datas->start_nthDay   = tmp->start_nthDay;
     tmp_tasks_datas->start_nthMonth = tmp->start_nthMonth;
-    tmp_tasks_datas->start_nthYear = tmp->start_nthYear;
-    tmp_tasks_datas->end_nthDay = tmp->end_nthDay;
-    tmp_tasks_datas->end_nthMonth = tmp->end_nthMonth;
-    tmp_tasks_datas->end_nthYear = tmp->end_nthYear;
+    tmp_tasks_datas->start_nthYear  = tmp->start_nthYear;
+    tmp_tasks_datas->end_nthDay     = tmp->end_nthDay;
+    tmp_tasks_datas->end_nthMonth   = tmp->end_nthMonth;
+    tmp_tasks_datas->end_nthYear    = tmp->end_nthYear;
 
-    tmp_tasks_datas->lim_nthDay = tmp->lim_nthDay;
+    tmp_tasks_datas->lim_nthDay   = tmp->lim_nthDay;
     tmp_tasks_datas->lim_nthMonth = tmp->lim_nthMonth;
-    tmp_tasks_datas->lim_nthYear = tmp->lim_nthYear;
+    tmp_tasks_datas->lim_nthYear  = tmp->lim_nthYear;
 
-    tmp_tasks_datas->cadre = tmp->cadre;
-    tmp_tasks_datas->cRscBox = tmp->cRscBox;
+    tmp_tasks_datas->cadre    = tmp->cadre;
+    tmp_tasks_datas->cRscBox  = tmp->cRscBox;
     tmp_tasks_datas->cTaskBox = tmp->cTaskBox;
-    tmp_tasks_datas->cName = tmp->cName;
-    tmp_tasks_datas->cGroup = tmp->cGroup;
-    tmp_tasks_datas->cPeriod = tmp->cPeriod;
-    tmp_tasks_datas->cProgress = tmp->cProgress;
-    tmp_tasks_datas->cImgPty = tmp->cImgPty;
+    tmp_tasks_datas->cName    = tmp->cName;
+    tmp_tasks_datas->cGroup   = tmp->cGroup;
+    tmp_tasks_datas->cPeriod  = tmp->cPeriod;
+    tmp_tasks_datas->cProgress  = tmp->cProgress;
+    tmp_tasks_datas->cImgPty    = tmp->cImgPty;
     tmp_tasks_datas->cImgStatus = tmp->cImgStatus;
-    tmp_tasks_datas->cImgCateg = tmp->cImgCateg;
-    tmp_tasks_datas->cRun = tmp->cRun;
+    tmp_tasks_datas->cImgCateg  = tmp->cImgCateg;
+    tmp_tasks_datas->cRun       = tmp->cRun;
     tmp_tasks_datas->groupItems = NULL; /* before any display */
     tmp_tasks_datas->cDashboard = NULL; /* idem */
     tmp_tasks_datas->durationMode = tmp->durationMode;
-    tmp_tasks_datas->days = tmp->days;
-    tmp_tasks_datas->hours = tmp->hours;
+    tmp_tasks_datas->days    = tmp->days;
+    tmp_tasks_datas->hours   = tmp->hours;
     tmp_tasks_datas->minutes = tmp->minutes;
     tmp_tasks_datas->calendar = tmp->calendar;
-    tmp_tasks_datas->delay = tmp->delay;
+    tmp_tasks_datas->delay   = tmp->delay;
 
     data->tasksList = g_list_insert (data->tasksList, tmp_tasks_datas, position);
   }
@@ -983,18 +986,18 @@ void tasks_modify_datas (gint position, APP_data *data, tasks_data *tmp)
   gint tsk_list_len = g_list_length (data->tasksList);
   GList *l;
 
-  if((position >=0) && (position<=tsk_list_len)) {
+  if((position >=0) && (position <= tsk_list_len)) {
      l = g_list_nth (data->tasksList, position);
      tasks_data *tmp_tasks_datas;
      tmp_tasks_datas = (tasks_data *)l->data;
      /* now we change values 'in place' */
-     if(tmp_tasks_datas->name!=NULL) {
+     if(tmp_tasks_datas->name != NULL) {
          g_free (tmp_tasks_datas->name);
-         tmp_tasks_datas->name=NULL;
+         tmp_tasks_datas->name = NULL;
      }
-     if(tmp_tasks_datas->location!=NULL) {
+     if(tmp_tasks_datas->location != NULL) {
          g_free (tmp_tasks_datas->location);
-         tmp_tasks_datas->location=NULL;
+         tmp_tasks_datas->location = NULL;
      }
 
     /* we transfer datas */
@@ -1035,7 +1038,7 @@ void tasks_modify_date_datas (gint position, GDate *date_start, GDate *date_end,
   gint tsk_list_len = g_list_length (data->tasksList);
   GList *l;
 
-  if((position >=0) && (position<=tsk_list_len)) {
+  if((position >= 0) && (position <= tsk_list_len)) {
      l = g_list_nth (data->tasksList, position);
      tasks_data *tmp_tasks_datas;
      tmp_tasks_datas = (tasks_data *)l->data;
@@ -1065,18 +1068,18 @@ gint tasks_search_group_backward (gint position, APP_data *data)
   GList *l;
   tasks_data *tmp;
 
-  if(position>g_list_length (data->tasksList))
+  if(position > g_list_length (data->tasksList))
          return -1;
-  if(position>0) {
+  if(position > 0) {
     l = g_list_nth (data->tasksList, position);
     tmp = (tasks_data *)l->data;
-    if(tmp->type==TASKS_TYPE_TASK)
+    if(tmp->type == TASKS_TYPE_TASK)
        ret = tmp->group;
-    if(tmp->type==TASKS_TYPE_GROUP) {
-       if(position>1) {/* attempt to reach a 'TRUE' task */
+    if(tmp->type == TASKS_TYPE_GROUP) {
+       if(position > 1) {/* attempt to reach a 'TRUE' task */
           l = g_list_nth (data->tasksList, position-1);
           tmp = (tasks_data *)l->data;
-          if(tmp->type==TASKS_TYPE_TASK)
+          if(tmp->type == TASKS_TYPE_TASK)
                 ret = tmp->group;
        }
     }
@@ -1099,13 +1102,13 @@ gint tasks_search_group_forward (gint position, APP_data *data)
   if(position<g_list_length (data->tasksList)) {
     l = g_list_nth (data->tasksList, position);
     tmp = (tasks_data *)l->data;
-    if(tmp->type==TASKS_TYPE_TASK)
+    if(tmp->type == TASKS_TYPE_TASK)
        ret = tmp->group;
-    if(tmp->type==TASKS_TYPE_GROUP) {
+    if(tmp->type == TASKS_TYPE_GROUP) {
        if(position<g_list_length (data->tasksList)-1) {/* attempt to reach a 'TRUE' task */
           l = g_list_nth (data->tasksList, position+1);
           tmp = (tasks_data *)l->data;
-          if(tmp->type==TASKS_TYPE_TASK)
+          if(tmp->type == TASKS_TYPE_TASK)
                 ret = tmp->group;
        }
     }
@@ -1147,7 +1150,7 @@ void tasks_reset_tomato_timer_value (APP_data *data)
 *********************************/
 void tasks_update_tomato_timer_value (gint secs, APP_data *data)
 {
-   timer_val = timer_val+secs;
+   timer_val = timer_val + secs;
 }
 
 /*********************************
@@ -1192,9 +1195,9 @@ void tasks_update_tomato_timer_value_for_ID (gint id, APP_data *data)
      l = g_list_nth (data->tasksList, i);
      tmp = (tasks_data *)l->data;
      if(tmp->id == id) {
-        tmp->timer_val = tmp->timer_val+timer_val;
+        tmp->timer_val = tmp->timer_val + timer_val;
         /* we modify widget */
-        if(tmp->timer_val>0)
+        if(tmp->timer_val > 0)
             job_run = g_strdup_printf ("<i>Time spent %.2d:%.2d</i>", (gint)tmp->timer_val/60, (gint)tmp->timer_val % 60);
         else
             job_run = g_strdup_printf ("<i>Time spent %s</i>", "--");
@@ -1222,7 +1225,7 @@ void tasks_reset_tomato_ellapsed_value (APP_data *data)
 *********************************/
 void tasks_tomato_update_ellapsed_value (gint secs, APP_data *data)
 {
-   ellapsed = ellapsed+secs;
+   ellapsed = ellapsed + secs;
    timer_val = ellapsed;
 }
 
@@ -1269,7 +1272,7 @@ void tasks_reset_tomato_paused_value (APP_data *data)
 *********************************/
 void tasks_tomato_update_paused_value (gint secs, APP_data *data)
 {
-   paused = paused+secs;
+   paused = paused + secs;
 }
 
 /*********************************
@@ -1312,8 +1315,10 @@ gint tasks_compute_valid_insertion_point (gint pos, gint group, gboolean isGroup
      return 0; /* empty task list, so insertion point = 0 */
   if(pos==0 && group ==-1)
      return 0;
-  if(pos>=tsk_list_len)
+  if(pos>=tsk_list_len) {
+	  printf ("raccourci \n");
     return tsk_list_len;
+  }
 
   /* check we are on group line */
   l = g_list_nth (data->tasksList, pos);
@@ -1322,8 +1327,11 @@ gint tasks_compute_valid_insertion_point (gint pos, gint group, gboolean isGroup
            return pos+1;
 
   /* check if current position is group free */
-  if(tmp->group == -1)
-     return pos;
+  if(tmp->group == -1) {
+	 /* if we are at end of list we correct position */ 
+	  printf  ("coucou \n");
+     return pos;      
+  }
   /* seek backward */
   if(pos>0) {
      i = pos-1;
@@ -1730,9 +1738,9 @@ printf ("cmp dedaline date current avant %d \n", cmp);
      }
      cmp = g_date_compare (&end_date, &date_interval2);
      if(cmp<0) {
-           data->properties.end_nthDay = g_date_get_day (&date_interval2);
+           data->properties.end_nthDay   = g_date_get_day (&date_interval2);
            data->properties.end_nthMonth = g_date_get_month (&date_interval2);
-           data->properties.end_nthYear = g_date_get_year (&date_interval2);
+           data->properties.end_nthYear  = g_date_get_year (&date_interval2);
            info_updated_end_date (dlg, data);
            ret = TASK_PLACEMENT_UPDATED_END;
      }/* endif cmp */
@@ -1831,7 +1839,7 @@ printf ("-------------------------\n");
   }/* next i */
   /* if nbTsks>0 we allocate an array of (n tasks) * (n tasks) where we put dependencies */
   if(nbTsks>0) {
-     array = g_malloc0 (nbTsks*nbTsks*sizeof(gint));
+     array = g_malloc0 (nbTsks * nbTsks * sizeof(gint));
      /* now we fill array with dependancies - code == 1 when dependant, or 0 if no link */
      /* in lines, tasks-receuvers, in columns, predecessors */
      for(i=0; i<nbTsks; i++) {
@@ -1843,9 +1851,9 @@ printf ("-------------------------\n");
         }/* next j */
      }/* next i for vectors*/
      /* we sum all nodes vertically since senders are arranged in columns */
-     for(j=0;j<nbTsks;j++) {
-        for(i=0;i<nbTsks;i++) {
-           nodes[j]=nodes[j]+array[i*nbTsks+j];
+     for(j = 0; j < nbTsks ; j++) {
+        for(i=0; i<nbTsks; i++) {
+           nodes[j] = nodes[j] + array[i*nbTsks+j];
         }/* lines = nodes */
      }/* next j - columns */
 /*
@@ -1871,12 +1879,12 @@ printf ("-------------------------\n");
      tasks = g_list_prepend (tasks, GINT_TO_POINTER (id));/* first alement is always the ID of modified source task */
   //   status = g_list_prepend (status, GINT_TO_POINTER (-1));/* the is nothing to do with ROOT task */
 
-     while(g_list_length(tasks)>0) {
+     while(g_list_length(tasks) > 0) {
         l = g_list_nth (tasks, 0); /* always first element of a FIFO stack */
         sender = (gint *) l->data;
         /* we're looking for successors and manage them */
-        for(i=0;i<nbTsks;i++) {
-            if(links_check_element (vector [i], sender, data)>=0) {
+        for(i=0; i<nbTsks; i++) {
+            if(links_check_element (vector [i], sender, data) >= 0) {
                printf ("%d reçoit de %d \n", vector [i], sender);
                tasks = g_list_prepend (tasks, GINT_TO_POINTER (vector[i]));
                rank = tasks_get_rank_for_id (vector[i], data);

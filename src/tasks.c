@@ -626,7 +626,7 @@ void tasks_new (GDate *date, APP_data *data)
 {
   GtkWidget *dialog;
   gint ret, insertion_row, cmp;
-  gdouble progress=0;
+  gdouble progress = 0;
   GdkRGBA color;
   GtkWidget *boxTasks, *pBtnColor, *entryName, *comboPriority, *comboCategory, *comboStatus, *spinProgress;
   gint curPty, curCateg, curStatus=0, curDuration = 0, curDays, curHours, curTemp, curGroup;
@@ -658,35 +658,37 @@ void tasks_new (GDate *date, APP_data *data)
     GtkWidget *comboGroup = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboGroup"));
     /* we get various useful values */
     name = gtk_entry_get_text (GTK_ENTRY(entryName));
-    if(strlen(name)==0) {
+    if(strlen(name) == 0) {
        name = fooStr;
     }
     curPty = gtk_combo_box_get_active (GTK_COMBO_BOX(comboPriority));
     curCateg = gtk_combo_box_get_active (GTK_COMBO_BOX(comboCategory));
     curStatus = gtk_combo_box_get_active (GTK_COMBO_BOX(comboStatus));
-    progress =  gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinProgress));
+    progress = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinProgress));
     curGroup = gtk_combo_box_get_active (GTK_COMBO_BOX(comboGroup));
     /* test if progress = 100 % */
-    if(progress == 100)
-            curStatus = TASKS_STATUS_DONE;
+    if(progress == 100) {
+       curStatus = TASKS_STATUS_DONE;
+    }
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(pBtnColor), &color);
     curDays = (gint) gtk_spin_button_get_value (GTK_SPIN_BUTTON(pDays));
     curHours = (gint) gtk_spin_button_get_value (GTK_SPIN_BUTTON(pHours));
     curDuration = gtk_combo_box_get_active (GTK_COMBO_BOX(pComboDuration));
 
     /* dates */
-    if((curDays == 0) && (curHours == 0))
-         curDays = 1;/* not enough security ! */
-        
+    if((curDays == 0) && (curHours == 0)) {
+       curDays = 1;/* not enough security ! */
+    }    
     currentDate = gtk_button_get_label (GTK_BUTTON(pButtonStart));
     g_date_set_parse (&date_current, currentDate);
     g_date_set_parse (&date_interval2, currentDate);
-    if(curDays>1) /* because when task last one day or less, start and date are identical */
-            g_date_add_days (&date_interval2, curDays-1); 
+    if(curDays>1) {/* because when task last one day or less, start and date are identical */
+        g_date_add_days (&date_interval2, curDays-1); 
+    }
     /* we compute final date */
-    if((curDuration == TASKS_DEADLINE)  || (curDuration == TASKS_AFTER)) {
-            limDate = gtk_button_get_label (GTK_BUTTON(pButton));
-            g_date_set_parse (&interval3, limDate);
+    if((curDuration == TASKS_DEADLINE) || (curDuration == TASKS_AFTER)) {
+        limDate = gtk_button_get_label (GTK_BUTTON(pButton));
+        g_date_set_parse (&interval3, limDate);
     }
     else {/* we use standard mode with choosen start date */
             limDate = gtk_button_get_label (GTK_BUTTON(pButtonStart));
@@ -2109,7 +2111,7 @@ void tasks_milestone_new (GDate *date, APP_data *data)
   }
   
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
-  if(ret==1) {
+  if(ret == 1) {
     tasks_utils_reset_errors (data);
     /* yes, we want to add a new milestone */
     entryName = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryMilestoneName")); 
@@ -2151,11 +2153,14 @@ void tasks_milestone_new (GDate *date, APP_data *data)
                             -1, -1, -1, 
                             0, 0, 0, 0, color, data, -1, TRUE, TASKS_AS_SOON, 1, 0, 0, 0, -1, &temp);/* -1 = delay */
     tasks_insert (insertion_row, data, &temp);/* here we store id */
-    if(g_list_length (data->tasksList)==1)
+    /* update display */
+    if(g_list_length (data->tasksList) == 1) {
         task_set_selected_row (0, data); 
-    else
+    }
+    else {
         task_set_selected_row (insertion_row, data);
-    tasks_autoscroll ((gdouble)insertion_row/g_list_length(data->tasksList), data);
+    }
+    tasks_autoscroll ((gdouble)insertion_row/g_list_length (data->tasksList), data);
     /* we update links */
     tasks_update_links_tasks (temp.id, dialog, data);
     gint t_links = links_check_task_linked (temp.id, data);
@@ -2195,7 +2200,7 @@ void tasks_group_new (APP_data *data)
 {
   GtkWidget *dialog, *boxTasks, *entryName;
   gint ret=0, insertion_row, days;
-  const gchar *name=NULL;
+  const gchar *name = NULL;
   const gchar *fooStr2 = _("Noname Group");
   gchar *tmpStr;
   tasks_data temp;
@@ -2205,13 +2210,13 @@ void tasks_group_new (APP_data *data)
   boxTasks = GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxTasks"));
   dialog = tasks_create_group_dialog (FALSE, -1, data);
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
-  if(ret==1) {
+  if(ret == 1) {
     /* yes, we want to add a new task */
     entryName = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryGroupName")); 
     
     /* we get various useful values */
     name = gtk_entry_get_text (GTK_ENTRY(entryName));
-    if(strlen (name)==0) {
+    if(strlen (name) == 0) {
        name = fooStr2;
     }
 
@@ -2227,8 +2232,12 @@ void tasks_group_new (APP_data *data)
     GtkWidget *cadres = tasks_new_group_widget (name, tmpStr, 0, 0, 0, color, 0, &temp, data);
     g_free (tmpStr);
     /* here, all widget pointers are stored in 'temp' */
-    insertion_row = task_get_selected_row (data);
+    insertion_row = task_get_selected_row (data)+1;
+    if(insertion_row >= g_list_length (data->tasksList)) {
+	   insertion_row++;	
+    }
     insertion_row = tasks_compute_valid_insertion_point (insertion_row, -1, TRUE, data);
+        
     /* we insert a simple widget - only title */
     gtk_list_box_insert (GTK_LIST_BOX(boxTasks), GTK_WIDGET(cadres), insertion_row);
 
@@ -2237,9 +2246,17 @@ void tasks_group_new (APP_data *data)
                              g_date_get_day (&date_interval2), g_date_get_month (&date_interval2), 
                              g_date_get_year (&date_interval2),
                              -1, -1, -1, 
-                            0, 0, 0, 0, color, data, -1, TRUE, 0, days, 0, 0, 0, -1, &temp);// TODO days hours 1 == days , -1 delay
+                             0, 0, 0, 0, color, data, -1, TRUE, 0, days, 0, 0, 0, -1, &temp);// TODO days hours 1 == days , -1 delay
 
     tasks_insert (insertion_row, data, &temp);/* here we store id */
+    /* update display */
+    if(g_list_length (data->tasksList) == 1) {
+        task_set_selected_row (0, data); 
+    }
+    else {
+        task_set_selected_row (insertion_row, data);
+    }
+    tasks_autoscroll ((gdouble)insertion_row/g_list_length (data->tasksList), data);    
     /* update timeline */
     timeline_remove_all_tasks (data);
     timeline_draw_all_tasks (data);
@@ -2250,9 +2267,9 @@ void tasks_group_new (APP_data *data)
     tmp_value->opCode = OP_INSERT_GROUP;
     tmp_value->insertion_row = insertion_row;
     tmp_value->id = temp.id;
-    tmp_value->datas = NULL;/* nothing to store ? */
+    tmp_value->datas  = NULL;/* nothing to store ? */
     tmp_value->groups = NULL;
-    tmp_value->list = NULL;
+    tmp_value->list   = NULL;
     undo_push (CURRENT_STACK_TASKS, tmp_value, data);
   }
 
