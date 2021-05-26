@@ -19,7 +19,7 @@
 #include "settings.h"
 #include "mail.h"
 #include "export.h"
-
+#include "cursor.h"
 
 /* constants */
 #define MSG_MAX_LINES 1024
@@ -184,8 +184,9 @@ gboolean collaborate_alert_empty_message (GtkWidget *win)
   dialog = gtk_message_dialog_new (GTK_WINDOW(win), flags,
                     GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL,
                 _("Your current message is empty.\nDo you want to send it anyway ?"));
-  if(gtk_dialog_run (GTK_DIALOG(dialog))==GTK_RESPONSE_OK)
+  if(gtk_dialog_run (GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
          flag = TRUE;
+  }
   gtk_widget_destroy (GTK_WIDGET(dialog));
   return flag;
 }
@@ -892,7 +893,7 @@ gint collaborate_send_email (gchar *subject, gchar *from, GList *list_recipients
   count++;
   g_free (tmpStr);
   /* message identifier - two parts */
-  tmpStr = g_strdup_printf ("Message-ID: <%d@", rawtime);
+  tmpStr = g_strdup_printf ("Message-ID: <%d@", (gint) rawtime);
   payload_text[count] = g_strdup_printf ("%s", tmpStr);
   count++;
   g_free (tmpStr);
@@ -1028,7 +1029,7 @@ gint collaborate_send_multipart_email (gchar *subject, gchar *from, GList *list_
   count++;
   g_free (tmpStr);
   /* message identifier - two parts */
-  tmpStr = g_strdup_printf ("Message-ID: <%d@", rawtime);
+  tmpStr = g_strdup_printf ("Message-ID: <%d@", (gint) rawtime);
   payload_text[count] = g_strdup_printf ("%s", tmpStr);
   count++;
   g_free (tmpStr);
@@ -1058,7 +1059,7 @@ gint collaborate_send_multipart_email (gchar *subject, gchar *from, GList *list_
   /* text part = message */
   for(i=0; message[i]; i++) {
      /* minimal protection against overflow */
-     if(count<MSG_MAX_LINES-20) {
+     if(count < MSG_MAX_LINES-20) {
         payload_text[count] = g_strdup_printf ("%s", message[i]);
         count++;
      }
@@ -1370,7 +1371,7 @@ gint
 
   /* we add spell checking */
   text_view = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "textviewCompMail"));
-  misc_init_spell_checker (text_view, data);
+  misc_init_spell_checker (GTK_TEXT_VIEW(text_view), data);
   ret = gtk_dialog_run (GTK_DIALOG (dialog));
 
   if(ret == 1) { /* [OK] request to send mail */       
@@ -1421,7 +1422,7 @@ gint
              }/* endif receptors */
              else {
                 tmpStr = g_strdup_printf ("%s", _("Error !\n\nMail sending aborted because there\nisn't any recipient !"));
-	        misc_ErrorDialog (GTK_WINDOW(data->appWindow), tmpStr);
+	        misc_ErrorDialog (GTK_WIDGET(data->appWindow), tmpStr);
 	        g_free (tmpStr);
              }
              break;
@@ -1512,7 +1513,7 @@ gint collaborate_send_manual_email (gint type_of_mail, APP_data *data)
   /* switch */
   switch(type_of_mail) {
     case MAIL_TYPE_FREE:{
-       ret = collaborate_send_free_email (adress, port, server_id, settings_get_password (), fSslTls, data);
+       ret = collaborate_send_free_email (adress, port, server_id, (gchar *) settings_get_password (), fSslTls, data);
       break;
     }
     case MAIL_TYPE_REPORT:{
@@ -1520,17 +1521,17 @@ gint collaborate_send_manual_email (gint type_of_mail, APP_data *data)
       break;
     }
     case MAIL_TYPE_OVERDUE:{
-      ret = collaborate_send_recipients_tasks_overdue (FALSE, NULL, NULL, adress, port, server_id, settings_get_password (), 
+      ret = collaborate_send_recipients_tasks_overdue (FALSE, NULL, NULL, adress, port, server_id, (gchar *) settings_get_password (), 
                                                  fSslTls, data);
       break;
     }
     case MAIL_TYPE_COMPLETED:{
-      ret = collaborate_send_recipients_tasks_ended_yesterday (FALSE, NULL, NULL, adress, port, server_id, settings_get_password (), 
+      ret = collaborate_send_recipients_tasks_ended_yesterday (FALSE, NULL, NULL, adress, port, server_id, (gchar *) settings_get_password (), 
                                                  fSslTls, data);
       break;
     }
     case MAIL_TYPE_INCOMING:{
-      ret = collaborate_send_recipients_tasks_start_tomorrow (FALSE, NULL, NULL, adress, port, server_id, settings_get_password (), 
+      ret = collaborate_send_recipients_tasks_start_tomorrow (FALSE, NULL, NULL, adress, port, server_id, (gchar *) settings_get_password (), 
                                                  fSslTls, data);
       break;
     }
@@ -1613,7 +1614,7 @@ gint collaborate_send_report_or_calendar (gint mode, APP_data *data)
 
   /* we add spell checking */
   text_view = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "textviewCompMail"));
-  misc_init_spell_checker (text_view, data);
+  misc_init_spell_checker (GTK_TEXT_VIEW(text_view), data);
 
   ret = gtk_dialog_run (GTK_DIALOG (dialog));
   if(ret == 1) { /* [OK] request to send mail */       
@@ -1650,18 +1651,18 @@ gint collaborate_send_report_or_calendar (gint mode, APP_data *data)
              /* send */
              if(g_list_length (receptors)>0){               
 		   ret = collaborate_send_multipart_email (subject, data->properties.manager_mail, receptors, 
-		                    array, adress, port, server_id, settings_get_password (), 
+		                    array, adress, port, server_id, (gchar *) settings_get_password (), 
 		                    fSslTls, tmpFilename);
 	     }
 	     else {
-		     fErrReceptors = TRUE;
+		        fErrReceptors = TRUE;
              }
-             g_free (tmpFilename);
+           g_free (tmpFilename);
          }
          else {/* we send calendars for every choosen recipient (it's a personalized calendar) */
               tmpElem = g_malloc (sizeof(receptors_elem));/* just a pointer on values, never free thos evalues ! */
               l1 = NULL;
-              for(i=0;i<g_list_length (receptors);i++) {
+              for(i = 0; i < g_list_length (receptors); i++) {
                  tmpFilename = g_strdup_printf (_("%s/calendar-%s.ics"), g_get_tmp_dir (), buffer_date);
                  l = g_list_nth (receptors, i);
                  elem = (receptors_elem *) l->data;
@@ -1671,7 +1672,7 @@ gint collaborate_send_report_or_calendar (gint mode, APP_data *data)
                  tmpElem->str = elem->str;
                  l1 = g_list_append (l1, tmpElem);/* l1 contains only ONE element */
                  ret = collaborate_send_multipart_email (subject, data->properties.manager_mail, l1, 
-		                    array, adress, port, server_id, settings_get_password (), 
+		                    array, adress, port, server_id, (gchar *) settings_get_password (), 
 		                    fSslTls, tmpFilename);
                  g_free (tmpFilename);
                  /* we remove the unique element of l1 */
@@ -1687,17 +1688,17 @@ gint collaborate_send_report_or_calendar (gint mode, APP_data *data)
          /* common for reports and calendars ; ret is !=0 if something is wrong */
          if(rr!=0) {
              gchar *msg = g_strdup_printf ("%s", _("Sorry !\nAn error happened during attached file generation.\nOperation aborted. You can try again, or\ncheck your system."));
-             misc_ErrorDialog (data->appWindow, msg );
+             misc_ErrorDialog (data->appWindow, msg);
              g_free (msg);
          }
          if(fErrReceptors) {
              tmpStr = g_strdup_printf ("%s", _("Error !\n\nMail sending aborted because there\nisn't any recipient !"));
-	     misc_ErrorDialog (GTK_WINDOW(data->appWindow), tmpStr);
-	     g_free (tmpStr);
+	         misc_ErrorDialog (GTK_WIDGET(data->appWindow), tmpStr);
+	         g_free (tmpStr);
          }
 	 if(ret!=0) {
 	     tmpStr = g_strdup_printf ("%s", _("Error !\n\nMail sending aborted partially or totally.\nPlease try again after checking your Internet connection and accounts settings."));
-	     misc_ErrorDialog (GTK_WINDOW(data->appWindow), tmpStr);
+	     misc_ErrorDialog (GTK_WIDGET(data->appWindow), tmpStr);
 	     g_free (tmpStr);
 	 }/* endif ret !=0 */
       }/* endif array */

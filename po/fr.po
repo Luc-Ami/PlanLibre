@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlanLibre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-24 21:47+0200\n"
+"POT-Creation-Date: 2021-05-26 14:41+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: amiluc_bis@yahoo;fr\n"
@@ -223,12 +223,12 @@ msgstr "%d jour(s)"
 msgid "%d day(s) and %d hour(s)."
 msgstr "%d jour(s) et %d heure(s)."
 
-#: timeline.c:430
+#: timeline.c:432
 #, c-format
 msgid "%d day(s) backward"
 msgstr "Avancer de %d jour(s)"
 
-#: timeline.c:432
+#: timeline.c:434
 #, c-format
 msgid "%d day(s) forward"
 msgstr "Retarder de %d jour(s)"
@@ -921,7 +921,7 @@ msgstr ""
 "de la tâche liée !\n"
 "SVP, changez la date de début ou la durée de la tâche actuelle."
 
-#: timeline.c:338
+#: timeline.c:340
 msgid ""
 "<b>Error!</b>\n"
 "\n"
@@ -939,7 +939,7 @@ msgstr ""
 "projet</i>.\n"
 "SVP, allez voir le menu  <b>Projet>Propriétés</b>."
 
-#: timeline.c:310
+#: timeline.c:312
 msgid ""
 "<b>Error!</b>\n"
 "\n"
@@ -1338,7 +1338,7 @@ msgstr ""
 "souhaitable de taper un court\n"
 "message pour les informer sur le sujet du fichier attaché.</i>"
 
-#: timeline.c:493
+#: timeline.c:495
 msgid "<i>Define the new <b>starting date</b> of current group.</i>"
 msgstr "<i>Définir la nouvelle <b>date de début</b> du groupe actuel.</i>"
 
@@ -1600,11 +1600,11 @@ msgstr ""
 msgid "Animal work force"
 msgstr "Force de travail animale"
 
-#: callbacks.c:2139
+#: callbacks.c:2140
 msgid "Append PlanLibre ressources from Thunderbird contacts ..."
 msgstr "Ajouter des ressources PlanLibre depuis les contacts de Thunderbird..."
 
-#: callbacks.c:2046 callbacks.c:2093
+#: callbacks.c:2047 callbacks.c:2094
 msgid "Append PlanLibre ressources from file ..."
 msgstr "Ajouter des ressources PlanLibre depuis un fichier ..."
 
@@ -1768,7 +1768,7 @@ msgstr ""
 msgid "CTRL"
 msgstr "CTRL"
 
-#: assign.c:125 timeline.c:559 timeline.c:647
+#: assign.c:125 timeline.c:561 timeline.c:649
 msgid "C_ancel"
 msgstr "_Annuler"
 
@@ -1868,7 +1868,7 @@ msgstr ""
 msgid "Choose repeat frequency"
 msgstr "Choisissez la fréquence de répétition"
 
-#: callbacks.c:1885
+#: callbacks.c:1886
 msgid "Clic on a task, and drag'n'drop it to change its status"
 msgstr "Cliquez sur une tâche, et glissez-déposez pour modifier son statut"
 
@@ -2249,7 +2249,7 @@ msgstr "Date : "
 msgid "Date : ? "
 msgstr "Date : ? "
 
-#: timeline.c:468 ui/main_ribbon.ui:911
+#: timeline.c:470 ui/main_ribbon.ui:911
 msgid "Date shift"
 msgstr "Déplacement de date"
 
@@ -2281,7 +2281,7 @@ msgstr "Horaire par défaut : <i>de</i>"
 msgid "Define a date shift"
 msgstr "Définir un déplacement de dates"
 
-#: timeline.c:469
+#: timeline.c:471
 msgid "Define a timeshift for whole project or current group."
 msgstr ""
 "Définir un déplacement de date pour l'ensemble du projet ou le groupe courant"
@@ -2353,7 +2353,7 @@ msgstr ""
 "Êtes-vous sûr(e) de vouloir enlever TOUS les jours marqués ?\n"
 "Cette opération n'est pas annulable ..."
 
-#: assign.c:852 timeline.c:1685
+#: assign.c:852 timeline.c:1694
 msgid "Documents PDF files"
 msgstr "Fichiers de documents PDF"
 
@@ -2374,7 +2374,7 @@ msgstr ""
 "particulier.\n"
 "Faites de nouveau un double-Clic pour enlever cette marque."
 
-#: callbacks.c:1890
+#: callbacks.c:1891
 msgid ""
 "Double-click on a ressource to modify it, right-click for other options "
 msgstr ""
@@ -2502,15 +2502,15 @@ msgstr ""
 msgid "Export current report to word processor"
 msgstr "Exporter le rapport actuel vers un traitement de texte"
 
-#: timeline.c:1686
+#: timeline.c:1695
 msgid "Export current timeline to a PDF file"
 msgstr "Exporter la chronologie actuelle comme fichier PDF"
 
-#: timeline.c:1698
+#: timeline.c:1707
 msgid "Export current timeline to a PNG file"
 msgstr "Exporter la chronologie actuelle comme fichier PNG"
 
-#: timeline.c:1692
+#: timeline.c:1701
 msgid "Export current timeline to a SVG file"
 msgstr "Exporter la chronologie actuelle comme fichier SVG"
 
@@ -2699,7 +2699,7 @@ msgstr ""
 msgid "In progress"
 msgstr "En cours"
 
-#: timeline.c:549
+#: timeline.c:551
 msgid "Increase duration by one day "
 msgstr "Augmenter la durée d'une journée"
 
@@ -2794,17 +2794,17 @@ msgstr "juin"
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: callbacks.c:2248
+#: callbacks.c:2249
 #, c-format
 msgid "L%d"
 msgstr "L%d"
 
-#: callbacks.c:1917
+#: callbacks.c:1918
 #, c-format
 msgid "L%d/%d"
 msgstr "L%d/%d"
 
-#: callbacks.c:1833 callbacks.c:1927 callbacks.c:2300 ui/main_ribbon.ui:4791
+#: callbacks.c:1834 callbacks.c:1928 callbacks.c:2301 ui/main_ribbon.ui:4791
 #: ui/main.ui:4284
 msgid "L--"
 msgstr "L--"
@@ -2957,19 +2957,19 @@ msgstr "Lundi"
 msgid "Monthly by day(s) of month"
 msgstr "Mensuellement en fonction des jours du mois"
 
-#: timeline.c:529
+#: timeline.c:531
 msgid "Move _Up "
 msgstr "Mon_ter"
 
-#: timeline.c:532
+#: timeline.c:534
 msgid "Move _down "
 msgstr "_Descendre"
 
-#: timeline.c:539
+#: timeline.c:541
 msgid "Move one day _backward "
 msgstr "Reculer d'une journée"
 
-#: timeline.c:542
+#: timeline.c:544
 msgid "Move one day _forward "
 msgstr "Avancer d'une journée"
 
@@ -3069,7 +3069,7 @@ msgstr "Pas de données à rapporter ! Abandon."
 msgid "No more operations - Ressource hasn't any task !"
 msgstr "Fin des opérations - la ressource n'effectue aucune tâche"
 
-#: timeline.c:426
+#: timeline.c:428
 msgid "No shift"
 msgstr "Pas de changement"
 
@@ -3134,7 +3134,7 @@ msgstr "Groupe sans nom"
 msgid "Nonane milestone"
 msgstr "Jalon sans nom"
 
-#: callbacks.c:2257 tasksdialogs.c:1140
+#: callbacks.c:2258 tasksdialogs.c:1140
 msgid "None"
 msgstr "Aucun"
 
@@ -3211,7 +3211,7 @@ msgstr "Notre organisation"
 msgid "Overdue"
 msgstr "En retard"
 
-#: assign.c:864 timeline.c:1697
+#: assign.c:864 timeline.c:1706
 msgid "PNG image files"
 msgstr "Fichiers images PNG"
 
@@ -3259,7 +3259,7 @@ msgstr ""
 "PlanLibre ne stocke jamais vos mots de passe. C'est pourquoi vous devez "
 "saisir votre mot de passe à chaque session."
 
-#: callbacks.c:1697 callbacks.c:2042
+#: callbacks.c:1697 callbacks.c:2043
 msgid "PlanLibre xml files"
 msgstr "Fichiers XML PlanLibre"
 
@@ -3310,6 +3310,10 @@ msgstr "Port"
 #: ui/main_ribbon.ui:4286 ui/main.ui:3694
 msgid "Prev. month"
 msgstr "Mois précéd."
+
+#: callbacks.c:1815
+msgid "Previous version of your project reloaded"
+msgstr "La version précédente de votre projet a été rechargée"
 
 #: ui/tasks.ui:339
 msgid "Priority : "
@@ -3428,7 +3432,7 @@ msgstr "Destinataires :"
 msgid "Recurring task"
 msgstr "Tâche récurrente"
 
-#: timeline.c:552
+#: timeline.c:554
 msgid "Reduce duration by one day "
 msgstr "Réduire la durée d'une journée"
 
@@ -3482,7 +3486,7 @@ msgstr "Temps de repos"
 msgid "Rest time %.2d:%.2d"
 msgstr "Temps de repos %.2d:%.2d"
 
-#: callbacks.c:1845
+#: callbacks.c:1846
 msgid ""
 "Right-click on a task for various options, or left-click and drag and drop "
 "to move a task along time"
@@ -3510,7 +3514,7 @@ msgstr "D>>D"
 msgid "SHIFT"
 msgstr "MAJ"
 
-#: assign.c:858 timeline.c:1691
+#: assign.c:858 timeline.c:1700
 msgid "SVG drawings files"
 msgstr "Fichiers de croquis SVG"
 
@@ -3694,7 +3698,7 @@ msgstr ""
 "L'opération est abandonnée. Vous pouvez réessayer, ou\n"
 "vérifier votre système."
 
-#: callbacks.c:2054 callbacks.c:2102 callbacks.c:2148 import.c:599
+#: callbacks.c:2055 callbacks.c:2103 callbacks.c:2149 import.c:599
 msgid ""
 "Sorry !\n"
 "An error happened during file importation.\n"
@@ -3718,7 +3722,7 @@ msgstr ""
 "L'opération est abandonnée. Vous pouvez réessayer, ou\n"
 "vérifier votre système."
 
-#: callbacks.c:1817
+#: callbacks.c:1818
 msgid ""
 "Sorry !\n"
 "An error happened during file restoration.\n"
@@ -3728,7 +3732,7 @@ msgstr ""
 "Une erreur s'est produite durant la restauration du fichier.\n"
 "L'opération est abandonnée."
 
-#: timeline.c:1802
+#: timeline.c:1811
 msgid ""
 "Sorry !\n"
 "An error happened during timeline exporting.\n"
@@ -3816,7 +3820,7 @@ msgstr ""
 "Il n'y a aucune tâche %s.\n"
 "Abandon de l'opération."
 
-#: timeline.c:932
+#: timeline.c:934
 msgid ""
 "Sorry !\n"
 "When you click on the timeline, you can ...\n"
@@ -3829,7 +3833,7 @@ msgstr ""
 " ... Ou clic-droit sur une ligne <b>sans</b> aucune tâche pour en ajouter "
 "une nouvelle."
 
-#: timeline.c:787
+#: timeline.c:789
 msgid ""
 "Sorry !\n"
 "You <b>can't move a fixed task</b> along the timeline.\n"
@@ -3842,7 +3846,7 @@ msgstr ""
 "Vous pouvez modifier la date fixée ou\n"
 "changer le type de contrainte de la tâche."
 
-#: timeline.c:779
+#: timeline.c:781
 msgid ""
 "Sorry !\n"
 "You <b>can't move a task that is in <u>not before</u> mode</b> at this "
@@ -3852,7 +3856,7 @@ msgstr ""
 "Vous <b>ne pouvez pas déplacer une tâche en mode <u>ne pas débuter avant le</"
 "u></b> à cette position. SVP, vérifiez ses dates ou modifiez sa durée."
 
-#: timeline.c:771
+#: timeline.c:773
 msgid ""
 "Sorry !\n"
 "You <b>can't move a task with a deadline</b> at this position. Please, check "
@@ -3862,7 +3866,7 @@ msgstr ""
 "Vous <b>ne pouvez pas déplacer une tâche avec une date butoir</b> à cette "
 "position. SVP, vérifiez les dates de la tâche ou modifiez sa durée."
 
-#: callbacks.c:2089 export.c:846 import.c:586
+#: callbacks.c:2090 export.c:846 import.c:586
 msgid "Spreadsheets CSV files"
 msgstr "Fichiers CSV de tableurs"
 
@@ -4009,7 +4013,7 @@ msgstr ""
 "existe déjà !\n"
 "Êtes-vous sûr(e) de vouloir écraser ce fichier RTF ?"
 
-#: assign.c:915 timeline.c:1748
+#: assign.c:915 timeline.c:1757
 #, c-format
 msgid ""
 "The file :\n"
@@ -4059,13 +4063,13 @@ msgstr "C'est la date ACTUELLE de début pour l'ensemble du projet"
 msgid "This is the NEW starting date for the whole project"
 msgstr "C'est la NOUVELLE date de début pour l'ensemble du projet"
 
-#: callbacks.c:1895
+#: callbacks.c:1896
 msgid "This page displays last report. You can export it, see top buttons."
 msgstr ""
 "Cette page affiche le dernier rapport. Vous pouvez l'exporter, voir les "
 "boutons supérieurs."
 
-#: callbacks.c:1838
+#: callbacks.c:1839
 msgid "This page displays project information summary"
 msgstr "Cette page affiche un résumé des informations du projet"
 
@@ -4091,7 +4095,7 @@ msgstr ""
 msgid "Thu."
 msgstr "Jeu."
 
-#: callbacks.c:2135
+#: callbacks.c:2136
 msgid "Thunderbird CSV files"
 msgstr "Fichier CSV de Thunderbird"
 
@@ -4396,7 +4400,7 @@ msgstr "_Fichier"
 msgid "_Help"
 msgstr "_Aide"
 
-#: timeline.c:522
+#: timeline.c:524
 msgid "_Modify ... "
 msgstr "_Modifier"
 
@@ -4404,11 +4408,11 @@ msgstr "_Modifier"
 msgid "_Modify ressource ... "
 msgstr "_Modifier ressource ..."
 
-#: timeline.c:640
+#: timeline.c:642
 msgid "_New milestone ... "
 msgstr "_Nouveau jalon"
 
-#: timeline.c:637
+#: timeline.c:639
 msgid "_New task ... "
 msgstr "_Nouvelle tâche ..."
 
@@ -4445,11 +4449,11 @@ msgstr "sauvegarde_de_"
 msgid "change ..."
 msgstr "modifier ..."
 
-#: callbacks.c:1880
+#: callbacks.c:1881
 msgid "click on a ressource to select it "
 msgstr "cliquez sur une ressource pour la sélectionner"
 
-#: callbacks.c:1867
+#: callbacks.c:1868
 msgid "click on a task to select it"
 msgstr "cliquer sur une tâche pour la sélectionner"
 
@@ -4551,7 +4555,7 @@ msgstr "doit commencer le ..."
 msgid "name"
 msgstr "nom"
 
-#: callbacks.c:2028
+#: callbacks.c:2029
 msgid "no"
 msgstr "non"
 
@@ -4563,11 +4567,11 @@ msgstr "sans_nom"
 msgid "noname"
 msgstr "sans_nom"
 
-#: callbacks.c:1991
+#: callbacks.c:1992
 msgid "none after"
 msgstr "aucun après"
 
-#: callbacks.c:1960
+#: callbacks.c:1961
 msgid "none before"
 msgstr "aucun avant"
 
@@ -4699,7 +4703,7 @@ msgstr "tapez ici le nom du jalon"
 msgid "uncategorized"
 msgstr "non classé"
 
-#: timeline.c:1553
+#: timeline.c:1562
 #, c-format
 msgid "week %d of %d"
 msgstr "semaine %d de %d"
@@ -4714,7 +4718,7 @@ msgstr "Sem. %d de %d - %s"
 msgid "week %d of %d - %s/%s"
 msgstr "sem. %d de %d - %s/%s"
 
-#: timeline.c:1555
+#: timeline.c:1564
 #, c-format
 msgid "week %d of %d-%s"
 msgstr "sem. %d de %d-%s"
@@ -4732,7 +4736,7 @@ msgstr "avec en moyenne %.2f tâche(s) par ressource.\n"
 msgid "year(s)"
 msgstr "année(s)"
 
-#: callbacks.c:1953 callbacks.c:1984 callbacks.c:2023
+#: callbacks.c:1954 callbacks.c:1985 callbacks.c:2024
 msgid "yes"
 msgstr "oui"
 

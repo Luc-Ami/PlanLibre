@@ -1812,6 +1812,7 @@ void on_edit_reload_activate (GtkMenuItem *menuitem, APP_data *data)
          /* force to set a new name in case of saving */
          data->fProjectModified = FALSE;
          data->fProjectHasName = TRUE;
+         misc_InfoDialog (data->appWindow, _("Previous version of your project reloaded"));
       }
       else {/* display an error message */
         msg = g_strdup_printf ("%s", _("Sorry !\nAn error happened during file restoration.\nOperation aborted."));

@@ -122,6 +122,7 @@ typedef struct {
   gchar *proj_website;
   gchar *units;
   gdouble budget;
+  gdouble quantity;
   GdkPixbuf *logo;
   gchar *start_date;
   gint start_nthDay;
