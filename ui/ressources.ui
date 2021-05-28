@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAdjustment" id="adjustment1">
@@ -16,6 +16,13 @@
   </object>
   <object class="GtkAdjustment" id="adjustmentDayMin">
     <property name="upper">59</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustmentQty">
+    <property name="lower">1</property>
+    <property name="upper">256</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -177,9 +184,9 @@
                       <object class="GtkLabel" id="label20">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Ressource&lt;/b&gt;&lt;/big&gt;</property>
+                        <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Resource&lt;/b&gt;&lt;/big&gt;</property>
                         <property name="use_markup">True</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -233,9 +240,9 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">2</property>
                 <property name="margin_bottom">2</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">&lt;b&gt;Description :&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -260,9 +267,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">4</property>
                   </packing>
                 </child>
                 <child>
@@ -277,14 +282,13 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkSpinButton" id="spinbuttonCost">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="tooltip_text" translatable="yes">Type here the cost in monetary units</property>
                     <property name="margin_left">2</property>
                     <property name="margin_right">2</property>
                     <property name="margin_top">2</property>
@@ -296,9 +300,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">1</property>
                   </packing>
                 </child>
                 <child>
@@ -306,7 +308,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
-                    <property name="tooltip_text" translatable="yes">Click this button to choose or change ressource's icon</property>
+                    <property name="tooltip_text" translatable="yes">Click this button to choose or change resource's icon</property>
                     <property name="margin_left">2</property>
                     <property name="margin_right">2</property>
                     <property name="margin_top">2</property>
@@ -327,9 +329,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">5</property>
                   </packing>
                 </child>
                 <child>
@@ -353,25 +353,8 @@ For weeks and months, we use standard accounting conventions.</property>
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
-                    <property name="top_attach">2</property>
-                    <property name="width">2</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label26">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_top">2</property>
-                    <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Mail : </property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="width">2</property>
                   </packing>
                 </child>
                 <child>
@@ -380,31 +363,13 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Name : </property>
                     <property name="ellipsize">start</property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_top">2</property>
-                    <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Cost : </property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -413,14 +378,12 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Photo : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">3</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">5</property>
                   </packing>
                 </child>
                 <child>
@@ -429,20 +392,19 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Reminder : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">8</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">9</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkEntry" id="entryRscReminder">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="tooltip_text" translatable="yes">If necessary, type here some details about this resource</property>
                     <property name="margin_left">2</property>
                     <property name="margin_right">2</property>
                     <property name="margin_top">2</property>
@@ -451,9 +413,8 @@ For weeks and months, we use standard accounting conventions.</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">8</property>
+                    <property name="top_attach">9</property>
                     <property name="width">3</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -462,14 +423,12 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Belongs to : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">7</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">8</property>
                   </packing>
                 </child>
                 <child>
@@ -494,9 +453,8 @@ For weeks and months, we use standard accounting conventions.</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="top_attach">7</property>
+                    <property name="top_attach">8</property>
                     <property name="width">2</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -505,14 +463,12 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Phone : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">4</property>
                   </packing>
                 </child>
                 <child>
@@ -526,9 +482,7 @@ For weeks and months, we use standard accounting conventions.</property>
                   </object>
                   <packing>
                     <property name="left_attach">3</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">4</property>
                   </packing>
                 </child>
                 <child>
@@ -537,14 +491,12 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">type : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -567,8 +519,23 @@ For weeks and months, we use standard accounting conventions.</property>
                   <packing>
                     <property name="left_attach">3</property>
                     <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkColorButton" id="colorbuttonRsc">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Click this button to define a color for this resource</property>
+                    <property name="margin_left">2</property>
+                    <property name="margin_right">2</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="title" translatable="yes">Choose a color to identify this ressource</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">3</property>
+                    <property name="top_attach">5</property>
                   </packing>
                 </child>
                 <child>
@@ -577,33 +544,152 @@ For weeks and months, we use standard accounting conventions.</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="xalign">1</property>
                     <property name="label" translatable="yes">Color : </property>
+                    <property name="xalign">1</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Cost : </property>
+                    <property name="xalign">1</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label26">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Mail : </property>
+                    <property name="xalign">1</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkColorButton" id="colorbuttonRsc">
+                  <object class="GtkLabel" id="label11">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="margin_left">2</property>
-                    <property name="margin_right">2</property>
+                    <property name="can_focus">False</property>
                     <property name="margin_top">2</property>
                     <property name="margin_bottom">2</property>
-                    <property name="title" translatable="yes">Choose a color to identify this ressource</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Details :&lt;/b&gt;</property>
+                    <property name="use_markup">True</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">4</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">3</property>
                   </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label10">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="label" translatable="yes">Quantity : </property>
+                    <property name="xalign">1</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">4</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSpinButton" id="spinbuttonQty">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="tooltip_text" translatable="yes">Type here the quantity of this resource used.
+You can type a fractionnal value if necessary.</property>
+                    <property name="margin_top">2</property>
+                    <property name="margin_bottom">2</property>
+                    <property name="text" translatable="yes">1,00</property>
+                    <property name="adjustment">adjustmentQty</property>
+                    <property name="digits">2</property>
+                    <property name="numeric">True</property>
+                    <property name="value">1</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">5</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
                 </child>
                 <child>
                   <placeholder/>
@@ -670,9 +756,9 @@ For weeks and months, we use standard accounting conventions.</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">2</property>
                 <property name="margin_bottom">2</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">&lt;b&gt;Date and Time management :&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -698,8 +784,8 @@ For weeks and months, we use standard accounting conventions.</property>
                         <property name="margin_right">4</property>
                         <property name="margin_top">2</property>
                         <property name="margin_bottom">2</property>
-                        <property name="xalign">1</property>
                         <property name="label" translatable="yes">Working days : </property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -730,8 +816,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -751,8 +835,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -772,8 +854,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -793,8 +873,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -814,8 +892,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -834,8 +910,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="top_attach">1</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -854,8 +928,6 @@ For weeks and months, we use standard accounting conventions.</property>
                           <packing>
                             <property name="left_attach">0</property>
                             <property name="top_attach">2</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -890,8 +962,8 @@ For weeks and months, we use standard accounting conventions.</property>
                         <property name="margin_right">4</property>
                         <property name="margin_top">2</property>
                         <property name="margin_bottom">2</property>
-                        <property name="xalign">1</property>
                         <property name="label" translatable="yes">Calendar : </property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -924,8 +996,8 @@ For weeks and months, we use standard accounting conventions.</property>
                         <property name="margin_right">4</property>
                         <property name="margin_top">2</property>
                         <property name="margin_bottom">2</property>
-                        <property name="xalign">1</property>
                         <property name="label" translatable="yes">Maximum daily working time : </property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>

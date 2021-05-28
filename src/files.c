@@ -515,6 +515,7 @@ static gint get_ressources_from_xml (xmlDocPtr doc, gboolean append, APP_data *d
      if(quantity <1) {
 		 quantity = 1;
      }
+     newRsc.quantity = quantity;
      g_free (tmpStr);     
      /* working days */
      tmpStr = g_strdup_printf ("/PlanLibre/Ressources/Object%d/@working_monday", i-lenRsc);

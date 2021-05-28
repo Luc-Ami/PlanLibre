@@ -76,33 +76,33 @@ void rsc_minutes_changed (GtkSpinButton *spin_button, APP_data *data)
   memory management for
   ressources datas
 *******************************/
-static gchar *rsc_get_cost_and_rate (gdouble cost, gint cost_type)
+static gchar *rsc_get_cost_and_rate (gdouble cost, gint cost_type, gdouble quantity)
 {
   gchar *label_cost;
 
   switch (cost_type) {
     case RSC_COST_HOUR: {
-      label_cost = g_strdup_printf (_("%.2f <i>per hour</i>"), cost);
+      label_cost = g_strdup_printf (_("%.2f <i>per hour</i>-<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
       break;
     }
     case RSC_COST_DAY: {
-      label_cost = g_strdup_printf (_("%.2f <i>per day</i>"), cost);
+      label_cost = g_strdup_printf (_("%.2f <i>per day</i>-<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
       break;
     }
     case RSC_COST_WEEK: {
-      label_cost = g_strdup_printf (_("%.2f <i>per week</i>"), cost);
+      label_cost = g_strdup_printf (_("%.2f <i>per week</i>-<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
       break;
     }
     case RSC_COST_MONTH: {
-      label_cost = g_strdup_printf (_("%.2f <i>per month</i>"), cost);
+      label_cost = g_strdup_printf (_("%.2f <i>per month</i>-<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
       break;
     }
     case RSC_COST_FIXED: {
-      label_cost = g_strdup_printf (_("%.2f <i>fixed</i>"), cost);
+      label_cost = g_strdup_printf (_("%.2f <i>fixed</i>-<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
       break;
     }
     default:{
-       label_cost = g_strdup_printf (_("%.2f per unknown rate"), cost);
+       label_cost = g_strdup_printf (_("%.2f per unknown rate --<b> <span background=\"black\" color=\"white\"> %.2f </span></b>"), cost, quantity);
     }
   }/* end switch */
 
@@ -304,7 +304,7 @@ void rsc_free_all (APP_data *data)
   /* free the Glist itself */
   g_list_free (data->rscList);
   data->rscList = NULL;
-  printf ("* PlanLibre : successfully freed Ressources datas *\n");
+  printf ("* PlanLibre : successfully freed Resources datas *\n");
 }
 
 /******************************************
@@ -389,7 +389,7 @@ void rsc_modify_widget (gint position, APP_data *data)
   GList *l;
   gchar *tmpStr;
 
-  if((position >=0) && (position<rsc_list_len)) {
+  if((position >= 0) && (position < rsc_list_len)) {
      l = g_list_nth (data->rscList, position);
      rsc_datas *tmp_rsc_datas;
      tmp_rsc_datas = (rsc_datas *)l->data;
@@ -399,7 +399,7 @@ void rsc_modify_widget (gint position, APP_data *data)
      g_free (tmpStr);
      gtk_label_set_text (GTK_LABEL(tmp_rsc_datas->cType), rsc_get_label_type (tmp_rsc_datas->type));
      gtk_label_set_text (GTK_LABEL(tmp_rsc_datas->cAff), rsc_get_affiliate (tmp_rsc_datas->affiliate ));
-     gtk_label_set_markup (GTK_LABEL(tmp_rsc_datas->cCost), rsc_get_cost_and_rate (tmp_rsc_datas->cost, tmp_rsc_datas->cost_type));
+     gtk_label_set_markup (GTK_LABEL(tmp_rsc_datas->cCost), rsc_get_cost_and_rate (tmp_rsc_datas->cost, tmp_rsc_datas->cost_type, tmp_rsc_datas->quantity));
 
      /* color */
      gtk_label_set_markup (GTK_LABEL(tmp_rsc_datas->cColor ),  
@@ -568,7 +568,7 @@ void rsc_store_to_app_data (gint position, gchar *name, gchar *mail, gchar *phon
  if(incrCounter)
       data->objectsCounter++;
  else
-     printf ("* add ressource object without increasing internal counter *\n");
+     printf ("* add resource object without increasing internal counter *\n");
 
 
   /* WARNING ! never unref the pointer to the pixbuf, it must remain in memory */
@@ -683,7 +683,7 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
   /* image part */
 
   if((data->path_to_pixbuf) && (imgFromXml == FALSE)) {
-     printf("chemin vers pixbuf=%s\n",data->path_to_pixbuf );
+   //  printf("chemin vers pixbuf=%s\n",data->path_to_pixbuf );
      pixbuf = gdk_pixbuf_new_from_file_at_scale (data->path_to_pixbuf, -1, RSC_AVATAR_HEIGHT*0.8, TRUE, &err);
      g_free (data->path_to_pixbuf);
      data->path_to_pixbuf = NULL;
@@ -748,8 +748,8 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
   gtk_widget_set_halign (label_type, GTK_ALIGN_START);
   gtk_grid_attach (GTK_GRID(grid), label_type, 2, 1, 1, 1);
 
-  /* cost, cost type */
-  label_cost = gtk_label_new (rsc_get_cost_and_rate (cost, cost_type));
+  /* cost, cost type, quantity (in *rsc->quantity */
+  label_cost = gtk_label_new (rsc_get_cost_and_rate (cost, cost_type, rsc->quantity));
   g_object_set (label_cost, "margin-left", 8, NULL);
   gtk_label_set_use_markup (GTK_LABEL(label_cost), TRUE);
   gtk_grid_attach (GTK_GRID(grid), label_cost, 3, 1, 1, 1);
@@ -784,14 +784,14 @@ GtkWidget *rsc_new_widget (gchar *name, gint type, gint orga,
 void rsc_new (APP_data *data)
 {
   GtkWidget *dialog;
-  gint ret=0, insertion_row, iCost, iAffi, iType, iCal;
+  gint ret = 0, insertion_row, iCost, iAffi, iType, iCal;
   GdkRGBA color;
   const gchar *name;
   const gchar *mail;
   const gchar *phone;
   const gchar *reminder;
   GtkWidget *entryName, *entryMail, *entryPhone, *entryRemind;
-  GtkWidget *comboCost, *comboAffi, *comboType, *pBtnColor, *spinBtnCost;
+  GtkWidget *comboCost, *comboAffi, *comboType, *pBtnColor, *spinBtnCost, *spinbuttonQty;
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
   GtkWidget *cadres, *listBoxRessources;
   gdouble cost, quantity = 1;
@@ -806,7 +806,7 @@ void rsc_new (APP_data *data)
   if(ret == 1) {
     /* yes, we want to add a new ressource */
     entryName = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscName"));
-    entryMail =GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscMail"));
+    entryMail = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscMail"));
     entryPhone = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscPhone"));
     entryRemind =GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryRscReminder"));
     comboCost = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboboxCost"));
@@ -814,6 +814,7 @@ void rsc_new (APP_data *data)
     comboType = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboboxType"));
     pBtnColor = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "colorbuttonRsc"));
     spinBtnCost = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonCost"));
+    spinbuttonQty = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonQty"));     
     pCalendar = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboboxtextCal"));
     pDayHours = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonDayHours"));
     pDayMins = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonDayMins"));
@@ -825,7 +826,7 @@ void rsc_new (APP_data *data)
     pFriday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkFriday"));
     pSaturday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkSaturday"));
     pSunday = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "checkSunday"));
-// TODO quantity 
+
     /* we get various useful values */
     name = gtk_entry_get_text (GTK_ENTRY(entryName));
     if(strlen(name) == 0) {
@@ -839,8 +840,10 @@ void rsc_new (APP_data *data)
     iType = gtk_combo_box_get_active (GTK_COMBO_BOX(comboType));/* of RSC, work force for example */
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(pBtnColor), &color);
     cost = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBtnCost));
+    quantity = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinbuttonQty));
     newRsc.location = NULL;
-    newRsc.quantity = 1;/* default */
+    newRsc.quantity = quantity;/* default quantity of resource = 1 */
+
     /* working days */
     newRsc.fWorkMonday = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pMonday));
     newRsc.fWorkTuesday = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pTuesday));
@@ -969,7 +972,7 @@ void rsc_modify (APP_data *data)
   GtkListBox *box;
   GtkListBoxRow *row;
   GtkWidget *entryName, *entryMail, *entryPhone, *entryRemind, *comboCost, *comboAffi, *comboType;
-  GtkWidget *pBtnColor, *buttonLogo, *spinBtnCost;
+  GtkWidget *pBtnColor, *buttonLogo, *spinBtnCost, *spinbuttonQty;
   GtkWidget *pMonday, *pThursday, *pWednesday, *pTuesday, *pFriday, *pSaturday, *pSunday, *pCalendar, *pDayHours, *pDayMins;
   rsc_datas tmpRsc, newRsc, *undoRsc;
   const gchar *name;
@@ -1008,18 +1011,24 @@ void rsc_modify (APP_data *data)
   else {
      undoRsc->name = NULL;
   }
-  if(tmpRsc.mail)
+  if(tmpRsc.mail){
       undoRsc->mail = g_strdup_printf ("%s", tmpRsc.mail);
-  else
+  }
+  else {
      undoRsc->mail = NULL;
-  if(tmpRsc.phone)
+  }
+  if(tmpRsc.phone) {
       undoRsc->phone = g_strdup_printf ("%s", tmpRsc.phone);
-  else
+  }
+  else {
      undoRsc->phone = NULL;
-  if(tmpRsc.reminder)
+  }
+  if(tmpRsc.reminder) {
       undoRsc->reminder = g_strdup_printf ("%s", tmpRsc.reminder);
-  else
+  }
+  else {
      undoRsc->reminder = NULL;
+  }
   undoRsc->location = NULL; /* future improvements */
 
   /* we display dialog */
@@ -1035,6 +1044,7 @@ void rsc_modify (APP_data *data)
   comboType = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboboxType"));
   pBtnColor = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "colorbuttonRsc"));
   spinBtnCost = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonCost"));
+  spinbuttonQty = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonQty"));  
   buttonLogo = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonRscLogo"));
   pCalendar = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "comboboxtextCal"));
   pDayHours = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "spinbuttonDayHours"));
@@ -1048,8 +1058,9 @@ void rsc_modify (APP_data *data)
   gtk_combo_box_set_active (GTK_COMBO_BOX( comboType), tmpRsc.type);
   gtk_combo_box_set_active (GTK_COMBO_BOX( comboAffi), tmpRsc.affiliate);
   gtk_combo_box_set_active (GTK_COMBO_BOX( comboCost), tmpRsc.cost_type);
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinBtnCost), tmpRsc.cost);
-
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(spinBtnCost), tmpRsc.cost);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(spinbuttonQty), tmpRsc.quantity);
+  
   gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER(pBtnColor), &tmpRsc.color);
   if(tmpRsc.pix) {/* there is already an user ùodified image */
      GtkWidget *tmpImage = gtk_image_new_from_pixbuf (tmpRsc.pix);
@@ -1106,7 +1117,7 @@ void rsc_modify (APP_data *data)
       iType = gtk_combo_box_get_active (GTK_COMBO_BOX(comboType));/* of RSC, work force for example */
       gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(pBtnColor), &color);
       cost = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBtnCost));
-      
+      quantity = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinbuttonQty));
       /* default for images */
       newRsc.pix = NULL;
       newRsc.fPersoIcon = FALSE;
@@ -1205,7 +1216,7 @@ void rsc_modify (APP_data *data)
       break;
     }/* end case == 2 > remove */
     default: {/* we must remove path to logo, if exists, because user has cancelled */
-         printf ("* PlanLibre - Ressources module - default switch value ! */\n");
+         printf ("* PlanLibre - Resources module - default switch value ! */\n");
       /* free temporary undo datas */
       if(undoRsc->name)
           g_free (undoRsc->name);
@@ -1320,7 +1331,7 @@ void ressources_choose_ressource_logo (GtkButton *button, APP_data *data )
   buttonLogo = GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonRscLogo"));
 
   gtk_file_filter_set_name (filter, _("Image files"));
-  dialog = create_loadFileDialog (dlg, data, _("Import ressource logo ..."));
+  dialog = create_loadFileDialog (dlg, data, _("Import resource logo ..."));
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
 
   if(gtk_dialog_run (GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
@@ -1359,7 +1370,7 @@ GtkWidget *ressources_create_dialog (gboolean modify, APP_data *data)
 {
   GtkWidget *dialog;
   /* get datas from xml Glade file - CRITICAL : only in activate phase !!!! */
-  GtkBuilder *builder =NULL;
+  GtkBuilder *builder = NULL;
   builder = gtk_builder_new ();
   GError *err = NULL; 
   gint i;
@@ -1397,11 +1408,11 @@ GtkWidget *ressources_create_dialog (gboolean modify, APP_data *data)
   /* invalidate some widgets, according to 'modify' flag */
   if(modify) {
      gtk_widget_show (GTK_WIDGET(gtk_builder_get_object (builder, "buttonRscRemove"))); 
-     gtk_window_set_title (GTK_WINDOW(dialog), _("Modify a ressource" ));
+     gtk_window_set_title (GTK_WINDOW(dialog), _("Modify a resource" ));
   }
   else {
      gtk_widget_hide (GTK_WIDGET(gtk_builder_get_object (builder, "buttonRscRemove"))); 
-     gtk_window_set_title (GTK_WINDOW(dialog), _("New ressource" ));
+     gtk_window_set_title (GTK_WINDOW(dialog), _("New resource" ));
   }
 
   gtk_window_set_transient_for (GTK_WINDOW(dialog),

@@ -1878,7 +1878,7 @@ void on_page_switched (GtkNotebook *notebook, GtkWidget *page,
       else {
           gtk_widget_set_sensitive (GTK_WIDGET(btnModif), FALSE);
       }
-      misc_display_tips_status (_("click on a ressource to select it "), data);
+      misc_display_tips_status (_("click on a resource to select it "), data);
       break;
     }
     case 4: {
@@ -1888,7 +1888,7 @@ void on_page_switched (GtkNotebook *notebook, GtkWidget *page,
     }
     case 5: {
       data->currentStack = CURRENT_STACK_ASSIGN;
-      misc_display_tips_status (_("Double-click on a ressource to modify it, right-click for other options "), data);
+      misc_display_tips_status (_("Double-click on a resource to modify it, right-click for other options "), data);
       break;
     }
     case 6: {
@@ -2044,7 +2044,7 @@ static void append_from_library (APP_data *data)
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
 
-  GtkWidget *dialog = create_loadFileDialog (data->appWindow, data, _("Append PlanLibre ressources from file ..."));
+  GtkWidget *dialog = create_loadFileDialog (data->appWindow, data, _("Append PlanLibre resources from file ..."));
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), g_get_home_dir ());
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
   /* run dialog for file selection */
@@ -2091,7 +2091,7 @@ void on_rsc_append_from_csv (GtkMenuItem *menuitem, APP_data *data)
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
 
-  GtkWidget *dialog = create_loadFileDialog(data->appWindow, data, _("Append PlanLibre ressources from file ..."));
+  GtkWidget *dialog = create_loadFileDialog(data->appWindow, data, _("Append PlanLibre resources from file ..."));
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), g_get_home_dir());
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
   /* run dialog for file selection */
@@ -2137,7 +2137,7 @@ void on_rsc_append_from_thunderbird (GtkMenuItem *menuitem, APP_data *data)
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
 
-  GtkWidget *dialog = create_loadFileDialog(data->appWindow, data, _("Append PlanLibre ressources from Thunderbird contacts ..."));
+  GtkWidget *dialog = create_loadFileDialog(data->appWindow, data, _("Append PlanLibre resources from Thunderbird contacts ..."));
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), g_get_home_dir());
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
   /* run dialog for file selection */
