@@ -18,6 +18,8 @@
 /*******************************
    PUBLIC : check if a "pair"
    exists
+   * retuens value>=0 if a
+   * link is found
 *******************************/
 gint links_check_element (gint receiver, gint sender, APP_data *data)
 {
@@ -27,7 +29,7 @@ gint links_check_element (gint receiver, gint sender, APP_data *data)
   link_datas *tmp_links_datas;
 
   /* first, we test receiver */
-  while((i<links_list_len) && (ret<0)) {
+  while((i < links_list_len) && (ret<0)) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *)l->data;
      if(tmp_links_datas->receiver == receiver )
@@ -35,12 +37,12 @@ gint links_check_element (gint receiver, gint sender, APP_data *data)
      i++;
   }/* wend */ 
   /* if not ret >=0 , there isn't receiver match */
-  if(ret<0)
+  if(ret < 0)
      return -1;
   /* we have found receiver, so we continue for sender */
   i = 0;
   ret = -1;
-  while ((i<links_list_len) && (ret < 0 )) {
+  while( (i<links_list_len) && (ret < 0 ) ) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *)l->data;
      if((tmp_links_datas->sender == sender) && (tmp_links_datas->receiver == receiver) )
@@ -507,16 +509,18 @@ void links_remove_rsc_task_link (gint idTsk, gint idRsc, APP_data *data)
   }
 }
 
-/********************************************
+/**************************************************************
   PUBLIC : test concurrent (conflictual) 
   usage of a ressource.
   Should return 0 (zero) if isn't any conflict
-  arguments : id of a task, id of a rsc
-  sender, id_src, dates
+  arguments : id of a task identifier, 
+  sender is an id of a rsc supposed to be assigned to a task,
+  idçtest : identifier for a task, 
+  dates
   id_src should be equal to -1 in order to
    avoid tests. id_src has a true task id
    in other cases
-********************************************/
+**************************************************************/
 gint links_test_concurrent_rsc_usage (gint id, gint sender, gint id_dest, GDate start, GDate end, APP_data *data)
 {
   gint i, ret = 0, cmpst1, cmpst2, cmped1, cmped2;
@@ -532,38 +536,40 @@ gint links_test_concurrent_rsc_usage (gint id, gint sender, gint id_dest, GDate 
 
   /* we get starting & ending date of current task */
   i = 0;
-  while((i<g_list_length (data->tasksList)) && (ret == 0)) {
+  while((i < g_list_length (data->tasksList)) && (ret == 0)) {
      l = g_list_nth (data->tasksList, i);
      tmp_tsk_datas = (tasks_data *)l->data;
      if((id != tmp_tsk_datas->id) && (id_dest != tmp_tsk_datas->id) && (tmp_tsk_datas->type == TASKS_TYPE_TASK)) {
-	 g_date_set_dmy (&date_task_start, tmp_tsk_datas->start_nthDay, tmp_tsk_datas->start_nthMonth, tmp_tsk_datas->start_nthYear);
-	 g_date_set_dmy (&date_task_end, tmp_tsk_datas->end_nthDay, tmp_tsk_datas->end_nthMonth, tmp_tsk_datas->end_nthYear);
-	 /* now, we test if there is any concurrence on dates */
-         /*
-                           #########################  tsk
-                               [start rsc to test]
-         */
-	 cmpst1 =  g_date_compare (&start, &date_task_start); /* if <0 NOT concurrents */
-	 cmpst2 =  g_date_compare (&start, &date_task_end); /* if >0 NOT concurrents */
-         coincStart = FALSE;
-         if((cmpst1>=0) && (cmpst2<=0))
-                 coincStart = TRUE;
-         /*
-                           #########################  tsk
-                               [end rsc to test]
-         */
-	 cmped1 =  g_date_compare (&end, &date_task_start); /* if <0 NOT concurrents */
-	 cmped2 =  g_date_compare (&end, &date_task_end); /* if >0 NOT concurrents */
-         coincEnd = FALSE;
-         if((cmped1>=0) && (cmped2<=0))
-                 coincEnd = TRUE;
-	 if((coincStart) || (coincEnd)) {/* now we can check potential ressources conflicts */
-		gint res = links_check_element (tmp_tsk_datas->id, sender, data);
-                if(res!=0) {
-                     printf("* ressource conflict for rsc ID=%d \n", sender);
-                     ret = sender;
-                }
-	 }/* endif coinc dates */
+		 g_date_set_dmy (&date_task_start, tmp_tsk_datas->start_nthDay, tmp_tsk_datas->start_nthMonth, tmp_tsk_datas->start_nthYear);
+		 g_date_set_dmy (&date_task_end, tmp_tsk_datas->end_nthDay, tmp_tsk_datas->end_nthMonth, tmp_tsk_datas->end_nthYear);
+		 /* now, we test if there is any concurrence on dates from ANOTHER task on interval start>end */
+			 /*
+							   #########################  tsk
+								   [start rsc to test]
+			 */
+		 cmpst1 =  g_date_compare (&start, &date_task_start); /* if <0 NOT concurrents */
+		 cmpst2 =  g_date_compare (&start, &date_task_end); /* if >0 NOT concurrents */
+		 coincStart = FALSE;
+		 if((cmpst1 >= 0) && (cmpst2 <= 0)) {
+			 coincStart = TRUE;
+		 }
+			 /*
+							   #########################  tsk
+								   [end rsc to test]
+			 */
+		 cmped1 =  g_date_compare (&end, &date_task_start); /* if <0 NOT concurrents */
+		 cmped2 =  g_date_compare (&end, &date_task_end); /* if >0 NOT concurrents */
+		 coincEnd = FALSE;
+		 if((cmped1 >= 0) && (cmped2 <= 0)) {
+			 coincEnd = TRUE;
+		 }
+		 if((coincStart) || (coincEnd)) {/* now we can check potential ressources conflicts because there is al least ONE dates overleap */
+			gint res = links_check_element (tmp_tsk_datas->id, sender, data);/* we test if resource 'sender' is used by current task found on overlapping  */
+			if(res != 0) {
+				 printf("* resource conflict for rsc ID=%d \n", sender);
+				 ret = sender;
+			}
+		 }/* endif coinc dates */
      }/* endif */
      i++;
   }/* wend */

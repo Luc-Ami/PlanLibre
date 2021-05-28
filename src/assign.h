@@ -37,6 +37,18 @@
 
 /* structures */
 
+typedef struct  {
+  gint task_id; /* Id of a task where resource is assigned */
+  gint s_day;/* starting date */
+  gint s_month;
+  gint s_year;
+  gint e_day;/* ending date */
+  gint e_month;
+  gint e_year;
+} assign_data;/* structure used when we try to verify if a resource is overloaded */
+
+
+
 /* functions */
 void assign_canvas (GtkWidget *win, APP_data *data);
 void assign_draw_calendar_ruler (gdouble ypos, gint dd, gint mm, gint yy, APP_data *data);

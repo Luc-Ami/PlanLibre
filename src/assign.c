@@ -20,6 +20,10 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
+#include <cairo-svg.h>
+#include <cairo-pdf.h>
+
+
 #include "support.h"
 #include "misc.h"
 #include "links.h"
@@ -27,6 +31,7 @@
 #include "assign.h"
 #include "ressources.h"
 #include "report.h"
+#include "files.h"
 
 /* =====================
   protected variables 
@@ -41,7 +46,7 @@ static gdouble canvas_max_x = 0, canvas_max_y = 0;
 ********************************/
 static gdouble assign_compute_correction (APP_data *data)
 {
-   if(maxTaskByRsc>10)
+   if(maxTaskByRsc > 10)
      return (gdouble) maxTaskByRsc/10;
    else
      return 1;
@@ -52,17 +57,19 @@ static gdouble assign_compute_correction (APP_data *data)
 ************************/
 static gdouble assign_get_max_x (void)
 {
-  gdouble tmp = canvas_max_x+(7*ASSIGN_CALENDAR_DAY_WIDTH);
-  if(tmp>ASSIGN_VIEW_MAX_WIDTH)
+  gdouble tmp = canvas_max_x + (7*ASSIGN_CALENDAR_DAY_WIDTH);
+  if(tmp>ASSIGN_VIEW_MAX_WIDTH) {
     tmp = ASSIGN_VIEW_MAX_WIDTH;
+  }
   return tmp;
 }
 
 static gdouble assign_get_max_y (void)
 {
-  gdouble tmp = canvas_max_y+ASSIGN_AVATAR_HEIGHT;
-  if(tmp>ASSIGN_VIEW_MAX_HEIGHT)
+  gdouble tmp = canvas_max_y + ASSIGN_AVATAR_HEIGHT;
+  if(tmp>ASSIGN_VIEW_MAX_HEIGHT) {
      tmp = ASSIGN_VIEW_MAX_HEIGHT;
+  }
   return tmp;
 }
 /*****************************************
@@ -105,15 +112,15 @@ static GtkWidget *create_menu_assign (GtkWidget *win, APP_data *data)
 
   menu1Assign = gtk_menu_new (); 
 
-  menuAssignEdit = gtk_menu_item_new_with_mnemonic (_("_Modify ressource ... "));
+  menuAssignEdit = gtk_menu_item_new_with_mnemonic (_("_Modify resource ... "));
   gtk_widget_show (menuAssignEdit);
   gtk_container_add (GTK_CONTAINER (menu1Assign), menuAssignEdit);
 
-  menuAssignCharge = gtk_menu_item_new_with_mnemonic (_("_Ressource charge ... "));
+  menuAssignCharge = gtk_menu_item_new_with_mnemonic (_("_Resource charge ... "));
   gtk_widget_show (menuAssignCharge);
   gtk_container_add (GTK_CONTAINER (menu1Assign), menuAssignCharge);
 
-  menuAssignCost = gtk_menu_item_new_with_mnemonic (_("_Ressource cost ... "));
+  menuAssignCost = gtk_menu_item_new_with_mnemonic (_("_Resource cost ... "));
   gtk_widget_show (menuAssignCost);
   gtk_container_add (GTK_CONTAINER (menu1Assign), menuAssignCost);
 
@@ -306,9 +313,9 @@ static void
 
   /* extrema */
   if(ASSIGN_CALENDAR_RSC_WIDTH+(nbDays*ASSIGN_CALENDAR_DAY_WIDTH)+duration*ASSIGN_CALENDAR_DAY_WIDTH >canvas_max_x)
-      canvas_max_x = ASSIGN_CALENDAR_RSC_WIDTH+(nbDays*ASSIGN_CALENDAR_DAY_WIDTH)+duration*ASSIGN_CALENDAR_DAY_WIDTH;
+      canvas_max_x = ASSIGN_CALENDAR_RSC_WIDTH + (nbDays*ASSIGN_CALENDAR_DAY_WIDTH) + duration*ASSIGN_CALENDAR_DAY_WIDTH;
   if(ASSIGN_CALENDAR_HEADER_HEIGHT+(avatar_height*index)+(gint) (bar_height*total )+bar_height >canvas_max_y)
-      canvas_max_y = ASSIGN_CALENDAR_HEADER_HEIGHT+(avatar_height*index)+(gint) (bar_height*total )+bar_height;
+      canvas_max_y = ASSIGN_CALENDAR_HEADER_HEIGHT + (avatar_height*index) + (gint) (bar_height*total ) + bar_height;
 /*
   GooCanvasItem *small_rect = goo_canvas_rect_new (group_task, ASSIGN_CALENDAR_RSC_WIDTH+(nbDays*ASSIGN_CALENDAR_DAY_WIDTH)+6 ,
 		                                ASSIGN_CALENDAR_HEADER_HEIGHT+(ASSIGN_AVATAR_HEIGHT*index)+12, 
@@ -320,12 +327,13 @@ static void
 		                           "fill-color", sRgba,	
  	                           NULL);*/
   Str = light_color;
-  if((color.red+color.green+color.blue) > 0.7)
+  if((color.red + color.green+color.blue) > 0.7) {
     Str = dark_color;  
-
-  GooCanvasItem *task_text = goo_canvas_text_new (group_task, tmpStr, 
-		                           ASSIGN_CALENDAR_RSC_WIDTH+(nbDays*ASSIGN_CALENDAR_DAY_WIDTH)+2,
-		                           ASSIGN_CALENDAR_HEADER_HEIGHT+(avatar_height*index)+(gint) (bar_height*total )+2,
+  }
+  
+  GooCanvasItem *task_text = goo_canvas_text_new (group_task, (const gchar*) tmpStr, 
+		                           ASSIGN_CALENDAR_RSC_WIDTH + (nbDays*ASSIGN_CALENDAR_DAY_WIDTH) + 2,
+		                           ASSIGN_CALENDAR_HEADER_HEIGHT + (avatar_height * index) + (gint) (bar_height * total ) + 2,
 		                           -1,
 		                           GOO_CANVAS_ANCHOR_NW,
 		                           "font", "Sans 9", "fill-color", Str, 
@@ -347,12 +355,129 @@ on_assign_vadj_changed (GtkAdjustment *adjustment, APP_data *data)
 void
 on_assign_hadj_changed (GtkAdjustment *adjustment, APP_data *data)
 {
-  if(data->rscAssign!=NULL) {
+  if(data->rscAssign != NULL) {
       g_object_set (data->rscAssign, "x", gtk_adjustment_get_value (adjustment), NULL);  
       goo_canvas_item_raise (data->rscAssign, NULL);
   }
 }
 
+ 
+ 
+/********************************************
+ * protected : test overload for a resource
+ * arguments :
+ * data_app structure
+ * id of resource to test
+ * output : TRUE if overload
+ * *****************************************/
+ 
+static gboolean assign_test_rsc_overload (gint id, APP_data *data)
+ {
+	 gboolean ret = FALSE;
+	 gboolean coincStart, coincEnd;
+	 gint i = 0, rc = -1, link, j;
+	 gint cmpst1, cmpst2, cmped1, cmped2;
+	 GList *l = NULL;
+	 GList *l2 = NULL;	 
+     tasks_data *tmp_tsk_datas;
+     assign_data *tmp_assign_datas, *tmp_assign2;
+     GDate date_task_start, date_task_end, start, end;
+
+     /* we do a loop to find every tasks where resource 'id' is used and we build a GList*/
+     for( i = 0; i < g_list_length (data->tasksList); i++) {
+	    l = g_list_nth (data->tasksList, i);
+        tmp_tsk_datas = (tasks_data *)l->data;
+        /* now we check if the resource 'id' is used by current task ; if Yes, we upgrade Glist */
+        link = links_check_element (tmp_tsk_datas->id, id, data);
+        if(link >= 0) {
+		   printf ("trouvé un lien entre tâche %s et ressource %d \n", tmp_tsk_datas->name, id);
+		   tmp_assign_datas = g_malloc (sizeof(assign_data));
+		   tmp_assign_datas->task_id = tmp_tsk_datas->id;
+		   tmp_assign_datas->s_day = tmp_tsk_datas->start_nthDay;
+		   tmp_assign_datas->s_month = tmp_tsk_datas->start_nthMonth;
+		   tmp_assign_datas->s_year = tmp_tsk_datas->start_nthYear;		   
+
+		   tmp_assign_datas->e_day = tmp_tsk_datas->end_nthDay;
+		   tmp_assign_datas->e_month = tmp_tsk_datas->end_nthMonth;
+		   tmp_assign_datas->e_year = tmp_tsk_datas->end_nthYear;
+		   		   
+		   l2 = g_list_append(l2, tmp_assign_datas);	
+		}	
+     }/* next i */
+     
+     /* now, if list l2 has zero or one element, we haven't any overloading */
+     if(g_list_length (l2)<2) {
+		 printf ("liste vide ou égale 1 pas de surcharge \n");
+	 }
+	 else {
+	     printf ("liste >1 donc surcharge \n");
+	     /* now we do loop on list in order to test oveloads */
+	     printf ("voici la liste des tâches utilisant la ressource %d\n", id);
+	     for( i = 0; i < g_list_length (l2); i++) {
+		    l = g_list_nth (l2, i);
+            tmp_assign_datas = (assign_data *)l->data;
+            printf ("i=%d tsk=%d \n", i, tmp_assign_datas->task_id);
+            /* now we do a while/wend loop in order to check an oveleao */
+            /* it's a decreasing loop, because we are indexed on 'i'    */
+            /* we use date at rank i as reference                       */
+            g_date_set_dmy (&start, tmp_assign_datas->s_day, tmp_assign_datas->s_month, tmp_assign_datas->s_year);
+            g_date_set_dmy (&end, tmp_assign_datas->e_day, tmp_assign_datas->e_month, tmp_assign_datas->e_year);
+            /* now we will compare to any date at rank AFTER i */
+            j = i+1;
+            
+            while( j < g_list_length (l2)) {
+			   l = g_list_nth (l2, j);
+               tmp_assign2 = (assign_data *)l->data;			   
+			   /* we get dates for current tasks */
+			   g_date_set_dmy (&date_task_start, tmp_assign2->s_day, tmp_assign2->s_month, tmp_assign2->s_year);
+			   g_date_set_dmy (&date_task_end, tmp_assign2->e_day, tmp_assign2->e_month, tmp_assign2->e_year);
+			   /* now we test overlaping with start and end dates */
+			   /*
+							   #########################  tsk
+								   [start rsc to test]
+			   */
+		       cmpst1 =  g_date_compare (&start, &date_task_start); /* if <0 NOT concurrents */
+		       cmpst2 =  g_date_compare (&start, &date_task_end); /* if >0 NOT concurrents */
+		       coincStart = FALSE;
+			   if((cmpst1 >= 0) && (cmpst2 <= 0)) {
+				 coincStart = TRUE;
+			   }
+			   /*
+							   #########################  tsk
+								   [end rsc to test]
+			   */
+			   cmped1 =  g_date_compare (&end, &date_task_start); /* if <0 NOT concurrents */
+			   cmped2 =  g_date_compare (&end, &date_task_end); /* if >0 NOT concurrents */
+			   coincEnd = FALSE;
+			   if((cmped1 >= 0) && (cmped2 <= 0)) {
+				 coincEnd = TRUE;
+			   }
+			   if((coincStart) || (coincEnd)) {
+				  ret = TRUE;   
+			   }
+			   j++;	
+		    }/* wend */
+            
+	     }/* nexr i */
+	 }
+	 
+     /* we free datas */
+     l2 = g_list_first (l2);
+     for(l2 ; l2 != NULL; l2 = l2->next) {
+        tmp_assign_datas = (assign_data *)l2->data;
+        g_free (tmp_assign_datas);
+     }/* next l2*/
+     
+     /* free the Glist itself */
+     g_list_free (l2);     
+     
+     printf ("liste des surchages vidée \n");
+     
+	 return ret;
+
+ }
+ 
+ 
 /******************************************
   PUBLIC : draw ressources ruler 
 ******************************************/
@@ -368,6 +493,7 @@ void assign_draw_rsc_ruler (gdouble xpos, APP_data *data)
   gchar *tmpStr = NULL, buffer[50];/* for utf/8 : 4*maxlen */
   const gchar *grey_day = "#3E3E3E";
   const gchar *blue_day = "#1DD6F2";
+  gboolean fOverload = FALSE;
 
   root = goo_canvas_get_root_item (GOO_CANVAS(data->canvasAssign));
   /* reset max tasks for all ressources */
@@ -386,21 +512,37 @@ void assign_draw_rsc_ruler (gdouble xpos, APP_data *data)
                                                         "line-width", 1.5, NULL);  
   /* compute absolute max number of tasks for ONe ressource */
   maxTaskByRsc = rsc_get_absolute_max_tasks (data);
-  height = assign_compute_correction (data)*ASSIGN_AVATAR_HEIGHT;
+  height = assign_compute_correction (data) * ASSIGN_AVATAR_HEIGHT;
   /* draw all ressources names */
   for(i=0; i< g_list_length (data->rscList); i++) {
      l = g_list_nth (data->rscList, i);
      tmp_rsc_datas = (rsc_datas *)l->data;
 
      GooCanvasItem *rscGroup = goo_canvas_group_new (rscRuler, NULL);
-     g_utf8_strncpy (&buffer, tmp_rsc_datas->name, 12);
-     tmpStr = g_strdup_printf ("%s", buffer);
-     GooCanvasItem *sep_names = goo_canvas_text_new (rscGroup, tmpStr, 
+
+     /* if overload use red pencil */
+     fOverload = assign_test_rsc_overload (tmp_rsc_datas->id, data);
+     if(fOverload) {
+		g_utf8_strncpy (&buffer, tmp_rsc_datas->name, 8); 
+        tmpStr = g_strdup_printf ("%s <span background=\"red\" color=\"yellow\"><b> ! </b></span>", buffer);
+         GooCanvasItem *sep_names = goo_canvas_text_new (rscGroup, tmpStr, 
+                                    xpos+4, ASSIGN_CALENDAR_HEADER_HEIGHT+4+(i*(gint)height), -1,
+                                   GOO_CANVAS_ANCHOR_NW,
+                                   "font", "Sans 12", "fill-color", "#F00000",
+                                   "use-markup", TRUE, 
+                                   NULL);
+     }
+     else {
+	    g_utf8_strncpy (&buffer, tmp_rsc_datas->name, 12);	 
+        tmpStr = g_strdup_printf ("%s", buffer);
+        GooCanvasItem *sep_names = goo_canvas_text_new (rscGroup, tmpStr, 
                                     xpos+4, ASSIGN_CALENDAR_HEADER_HEIGHT+4+(i*(gint)height), -1,
                                    GOO_CANVAS_ANCHOR_NW,
                                    "font", "Sans 12", "fill-color", "#282828", 
-                                   NULL);  
-     if(tmpStr!=NULL){
+                                   NULL); 
+     }
+ 
+     if(tmpStr){
         g_free (tmpStr);
         tmpStr = NULL;
      }
@@ -445,7 +587,7 @@ void assign_draw_rsc_ruler (gdouble xpos, APP_data *data)
                                    GOO_CANVAS_ANCHOR_NW,
                                    "font", "Sans 10", "fill-color", "#282828", 
                                    NULL);  
-     if(tmpStr!=NULL) {
+     if(tmpStr) {
         g_free (tmpStr);
         tmpStr = NULL;
      }
@@ -671,16 +813,19 @@ void assign_remove_all_tasks (APP_data *data)
 
   root = goo_canvas_get_root_item (GOO_CANVAS (data->canvasAssign));
   /* we remove ressources ruler */
-  if(data->rscAssign)
+  if(data->rscAssign) {
      goo_canvas_item_remove (data->rscAssign);
+  }
   data->rscAssign = NULL;
   /* and same for calendar */
-  if(data->rulerAssign)
+  if(data->rulerAssign) {
      goo_canvas_item_remove (data->rulerAssign);
+  }
   data->rulerAssign = NULL;
   /* remove all tasks */
-  if(data->rscAssignMain)
+  if(data->rscAssignMain) {
      goo_canvas_item_remove (data->rscAssignMain);
+  }
   data->rscAssignMain = NULL;
 }
 
@@ -914,11 +1059,11 @@ gint assign_export (gint type, APP_data *data)
                           GTK_BUTTONS_OK_CANCEL,
                           _("The file :\n%s\n already exists !\nDo you really want to overwrite this file ?"),
                           filename);
-           if(gtk_dialog_run (GTK_DIALOG(alertDlg))==GTK_RESPONSE_CANCEL) {
+           if(gtk_dialog_run (GTK_DIALOG(alertDlg)) == GTK_RESPONSE_CANCEL) {
               gtk_widget_destroy (GTK_WIDGET(alertDlg));
               gtk_widget_destroy (GTK_WIDGET(dialog));
               g_free (filename);
-              return;
+              return -1;
            }
     }/* endif file exists */
 
