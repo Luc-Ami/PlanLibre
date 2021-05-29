@@ -24,11 +24,13 @@
 #include "misc.h"
 #include "links.h"
 #include "tasks.h"
+#include "tasksutils.h"
 #include "assign.h"
 #include "ressources.h"
 #include "calendars.h"
 #include "report.h"
 #include "files.h"
+#include "export.h"
 
 /******************************
   test is there is something to
@@ -42,7 +44,7 @@ gboolean report_is_ready_to_report (APP_data *data)
 
   if((misc_count_tasks (data)<1) || (g_list_length (data->rscList)<1)) {
      rep = FALSE;
-       tmpStr = g_strdup_printf ("%s", _("Sorry !\nIn order to report something, you must assign.\nat least <u>ONE</u> ressource to <u>ONE</u> task.\nPlease, check <b>ressources</b> page and <b>tasks</b> page.\nOperation aborted."));
+       tmpStr = g_strdup_printf ("%s", _("Sorry !\nIn order to report something, you must assign.\nat least <u>ONE</u> resource to <u>ONE</u> task.\nPlease, check <b>resources</b> page and <b>tasks</b> page.\nOperation aborted."));
        misc_ErrorDialog (data->appWindow, tmpStr);
        g_free (tmpStr);
   }
@@ -197,7 +199,7 @@ void report_init_view (APP_data *data)
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW(view));
   report_setup_text_buffer_tags (buffer);
-  data->view = view;
+  data->view = GTK_TEXT_VIEW(view);
   data->buffer = buffer;
   report_clear_text (buffer, "left");
 
@@ -294,7 +296,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
   gtk_text_buffer_get_iter_at_mark (data->buffer, &iter, gtk_text_buffer_get_insert (data->buffer));
 
   /* we get GtkTextIter in order to insert nex text */
-  tmpStr = g_strdup_printf ("%s %s\n", _("Assignments for Ressource "), rsc_get_name (id, data));
+  tmpStr = g_strdup_printf ("%s %s\n", _("Assignments for Resource "), rsc_get_name (id, data));
   gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "title", "underline", NULL);
   g_free (tmpStr);
 
@@ -316,7 +318,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
   g_free (tmpStr);
 
   if(total<=0) {
-     gtk_text_buffer_insert (data->buffer, &iter, _("No more operations - Ressource hasn't any task !"), -1);
+     gtk_text_buffer_insert (data->buffer, &iter, _("No more operations - Resource hasn't any task !"), -1);
   }
 
   completed = rsc_get_number_tasks_done (id, data);
@@ -406,7 +408,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
 	  g_object_unref (pixbuf2);
   }
   /* switch to report notebook page */
-  notebook = gtk_builder_get_object (data->builder, "notebook1");
+  notebook = GTK_WIDGET(gtk_builder_get_object (data->builder, "notebook1"));
   gtk_notebook_set_current_page (GTK_NOTEBOOK(notebook), 6);
   /* set sensible menus and buttons */
   report_set_buttons_menus (TRUE, FALSE, data);
@@ -499,7 +501,7 @@ void report_all_rsc_charge (APP_data *data)
       return;
    }
    else {
-      tmpStr = g_strdup_printf (_("Assignments for the %d Ressources \n\n"), total);
+      tmpStr = g_strdup_printf (_("Assignments for the %d Resources \n\n"), total);
       gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "title", "underline", NULL);
       g_free (tmpStr);
    }
@@ -509,7 +511,7 @@ void report_all_rsc_charge (APP_data *data)
    g_free (tmpStr);
    
    tsk_average = (gdouble) rsc_get_absolute_max_total_tasks (data)/total;
-   tmpStr = g_strdup_printf (_("with an average of %.2f task(s) by ressource.\n"), tsk_average);
+   tmpStr = g_strdup_printf (_("with an average of %.2f task(s) by resource.\n"), tsk_average);
    gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
    g_free (tmpStr);
 
@@ -577,7 +579,7 @@ void report_all_rsc_charge (APP_data *data)
       cairo_show_text (cr, tmpStr);
       g_free (tmpStr);
       /* diagram title */
-      tmpStr = g_strdup_printf ("%s", _("Tasks by ressources"));
+      tmpStr = g_strdup_printf ("%s", _("Tasks by resources"));
       cairo_text_extents (cr, tmpStr, &extents);
       cairo_move_to (cr, (REPORT_DIAGRAM_NAME_WIDTH + REPORT_DIAGRAM_WIDTH)/2- (extents.width/2),
                         REPORT_DIAGRAM_LEGEND_HEIGHT-extents.height);
@@ -611,7 +613,7 @@ void report_all_rsc_charge (APP_data *data)
 
    }/* next i */
    /* switch to report notebook page */
-   notebook = gtk_builder_get_object (data->builder, "notebook1");
+   notebook = GTK_WIDGET(gtk_builder_get_object (data->builder, "notebook1"));
    gtk_notebook_set_current_page (GTK_NOTEBOOK(notebook), 6);
    /* set sensible menus and buttons */
    report_set_buttons_menus (TRUE, TRUE, data);
@@ -917,7 +919,7 @@ void report_unique_rsc_cost (gint id, APP_data *data)
    gtk_text_buffer_get_iter_at_mark (data->buffer, &iter, gtk_text_buffer_get_insert (data->buffer));
 
    /* we get GtkTextIter in order to insert nex text */
-   tmpStr = g_strdup_printf ("%s %s\n", _("Costs for Ressource "), rsc_get_name (id, data));
+   tmpStr = g_strdup_printf ("%s %s\n", _("Costs for Resource "), rsc_get_name (id, data));
    gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "title", "underline", NULL);
    g_free (tmpStr);
 
@@ -939,7 +941,7 @@ void report_unique_rsc_cost (gint id, APP_data *data)
    g_free (tmpStr);
   
    if(total<=0) {
-      gtk_text_buffer_insert (data->buffer, &iter, _("No more operations - Ressource hasn't any task !"), -1);
+      gtk_text_buffer_insert (data->buffer, &iter, _("No more operations - Resource hasn't any task !"), -1);
    }
 
    /* total worked hours  */
@@ -971,7 +973,7 @@ void report_unique_rsc_cost (gint id, APP_data *data)
    gtk_text_buffer_insert_pixbuf (data->buffer, &iter, pixbuf2);
    g_object_unref (pixbuf2);
    /* switch to report notebook page */
-   notebook = gtk_builder_get_object (data->builder, "notebook1");
+   notebook = GTK_NOTEBOOK(gtk_builder_get_object (data->builder, "notebook1"));
    gtk_notebook_set_current_page (GTK_NOTEBOOK(notebook), 6);
    /* set sensible menus and buttons */
    report_set_buttons_menus (TRUE, FALSE, data);
@@ -1187,15 +1189,15 @@ void report_all_rsc_cost (APP_data *data)
    misc_set_font_color_settings (data);
    /* we get GtkTextIter in order to insert nex text */
    total = g_list_length (data->rscList);
-   tmpStr = g_strdup_printf ( _("Cost for the %d Ressources \n\n"), total);
+   tmpStr = g_strdup_printf ( _("Cost for the %d Resources \n\n"), total);
    gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "title", "underline", NULL);
    g_free (tmpStr);
 
-   tmpStr = g_strdup_printf (_("Please Note !\nDatas are ONLY estimated costs by durations, and converted to money.\nBe careful when you use them.\n\n"), total);
+   tmpStr = g_strdup_printf ("%s", _("Please Note !\nDatas are ONLY estimated costs by durations, and converted to money.\nBe careful when you use them.\n\n"));
    gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "italic", "underline", NULL);
    g_free (tmpStr);
    /* table of each ressources' cost */
-   tmpStr = g_strdup_printf (_("Table 1 of 2 : Cost per ressource (excl. non-working days, clamped), %s \n\n"), 
+   tmpStr = g_strdup_printf (_("Table 1 of 2 : Cost per resource (excl. non-working days, clamped), %s \n\n"), 
                               data->properties.units);
    gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "bold", "underline", NULL);
    g_free (tmpStr);
@@ -1329,4 +1331,178 @@ void report_export_report_to_rtf (APP_data *data)
   }
 
   gtk_widget_destroy (GTK_WIDGET(dialog)); 
+}
+
+/********************************************
+ * protected : test overload for a resource
+ * arguments :
+ * data_app structure
+ * id of resource to test
+ * output : TRUE if overload
+ * *****************************************/
+ 
+static void report_test_rsc_overload (gint id, GtkTextIter *iter, APP_data *data)
+ {
+	 gboolean coincStart, coincEnd;
+	 gint i = 0, rc = -1, link, j, id1, id2;
+	 gint cmpst1, cmpst2, cmped1, cmped2;
+	 GList *l = NULL;
+	 GList *l2 = NULL;	 
+     tasks_data *tmp_tsk_datas;
+     rsc_datas *tmp_rsc;
+     assign_data *tmp_assign_datas, *tmp_assign2;
+     GDate date_task_start, date_task_end, start, end;
+     gchar *tmpStr;
+
+     /* we do a loop to find every tasks where resource 'id' is used and we build a GList*/
+     for( i = 0; i < g_list_length (data->tasksList); i++) {
+	    l = g_list_nth (data->tasksList, i);
+        tmp_tsk_datas = (tasks_data *)l->data;
+        /* now we check if the resource 'id' is used by current task ; if Yes, we upgrade Glist */
+        link = links_check_element (tmp_tsk_datas->id, id, data);
+        if(link >= 0) {
+		   tmp_assign_datas = g_malloc (sizeof(assign_data));
+		   tmp_assign_datas->task_id = tmp_tsk_datas->id;
+		   tmp_assign_datas->s_day = tmp_tsk_datas->start_nthDay;
+		   tmp_assign_datas->s_month = tmp_tsk_datas->start_nthMonth;
+		   tmp_assign_datas->s_year = tmp_tsk_datas->start_nthYear;		   
+
+		   tmp_assign_datas->e_day = tmp_tsk_datas->end_nthDay;
+		   tmp_assign_datas->e_month = tmp_tsk_datas->end_nthMonth;
+		   tmp_assign_datas->e_year = tmp_tsk_datas->end_nthYear;
+		   		   
+		   l2 = g_list_append(l2, tmp_assign_datas);	
+		}	
+     }/* next i */
+     
+     /* now, if list l2 has zero or one element, we haven't any overloading */
+     if(g_list_length (l2)>=2) {
+	     /* now we do loop on list in order to test oveloads */
+
+	     for( i = 0; i < g_list_length (l2); i++) {
+		    l = g_list_nth (l2, i);
+            tmp_assign_datas = (assign_data *)l->data;
+            /* now we do a while/wend loop in order to check an oveleao */
+            /* it's a decreasing loop, because we are indexed on 'i'    */
+            /* we use date at rank i as reference                       */
+            g_date_set_dmy (&start, tmp_assign_datas->s_day, tmp_assign_datas->s_month, tmp_assign_datas->s_year);
+            g_date_set_dmy (&end, tmp_assign_datas->e_day, tmp_assign_datas->e_month, tmp_assign_datas->e_year);
+            /* now we will compare to any date at rank AFTER i */
+            j = i+1;
+            id1 = tmp_assign_datas->task_id;
+            
+            while( j < g_list_length (l2)) {
+			   l = g_list_nth (l2, j);
+               tmp_assign2 = (assign_data *)l->data;			   
+			   /* we get dates for current tasks */
+			   g_date_set_dmy (&date_task_start, tmp_assign2->s_day, tmp_assign2->s_month, tmp_assign2->s_year);
+			   g_date_set_dmy (&date_task_end, tmp_assign2->e_day, tmp_assign2->e_month, tmp_assign2->e_year);
+			   /* now we test overlaping with start and end dates */
+			   /*
+							   #########################  tsk
+								   [start rsc to test]
+			   */
+		       cmpst1 =  g_date_compare (&start, &date_task_start); /* if <0 NOT concurrents */
+		       cmpst2 =  g_date_compare (&start, &date_task_end); /* if >0 NOT concurrents */
+		       coincStart = FALSE;
+			   if((cmpst1 >= 0) && (cmpst2 <= 0)) {
+				 coincStart = TRUE;
+			   }
+			   /*
+							   #########################  tsk
+								   [end rsc to test]
+			   */
+			   cmped1 =  g_date_compare (&end, &date_task_start); /* if <0 NOT concurrents */
+			   cmped2 =  g_date_compare (&end, &date_task_end); /* if >0 NOT concurrents */
+			   coincEnd = FALSE;
+			   if((cmped1 >= 0) && (cmped2 <= 0)) {
+				 coincEnd = TRUE;
+			   }
+			   if((coincStart) || (coincEnd)) {
+				  /* here there is an overload, we have to display the conflict between tasks */
+				  /* first, we get names of the tasks */
+				  id2 = tmp_assign2->task_id;
+				//  printf ("la ressource est en conflit pour les tâches %s et %s \n",
+				  //         tasks_get_name_for_id (id1, data),
+				    //       tasks_get_name_for_id (id2, data)
+				      //   );
+				  tmpStr = g_strdup_printf (_("- overload on tasks : %s,  %s \n"), tasks_get_name_for_id (id1, data),
+				                                                                    tasks_get_name_for_id (id2, data) );
+                  gtk_text_buffer_insert (data->buffer, iter, tmpStr, -1);
+                  g_free (tmpStr);        
+			   }
+			   j++;	
+		    }/* wend */
+            
+	     }/* nexr i */
+	 }/* endif */
+	 
+     /* we free datas */
+     l2 = g_list_first (l2);
+     for(l2 ; l2 != NULL; l2 = l2->next) {
+        tmp_assign_datas = (assign_data *)l2->data;
+        g_free (tmp_assign_datas);
+     }/* next l2*/
+     
+     /* free the Glist itself */
+     g_list_free (l2);     
+
+ }
+
+
+
+/************************************
+  PUBLIC : ressource overload
+  analyssis, for ONE resource
+  * arguments : ID of resource,
+  * DATA_app structure
+**********************************/
+void report_unique_rsc_overload (gint id, APP_data *data)
+{
+  gchar *tmpStr;
+  GtkTextIter start, end, iter;
+  GdkPixbuf *pixbuf2;
+  gint total, i, tsk_list_len, link, total_minutes;
+  gdouble duration, duration_corrected, value, hours;
+  GtkWidget *notebook;
+
+   /* when the right-click happens, the convenient row is selected on "ressources" panel ; so, we know the ressource */
+   report_clear_text (data->buffer, "left");
+   misc_set_font_color_settings (data);
+   gtk_text_buffer_get_iter_at_mark (data->buffer, &iter, gtk_text_buffer_get_insert (data->buffer));
+
+   /* we get GtkTextIter in order to insert nex text */
+   tmpStr = g_strdup_printf ("%s %s\n", _("Overload for Resource : "), rsc_get_name (id, data));
+   gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "title", "underline", NULL);
+   g_free (tmpStr);
+
+   /* wexplanation for usert */
+   tmpStr = g_strdup_printf ("%s\n", _("There is an overload when a resource is used at same time by at least 2 tasks."));
+   gtk_text_buffer_insert_with_tags_by_name (data->buffer, &iter, tmpStr, -1, "italic", NULL);
+   g_free (tmpStr);
+
+   /* display avatar */
+   pixbuf2 = rsc_get_avatar (id, data);
+   if(pixbuf2) {
+      gtk_text_buffer_insert_pixbuf (data->buffer, &iter, pixbuf2);
+      g_object_unref (pixbuf2);
+   }
+
+   tmpStr = g_strdup_printf (_("\nThe current project has %d task(s)\n"), misc_count_tasks (data));
+   gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
+   g_free (tmpStr);
+
+   total = rsc_get_number_tasks (id, data);
+   tmpStr = g_strdup_printf (_("%s is assigned to %d task(s)\n\n"), rsc_get_name (id, data),
+                                total );
+   gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
+   g_free (tmpStr);
+   /* now we do loop in order to display all tasks where current resource is in overload */
+   report_test_rsc_overload (id, &iter, data);
+ 
+   /* switch to report notebook page */
+   notebook = GTK_WIDGET(gtk_builder_get_object (data->builder, "notebook1"));
+   gtk_notebook_set_current_page (GTK_NOTEBOOK(notebook), 6);
+   /* set sensible menus and buttons */
+   report_set_buttons_menus (TRUE, FALSE, data);
 }

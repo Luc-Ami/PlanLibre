@@ -39,4 +39,6 @@ void report_unique_rsc_cost (gint id, APP_data *data);
 void report_all_rsc_cost (APP_data *data);
 void report_export_report_to_rtf (APP_data *data);
 
+void report_unique_rsc_overload (gint id, APP_data *data);
+
 #endif /* REPORT_H */

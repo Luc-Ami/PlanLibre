@@ -40,6 +40,30 @@ static gint assignDay, assignMonth, assignYear, maxTaskByRsc, currentRscId;
 static gint calDay, calMonth, calYear;/* used to store top left value of current calendar, as displayed */
 static gdouble canvas_max_x = 0, canvas_max_y = 0;
 
+
+/************************************************
+ * PROTECTED : retrive overload flag for
+ * resource 'ID'
+ * ********************************************/
+static gboolean assign_get_overload_flag_for_id (gint id, APP_data *data)
+{
+  gboolean ret = FALSE;
+  gint i = 0, rc = -1;
+  GList *l = NULL;
+  rsc_datas *tmp_rsc;	
+
+  while( (i < g_list_length (data->rscList)) && (rc < 0)) {
+	  l = g_list_nth (data->rscList, i);
+	  tmp_rsc = (rsc_datas*) l->data;
+	  if(tmp_rsc->id == id) {
+		  ret = tmp_rsc->fOverload;
+		  rc = 1;
+	  }
+	  i++;
+  }	
+  return ret;	
+}
+
 /********************************
   LOCAL : compute correction
   for each tasks height
@@ -101,14 +125,32 @@ static void on_menuAssignCost (GtkMenuItem *menuitem, APP_data *data)
   report_unique_rsc_cost (currentRscId, data);
 }
 
+/************************************************
+ * PROTECTED : call a report about overload
+ * for current resource
+ * ********************************************/
+
+static void on_menuAssignOverload (GtkMenuItem *menuitem, APP_data *data)
+{
+  /* we jnow ID for selected row : currentRscId */	 
+  report_unique_rsc_overload (currentRscId, data);
+}
+
+
+
+
 /****************************************** 
  LOCAL
  PopUp menu after a right-click. 
+ * we have a static glo-cal variable for
+ * know the ID of selected resource :
+ * currentRscId
  ******************************************/
 static GtkWidget *create_menu_assign (GtkWidget *win, APP_data *data)
 {
   GtkWidget *menu1Assign, *menuAssignEdit, *separator1;
-  GtkWidget *menuCancelAssign, *menuAssignCharge, *menuAssignCost;
+  GtkWidget *menuCancelAssign, *menuAssignCharge, *menuAssignCost, *menuAssignOverload;
+  gboolean flag;
 
   menu1Assign = gtk_menu_new (); 
 
@@ -123,6 +165,13 @@ static GtkWidget *create_menu_assign (GtkWidget *win, APP_data *data)
   menuAssignCost = gtk_menu_item_new_with_mnemonic (_("_Resource cost ... "));
   gtk_widget_show (menuAssignCost);
   gtk_container_add (GTK_CONTAINER (menu1Assign), menuAssignCost);
+
+  menuAssignOverload = gtk_menu_item_new_with_mnemonic (_("Overload details ... "));
+  gtk_widget_show (menuAssignOverload);
+  gtk_container_add (GTK_CONTAINER (menu1Assign), menuAssignOverload);
+  /* we retrive overload flag for current resource */
+  flag = assign_get_overload_flag_for_id (currentRscId, data);
+  gtk_widget_set_sensitive (menuAssignOverload, flag);
 
   separator1 = gtk_separator_menu_item_new ();
   gtk_widget_show (separator1);
@@ -146,6 +195,11 @@ static GtkWidget *create_menu_assign (GtkWidget *win, APP_data *data)
   g_signal_connect ((gpointer) menuAssignCost, "activate",
                     G_CALLBACK (on_menuAssignCost),
                     data);
+                    
+  g_signal_connect ((gpointer) menuAssignOverload, "activate",
+                    G_CALLBACK (on_menuAssignOverload),
+                    data);                    
+                    
 
   return menu1Assign;
 }
@@ -260,7 +314,7 @@ static gboolean on_assign_button_press (GooCanvasItem  *item,
 
  
    g_object_get (item, "title", &tmpStr, NULL );/* we get a string representation of unique IDentifier */
-   if(tmpStr!=NULL) {
+   if(tmpStr != NULL) {
       id = atoi (tmpStr);
       g_free (tmpStr);
       currentRscId = id;
@@ -275,7 +329,7 @@ static gboolean on_assign_button_press (GooCanvasItem  *item,
    row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(box), ret);
    gtk_list_box_select_row (GTK_LIST_BOX(box), row);
 
-   if(event->type==GDK_2BUTTON_PRESS && ret>=0) {
+   if(event->type == GDK_2BUTTON_PRESS && ret >= 0) {
       /* now we can call modify task or modify group */
       rsc_modify (data);
    }
@@ -380,6 +434,7 @@ static gboolean assign_test_rsc_overload (gint id, APP_data *data)
 	 GList *l = NULL;
 	 GList *l2 = NULL;	 
      tasks_data *tmp_tsk_datas;
+     rsc_datas *tmp_rsc;
      assign_data *tmp_assign_datas, *tmp_assign2;
      GDate date_task_start, date_task_end, start, end;
 
@@ -390,7 +445,7 @@ static gboolean assign_test_rsc_overload (gint id, APP_data *data)
         /* now we check if the resource 'id' is used by current task ; if Yes, we upgrade Glist */
         link = links_check_element (tmp_tsk_datas->id, id, data);
         if(link >= 0) {
-		   printf ("trouvé un lien entre tâche %s et ressource %d \n", tmp_tsk_datas->name, id);
+		 //  printf ("trouvé un lien entre tâche %s et ressource %d \n", tmp_tsk_datas->name, id);
 		   tmp_assign_datas = g_malloc (sizeof(assign_data));
 		   tmp_assign_datas->task_id = tmp_tsk_datas->id;
 		   tmp_assign_datas->s_day = tmp_tsk_datas->start_nthDay;
@@ -416,7 +471,7 @@ static gboolean assign_test_rsc_overload (gint id, APP_data *data)
 	     for( i = 0; i < g_list_length (l2); i++) {
 		    l = g_list_nth (l2, i);
             tmp_assign_datas = (assign_data *)l->data;
-            printf ("i=%d tsk=%d \n", i, tmp_assign_datas->task_id);
+          //  printf ("i=%d tsk=%d \n", i, tmp_assign_datas->task_id);
             /* now we do a while/wend loop in order to check an oveleao */
             /* it's a decreasing loop, because we are indexed on 'i'    */
             /* we use date at rank i as reference                       */
@@ -460,6 +515,10 @@ static gboolean assign_test_rsc_overload (gint id, APP_data *data)
             
 	     }/* nexr i */
 	 }
+	 /* we store value on flag */
+	 if(ret == TRUE) {
+		 
+	 }	 
 	 
      /* we free datas */
      l2 = g_list_first (l2);
@@ -522,6 +581,9 @@ void assign_draw_rsc_ruler (gdouble xpos, APP_data *data)
 
      /* if overload use red pencil */
      fOverload = assign_test_rsc_overload (tmp_rsc_datas->id, data);
+     printf ("valeur retour over =%d \n", fOverload);
+     /* we store in flag for next usage */
+     tmp_rsc_datas->fOverload = fOverload;
      if(fOverload) {
 		g_utf8_strncpy (&buffer, tmp_rsc_datas->name, 8); 
         tmpStr = g_strdup_printf ("%s <span background=\"red\" color=\"yellow\"><b> ! </b></span>", buffer);

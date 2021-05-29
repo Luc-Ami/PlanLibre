@@ -82,5 +82,7 @@ gint tasks_compute_dates_for_all_linked_task (gint id, gint curDuration, gint cu
                                           GDate *current, gint predecessors, gint sucessors, gboolean fUpdate, GtkWidget *dlg, APP_data *data);
 void tasks_utils_update_receivers (gint id, APP_data *data);
 void tasks_utils_remove_receivers (gint id, APP_data *data);
+
+const gchar *tasks_get_name_for_id (gint id, APP_data *data);
  
 #endif /* TASKSUTILS_H */

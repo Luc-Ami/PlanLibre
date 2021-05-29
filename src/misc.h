@@ -122,7 +122,6 @@ typedef struct {
   gchar *proj_website;
   gchar *units;
   gdouble budget;
-  gdouble quantity;
   GdkPixbuf *logo;
   gchar *start_date;
   gint start_nthDay;
@@ -150,6 +149,7 @@ typedef struct {
   gint      day_hours;
   gint      day_mins;
   gint      cost_type;
+  gdouble quantity;  
   GdkRGBA   color;
   gboolean  fPersoIcon;
   GdkPixbuf *pix;
@@ -168,6 +168,7 @@ typedef struct {
   gboolean fWorkSaturday;
   gboolean fWorkSunday;
   gboolean fAllowConcurrent;/* in order to allow a ressource to be assigned to more 1 task at same time */
+  gboolean fOverload; /* flag computed in assign.c module */
   gint calendar;
 } rsc_datas;
 

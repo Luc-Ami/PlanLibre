@@ -1964,3 +1964,23 @@ void tasks_utils_remove_receivers (gint id, APP_data *data)
 }
 
 
+/*********************************************
+  PUBLIC : returns 'name' of task known
+  is ID
+*********************************************/
+const gchar *tasks_get_name_for_id (gint id, APP_data *data)
+{
+  gint ret = -1, i = 0;
+  const gchar *tmpStr = NULL;
+  GList *l;
+  tasks_data *tmp_tsk_datas;
+
+  while((i<g_list_length (data->tasksList)) && (ret<0)) {
+      l = g_list_nth (data->tasksList, i);
+      tmp_tsk_datas = (tasks_data *) l->data;
+      if(tmp_tsk_datas->id == id)
+          tmpStr = tmp_tsk_datas->name;
+      i++;
+  }
+  return tmpStr;
+}
