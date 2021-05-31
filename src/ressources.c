@@ -1466,16 +1466,19 @@ gchar *rsc_get_name (gint id, APP_data *data)
   return str;
 }
 
-/***************************************
+/**********************************************
   PUBLIC : compute the monetary cost
   of a ressource, known by
   its internal ID
   given total minutes worked
-  returns value in gdouble format
-**************************************/
+  returns value in gdouble format ;
+  * return value is corrected by "quantity"
+  * field
+***********************************************/
+
 gdouble rsc_compute_cost (gint id, gint total_minutes, APP_data *data)
 {
-  gdouble val = 0;
+  gdouble val = 0, quantity = 1;
   gint i = 0, ret = -1, total;
   GList *l;// TODO tenir compte de l'horaire maxi de la RSC
   rsc_datas *tmp_rsc_datas;
@@ -1485,6 +1488,8 @@ gdouble rsc_compute_cost (gint id, gint total_minutes, APP_data *data)
     l = g_list_nth (data->rscList, i);
     tmp_rsc_datas = (rsc_datas *)l->data;
     if(tmp_rsc_datas->id == id) {
+		 quantity = tmp_rsc_datas->quantity;
+
          switch(tmp_rsc_datas->cost_type) {
             case RSC_COST_HOUR: {
                val = tmp_rsc_datas->cost*((gdouble)total_minutes/60);
@@ -1523,7 +1528,7 @@ gdouble rsc_compute_cost (gint id, gint total_minutes, APP_data *data)
     i++;
   }/* wend */
 
-  return val;
+  return val*quantity;
 }
 
 /************************************

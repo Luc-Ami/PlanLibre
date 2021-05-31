@@ -961,6 +961,7 @@ void report_unique_rsc_cost (gint id, APP_data *data)
    g_free (tmpStr);
    /* monetary cost */
    value = rsc_compute_cost (id, total_minutes, data);
+   
    tmpStr = g_strdup_printf (_("%s costs (estimated excl. non-working days) : %s %.2f\n"), 
                                 rsc_get_name (id, data), data->properties.units, value);
    gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
