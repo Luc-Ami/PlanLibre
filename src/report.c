@@ -31,6 +31,7 @@
 #include "report.h"
 #include "files.h"
 #include "export.h"
+#include "assign.h"
 
 /******************************
   test is there is something to
@@ -230,6 +231,33 @@ static void report_draw_circle_text (cairo_t *cr, gdouble red, gdouble green, gd
 
 }
 
+
+/***************************************************
+ PROTECTED draw central circle for charge diagrams
+ arguments : cr cairo context
+ extents : cairo text extents
+red, green, blue flotaing point color components
+ str : string to display
+****************************************************/
+static void report_draw_circle_text_charge (cairo_t *cr, gdouble red, gdouble green, gdouble blue, gchar *tmpStr)
+{
+  cairo_text_extents_t extents;
+
+  /* central white circle with duration*/
+  cairo_set_source_rgb (cr, 1, 1, 1);
+  cairo_arc (cr, ASSIGN_RSC_CHARGE_WIDTH/2, ASSIGN_RSC_CHARGE_HEIGHT/2, 70, 0, 2*G_PI);
+  cairo_fill (cr);
+  cairo_select_font_face (cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+  cairo_set_font_size (cr, 20);
+  cairo_text_extents (cr, tmpStr, &extents);
+  cairo_move_to (cr, (ASSIGN_RSC_CHARGE_WIDTH / 2) - extents.width/2, ASSIGN_RSC_CHARGE_HEIGHT / 2+(extents.height/2));  
+  cairo_set_source_rgb (cr, red, green, blue);
+  cairo_show_text (cr, tmpStr); 
+
+}
+
+
+
 /*********************************
  PROTECTED : draw legend
 *********************************/
@@ -317,7 +345,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
   gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
   g_free (tmpStr);
 
-  if(total<=0) {
+  if(total <= 0) {
      gtk_text_buffer_insert (data->buffer, &iter, _("No more operations - Resource hasn't any task !"), -1);
   }
 
@@ -339,7 +367,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
   gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
   g_free (tmpStr);
 
-  on_progress = total-overdue-to_go-completed;
+  on_progress = total-overdue-to_go - completed;
 
   tmpStr = g_strdup_printf (_("The average progress for his/her task(s) is %.2f %\n\n"), 
                              rsc_get_number_tasks_average_progress (id, data) );
@@ -347,7 +375,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
   g_free (tmpStr);
 
   /* we "draw" in memory */
-  if(total>0) {
+  if(total > 0) {
 	  surf = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, ASSIGN_RSC_CHARGE_WIDTH, ASSIGN_RSC_CHARGE_HEIGHT);
 	  /* now we can create the context */
 	  cr = cairo_create (surf);
@@ -392,7 +420,7 @@ void report_unique_rsc_charge (gint id, APP_data *data)
 
 	  /* central white circle with percent*/
 	  tmpStr = g_strdup_printf (_("%.2f%%"), rsc_get_number_tasks_average_progress (id, data));
-	  report_draw_circle_text (cr, g_key_file_get_double(keyString, "editor", "text.color.red", NULL), 
+	  report_draw_circle_text_charge (cr, g_key_file_get_double(keyString, "editor", "text.color.red", NULL), 
 		                       g_key_file_get_double(keyString, "editor", "text.color.green", NULL), 
 		                       g_key_file_get_double(keyString, "editor", "text.color.blue", NULL), tmpStr);
 	  g_free (tmpStr);
@@ -1013,7 +1041,7 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
   cr = cairo_create (surf);
   cairo_set_source_rgb (cr, 0.84, 0.84, 0.84);
   cairo_set_line_width (cr, 1.5);
-  cairo_rectangle (cr, 0, 120, REPORT_RSC_COST_WIDTH, REPORT_RSC_COST_HEIGHT-120);
+  cairo_rectangle (cr, 0, 120, 400, REPORT_RSC_COST_HEIGHT-120);
   cairo_fill (cr);
   /* default size for text */
   cairo_select_font_face (cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
@@ -1029,15 +1057,15 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
     cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
     cairo_rectangle (cr, count_x*100, count_y*20, 16, 16);
     cairo_fill (cr);
-    cairo_move_to (cr, count_x*100+20, count_y*20+extents.height);
+    cairo_move_to (cr, count_x*100 + 20, count_y*20 + extents.height);
     cairo_set_source_rgb (cr, g_key_file_get_double(keyString, "editor", "text.color.red", NULL), 
                                 g_key_file_get_double(keyString, "editor", "text.color.green", NULL), 
                                 g_key_file_get_double(keyString, "editor", "text.color.blue", NULL));
     cairo_show_text (cr, buffer); 
     count_x++;
-    if(count_x>3) {
-                count_x = 0;
-                count_y++;
+    if(count_x>7) {
+         count_x = 0;
+         count_y++;
     }/* endif count_x */
     /* values & bars */
     cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
@@ -1048,13 +1076,13 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
     else {
           value = (report_get_tasks_duration (tmp_rsc_datas->id, data)/duration )*100;
     }
- printf ("la ressource %s occupe %d % (%.2f) écart =%.2f du projet \n", 
-                   tmp_rsc_datas->name, (gint) value, value, (gdouble) value-(gint)value);
-    for(j=0; j<(gint)value; j++) {
+//  printf ("la ressource %s occupe %d % (%.2f) écart =%.2f du projet \n", 
+           //        tmp_rsc_datas->name, (gint) value, value, (gdouble) value-(gint)value);
+    for(j = 0; j < (gint)value; j++) {
        cairo_rectangle (cr, pos_x*40, 120+pos_y*28, 38, 26);
        cairo_fill (cr);
        pos_x++;
-       if(pos_x>9) {
+       if(pos_x > 9) {
          pos_x = 0;
          pos_y++;
        }
@@ -1109,45 +1137,43 @@ static GdkPixbuf *report_cost_repartition_diagram (gdouble table[], gint total, 
   cairo_set_line_width (cr, 1);
   cairo_text_extents (cr, "Jp", &extents);
   /* beware of division by zero ! */
-  if(sum>0) {
-     for(i=0; i<total; i++) {
+  if(sum > 0) {
+     for(i = 0; i < total; i++) {
         l = g_list_nth (data->rscList, i);
         tmp_rsc_datas = (rsc_datas *)l->data;
         /* current part */
+        value = table[i] / sum;
+	    angle2 = angle2 + (2*G_PI*value);
+	    cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
+         /* we convert gdk rGba to RGB */
+	    cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
+	    cairo_arc (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2, REPORT_RSC_COST_RADIUS, angle1, angle2);
+	    cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
+	    cairo_fill (cr);    
+	    cairo_set_source_rgb (cr, 1, 1, 1);
 
-          value = table[i]/sum;
-	  angle2 = angle2+(2*G_PI*value);
-	  cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
-          /* we convert gdk rGba to RGB */
-	  cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
-	  cairo_arc (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2, REPORT_RSC_COST_RADIUS, angle1, angle2);
-	  cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
-	  cairo_fill (cr);    
-	  cairo_set_source_rgb (cr, 1, 1, 1);
-
-	  cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
-	  cairo_arc (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2, REPORT_RSC_COST_RADIUS+1, angle1, angle2);
-	  cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
-	  cairo_stroke (cr);
-          /* legend - when 'correct' only for value <>0 */ 
-          if(value>0) {
+ 	    cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
+	    cairo_arc (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2, REPORT_RSC_COST_RADIUS+1, angle1, angle2);
+		cairo_move_to (cr, REPORT_RSC_COST_WIDTH/2, REPORT_RSC_COST_HEIGHT/2);
+		cairo_stroke (cr);
+        /* legend - when 'correct' only for value <>0 */ 
+        if(value > 0) {
              g_utf8_strncpy (&buffer, tmp_rsc_datas->name, 10);
-	     cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
+	         cairo_set_source_rgb (cr, tmp_rsc_datas->color.red, tmp_rsc_datas->color.green, tmp_rsc_datas->color.blue);
              cairo_rectangle (cr, count_x*100, count_y*20, 16, 16);
              cairo_fill (cr);
-             cairo_move_to (cr, count_x*100+20, count_y*20+extents.height);
+             cairo_move_to (cr, count_x*100 + 20, count_y*20 + extents.height);
              cairo_set_source_rgb (cr, g_key_file_get_double (keyString, "editor", "text.color.red", NULL), 
-                                g_key_file_get_double (keyString, "editor", "text.color.green", NULL), 
-                                g_key_file_get_double (keyString, "editor", "text.color.blue", NULL));
+                                       g_key_file_get_double (keyString, "editor", "text.color.green", NULL), 
+                                       g_key_file_get_double (keyString, "editor", "text.color.blue", NULL));
              cairo_show_text (cr, buffer); 
              count_x++;
-             if(count_x>3) {
+             if(count_x>7) {
                 count_x = 0;
                 count_y++;
              }
-          }/* endif value */
-	  angle1 = angle2;
-
+        }/* endif value */
+	    angle1 = angle2;
      }/* next i */
   }/* endif sum */
   /* central white circle with duration*/
@@ -1230,13 +1256,13 @@ void report_all_rsc_cost (APP_data *data)
        gdouble tmp_cost = rsc_compute_cost (tmp_rsc_datas->id, minutes_full_corrected, data);
        cost_corrected = cost_corrected+tmp_cost;
        /* individual costs */
-       tmpStr = g_strdup_printf (_("\t%s\t%.3f\n"), tmp_rsc_datas->name, tmp_cost);
+       tmpStr = g_strdup_printf (_("\t\t%-25.25s \t%.3f\n"), tmp_rsc_datas->name, tmp_cost);
        gtk_text_buffer_insert (data->buffer, &iter, tmpStr, -1);
        g_free (tmpStr);
        t_cost [i] = tmp_cost;
-printf("rsc=%s durée corrigée=%d  complet corrigée =%d \n", tmp_rsc_datas->name, minutes_part_corrected, minutes_full_corrected);
+       // printf("rsc=%s durée corrigée=%d  complet corrigée =%d \n", tmp_rsc_datas->name, minutes_part_corrected, minutes_full_corrected);
    }
-printf("\n---------\ncout total estimé projet = %.2f totalement corrigé =%.2f\n", cost, cost_corrected);
+   // printf("\n---------\ncout total estimé projet = %.2f totalement corrigé =%.2f\n", cost, cost_corrected);
 
    /* durations */
    tmpStr = g_strdup_printf ("%s", _("\nTable 2 of 2 : global datas\n"));
