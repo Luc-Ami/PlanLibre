@@ -33,6 +33,30 @@
 #include "export.h"
 #include "assign.h"
 
+
+/*****************************************
+ * PROTECTED : round a value
+ * argument : value as float
+ * retuens : rounded value 
+ * *************************************/
+static gdouble report_round (gdouble value)
+{
+   gdouble val, ret;
+   
+   val = value - (gint) value;
+//   printf ("reste = %.2f \n", val);   
+   if( val<0.5) {
+	   ret = (gint) value;
+   }
+   else {
+	   ret = (gint) (value+1);
+   }
+   
+ //  printf ("valeur arrondie = %.2f \n", ret);
+   return ret;	
+}
+
+
 /******************************
   test is there is something to
   do : at least, ONE task and
@@ -452,7 +476,7 @@ static void report_draw_bar (gint nrsc, gdouble x, gdouble y, gdouble step, gdou
   rsc_datas *tmp_rsc_datas;
   gint id, total, completed, overdue, to_go, on_progress;
   gdouble xpos;
-  if(nrsc>=g_list_length (data->rscList))
+  if(nrsc >= g_list_length (data->rscList))
      return;
 
   l = g_list_nth (data->rscList, nrsc);
@@ -463,34 +487,34 @@ static void report_draw_bar (gint nrsc, gdouble x, gdouble y, gdouble step, gdou
   completed = rsc_get_number_tasks_done (id, data);
   overdue = rsc_get_number_tasks_overdue (id, data);
   to_go = rsc_get_number_tasks_to_go (id, data);
-  on_progress = total-overdue-to_go-completed;
+  on_progress = total - overdue - to_go - completed;
   xpos = x;
 
   /* we draw all bars in order : completed, progress, overdue, to_go */
 
   /* completed */
   cairo_set_source_rgb (cr, 0.2, 0.65, 0.32);
-  cairo_rectangle (cr, xpos, y+2, completed*step, units-4);
+  cairo_rectangle (cr, xpos, y + 2, completed*step, units - 4);
   cairo_fill (cr);
   xpos = xpos+completed*step;
 
   /* overdue */
   cairo_set_source_rgb (cr, 0.92, 0.26, 0.21);
-  cairo_rectangle (cr, xpos, y+2, overdue*step, units-4);
+  cairo_rectangle (cr, xpos, y + 2, overdue*step, units - 4);
   cairo_fill (cr);
-  xpos = xpos+overdue*step;
+  xpos = xpos + overdue*step;
 
   /* to-go */
   cairo_set_source_rgb (cr, 0.98, 0.74, 0.02);
-  cairo_rectangle (cr, xpos, y+2, to_go*step, units-4);
+  cairo_rectangle (cr, xpos, y + 2, to_go*step, units - 4);
   cairo_fill (cr);
-  xpos = xpos+to_go*step;
+  xpos = xpos + to_go*step;
 
   /* progress*/
   cairo_set_source_rgb (cr, 0.26, 0.52, 0.96);
-  cairo_rectangle (cr, xpos, y+2, on_progress*step, units-4);
+  cairo_rectangle (cr, xpos, y + 2, on_progress*step, units - 4);
   cairo_fill (cr);
-  xpos = xpos+on_progress*step;
+  xpos = xpos + on_progress*step;
 
 }
 
@@ -1012,7 +1036,7 @@ void report_unique_rsc_cost (gint id, APP_data *data)
  PROTECTED : draw old school diagram
  parameter : if TRUE, correct datas
  output : a GdkPixbuf, newly allocated,
-to be unref -ed
+to be unref-ed
 the parameter 'duration' means duration OR 
 duration_corrected, according to 'correct' parameter
 *****************************************************/
@@ -1024,6 +1048,7 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
   GList *l;
   rsc_datas *tmp_rsc_datas;
   gdouble value;
+  gdouble tmpVal;
   gint total, i, j, pos_x, pos_y, count_x, count_y;
   cairo_surface_t *surf = NULL;
   cairo_t *cr = NULL;
@@ -1049,7 +1074,7 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
   cairo_set_line_width (cr, 1);
   cairo_text_extents (cr, "Jp", &extents);
   /* we do the job for all ressources */
-  for(i=0; i<total; i++) {
+  for(i = 0; i < total; i++) {
     l = g_list_nth (data->rscList, i);
     tmp_rsc_datas = (rsc_datas *)l->data; 
     /* legend */
@@ -1063,7 +1088,7 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
                                 g_key_file_get_double(keyString, "editor", "text.color.blue", NULL));
     cairo_show_text (cr, buffer); 
     count_x++;
-    if(count_x>7) {
+    if(count_x > 7) {
          count_x = 0;
          count_y++;
     }/* endif count_x */
@@ -1076,9 +1101,11 @@ static GdkPixbuf *report_old_school_diagram (gboolean correct, gdouble duration,
     else {
           value = (report_get_tasks_duration (tmp_rsc_datas->id, data)/duration )*100;
     }
-//  printf ("la ressource %s occupe %d % (%.2f) écart =%.2f du projet \n", 
-           //        tmp_rsc_datas->name, (gint) value, value, (gdouble) value-(gint)value);
-    for(j = 0; j < (gint)value; j++) {
+  printf ("la ressource %s occupe %d % (%.2f) écart =%.2f du projet \n", 
+                   tmp_rsc_datas->name, (gint) value, value, (gdouble) value-(gint)value);
+                   tmpVal = report_round (value);
+                   
+    for(j = 0; j < (gint) (tmpVal); j++) {
        cairo_rectangle (cr, pos_x*40, 120+pos_y*28, 38, 26);
        cairo_fill (cr);
        pos_x++;
@@ -1114,8 +1141,8 @@ static GdkPixbuf *report_cost_repartition_diagram (gdouble table[], gint total, 
   cairo_t *cr = NULL;
   cairo_text_extents_t extents; 
 
-  for(i=0;i<total;i++) {
-     sum = sum+table[i];
+  for( i = 0; i < total; i++) {
+     sum = sum + table[i];
   }
  
   keyString =  data->keystring;
@@ -1168,7 +1195,7 @@ static GdkPixbuf *report_cost_repartition_diagram (gdouble table[], gint total, 
                                        g_key_file_get_double (keyString, "editor", "text.color.blue", NULL));
              cairo_show_text (cr, buffer); 
              count_x++;
-             if(count_x>7) {
+             if(count_x > 7) {
                 count_x = 0;
                 count_y++;
              }
