@@ -1301,7 +1301,8 @@ GtkWidget *collaborate_compose_email_dialog (APP_data *data)
   data->tmpBuilder = builder;
 
   /* here we can set-up default values */
-
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));  
   return dialog;
 }
 
@@ -1342,11 +1343,13 @@ GtkWidget *collaborate_compose_email_report_calendar_dialog (gint mode, APP_data
   if(mode == MAIL_TYPE_CALENDAR) {
      lblTitle = GTK_WIDGET(gtk_builder_get_object(builder, "labelTitle"));
      lblSubTitle = GTK_WIDGET(gtk_builder_get_object(builder, "labelSubTitle"));
-     gtk_label_set_markup (GTK_LABEL (lblTitle), ("<big><b>Send a calendar/agenda by email</b></big>"));
+     gtk_label_set_markup (GTK_LABEL (lblTitle), _("<big><b>Send a calendar/agenda by email</b></big>"));
      gtk_label_set_markup (GTK_LABEL (lblSubTitle), 
-             ("<i>The <u>current</u> calendar/agenda will be sent.\nBy default, calendar is sent to <u>all</u> recipients. </i>"));
+             _("<i>The <u>current</u> calendar/agenda will be sent.\nBy default, calendar is sent to <u>all</u> recipients. </i>"));
   }
 
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));  
   return dialog;
 }
 /***********************************
@@ -1422,8 +1425,8 @@ gint
              }/* endif receptors */
              else {
                 tmpStr = g_strdup_printf ("%s", _("Error !\n\nMail sending aborted because there\nisn't any recipient !"));
-	        misc_ErrorDialog (GTK_WIDGET(data->appWindow), tmpStr);
-	        g_free (tmpStr);
+	            misc_ErrorDialog (GTK_WIDGET(data->appWindow), tmpStr);
+	            g_free (tmpStr);
              }
              break;
            }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 15:41+0200\n"
+"POT-Creation-Date: 2021-06-11 10:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: report.c:1233
+#: report.c:1286
 #, c-format
-msgid "\t%s\t%.3f\n"
+msgid "\t\t%-25.25s \t%.3f\n"
 msgstr ""
 
-#: report.c:1251
+#: report.c:1304
 #, c-format
 msgid ""
 "\tCost excl. non-working days, clamped :\t%.3f\n"
 "\n"
 msgstr ""
 
-#: report.c:1246
+#: report.c:1299
 #, c-format
 msgid ""
 "\tDuration : %d hour(s) and %d minute(s) (excl. non-working days, clamped).\n"
 msgstr ""
 
-#: report.c:1265
+#: report.c:1318
 msgid ""
 "\n"
 "\n"
@@ -43,33 +43,33 @@ msgid ""
 "\n"
 msgstr ""
 
-#: report.c:525
+#: report.c:577
 #, c-format
 msgid ""
 "\n"
 "Diagram %d of %d\n"
 msgstr ""
 
-#: report.c:971
+#: report.c:1023
 msgid ""
 "\n"
 "Diagram : net duration repartition\n"
 msgstr ""
 
-#: report.c:509
+#: report.c:561
 #, c-format
 msgid ""
 "\n"
 "Project \"%s\" has %d task(s),\n"
 msgstr ""
 
-#: report.c:1242
+#: report.c:1295
 msgid ""
 "\n"
 "Table 2 of 2 : global datas\n"
 msgstr ""
 
-#: report.c:310 report.c:933 report.c:1492
+#: report.c:362 report.c:985 report.c:1545
 #, c-format
 msgid ""
 "\n"
@@ -151,7 +151,7 @@ msgstr ""
 msgid " holidays "
 msgstr ""
 
-#: report.c:889
+#: report.c:941
 #, c-format
 msgid "%.2dH%.2dm."
 msgstr ""
@@ -198,12 +198,12 @@ msgid ""
 "</span></b>"
 msgstr ""
 
-#: report.c:394
+#: report.c:446
 #, c-format
 msgid "%.2f%%"
 msgstr ""
 
-#: report.c:1154
+#: report.c:1207
 #, c-format
 msgid "%.3f %s"
 msgstr ""
@@ -248,39 +248,39 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#: report.c:965
+#: report.c:1017
 #, c-format
 msgid "%s costs (estimated excl. non-working days) : %s %.2f\n"
 msgstr ""
 
-#: report.c:325
+#: report.c:377
 #, c-format
 msgid "%s has completed %d task(s)\n"
 msgstr ""
 
-#: report.c:337
+#: report.c:389
 #, c-format
 msgid "%s if on go for %d task(s)\n"
 msgstr ""
 
-#: report.c:331
+#: report.c:383
 #, c-format
 msgid "%s if overdue for %d task(s)\n"
 msgstr ""
 
-#: report.c:315 report.c:938
+#: report.c:367 report.c:990
 #, c-format
 msgid "%s is assigned to %d task(s)\n"
 msgstr ""
 
-#: report.c:1497
+#: report.c:1550
 #, c-format
 msgid ""
 "%s is assigned to %d task(s)\n"
 "\n"
 msgstr ""
 
-#: report.c:958
+#: report.c:1010
 #, c-format
 msgid ""
 "%s works (estimated excl. non-working days, using true effective schedule, "
@@ -298,12 +298,12 @@ msgstr ""
 msgid "%s, %s"
 msgstr ""
 
-#: mail.c:1666
+#: mail.c:1669
 #, c-format
 msgid "%s/calendar-%s.ics"
 msgstr ""
 
-#: mail.c:1649
+#: mail.c:1652
 #, c-format
 msgid "%s/report-%s.rtf"
 msgstr ""
@@ -326,7 +326,7 @@ msgstr ""
 msgid "*PlanLibre critical : Error saving %s: %s*\n"
 msgstr ""
 
-#: report.c:1430
+#: report.c:1483
 #, c-format
 msgid "- overload on tasks : %s,  %s \n"
 msgstr ""
@@ -1085,6 +1085,10 @@ msgstr ""
 msgid "<big><b>Ressource</b></big>"
 msgstr ""
 
+#: mail.c:1346
+msgid "<big><b>Send a calendar/agenda by email</b></big>"
+msgstr ""
+
 #: ui/reportmail.ui:157
 msgid "<big><b>Send a report by email</b></big>"
 msgstr ""
@@ -1208,6 +1212,12 @@ msgstr ""
 
 #: settings.c:117
 msgid "<i>Stored</i>"
+msgstr ""
+
+#: mail.c:1348
+msgid ""
+"<i>The <u>current</u> calendar/agenda will be sent.\n"
+"By default, calendar is sent to <u>all</u> recipients. </i>"
 msgstr ""
 
 #: ui/reportmail.ui:176
@@ -1369,11 +1379,11 @@ msgstr ""
 msgid "Animal work force"
 msgstr ""
 
-#: callbacks.c:2140
+#: callbacks.c:2143
 msgid "Append PlanLibre resources from Thunderbird contacts ..."
 msgstr ""
 
-#: callbacks.c:2047 callbacks.c:2094
+#: callbacks.c:2050 callbacks.c:2097
 msgid "Append PlanLibre resources from file ..."
 msgstr ""
 
@@ -1430,11 +1440,11 @@ msgstr ""
 msgid "Assignments"
 msgstr ""
 
-#: report.c:299
+#: report.c:351
 msgid "Assignments for Resource "
 msgstr ""
 
-#: report.c:504
+#: report.c:556
 #, c-format
 msgid ""
 "Assignments for the %d Resources \n"
@@ -1457,7 +1467,7 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-#: report.c:575
+#: report.c:627
 msgid "Avg"
 msgstr ""
 
@@ -1517,7 +1527,7 @@ msgstr ""
 msgid "CTRL"
 msgstr ""
 
-#: assign.c:181 timeline.c:561 timeline.c:649
+#: assign.c:181 timeline.c:564 timeline.c:652
 msgid "C_ancel"
 msgstr ""
 
@@ -1529,7 +1539,7 @@ msgstr ""
 msgid "Calendar : "
 msgstr ""
 
-#: callbacks.c:908
+#: callbacks.c:911
 msgid "Calendar/agenda files"
 msgstr ""
 
@@ -1545,7 +1555,7 @@ msgstr ""
 msgid "Calendars ..."
 msgstr ""
 
-#: settings.c:399
+#: settings.c:403
 msgid ""
 "Can't do that !\n"
 "\n"
@@ -1609,7 +1619,7 @@ msgstr ""
 msgid "Choose repeat frequency"
 msgstr ""
 
-#: callbacks.c:1886
+#: callbacks.c:1889
 msgid "Clic on a task, and drag'n'drop it to change its status"
 msgstr ""
 
@@ -1889,14 +1899,14 @@ msgstr ""
 msgid "Cost : "
 msgstr ""
 
-#: report.c:1193
+#: report.c:1246
 #, c-format
 msgid ""
 "Cost for the %d Resources \n"
 "\n"
 msgstr ""
 
-#: report.c:922
+#: report.c:974
 msgid "Costs for Resource "
 msgstr ""
 
@@ -2001,7 +2011,7 @@ msgstr ""
 msgid "Define user token ..."
 msgstr ""
 
-#: report.c:1256
+#: report.c:1309
 msgid ""
 "Diagram 1 of 2 : repartition of monetary cost (excl. non-working days, "
 "clamped). \n"
@@ -2018,7 +2028,7 @@ msgid ""
 "This operation isn't cancellable ..."
 msgstr ""
 
-#: callbacks.c:1252
+#: callbacks.c:1255
 msgid "Do you really want to quit this program ?"
 msgstr ""
 
@@ -2028,7 +2038,7 @@ msgid ""
 "This operation isn't cancellable ..."
 msgstr ""
 
-#: assign.c:1059 timeline.c:1694
+#: assign.c:1059 timeline.c:1697
 msgid "Documents PDF files"
 msgstr ""
 
@@ -2046,7 +2056,7 @@ msgid ""
 "Double-Click again to remove this marking."
 msgstr ""
 
-#: callbacks.c:1891
+#: callbacks.c:1894
 msgid "Double-click on a resource to modify it, right-click for other options "
 msgstr ""
 
@@ -2094,7 +2104,7 @@ msgstr ""
 msgid "Equipment"
 msgstr ""
 
-#: mail.c:1424 mail.c:1695
+#: mail.c:1427 mail.c:1698
 msgid ""
 "Error !\n"
 "\n"
@@ -2102,7 +2112,7 @@ msgid ""
 "isn't any recipient !"
 msgstr ""
 
-#: mail.c:1700
+#: mail.c:1703
 msgid ""
 "Error !\n"
 "\n"
@@ -2152,7 +2162,7 @@ msgstr ""
 msgid "Export current assignments to a SVG file"
 msgstr ""
 
-#: callbacks.c:912
+#: callbacks.c:915
 msgid "Export current project tasks agenda as a Icalendar compatible file"
 msgstr ""
 
@@ -2160,15 +2170,15 @@ msgstr ""
 msgid "Export current report to word processor"
 msgstr ""
 
-#: timeline.c:1695
+#: timeline.c:1698
 msgid "Export current timeline to a PDF file"
 msgstr ""
 
-#: timeline.c:1707
+#: timeline.c:1710
 msgid "Export current timeline to a PNG file"
 msgstr ""
 
-#: timeline.c:1701
+#: timeline.c:1704
 msgid "Export current timeline to a SVG file"
 msgstr ""
 
@@ -2343,11 +2353,11 @@ msgid ""
 "You can check new ending date under <b>project/properties</b> menu."
 msgstr ""
 
-#: report.c:272
+#: report.c:324
 msgid "In progress"
 msgstr ""
 
-#: timeline.c:551
+#: timeline.c:554
 msgid "Increase duration by one day "
 msgstr ""
 
@@ -2427,17 +2437,17 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: callbacks.c:2249
+#: callbacks.c:2252
 #, c-format
 msgid "L%d"
 msgstr ""
 
-#: callbacks.c:1918
+#: callbacks.c:1921
 #, c-format
 msgid "L%d/%d"
 msgstr ""
 
-#: callbacks.c:1834 callbacks.c:1928 callbacks.c:2301 ui/main_ribbon.ui:4791
+#: callbacks.c:1837 callbacks.c:1931 callbacks.c:2304 ui/main_ribbon.ui:4791
 #: ui/main.ui:4284
 msgid "L--"
 msgstr ""
@@ -2590,19 +2600,19 @@ msgstr ""
 msgid "Monthly by day(s) of month"
 msgstr ""
 
-#: timeline.c:531
+#: timeline.c:534
 msgid "Move _Up "
 msgstr ""
 
-#: timeline.c:534
+#: timeline.c:537
 msgid "Move _down "
 msgstr ""
 
-#: timeline.c:541
+#: timeline.c:544
 msgid "Move one day _backward "
 msgstr ""
 
-#: timeline.c:544
+#: timeline.c:547
 msgid "Move one day _forward "
 msgstr ""
 
@@ -2693,15 +2703,15 @@ msgstr ""
 msgid "Next month"
 msgstr ""
 
-#: report.c:1187
+#: report.c:1240
 msgid "No datas for computations !"
 msgstr ""
 
-#: report.c:500
+#: report.c:552
 msgid "No datas for reporting ! Quit."
 msgstr ""
 
-#: report.c:321 report.c:944
+#: report.c:373 report.c:996
 msgid "No more operations - Resource hasn't any task !"
 msgstr ""
 
@@ -2729,7 +2739,7 @@ msgstr ""
 msgid "Non-worked days"
 msgstr ""
 
-#: callbacks.c:1421 ressources.c:833 ressources.c:1110
+#: callbacks.c:1424 ressources.c:833 ressources.c:1110
 msgid "Noname"
 msgstr ""
 
@@ -2757,8 +2767,8 @@ msgstr ""
 msgid "Noname tasks"
 msgstr ""
 
-#: callbacks.c:702 callbacks.c:1232 callbacks.c:1340 callbacks.c:1457
-#: callbacks.c:1541 callbacks.c:1662 callbacks.c:1779
+#: callbacks.c:702 callbacks.c:1235 callbacks.c:1343 callbacks.c:1460
+#: callbacks.c:1544 callbacks.c:1665 callbacks.c:1782
 msgid "Noname.plibre"
 msgstr ""
 
@@ -2770,7 +2780,7 @@ msgstr ""
 msgid "Nonane milestone"
 msgstr ""
 
-#: callbacks.c:2258 tasksdialogs.c:1140
+#: callbacks.c:2261 tasksdialogs.c:1140
 msgid "None"
 msgstr ""
 
@@ -2807,11 +2817,11 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: callbacks.c:1472
+#: callbacks.c:1475
 msgid "Open PlanLibre project ..."
 msgstr ""
 
-#: callbacks.c:1577
+#: callbacks.c:1580
 msgid "Open a previous project."
 msgstr ""
 
@@ -2843,7 +2853,7 @@ msgstr ""
 msgid "Our Organization"
 msgstr ""
 
-#: export.c:807 report.c:268 trello.c:493 ui/tasks.ui:468
+#: export.c:807 report.c:320 trello.c:493 ui/tasks.ui:468
 msgid "Overdue"
 msgstr ""
 
@@ -2851,11 +2861,11 @@ msgstr ""
 msgid "Overload details ... "
 msgstr ""
 
-#: report.c:1476
+#: report.c:1529
 msgid "Overload for Resource : "
 msgstr ""
 
-#: assign.c:1071 timeline.c:1706
+#: assign.c:1071 timeline.c:1709
 msgid "PNG image files"
 msgstr ""
 
@@ -2887,7 +2897,7 @@ msgstr ""
 msgid "PlanLibre Settings"
 msgstr ""
 
-#: callbacks.c:566 callbacks.c:1441 callbacks.c:1559
+#: callbacks.c:566 callbacks.c:1444 callbacks.c:1562
 msgid "PlanLibre files"
 msgstr ""
 
@@ -2901,7 +2911,7 @@ msgid ""
 "password at each session"
 msgstr ""
 
-#: callbacks.c:1697 callbacks.c:2043
+#: callbacks.c:1700 callbacks.c:2046
 msgid "PlanLibre xml files"
 msgstr ""
 
@@ -2913,7 +2923,7 @@ msgstr ""
 msgid "Platform worker"
 msgstr ""
 
-#: report.c:1197
+#: report.c:1250
 msgid ""
 "Please Note !\n"
 "Datas are ONLY estimated costs by durations, and converted to money.\n"
@@ -2942,7 +2952,7 @@ msgstr ""
 msgid "Prev. month"
 msgstr ""
 
-#: callbacks.c:1815
+#: callbacks.c:1818
 msgid "Previous version of your project reloaded"
 msgstr ""
 
@@ -2991,7 +3001,7 @@ msgstr ""
 msgid "Project information about task %s"
 msgstr ""
 
-#: callbacks.c:870
+#: callbacks.c:873
 msgid "Project main calendar"
 msgstr ""
 
@@ -3047,7 +3057,7 @@ msgstr ""
 msgid "R"
 msgstr ""
 
-#: callbacks.c:1576
+#: callbacks.c:1579
 msgid "Recent PlanLibre projects"
 msgstr ""
 
@@ -3067,7 +3077,7 @@ msgstr ""
 msgid "Recurring task"
 msgstr ""
 
-#: timeline.c:554
+#: timeline.c:557
 msgid "Reduce duration by one day "
 msgstr ""
 
@@ -3121,7 +3131,7 @@ msgstr ""
 msgid "Rest time %.2d:%.2d"
 msgstr ""
 
-#: callbacks.c:1846
+#: callbacks.c:1849
 msgid ""
 "Right-click on a task for various options, or left-click and drag and drop "
 "to move a task along time"
@@ -3147,7 +3157,7 @@ msgstr ""
 msgid "SHIFT"
 msgstr ""
 
-#: assign.c:1065 timeline.c:1700
+#: assign.c:1065 timeline.c:1703
 msgid "SVG drawings files"
 msgstr ""
 
@@ -3175,11 +3185,11 @@ msgstr ""
 msgid "Save current project and choose a name"
 msgstr ""
 
-#: callbacks.c:574 callbacks.c:1701
+#: callbacks.c:574 callbacks.c:1704
 msgid "Save current project as ..."
 msgstr ""
 
-#: report.c:1296
+#: report.c:1349
 msgid "Save current report to a Rich Text Format file"
 msgstr ""
 
@@ -3291,7 +3301,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: mail.c:1690
+#: mail.c:1693
 msgid ""
 "Sorry !\n"
 "An error happened during attached file generation.\n"
@@ -3307,7 +3317,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: report.c:1327
+#: report.c:1380
 msgid ""
 "Sorry !\n"
 "An error happened during file exporting.\n"
@@ -3315,7 +3325,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:2055 callbacks.c:2103 callbacks.c:2149 import.c:599
+#: callbacks.c:2058 callbacks.c:2106 callbacks.c:2152 import.c:599
 msgid ""
 "Sorry !\n"
 "An error happened during file importation.\n"
@@ -3323,7 +3333,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1499 callbacks.c:1626
+#: callbacks.c:1502 callbacks.c:1629
 msgid ""
 "Sorry !\n"
 "An error happened during file loading.\n"
@@ -3331,14 +3341,14 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1818
+#: callbacks.c:1821
 msgid ""
 "Sorry !\n"
 "An error happened during file restoration.\n"
 "Operation aborted."
 msgstr ""
 
-#: timeline.c:1811
+#: timeline.c:1814
 msgid ""
 "Sorry !\n"
 "An error happened during timeline exporting.\n"
@@ -3346,7 +3356,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: callbacks.c:1053
+#: callbacks.c:1056
 msgid ""
 "Sorry !\n"
 "Can't do that.\n"
@@ -3355,7 +3365,7 @@ msgid ""
 "You can try again, after updating project's properties."
 msgstr ""
 
-#: callbacks.c:1633
+#: callbacks.c:1636
 msgid ""
 "Sorry !\n"
 "I can't retrieve the file !\n"
@@ -3363,7 +3373,7 @@ msgid ""
 "check your system."
 msgstr ""
 
-#: report.c:47
+#: report.c:72
 msgid ""
 "Sorry !\n"
 "In order to report something, you must assign.\n"
@@ -3396,7 +3406,7 @@ msgid ""
 "Operation aborted."
 msgstr ""
 
-#: timeline.c:934
+#: timeline.c:937
 msgid ""
 "Sorry !\n"
 "When you click on the timeline, you can ...\n"
@@ -3404,7 +3414,7 @@ msgid ""
 " ... Or right-click on a line <b>without</b> any task to add a new task."
 msgstr ""
 
-#: timeline.c:789
+#: timeline.c:792
 msgid ""
 "Sorry !\n"
 "You <b>can't move a fixed task</b> along the timeline.\n"
@@ -3412,21 +3422,21 @@ msgid ""
 "modify task duration mode."
 msgstr ""
 
-#: timeline.c:781
+#: timeline.c:784
 msgid ""
 "Sorry !\n"
 "You <b>can't move a task that is in <u>not before</u> mode</b> at this "
 "position. Please, check task dates or modify its duration."
 msgstr ""
 
-#: timeline.c:773
+#: timeline.c:776
 msgid ""
 "Sorry !\n"
 "You <b>can't move a task with a deadline</b> at this position. Please, check "
 "task dates or modify its duration."
 msgstr ""
 
-#: callbacks.c:2090 export.c:846 import.c:586
+#: callbacks.c:2093 export.c:846 import.c:586
 msgid "Spreadsheets CSV files"
 msgstr ""
 
@@ -3478,7 +3488,7 @@ msgstr ""
 msgid "Switch to previous notebook page"
 msgstr ""
 
-#: report.c:1201
+#: report.c:1254
 #, c-format
 msgid ""
 "Table 1 of 2 : Cost per resource (excl. non-working days, clamped), %s \n"
@@ -3501,7 +3511,7 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: report.c:582
+#: report.c:634
 msgid "Tasks by resources"
 msgstr ""
 
@@ -3525,13 +3535,13 @@ msgstr ""
 msgid "Th"
 msgstr ""
 
-#: report.c:344
+#: report.c:396
 msgid ""
 "The average progress for his/her task(s) is %.2f %\n"
 "\n"
 msgstr ""
 
-#: callbacks.c:932
+#: callbacks.c:935
 #, c-format
 msgid ""
 "The file :\n"
@@ -3549,7 +3559,7 @@ msgid ""
 "Do you really want to overwrite this PlanLibre file ?"
 msgstr ""
 
-#: report.c:1316
+#: report.c:1369
 #, c-format
 msgid ""
 "The file :\n"
@@ -3558,7 +3568,7 @@ msgid ""
 "Do you really want to overwrite this RTF file ?"
 msgstr ""
 
-#: assign.c:1122 timeline.c:1757
+#: assign.c:1122 timeline.c:1760
 #, c-format
 msgid ""
 "The file :\n"
@@ -3567,7 +3577,7 @@ msgid ""
 "Do you really want to overwrite this file ?"
 msgstr ""
 
-#: callbacks.c:1725
+#: callbacks.c:1728
 #, c-format
 msgid ""
 "The file :\n"
@@ -3583,13 +3593,13 @@ msgstr ""
 msgid "The task will be repeated, according to your choices."
 msgstr ""
 
-#: report.c:1481
+#: report.c:1534
 msgid ""
 "There is an overload when a resource is used at same time by at least 2 "
 "tasks."
 msgstr ""
 
-#: report.c:96
+#: report.c:121
 msgid ""
 "There isn't any report for now.\n"
 "This area is editable, you can type ideas, append them to reports, paste "
@@ -3604,11 +3614,11 @@ msgstr ""
 msgid "This is the NEW starting date for the whole project"
 msgstr ""
 
-#: callbacks.c:1896
+#: callbacks.c:1899
 msgid "This page displays last report. You can export it, see top buttons."
 msgstr ""
 
-#: callbacks.c:1839
+#: callbacks.c:1842
 msgid "This page displays project information summary"
 msgstr ""
 
@@ -3632,7 +3642,7 @@ msgstr ""
 msgid "Thu."
 msgstr ""
 
-#: callbacks.c:2136
+#: callbacks.c:2139
 msgid "Thunderbird CSV files"
 msgstr ""
 
@@ -3675,7 +3685,7 @@ msgstr ""
 msgid "To Go"
 msgstr ""
 
-#: report.c:270 ui/tasks.ui:469
+#: report.c:322 ui/tasks.ui:469
 msgid "To go"
 msgstr ""
 
@@ -3823,7 +3833,7 @@ msgstr ""
 msgid "Voluntary"
 msgstr ""
 
-#: settings.c:237
+#: settings.c:241
 msgid ""
 "Warning !\n"
 "\n"
@@ -3869,7 +3879,7 @@ msgstr ""
 msgid "Weekly by day(s) of week"
 msgstr ""
 
-#: report.c:1292
+#: report.c:1345
 msgid "Word Processors RTF files"
 msgstr ""
 
@@ -3914,7 +3924,7 @@ msgstr ""
 msgid "Z"
 msgstr ""
 
-#: callbacks.c:1563
+#: callbacks.c:1566
 msgid "_Cancel"
 msgstr ""
 
@@ -3930,7 +3940,7 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
-#: timeline.c:524
+#: timeline.c:527
 msgid "_Modify ... "
 msgstr ""
 
@@ -3938,15 +3948,15 @@ msgstr ""
 msgid "_Modify resource ... "
 msgstr ""
 
-#: timeline.c:642
+#: timeline.c:645
 msgid "_New milestone ... "
 msgstr ""
 
-#: timeline.c:639
+#: timeline.c:642
 msgid "_New task ... "
 msgstr ""
 
-#: callbacks.c:1565
+#: callbacks.c:1568
 msgid "_Open"
 msgstr ""
 
@@ -3979,15 +3989,15 @@ msgstr ""
 msgid "change ..."
 msgstr ""
 
-#: callbacks.c:1881
+#: callbacks.c:1884
 msgid "click on a resource to select it "
 msgstr ""
 
-#: callbacks.c:1868
+#: callbacks.c:1871
 msgid "click on a task to select it"
 msgstr ""
 
-#: report.c:266
+#: report.c:318
 msgid "completed"
 msgstr ""
 
@@ -4082,7 +4092,7 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: callbacks.c:2029
+#: callbacks.c:2032
 msgid "no"
 msgstr ""
 
@@ -4094,11 +4104,11 @@ msgstr ""
 msgid "noname"
 msgstr ""
 
-#: callbacks.c:1992
+#: callbacks.c:1995
 msgid "none after"
 msgstr ""
 
-#: callbacks.c:1961
+#: callbacks.c:1964
 msgid "none before"
 msgstr ""
 
@@ -4228,7 +4238,7 @@ msgstr ""
 msgid "uncategorized"
 msgstr ""
 
-#: timeline.c:1562
+#: timeline.c:1565
 #, c-format
 msgid "week %d of %d"
 msgstr ""
@@ -4243,7 +4253,7 @@ msgstr ""
 msgid "week %d of %d - %s/%s"
 msgstr ""
 
-#: timeline.c:1564
+#: timeline.c:1567
 #, c-format
 msgid "week %d of %d-%s"
 msgstr ""
@@ -4252,7 +4262,7 @@ msgstr ""
 msgid "week(s)"
 msgstr ""
 
-#: report.c:514
+#: report.c:566
 #, c-format
 msgid "with an average of %.2f task(s) by resource.\n"
 msgstr ""
@@ -4261,7 +4271,7 @@ msgstr ""
 msgid "year(s)"
 msgstr ""
 
-#: callbacks.c:1954 callbacks.c:1985 callbacks.c:2024
+#: callbacks.c:1957 callbacks.c:1988 callbacks.c:2027
 msgid "yes"
 msgstr ""
 

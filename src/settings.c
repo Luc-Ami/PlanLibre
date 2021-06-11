@@ -67,7 +67,7 @@ GtkWidget *settings_create_dialog (APP_data *data)
   gtk_widget_show (hbar);
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("Settings"));
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (hbar), _("Define global settings for PlanLibre."));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), TRUE);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), FALSE);
   gtk_window_set_titlebar (GTK_WINDOW(dialog), hbar);
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   
@@ -183,6 +183,10 @@ GtkWidget *settings_create_dialog (APP_data *data)
   /* password */
   if(mdpStr != NULL)
       gtk_entry_set_text (GTK_ENTRY(entryUserPwd), mdpStr);
+      
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));       
+      
   return dialog;
 }
 

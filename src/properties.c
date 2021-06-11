@@ -253,12 +253,12 @@ GtkWidget *properties_create_dialog (APP_data *data)
   gtk_widget_show (hbar);
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("Project's properties"));
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (hbar), _("Define and modify project's properties and various global values."));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), TRUE);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), FALSE);
   gtk_window_set_titlebar (GTK_WINDOW(dialog), hbar);
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   
   gtk_header_bar_pack_start (GTK_HEADER_BAR (hbar), box);
-  GtkWidget *icon =  gtk_image_new_from_icon_name  ("gtk-page-setup", GTK_ICON_SIZE_DIALOG);
+  GtkWidget *icon =  gtk_image_new_from_icon_name  ("document-properties", GTK_ICON_SIZE_DIALOG);
   gtk_container_add (GTK_CONTAINER (box), icon);
   gtk_widget_show (box);
   gtk_widget_show (icon);

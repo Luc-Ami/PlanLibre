@@ -766,7 +766,7 @@ on_keyHelp1_activate (GtkMenuItem *menuitem, APP_data *data)
   gtk_widget_show (hbar);
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("Keyboard shortcuts"));
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (hbar), _("List of keyboard shortcuts used by PLanLibre"));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), TRUE);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), FALSE);
   gtk_window_set_titlebar (GTK_WINDOW(dialog), hbar);
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);  
   gtk_header_bar_pack_start (GTK_HEADER_BAR (hbar), box);
@@ -774,6 +774,9 @@ on_keyHelp1_activate (GtkMenuItem *menuitem, APP_data *data)
   gtk_container_add (GTK_CONTAINER (box), icon);
   gtk_widget_show (box);
   gtk_widget_show (icon);
+
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));  
 
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   g_object_unref (data->tmpBuilder);
@@ -1575,7 +1578,7 @@ void on_file_recent_activate (GtkMenuItem *menuitem, APP_data *data)
   gtk_widget_show (hbar);
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("Recent PlanLibre projects"));
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (hbar), _("Open a previous project."));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), TRUE);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), FALSE);
   gtk_window_set_titlebar (GTK_WINDOW(dialog), hbar);
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   

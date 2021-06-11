@@ -469,7 +469,7 @@ GtkWidget *timeline_create_timeshift_dialog (gboolean groupMode, gint position, 
   gtk_widget_show (hbar);
   gtk_header_bar_set_title (GTK_HEADER_BAR (hbar), _("Date shift"));
   gtk_header_bar_set_subtitle (GTK_HEADER_BAR (hbar), _("Define a timeshift for whole project or current group."));
-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), TRUE);
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (hbar), FALSE);
   gtk_window_set_titlebar (GTK_WINDOW(dialog), hbar);
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   
@@ -506,6 +506,9 @@ GtkWidget *timeline_create_timeshift_dialog (gboolean groupMode, gint position, 
                                       g_date_get_year(&current_date));
   gtk_label_set_text (GTK_LABEL(labelBtn), curDate);
   g_free (curDate);
+  
+  gtk_window_set_transient_for (GTK_WINDOW(dialog),
+                              GTK_WINDOW(data->appWindow));   
   return dialog;
 }
 
