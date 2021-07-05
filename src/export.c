@@ -847,7 +847,7 @@ gint save_tasks_CSV (APP_data *data)
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
 
-  GtkWidget *dialog = create_loadFileDialog (data->appWindow, data, _("Export tasks to spreadsheet file ..."));
+  GtkWidget *dialog = create_saveFileDialog ( _("Export tasks to spreadsheet file ..."), data);
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), g_get_home_dir());
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
   /* run dialog for file selection */
