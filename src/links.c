@@ -217,23 +217,23 @@ GDate links_get_latest_task_linked (gint tsk, APP_data *data)
   g_date_set_dmy (&date, data->properties.start_nthDay, data->properties.start_nthMonth, data->properties.start_nthYear);
 
   /* we test if ressource is sender anywhere  */
-  while(i<links_list_len) {
+  while(i < links_list_len) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *)l->data;
-     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type==LINK_TYPE_TSK_TSK)) {
+     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type == LINK_TYPE_TSK_TSK)) {
         sender = tmp_links_datas->sender;/* ID of sender */
         j=0;
         ret = -1;
         while((j<g_list_length (data->tasksList)) && (ret<0)) {
            l1 = g_list_nth (data->tasksList, j);
            temp = (tasks_data *) l1->data;
-           if(temp->id == sender) {//printf ("ds links test pour sender = %d dates début =%d %d %d fin = %d %d %d \n", sender,  temp->start_nthDay, temp->start_nthMonth, temp->start_nthYear,
-// temp->end_nthDay, temp->end_nthMonth, temp->end_nthYear);
+           if(temp->id == sender) {
               /* rustine ! ouh ! */
               g_date_set_dmy (&s_date, temp->start_nthDay, temp->start_nthMonth, temp->start_nthYear);
               g_date_set_dmy (&e_date, temp->end_nthDay, temp->end_nthMonth, temp->end_nthYear);
               cmp = g_date_compare (&e_date, &s_date);
-              if(cmp<=0) {printf ("* rustine correction ! *\n");
+              if(cmp<0) {
+				 printf ("* PlanLibre critical : rustine correction ! *\n");
                  g_date_set_dmy (&e_date, temp->start_nthDay, temp->start_nthMonth, temp->start_nthYear);
                  //g_date_add_days (&e_date, temp->days-1);
                  temp->end_nthDay = g_date_get_day (&e_date);
@@ -243,8 +243,9 @@ GDate links_get_latest_task_linked (gint tsk, APP_data *data)
               ret = j;
               g_date_set_dmy (&cur_date, temp->end_nthDay, temp->end_nthMonth, temp->end_nthYear);
               cmp = g_date_compare (&cur_date, &date);
-              if(cmp>0)
+              if(cmp > 0) {
                  g_date_set_dmy (&date, temp->end_nthDay, temp->end_nthMonth, temp->end_nthYear);
+              }
            }/* endif */
            j++;
         }/* wend tsk */
@@ -271,14 +272,14 @@ void links_remove_tasks_ending_too_late (gint id, GDate *lim_date, APP_data *dat
 
   total = g_list_length (data->linksList);
 
-  for(i=total-1; i>=0; i--) {
+  for(i = total-1; i >= 0; i--) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *) l->data;
      if(tmp_links_datas->receiver == id) {
          sender = tmp_links_datas->sender;
          /* now we are looking for ending date of sender task */
          index = tasks_get_rank_for_id (sender, data);
-         if(index>=0) {
+         if(index >= 0) {
             l1 = g_list_nth (data->tasksList, index);
             tmp_tsk = (tasks_data *) l1->data;
             g_date_set_dmy (&end_date, tmp_tsk->end_nthDay, tmp_tsk->end_nthMonth, tmp_tsk->end_nthYear);
@@ -337,7 +338,7 @@ void links_free_all (APP_data *data)
   g_list_free (data->linksList);
   data->linksList = NULL;
 
-  printf("* PlanLibre : successfully freed Links datas *\n");
+  printf ("* PlanLibre : successfully freed Links datas *\n");
 }
 
 /*****************************************
@@ -566,7 +567,7 @@ gint links_test_concurrent_rsc_usage (gint id, gint sender, gint id_dest, GDate 
 		 if((coincStart) || (coincEnd)) {/* now we can check potential ressources conflicts because there is al least ONE dates overleap */
 			gint res = links_check_element (tmp_tsk_datas->id, sender, data);/* we test if resource 'sender' is used by current task found on overlapping  */
 			if(res != 0) {
-				 printf("* resource conflict for rsc ID=%d \n", sender);
+				 printf ("* PlanLibre critical : resource conflict for rsc ID=%d \n", sender);
 				 ret = sender;
 			}
 		 }/* endif coinc dates */

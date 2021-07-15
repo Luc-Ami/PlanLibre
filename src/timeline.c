@@ -45,8 +45,9 @@ static gboolean fResize = FALSE;
 ******************************/
 void timeline_store_zoom (gdouble z)
 {
-  if(z>=0)
+  if(z >= 0) {
      zoom_factor = z;
+  }
 }
 
 /**************************************
@@ -428,10 +429,12 @@ void timeshift_calendars_day_selected (GtkCalendar *calendar, APP_data *data)
      tmpStr = g_strdup_printf ("%s", _("No shift"));
   }
   else {
-    if(cmp_date<0)
+    if(cmp_date<0) {
       tmpStr = g_strdup_printf (_("%d day(s) backward"), ABS (cmp_date));
-    else
+    }
+    else {
       tmpStr = g_strdup_printf (_("%d day(s) forward"), cmp_date);
+    }
   }
   gtk_label_set_text (GTK_LABEL(labelShift), tmpStr);
   gtk_label_set_text (GTK_LABEL(labelBtn), newDate);
@@ -863,22 +866,23 @@ static gboolean on_timeline_mouse_release (GooCanvasItem *item, GooCanvasItem *t
 	    else {
 	       /* test for tasks with BEFORE limit - checked if AFTER/BEFORE duration mode inside function*/
 	       if(!tasks_test_decrease_dates (data->curTasks, day_offset-days, data)) {
-		   msg_error_after (data);
+		       msg_error_after (data);
 	       }
-	       else {printf ("backward day offset =%d days=%d  \n", day_offset, days);
-		  tasks_move_backward (days-day_offset, data->curTasks, data);
-                  /* we get MODIFIED values */
-                  tasks_get_ressource_datas (data->curTasks, &temp, data);
-                  /* we must get new starting date ! */
-                  g_date_set_dmy (&current_date, temp.start_nthDay, temp.start_nthMonth, temp.start_nthYear);
-                  s_links = links_check_task_successors (temp.id, data);
-		  if(s_links>=0) {
-		      retour = tasks_compute_dates_for_all_linked_task (temp.id, temp.durationMode, 
+	       else {
+			   printf ("backward day offset =%d days=%d  \n", day_offset, days);
+		       tasks_move_backward (days-day_offset, data->curTasks, data);
+                /* we get MODIFIED values */
+                tasks_get_ressource_datas (data->curTasks, &temp, data);
+                /* we must get new starting date ! */
+                g_date_set_dmy (&current_date, temp.start_nthDay, temp.start_nthMonth, temp.start_nthYear);
+                s_links = links_check_task_successors (temp.id, data);
+		        if(s_links>=0) {
+		            retour = tasks_compute_dates_for_all_linked_task (temp.id, temp.durationMode, 
 		                 temp.days, data->curTasks, &current_date, 0, s_links, TRUE, data->appWindow, data);
-		      timeline_remove_all_tasks (data);/* YES, for other tasks */
-		      timeline_draw_all_tasks (data);
-		  }/* endif s_links */
-	       }
+		            timeline_remove_all_tasks (data);/* YES, for other tasks */
+		             timeline_draw_all_tasks (data);
+		        }/* endif s_links */
+	      }/* elseif */
 	    }/* elseif decrease */
 	 }/* endif not fixed */
 	 else {
@@ -924,7 +928,7 @@ static gboolean on_timeline_mouse_release (GooCanvasItem *item, GooCanvasItem *t
     ret = (gint) (event->y-TIMELINE_CALENDAR_HEADER_HEIGHT)/TIMELINE_AVATAR_HEIGHT;
     id = timeline_get_item_id (item);
 
-    printf (" trelease sans select tâche potentielle = %d  pour cutask =%d avec objet %d\n", ret, data->curTasks, id );
+    printf (" release sans select tâche potentielle = %d  pour cutask =%d avec objet %d\n", ret, data->curTasks, id );
     printf ("offset jour potentiel =%d \n", day_offset);
    
     if(event->button==3) {/* right-click */
@@ -1051,11 +1055,12 @@ static void timeline_draw_bar (gint id, gint nbDays, gint duration, gint index, 
 		                           NULL);
   g_free (tmpStr);
   /* extremas */
-  if(nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(duration*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)) > canvas_max_x)
+  if(nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(duration*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)) > canvas_max_x) {
       canvas_max_x = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(duration*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor));
-  if(TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+TIMELINE_AVATAR_HEIGHT > canvas_max_y)
+  }
+  if(TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+TIMELINE_AVATAR_HEIGHT > canvas_max_y) {
       canvas_max_y = TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+TIMELINE_AVATAR_HEIGHT;
-
+  }
   /* we set a reference name */
   tmpStr = g_strdup_printf ("R%d", id);
   g_object_set (rect_item, "title", tmpStr, NULL);
@@ -1084,12 +1089,12 @@ static void timeline_draw_group (gint nbDays, gint duration, gint index, gchar *
 {
    gchar *tmpStr;
    gdouble xorg, yorg, xend, yend;
-printf ("groupe =%s durée = %d \n", name, nbDays);
+// printf ("groupe =%s durée = %d \n", name, nbDays);
 
-   xorg = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor);
-   yorg = TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+10;
-   xend = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(duration*TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor);
-   yend = yorg+TIMELINE_AVATAR_HEIGHT/1.5;
+   xorg = nbDays * (TIMELINE_CALENDAR_DAY_WIDTH * zoom_factor);
+   yorg = TIMELINE_CALENDAR_HEADER_HEIGHT + (TIMELINE_AVATAR_HEIGHT * index) + 10;
+   xend = nbDays * (TIMELINE_CALENDAR_DAY_WIDTH * zoom_factor) + (duration*TIMELINE_CALENDAR_DAY_WIDTH * zoom_factor);
+   yend = yorg + TIMELINE_AVATAR_HEIGHT / 1.5;
 
    tmpStr = g_strdup_printf ("M %d %d L %d %d L %d %d L %d %d L %d %d L %d %d z", (gint)xorg, (gint)yorg, 
               (gint)xend-10, (gint)yorg, 
@@ -1166,7 +1171,7 @@ void timeline_draw_avatars (gint id, GooCanvasItem *group, gdouble xorg, gdouble
      tmp_rsc_datas = (rsc_datas *)l->data;
      ok = links_check_element (id, tmp_rsc_datas->id, data);
      /* we test association receiver-sender for current line */
-     if(ok>=0) {
+     if(ok >= 0) {
         GdkPixbuf *pix2;
         /* icon */
         if(tmp_rsc_datas->pix) {   
@@ -1213,7 +1218,7 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
 {
    GdkRGBA color, modColor;
    gboolean isDark = FALSE;
-   gint day, i, link, link_mode, dd, sHour, eHour;
+   gint day, i, link, link_mode, dd, sHour, eHour, tmpDays;
    gdouble x_pos, x_start_shift, x_start_shift_pred, x_end_shift, x_end_shift_pred;
    GList *l;
    gchar *sRgba, *tmpStr;
@@ -1226,7 +1231,7 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
    gint nbDays = g_date_days_between (&date_proj_start, &date_start);
    gint duration = tmp_tasks_datas->days;
 
-   if(duration<=0 && tmp_tasks_datas->type!=TASKS_TYPE_MILESTONE && tmp_tasks_datas->type!=TASKS_TYPE_GROUP) {
+   if(duration <= 0 && tmp_tasks_datas->type != TASKS_TYPE_MILESTONE && tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
       printf ("* PlanLibre critical-duration <1 day for %s *\n", tmp_tasks_datas->name);
       duration = 1;/* temporary until hours aren't managed */
    }
@@ -1253,9 +1258,10 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
 
    /* y = TIMELINE_AVATAR_HEIGHT* nth of current task */
 
-   x_pos = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(32*zoom_factor);
-   if(x_pos>TIMELINE_VIEW_MAX_WIDTH)
+   x_pos = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor) + (32*zoom_factor);
+   if(x_pos > TIMELINE_VIEW_MAX_WIDTH) {
       return;
+   }
    group_task = goo_canvas_group_new (root, NULL);
 
    if(tmp_tasks_datas->type == TASKS_TYPE_TASK) {
@@ -1268,19 +1274,24 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
            /* for now, default calendar = 0 - sHour starting hour in MINUTES*/
            x_start_shift = (TIMELINE_CALENDAR_DAY_WIDTH*((gdouble)sHour/1440))*zoom_factor;/* 24h = 1440 minutes */
            x_end_shift = (TIMELINE_CALENDAR_DAY_WIDTH * ((gdouble)eHour/1440))*zoom_factor;/* 24h = 1440 minutes */
-	   timeline_draw_bar (tmp_tasks_datas->id, nbDays, duration, index, sRgba, modColor, group_task, x_start_shift, x_end_shift);
-	   g_free (sRgba);
-	   /* we add tasks' name */
-           if(tmp_tasks_datas->durationMode == TASKS_FIXED)
-	       tmpStr = g_markup_printf_escaped ("<i>%s</i>", tmp_tasks_datas->name);
-           else
-	       tmpStr = g_markup_printf_escaped ("%s", tmp_tasks_datas->name);
+	       timeline_draw_bar (tmp_tasks_datas->id, nbDays, duration, index, sRgba, modColor, group_task, x_start_shift, x_end_shift);
+	       g_free (sRgba);
+	       /* we add tasks' name */
+           if(tmp_tasks_datas->durationMode == TASKS_FIXED) {
+	          tmpStr = g_markup_printf_escaped ("<i>%s</i>", tmp_tasks_datas->name);
+	       }
+           else {
+	          tmpStr = g_markup_printf_escaped ("%s", tmp_tasks_datas->name);
+	       }
+	       
 	   /* if task's fill color is dim, we must invert text color */
-	   if(isDark)
-		sRgba = g_strdup_printf ("%s", "black");// "#A9B2EB"
-	   else
-		sRgba = g_strdup_printf ("%s", "black");
-		
+	   if(isDark) {
+		  sRgba = g_strdup_printf ("%s", "black");// "#A9B2EB"
+	   }
+	   else {
+		  sRgba = g_strdup_printf ("%s", "black");
+	   }
+	   
 	   GooCanvasItem *task_text = goo_canvas_text_new (group_task, tmpStr, 
 		                           x_pos+x_start_shift/2-4*(zoom_factor),
 		                           TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+7,
@@ -1290,11 +1301,12 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
 		                           NULL);  
 	   g_free (sRgba);
 	   g_free (tmpStr);
-           /*  avatars */
-           timeline_draw_avatars (tmp_tasks_datas->id, group_task, x_pos+x_start_shift/2, 
+       /*  avatars */
+       timeline_draw_avatars (tmp_tasks_datas->id, group_task, x_pos+x_start_shift/2, 
                                   TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+4, data);
 
    }/* endif std task */
+   
    if(tmp_tasks_datas->type == TASKS_TYPE_GROUP) {/* we display a "group" task */
       timeline_draw_group (nbDays, duration, index, tmp_tasks_datas->name, group_task);
    }
@@ -1311,37 +1323,59 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
    g_signal_connect ((gpointer)group_task, "leave-notify-event", G_CALLBACK (on_timeline_leave_task), data);
 
    /* now, we are looking for predecessors tasks */
+//  gchar *tmpName = g_strdup_printf ("%s", tmp_tasks_datas->name);
    for(i=0; i<g_list_length (data->tasksList); i++) {
      l = g_list_nth (data->tasksList, i);
      tasks_data *tmp_tsk_datas;
      tmp_tsk_datas = (tasks_data *)l->data;
      if((tmp_tasks_datas->id != tmp_tsk_datas->id) && (tmp_tsk_datas->type != TASKS_TYPE_GROUP)) {
           link = links_check_element (tmp_tasks_datas->id, tmp_tsk_datas->id, data);
-          if(link>=0) {/* there is a predecessor */
+          if(link >= 0) {/* there is a predecessor */
                link_mode = links_get_element_link_mode (tmp_tasks_datas->id, tmp_tsk_datas->id, data);
                /* we draw two lines for link */
                gdouble x1, y1, x2, y2, xend;
                g_date_set_dmy (&date_start_link, 
                                tmp_tsk_datas->start_nthDay, tmp_tsk_datas->start_nthMonth, tmp_tsk_datas->start_nthYear);
                gint nbDays2 = g_date_days_between (&date_proj_start, &date_start_link);
-	       if(tmp_tsk_datas->type==TASKS_TYPE_MILESTONE) {
-		  printf ("date début jalon =%d %d %d \n", tmp_tsk_datas->start_nthDay, tmp_tsk_datas->start_nthMonth, tmp_tsk_datas->start_nthYear);
-                  //nbDays2++;
-	        } 
+ 
                dd = misc_get_calendar_day_from_glib (g_date_get_weekday (&date_start_link));
                sHour = calendars_get_starting_hour (0, dd, data);
                eHour = calendars_get_ending_hour (0, dd, data);
                x_start_shift_pred = TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor* ((gdouble)sHour/1440);/* 24h = 1440 minutes */
                x_end_shift_pred = (TIMELINE_CALENDAR_DAY_WIDTH * ((gdouble)eHour/1440))*zoom_factor;/* 24h = 1440 minutes */
-               x1 = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+x_start_shift;/* x1 = near final arrow */
-               y1 = TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*index)+7+TIMELINE_AVATAR_HEIGHT/2;
-              
-              // x2 = nbDays2*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(xend/2)+2;/* at center of sender task */
-              /* TODO différencier selon type lien E>>S S>>S etc.
-  durationMode LINK_END_START 0  LINK_START_START 1  LINK_END_END 2  LINK_START_END 3 */
+               x1 = nbDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor) + x_start_shift;/* x1 = near final arrow */
+               y1 = TIMELINE_CALENDAR_HEADER_HEIGHT + (TIMELINE_AVATAR_HEIGHT*index) + 7 + TIMELINE_AVATAR_HEIGHT/2;
+
+/*	           if(tmp_tsk_datas->type == TASKS_TYPE_MILESTONE) {
+		          printf ("dates projet =%d %d %d   *** date début jalon =%d %d %d \n", 
+		          g_date_get_day( &date_proj_start),
+		          g_date_get_month( &date_proj_start),
+		          g_date_get_year( &date_proj_start),
+		          tmp_tsk_datas->start_nthDay, tmp_tsk_datas->start_nthMonth, tmp_tsk_datas->start_nthYear);
+                  printf ("trouvé un lien entre tâche %s et jalon %s nbdays2 =%d \n",  tmpName, tmp_tsk_datas->name, nbDays2);
+                  x2 = x2 + ((TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)/2);   
+	           }
+  */            
+               /* sentinel for lonks with milestone as predecessor - required before project is saved */
+  			   tmpDays = tmp_tsk_datas->days;
+			   if(tmpDays<1) {
+					  tmpDays = 1;
+			   }
+			   
                if(link_mode == LINK_END_START) {
-                  xend = (tmp_tsk_datas->days*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor))-x_end_shift_pred+(16*zoom_factor);
-                  x2 = nbDays2*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+xend;/* at end of sender task */
+                  xend = (tmpDays*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor))-x_end_shift_pred+(16*zoom_factor);
+                  x2 = nbDays2*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+xend;/* at end of sender task it isn't the end of arrow, but the START */
+                 	           if(tmp_tsk_datas->type==TASKS_TYPE_MILESTONE) { 
+                               }
+ /*
+	           	           if(tmp_tsk_datas->type==TASKS_TYPE_MILESTONE) {
+                               printf ("days = %d xendshiftpred %.2f xend = %.2f nbdays2=%d valeurs x1=%.2f x2=%.2f \n", 
+                               tmp_tsk_datas->days,
+                               x_end_shift_pred, 
+                               xend, nbDays2, x1, x2);
+			                }
+   */
+                  
                   y2 = TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*i)+TIMELINE_AVATAR_HEIGHT;    
                   GooCanvasItem *task_link_path = goo_canvas_polyline_new (group_task, FALSE, 4, x1, y1,
                                   x2, y1, 
@@ -1350,6 +1384,7 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
                                   "start-arrow", TRUE, "line-width", 2.0,
                                   "stroke-color", "#9EB6CD", NULL);           
                }
+               
                if(link_mode == LINK_START_START) {
                   x2 = nbDays2*(TIMELINE_CALENDAR_DAY_WIDTH*zoom_factor)+(4*zoom_factor);/* at start of sender task */
                   y2 = TIMELINE_CALENDAR_HEADER_HEIGHT+(TIMELINE_AVATAR_HEIGHT*i)+TIMELINE_AVATAR_HEIGHT/2+7;
@@ -1370,6 +1405,10 @@ void timeline_draw_task (gint index, GooCanvasItem *root, GDate date_proj_start,
           }/* if link >=0 */
      }/* endif */
    }/* next i */
+   
+   
+ //  g_free (tmpName);
+   
    /* goovanvas item management */
    tmpStr = g_strdup_printf ("%d", tmp_tasks_datas->id);
    g_object_set (group_task, "title", tmpStr, NULL);

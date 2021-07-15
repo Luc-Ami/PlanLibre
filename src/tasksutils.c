@@ -1592,10 +1592,12 @@ gint tasks_compute_dates_for_linked_new_task (gint id, gint curDuration, gint cu
      /* build strings in order to keep "true" values */
      undoTasks->name = NULL;
      undoTasks->location = NULL;
-     if(temp.name)
+     if(temp.name) {
         undoTasks->name = g_strdup_printf ("%s", temp.name);
-     if(temp.location)
+     }
+     if(temp.location) {
         undoTasks->location = g_strdup_printf ("%s", temp.location);
+     }
      tmp_value = g_malloc (sizeof(undo_datas));
      tmp_value->insertion_row = insertion_row;
      tmp_value->new_row = insertion_row;
@@ -1605,6 +1607,7 @@ gint tasks_compute_dates_for_linked_new_task (gint id, gint curDuration, gint cu
   }
 
   /* default */
+
   g_date_set_dmy (&date_interval2, data->properties.end_nthDay, data->properties.end_nthMonth, data->properties.end_nthYear);
   if(temp.lim_nthDay>0 && temp.lim_nthMonth>0 && temp.lim_nthYear>0) {
      g_date_set_dmy (&interval3, temp.lim_nthDay, temp.lim_nthMonth, temp.lim_nthYear);
@@ -1648,7 +1651,7 @@ gint tasks_compute_dates_for_linked_new_task (gint id, gint curDuration, gint cu
         ret = TASK_PLACEMENT_UPDATED_END;
      }/* endif cmp */
      if(fUpdate) {
-	tmp_value->datas = undoTasks;
+	    tmp_value->datas = undoTasks;
         /* duplicate links */
         tmp_value->list = links_copy_all (data);
         tmp_value->opCode = OP_MODIFY_TASK;
@@ -1800,7 +1803,7 @@ printf ("cmp dedaline date current avant %d \n", cmp);
   PUBLIC : TODO function to compute optimal path for linked tasks when
   user modifies a previous task with predecessor(s)
   greedy algorithm.
-  Retuens how many tasks have been updated
+  Returns how many tasks have been updated
 ***********************************************************************/
 gint tasks_compute_dates_for_all_linked_task (gint id, gint curDuration, gint curDays, gint insertion_row, 
                                           GDate *current, gint predecessors, gint sucessors, gboolean fUpdate, 
@@ -1811,15 +1814,17 @@ gint tasks_compute_dates_for_all_linked_task (gint id, gint curDuration, gint cu
   GList *l, *tasks = NULL;
 
   total = g_list_length (data->tasksList);
-  if(total==0)
+  if(total == 0) {
      return 0;
+  }
   /* first, we work with the task ID itself */
 printf ("-------------------------\n");
   rc = tasks_compute_dates_for_linked_new_task (id, curDuration, curDays, insertion_row, 1, current, TRUE, FALSE, dlg, data);
 printf ("-------------------------\n");
-  if(rc>TASK_PLACEMENT_UPDATED_END)
+  if(rc > TASK_PLACEMENT_UPDATED_END) {
      return 0;
-  /* we test for successord */
+  }
+  /* we test for successors */
   rc = links_check_task_successors (id, data);
   if(rc<0) { printf ("je quitte, pas de succ \n");
      return 0;

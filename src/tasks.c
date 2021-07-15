@@ -1234,7 +1234,7 @@ void tasks_modify (APP_data *data)
   GtkWidget *dialog;
   gint ret, insertion_row, curPty, curCateg, curStatus=0, iRow=-1, curDays, curHours, curDuration, curGroup, cmp;
   gint t_links, s_links, rc;
-  gdouble progress=0;
+  gdouble progress = 0;
   GdkRGBA color;
   GtkWidget *boxTasks, *row, *pBtnColor, *pButtonStart, *pButton, *pComboDuration, *entryLocation, *comboGroup;
   GtkWidget *entryName, *comboPriority, *comboCategory, *comboStatus, *spinProgress, *pDays, *pHours;
@@ -1260,9 +1260,10 @@ void tasks_modify (APP_data *data)
   /* build strings in order to keep "true" values */
   undoTasks->name = NULL;
   undoTasks->location = NULL;
-  if(temp.name)
+  if(temp.name) {
      undoTasks->name = g_strdup_printf ("%s", temp.name);
-  if(temp.location) {printf ("loc non nulle \n");
+  }
+  if(temp.location) {
      undoTasks->location = g_strdup_printf ("%s", temp.location);
   }
 
@@ -1295,10 +1296,12 @@ void tasks_modify (APP_data *data)
       gtk_spin_button_set_value (GTK_SPIN_BUTTON(pHours), temp.hours);
 
       gtk_combo_box_set_active (GTK_COMBO_BOX(pComboDuration), temp.durationMode);
-      if((temp.durationMode != TASKS_DEADLINE) && (temp.durationMode != TASKS_AFTER)) 
-          gtk_widget_set_sensitive (GTK_WIDGET (pButton), FALSE);
-      else
-          gtk_widget_set_sensitive (GTK_WIDGET (pButton), TRUE);
+      if((temp.durationMode != TASKS_DEADLINE) && (temp.durationMode != TASKS_AFTER)) {
+         gtk_widget_set_sensitive (GTK_WIDGET (pButton), FALSE);
+      }
+      else {
+         gtk_widget_set_sensitive (GTK_WIDGET (pButton), TRUE);
+      }
       /*  dates */ 
       startDate = misc_convert_date_to_str (temp.start_nthDay, temp.start_nthMonth, temp.start_nthYear);
       endDate = misc_convert_date_to_str (temp.end_nthDay, temp.end_nthMonth, temp.end_nthYear);
@@ -1333,21 +1336,24 @@ printf ("lim date =%s \n", limDate);
         startDate = misc_convert_date_to_str (temp.start_nthDay, temp.start_nthMonth, temp.start_nthYear);
         gtk_button_set_label (GTK_BUTTON(pButtonStart), startDate);
         g_free (startDate);
-        if(temp.location)
+        if(temp.location) {
            gtk_entry_set_text (GTK_ENTRY(entryLocation), temp.location);
+        }
      }
   }
 
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   /* code 2 = remove , code 1 = OK */
-  if(ret<=0) {/* cancel, mandatory in order to free unused undo datas -ret == -4 if user closes window */
-      if(undoTasks->name)
+  if(ret <= 0) {/* cancel, mandatory in order to free unused undo datas -ret == -4 if user closes window */
+      if(undoTasks->name) {
          g_free (undoTasks->name);
-      if(undoTasks->location)
+      }
+      if(undoTasks->location) {
          g_free (undoTasks->location);
+      }
       g_free (undoTasks);
   }
-  if(ret==2) {/* remove */  // Gtk >=3.14 : gtk_list_box_unselect_all (box);  
+  if(ret == 2) {/* remove */  // Gtk >=3.14 : gtk_list_box_unselect_all (box);  
       /* undo engine - part 2 of 3 - we just have to get a pointer on ID */
       tmp_value = g_malloc (sizeof(undo_datas));
       tmp_value->insertion_row = iRow;
@@ -1382,10 +1388,10 @@ printf ("lim date =%s \n", limDate);
       report_clear_text (data->buffer, "left");
       misc_display_app_status (TRUE, data);
   }
-  if(ret==1) {/* we get various useful values */
+  if(ret == 1) {/* we get various useful values */
     tasks_utils_reset_errors (data);
     /* undo engine - part 2 of 3 - we just have to get a pointer on ID */
-    tmp_value = g_malloc (sizeof(undo_datas));
+    tmp_value = g_malloc (sizeof (undo_datas));
     tmp_value->insertion_row = iRow;
     tmp_value->new_row = iRow;
     tmp_value->id = temp.id;
@@ -1400,32 +1406,33 @@ printf ("lim date =%s \n", limDate);
         if(strlen (name)==0) {
            name = nonameGroup;
         }    
-        newTasks.name = name;
-        newTasks.location = NULL;
-        newTasks.group = -1;
-        /* dates */
-	newTasks.start_nthDay = temp.start_nthDay;
-	newTasks.start_nthMonth = temp.start_nthMonth;
-	newTasks.start_nthYear = temp.start_nthYear;
-	newTasks.end_nthDay = temp.end_nthDay;
-	newTasks.end_nthMonth = temp.end_nthMonth;
-	newTasks.end_nthYear = temp.end_nthYear;
-        /* duration evaluation - TODO : true group duration */
-        g_date_set_dmy (&interval1, newTasks.start_nthDay, newTasks.start_nthMonth, newTasks.start_nthYear);
-        g_date_set_dmy (&interval2, newTasks.end_nthDay, newTasks.end_nthMonth, newTasks.end_nthYear);
-        newTasks.days = g_date_days_between (&interval1, &interval2)+1;
+     newTasks.name = name;
+     newTasks.location = NULL;
+     newTasks.group = -1;
+     /* dates */
+	 newTasks.start_nthDay = temp.start_nthDay;
+	 newTasks.start_nthMonth = temp.start_nthMonth;
+	 newTasks.start_nthYear = temp.start_nthYear;
+	 newTasks.end_nthDay = temp.end_nthDay;
+	 newTasks.end_nthMonth = temp.end_nthMonth;
+	 newTasks.end_nthYear = temp.end_nthYear;
+	
+     /* duration evaluation - TODO : true group duration */
+     g_date_set_dmy (&interval1, newTasks.start_nthDay, newTasks.start_nthMonth, newTasks.start_nthYear);
+     g_date_set_dmy (&interval2, newTasks.end_nthDay, newTasks.end_nthMonth, newTasks.end_nthYear);
+     newTasks.days = g_date_days_between (&interval1, &interval2)+1;
 
-        newTasks.calendar = 0; /* TODO : version 0.2, variable calendar */
-        /* we modify datas in memory */
-        tasks_modify_datas (iRow, data, &newTasks);
-        tasks_group_modify_widget (iRow, data);
-        tmp_value->opCode = OP_MODIFY_GROUP;
-        tmp_value->nbTasks = 0;
-        undo_push (CURRENT_STACK_TASKS, tmp_value, data);
+     newTasks.calendar = 0; /* TODO : version 0.2, variable calendar */
+     /* we modify datas in memory */
+     tasks_modify_datas (iRow, data, &newTasks);
+     tasks_group_modify_widget (iRow, data);
+     tmp_value->opCode = OP_MODIFY_GROUP;
+     tmp_value->nbTasks = 0;
+     undo_push (CURRENT_STACK_TASKS, tmp_value, data);
     }/* endif groups */
 
     if(temp.type == TASKS_TYPE_MILESTONE) {
-        if(strlen(name)==0) {
+        if(strlen(name) == 0) {
            name = nonameMileStone;
         }    
         newTasks.name = name;
@@ -1433,8 +1440,15 @@ printf ("lim date =%s \n", limDate);
         newTasks.group = -1;
         newTasks.days = 0;
         newTasks.hours = 0;
+        color.red = 0;
+        color.green = 0;
+        color.blue = 1;
+        newTasks.color = color;
+        newTasks.priority = 0;
+        newTasks.category = 0;
+        newTasks.progress = 0;
         location = gtk_entry_get_text (GTK_ENTRY(entryLocation));
-        if(strlen(location)==0) {
+        if( strlen(location) == 0) {
            location = fooStr2;
         }
         newTasks.location = location;
@@ -1447,6 +1461,11 @@ printf ("lim date =%s \n", limDate);
         newTasks.end_nthDay = g_date_get_day (&interval1);
         newTasks.end_nthMonth = g_date_get_month (&interval1);
         newTasks.end_nthYear = g_date_get_year (&interval1);
+        newTasks.durationMode = TASKS_AS_SOON;         
+        newTasks.lim_nthDay = -1;
+        newTasks.lim_nthMonth = -1;
+        newTasks.lim_nthYear = -1;       
+
         /* we modify datas in memory */
         tasks_modify_datas (iRow, data, &newTasks);
         tasks_milestone_modify_widget (iRow, data);
@@ -1455,6 +1474,7 @@ printf ("lim date =%s \n", limDate);
         /* if t_links >0 ther is at least one predecessor task */
         t_links = links_check_task_linked (temp.id, data);
         s_links = links_check_task_successors (temp.id, data);
+        printf ("modif jalon tlink =%d s_link =%d \n", t_links, s_links);
         if(t_links>=0 || s_links>=0) {
            rc = tasks_compute_dates_for_all_linked_task (temp.id, TASKS_AS_SOON, 1, iRow, 
                                                                     &interval1, t_links, s_links, TRUE, dialog, data);
@@ -1466,7 +1486,7 @@ printf ("lim date =%s \n", limDate);
     }/* endif milestone */
 
     if(temp.type == TASKS_TYPE_TASK) {    
-        if(strlen (name)==0) {
+        if( strlen (name) == 0) {
            name = fooStr;
         }
         curPty = gtk_combo_box_get_active (GTK_COMBO_BOX(comboPriority));
@@ -1478,8 +1498,9 @@ printf ("lim date =%s \n", limDate);
         curDays = (gint) gtk_spin_button_get_value (GTK_SPIN_BUTTON(pDays));
         curHours = (gint) gtk_spin_button_get_value (GTK_SPIN_BUTTON(pHours));
         curDuration = gtk_combo_box_get_active (GTK_COMBO_BOX(pComboDuration));
-        if((curDays==0) && (curHours ==0))
+        if((curDays==0) && (curHours ==0)) {
            curDays = 1;
+        }
         /* if curDuration different of default value, we read button's date */
         if((curDuration == TASKS_DEADLINE) || (curDuration == TASKS_AFTER)) {
             limDate = gtk_button_get_label (GTK_BUTTON(pButton));
@@ -1538,7 +1559,7 @@ printf ("lim date =%s \n", limDate);
         /*  dashboard - yes, removing before other oprations */
         dashboard_remove_task (iRow, data);
         /* we modify datas in memory */
-        newTasks.calendar = 0; /* TODO : version 0.2, enable variable calendar */
+        newTasks.calendar = 0; /* TODO : version 0.3, enable variable calendar */
         tasks_modify_datas (iRow, data, &newTasks);
         tasks_modify_widget (iRow, data); 
         /*  dashboard */
@@ -1552,6 +1573,7 @@ printf ("lim date =%s \n", limDate);
 	    t_links = links_check_task_linked (temp.id, data);
         s_links = links_check_task_successors (temp.id, data);
 		/* if t_links >0 ther is at least one predecessor task */
+
 		if(t_links>=0 || s_links>=0) {// TODO change to wider function !!! 
 				rc = tasks_compute_dates_for_all_linked_task (temp.id, curDuration, curDays, iRow, 
 																		&interval1, t_links, s_links, TRUE, dialog, data);
