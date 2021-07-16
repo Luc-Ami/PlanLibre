@@ -470,7 +470,7 @@ static GList  *trello_lists_request_for_board (gchar *api_key, gchar *user_token
   arguments : API_key, user_token, board ID
   
 **********************************************/
-static gint trello_lists_initialize_for_board (gchar *api_key, gchar *user_token, gchar *board_id)
+static gint trello_lists_initialize_for_board (gchar *api_key, gchar *user_token, gchar *board_id, APP_data *data)
 {
   GList *l, *l2;
   gint i, rc =0, ret;
@@ -484,16 +484,36 @@ static gint trello_lists_initialize_for_board (gchar *api_key, gchar *user_token
              l2 = g_list_nth (l, i);
              tmp = (gchar*) l2->data;
              if(i==0) {
-               ret = trello_update_list_name (api_key, user_token, tmp, _("To Do"));
+			   if(data->properties.labelDashCol0) {
+                  ret = trello_update_list_name (api_key, user_token, tmp, data->properties.labelDashCol0);
+               }
+               else {		 
+                  ret = trello_update_list_name (api_key, user_token, tmp, _("To Do"));
+               }
              }
              if(i==1) {
-               ret = trello_update_list_name (api_key, user_token, tmp, _("In Progress"));
+			   if(data->properties.labelDashCol1) {
+                  ret = trello_update_list_name (api_key, user_token, tmp, data->properties.labelDashCol1);
+               }				 
+               else {
+                  ret = trello_update_list_name (api_key, user_token, tmp, _("In Progress"));
+               }
              }
              if(i==2) {
-               ret = trello_update_list_name (api_key, user_token, tmp, _("Overdue"));
+			   if(data->properties.labelDashCol2) {
+                  ret = trello_update_list_name (api_key, user_token, tmp, data->properties.labelDashCol2);
+               }				 
+               else {
+                  ret = trello_update_list_name (api_key, user_token, tmp, _("Overdue"));
+               }
              }
              if(i==3) {
-               ret = trello_update_list_name (api_key, user_token, tmp, _("Completed"));
+			   if(data->properties.labelDashCol3) {
+                  ret = trello_update_list_name (api_key, user_token, tmp, data->properties.labelDashCol3);
+               }				 
+               else {
+                  ret = trello_update_list_name (api_key, user_token, tmp, _("Completed"));
+               }
              }
 
           }/* next i */
@@ -865,7 +885,7 @@ gint trello_export_project (APP_data *data)
                /* we add the 4th column, like in PlanLibre */
                rc = trello_add_list (API_KEY, password, IdBoard, _("Column"));
                /* we add lists and rename them according to PLanLibre conventions */
-               rc = trello_lists_initialize_for_board (API_KEY, password, IdBoard);
+               rc = trello_lists_initialize_for_board (API_KEY, password, IdBoard, data);
                /* now we add all tasks as cards */
                rc = trello_export_tasks (API_KEY, password, IdBoard, data);
                /* free memory */
