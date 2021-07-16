@@ -301,6 +301,7 @@ void properties_modify (APP_data *data)
   GtkWidget *entryManager, *entryTitle, *entrySummary, *entryManagerMail, *entryManagerPhone;
   GtkWidget *entryOrgaName, *entryProjWebsite, *entryUnits, *spinBudget, *buttonLogo;
   GtkWidget *startRange, *endRange, *btnStartDate, *btnEndDate;
+  GtkWidget *labelDashCol0, *labelDashCol1, *labelDashCol2, *labelDashCol3;
   GKeyFile *keyString;
   struct lconv *locali;
   const gchar *startDate = NULL;
@@ -338,6 +339,13 @@ void properties_modify (APP_data *data)
   btnEndDate 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "buttonPropertiesEndDate"));
   startRange 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleStart"));
   endRange 	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "scaleEnd"));
+  
+  labelDashCol0	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryDashCol0"));
+  labelDashCol1	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryDashCol1"));  
+  labelDashCol2	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryDashCol2"));
+  labelDashCol3	= GTK_WIDGET(gtk_builder_get_object (data->tmpBuilder, "entryDashCol3"));
+  
+  
   /* set current values  */
   /* project */
   if(data->properties.title) {
@@ -391,6 +399,22 @@ void properties_modify (APP_data *data)
      gtk_button_set_image (GTK_BUTTON(buttonLogo), tmpImage);
   }
 
+  /* dashboard */
+  if(data->properties.labelDashCol0) {
+     gtk_entry_set_text (GTK_ENTRY(labelDashCol0), data->properties.labelDashCol0);
+  }	  
+  if(data->properties.labelDashCol1) {
+     gtk_entry_set_text (GTK_ENTRY(labelDashCol1), data->properties.labelDashCol1);
+  }	  
+  if(data->properties.labelDashCol2) {
+     gtk_entry_set_text (GTK_ENTRY(labelDashCol2), data->properties.labelDashCol2);
+  }	  
+  if(data->properties.labelDashCol3) {
+     gtk_entry_set_text (GTK_ENTRY(labelDashCol3), data->properties.labelDashCol3);
+  }	  
+  
+  
+  
   ret = gtk_dialog_run (GTK_DIALOG(dialog));
   /* ret==1 for [OK] */
   if(ret == 1) {
@@ -425,7 +449,12 @@ void properties_modify (APP_data *data)
       if(pix!=NULL) {/* previous pixbuf alreday duplicated */
           tmp->logo = pix;
       }
-               
+      /* dashboard */
+      tmp->labelDashCol0 = g_strdup_printf ("%s", data->properties.labelDashCol0);
+      tmp->labelDashCol1 = g_strdup_printf ("%s", data->properties.labelDashCol1);
+      tmp->labelDashCol2 = g_strdup_printf ("%s", data->properties.labelDashCol2);
+      tmp->labelDashCol3 = g_strdup_printf ("%s", data->properties.labelDashCol3);
+                     
       tmp_value->datas = tmp;
       tmp_value->groups = NULL;
       tmp_value->list = NULL;
@@ -489,6 +518,24 @@ void properties_modify (APP_data *data)
 
       data->properties.budget = gtk_spin_button_get_value (GTK_SPIN_BUTTON(spinBudget));
 
+      /* dashboard */
+      if(data->properties.labelDashCol0) {
+	    g_free (data->properties.labelDashCol0);
+      }
+      data->properties.labelDashCol0 = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(labelDashCol0)));
+      if(data->properties.labelDashCol1) {
+	    g_free (data->properties.labelDashCol1);
+      }
+      data->properties.labelDashCol1 = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(labelDashCol1)));      
+      if(data->properties.labelDashCol2) {
+	    g_free (data->properties.labelDashCol2);
+      }
+      data->properties.labelDashCol2 = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(labelDashCol2)));
+      if(data->properties.labelDashCol3) {
+	    g_free (data->properties.labelDashCol3);
+      }
+      data->properties.labelDashCol3 = g_strdup_printf ("%s", gtk_entry_get_text (GTK_ENTRY(labelDashCol3)));
+      dashboard_update_column_labels (data);
       /* schedules */
       data->properties.scheduleStart = (gint) gtk_range_get_value (GTK_RANGE(startRange));
       data->properties.scheduleEnd = (gint) gtk_range_get_value (GTK_RANGE(endRange));
@@ -610,6 +657,27 @@ void properties_free_all (APP_data *data)
  }
  data->properties.units = NULL;
 
+ /* dashboard */
+ if(data->properties.labelDashCol0) {
+	g_free (data->properties.labelDashCol0);
+ }	
+ data->properties.labelDashCol0 = NULL;
+
+ if(data->properties.labelDashCol1) {
+	g_free (data->properties.labelDashCol1);
+ }	
+ data->properties.labelDashCol1 = NULL;
+
+ if(data->properties.labelDashCol2) {
+	g_free (data->properties.labelDashCol2);
+ }	
+ data->properties.labelDashCol2 = NULL;
+
+ if(data->properties.labelDashCol3) {
+	g_free (data->properties.labelDashCol3);
+ }	
+ data->properties.labelDashCol3 = NULL;
+
  if(data->properties.start_date) {
     g_free (data->properties.start_date);
  }
@@ -628,6 +696,18 @@ void properties_free_all (APP_data *data)
  data->objectsCounter = 0;/* internal counter, never decremented, in order to give UNIQUE id. to objects */
 
  printf("* PlanLibre : successfully freed properties datas *\n");
+}
+
+/************************************
+  PUBLIC :   set default dashboard
+  * hedaers for columns
+************************************/
+void properties_set_default_dashboard (APP_data *data)
+{
+  data->properties.labelDashCol0 = g_strdup_printf ("%s", _("To Do"));
+  data->properties.labelDashCol1 = g_strdup_printf ("%s", _("In progress"));
+  data->properties.labelDashCol2 = g_strdup_printf ("%s", _("Overdue"));  
+  data->properties.labelDashCol3 = g_strdup_printf ("%s", _("Completed"));     
 }
 
 /********************************

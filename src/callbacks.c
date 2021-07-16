@@ -1374,6 +1374,7 @@ on_file_new_activate (GtkMenuItem *menuitem, APP_data *data)
   properties_free_all (data);
   properties_set_default_dates (data);
   properties_set_default_schedules (data);
+  properties_set_default_dashboard (data);
   /* clear assignments */
   assign_remove_all_tasks (data);
   /* clear report area */

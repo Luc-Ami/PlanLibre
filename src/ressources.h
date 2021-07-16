@@ -98,5 +98,6 @@ gint rsc_get_rank_for_id (gint id, APP_data *data);
 void rsc_autoscroll (gdouble value, APP_data *data);
 
 gboolean rsc_get_concurrent_status_for_id (gint id, APP_data *data);
+void rsc_remove_tasks_widgets (gint id, APP_data *data);
 
 #endif /* RESSOURCES_H */

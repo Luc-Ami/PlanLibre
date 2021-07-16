@@ -246,6 +246,7 @@ static gint get_properties_from_xml (xmlDocPtr doc, APP_data *data)
      data->properties.budget = g_ascii_strtod (g_strdup_printf ("%s", valeur2), NULL);
      g_free (valeur2);
   }
+  
   /* start date components */
   valeur2 = get_xml_attribute_value ("/PlanLibre/Properties/Project/@Start_date_day", "Start_date_day", doc);
   if(valeur2) {
@@ -304,6 +305,36 @@ static gint get_properties_from_xml (xmlDocPtr doc, APP_data *data)
                                       data->properties.end_nthMonth, data->properties.end_nthYear);
 // printf("buffer end =%s dans data=%s \n", buffer, data->properties.end_date);
 
+  /* dashboard columns labels - be careful, at this step, they are initialized, so if valeur2 not NULL, we must free */
+ 
+  valeur2 = get_xml_attribute_value ("/PlanLibre/Properties/Dashboard/@DashCol0", "DashCol0", doc);
+  if(valeur2) {
+	 g_free (data->properties.labelDashCol0);
+     data->properties.labelDashCol0 = g_strdup_printf ("%s", valeur2);
+     g_free (valeur2);
+  }
+  
+  valeur2 = get_xml_attribute_value ("/PlanLibre/Properties/Dashboard/@DashCol1", "DashCol1", doc);
+  if(valeur2) {
+	 g_free (data->properties.labelDashCol1);
+     data->properties.labelDashCol1 = g_strdup_printf ("%s", valeur2);
+     g_free (valeur2);
+  }  
+
+  valeur2 = get_xml_attribute_value ("/PlanLibre/Properties/Dashboard/@DashCol2", "DashCol2", doc);
+  if(valeur2) {
+	 g_free (data->properties.labelDashCol2);
+     data->properties.labelDashCol2 = g_strdup_printf ("%s", valeur2);
+     g_free (valeur2);
+  }
+
+  valeur2 = get_xml_attribute_value ("/PlanLibre/Properties/Dashboard/@DashCol3", "DashCol3", doc);
+  if(valeur2) {
+	 g_free (data->properties.labelDashCol3);
+     data->properties.labelDashCol3 = g_strdup_printf ("%s", valeur2);
+     g_free (valeur2);
+  }
+  
   /* schedules */
   data->properties.scheduleStart = 540;
   valeur2 = get_xml_attribute_value("/PlanLibre/Properties/Project/@Schedule_start", "Schedule_start", doc);
@@ -1148,6 +1179,7 @@ gint open_file (gchar *path_to_file, APP_data *data)
   /* clear project's properties */
   properties_free_all (data);
   properties_set_default_dates (data);
+  properties_set_default_dashboard (data);
   /* clear assignments */
   assign_remove_all_tasks (data);
   /* clear report area */
@@ -1170,7 +1202,7 @@ gint open_file (gchar *path_to_file, APP_data *data)
         return EXIT_FAILURE;
   }
   /* test if it's a PlanLibre document ? */
-  if(strcmp (root->name, "PlanLibre")!=0) {
+  if(strcmp (root->name, "PlanLibre") != 0) {
         fprintf (stderr, "* Critical : it isn't a PlanLibre XML Document *\n");
         xmlFreeDoc (doc);
         return EXIT_FAILURE;
@@ -1230,7 +1262,7 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
   gint ret = 0, dd, mm, yy;
   gchar buffer[100];/* for gdouble conversions */
   GError *error = NULL;
-  xmlNodePtr prop_project = NULL, prop_manager = NULL, prop_orga = NULL;
+  xmlNodePtr prop_project = NULL, prop_manager = NULL, prop_orga = NULL, prop_dash = NULL;
 
   keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
   dd = g_key_file_get_integer (keyString, "collaborate", "last_auto_mailing-day", NULL);
@@ -1240,6 +1272,7 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
   prop_project = xmlNewChild (properties_node, NULL, BAD_CAST "Project", NULL);
   prop_manager = xmlNewChild (properties_node, NULL, BAD_CAST "Manager", NULL);
   prop_orga = xmlNewChild (properties_node, NULL, BAD_CAST "Organization", NULL);
+  prop_dash = xmlNewChild (properties_node, NULL, BAD_CAST "Dashboard", NULL);
 
   /* nodes and attributes for project properties */
   /* contents project */
@@ -1247,40 +1280,40 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
                xmlNewProp (prop_project, BAD_CAST "Title", BAD_CAST g_strdup_printf ("%s", data->properties.title));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Title", BAD_CAST "");
+	          xmlNewProp (prop_project, BAD_CAST "Title", BAD_CAST "");
             }
 
             if(data->properties.summary) {
                xmlNewProp (prop_project, BAD_CAST "Summary", BAD_CAST g_strdup_printf ("%s", data->properties.summary));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Summary", BAD_CAST "");
+	          xmlNewProp (prop_project, BAD_CAST "Summary", BAD_CAST "");
             }
 
             if(data->properties.location) {
                xmlNewProp (prop_project,  BAD_CAST "Location", BAD_CAST g_strdup_printf ("%s", data->properties.location));
             }
             else {
-	       xmlNewProp (prop_project,  BAD_CAST "Location", BAD_CAST "");
+	          xmlNewProp (prop_project,  BAD_CAST "Location", BAD_CAST "");
             }
             if(data->properties.gps) {
                xmlNewProp (prop_project, BAD_CAST "Gps", BAD_CAST g_strdup_printf ("%s", data->properties.gps));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Gps", BAD_CAST "");
+	          xmlNewProp (prop_project, BAD_CAST "Gps", BAD_CAST "");
             }
             if(data->properties.units) {
                xmlNewProp (prop_project, BAD_CAST "Units", BAD_CAST g_strdup_printf ("%s", data->properties.units));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Units", BAD_CAST "");
+	         xmlNewProp (prop_project, BAD_CAST "Units", BAD_CAST "");
             }
 
             if(data->properties.proj_website) {
                xmlNewProp (prop_project, BAD_CAST "Website", BAD_CAST g_strdup_printf ("%s", data->properties.proj_website));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Website", BAD_CAST "");
+	           xmlNewProp (prop_project, BAD_CAST "Website", BAD_CAST "");
             }
             
             /* convert budget value to string with 'forced' decimal point separator */
@@ -1295,7 +1328,7 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
                xmlNewProp (prop_project, BAD_CAST "Start_date", BAD_CAST g_strdup_printf ("%s", data->properties.start_date));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "Start_date", BAD_CAST "");
+	          xmlNewProp (prop_project, BAD_CAST "Start_date", BAD_CAST "");
             }
             xmlNewProp (prop_project, BAD_CAST "Start_date_day", BAD_CAST g_strdup_printf ("%d", data->properties.start_nthDay));
             xmlNewProp (prop_project, BAD_CAST "Start_date_month", BAD_CAST g_strdup_printf ("%d", data->properties.start_nthMonth));
@@ -1305,7 +1338,7 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
                xmlNewProp (prop_project, BAD_CAST "End_date", BAD_CAST g_strdup_printf ("%s", data->properties.end_date));
             }
             else {
-	       xmlNewProp (prop_project, BAD_CAST "End_date", BAD_CAST "");
+	          xmlNewProp (prop_project, BAD_CAST "End_date", BAD_CAST "");
             }
             xmlNewProp (prop_project, BAD_CAST "End_date_day", BAD_CAST g_strdup_printf ("%d", data->properties.end_nthDay));
             xmlNewProp (prop_project, BAD_CAST "End_date_month", BAD_CAST g_strdup_printf ("%d", data->properties.end_nthMonth));
@@ -1325,21 +1358,21 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
                xmlNewProp (prop_manager, BAD_CAST "Name", BAD_CAST g_strdup_printf ("%s", data->properties.manager_name));
             }
             else {
-	       xmlNewProp (prop_manager, BAD_CAST "Name", BAD_CAST "");
+	          xmlNewProp (prop_manager, BAD_CAST "Name", BAD_CAST "");
             }
 
             if(data->properties.manager_mail) {
                xmlNewProp (prop_manager, BAD_CAST "Mail", BAD_CAST g_strdup_printf ("%s", data->properties.manager_mail));
             }
             else {
-	       xmlNewProp (prop_manager, BAD_CAST "Mail", BAD_CAST "");
+	          xmlNewProp (prop_manager, BAD_CAST "Mail", BAD_CAST "");
             }
 
             if(data->properties.manager_phone) {
                xmlNewProp (prop_manager, BAD_CAST "Phone", BAD_CAST g_strdup_printf ("%s", data->properties.manager_phone));
             }
             else {
-	       xmlNewProp (prop_manager, BAD_CAST "Phone", BAD_CAST "");
+	          xmlNewProp (prop_manager, BAD_CAST "Phone", BAD_CAST "");
             }
 
         /* nodes and attributes for organization properties */
@@ -1348,9 +1381,9 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
                xmlNewProp (prop_orga, BAD_CAST "Name", BAD_CAST g_strdup_printf ("%s", data->properties.org_name));
             }
             else {
-	       xmlNewProp (prop_orga, BAD_CAST "Name", BAD_CAST "");
-            }
-
+	          xmlNewProp (prop_orga, BAD_CAST "Name", BAD_CAST "");
+            }           
+            
             if(data->properties.logo) {
                /* conversion to base64 - we have a pointer on a gdkPixbuf */
 // see : https://stackoverflow.com/questions/9453996/sending-an-image-to-ftp-server-from-gchar-buffer-libcurl
@@ -1369,6 +1402,38 @@ static gint save_properties (xmlNodePtr properties_node, APP_data *data)
             else {
                xmlNewProp (prop_orga, BAD_CAST "Logo", BAD_CAST "");
             }
+            
+        /* dashboard */
+            if(data->properties.labelDashCol0) {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol0", BAD_CAST g_strdup_printf ("%s", data->properties.labelDashCol0));	    
+            }
+            else {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol0", BAD_CAST _("To Do"));
+            }
+            
+            if(data->properties.labelDashCol1) {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol1", BAD_CAST g_strdup_printf ("%s", data->properties.labelDashCol1));	    
+            }
+            else {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol1", BAD_CAST _("In progress"));
+            }
+
+            
+            if(data->properties.labelDashCol2) {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol2", BAD_CAST g_strdup_printf ("%s", data->properties.labelDashCol2));	    
+            }
+            else {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol2", BAD_CAST _("Overdue"));
+            }
+           
+            if(data->properties.labelDashCol3) {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol3", BAD_CAST g_strdup_printf ("%s", data->properties.labelDashCol3));	    
+            }
+            else {
+               xmlNewProp (prop_dash, BAD_CAST "DashCol3", BAD_CAST _("Completed"));
+            }
+
+ 
 
   return ret;
 }

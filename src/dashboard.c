@@ -21,6 +21,7 @@
 #include "support.h"
 #include "misc.h"
 #include "tasks.h"
+#include "tasksutils.h"
 #include "dashboard.h"
 #include "assign.h"
 #include "undoredo.h"
@@ -664,6 +665,30 @@ static  GtkWidget *dashboard_new_foo_row (gint status, APP_data *data)
 
 }
 
+
+/**********************************************
+ * 
+ * PUBLIC : update columnus title
+ * with content of data->properties structure
+ * 
+ * ********************************************/
+void dashboard_update_column_labels (APP_data *data)
+{
+  GtkWidget *labelDashCol0, *labelDashCol1, *labelDashCol2, *labelDashCol3;
+  
+  /* get pointers on columns names */
+  labelDashCol0 = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelDashCol0"));
+  labelDashCol1 = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelDashCol1"));  
+  labelDashCol2 = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelDashCol2"));
+  labelDashCol3 = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelDashCol3"));  
+  
+  /* set default names  */
+  gtk_label_set_markup (GTK_LABEL (labelDashCol0), g_strdup_printf ("<big><b>%s</b></big>", data->properties.labelDashCol0));
+  gtk_label_set_markup (GTK_LABEL (labelDashCol1), g_strdup_printf ("<big><b>%s</b></big>", data->properties.labelDashCol1));
+  gtk_label_set_markup (GTK_LABEL (labelDashCol2), g_strdup_printf ("<big><b>%s</b></big>", data->properties.labelDashCol2)); 
+  gtk_label_set_markup (GTK_LABEL (labelDashCol3), g_strdup_printf ("<big><b>%s</b></big>", data->properties.labelDashCol3));  
+}
+
 /***********************************
   PUBLIC :
   init (first display) the 
@@ -681,7 +706,10 @@ void dashboard_init (APP_data *data)
   gchar *startDate = NULL, *endDate = NULL, *human_date;
   GDate date_start, date_end;
   tasks_data *tmp_tasks_datas;  
-
+ 
+  /* set columns titles */
+  dashboard_update_column_labels (data);
+    
   /* get pointers on labels */
   labelWait = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelWait"));
   labelRun = GTK_WIDGET(gtk_builder_get_object (data->builder, "labelRun"));
@@ -722,15 +750,15 @@ void dashboard_init (APP_data *data)
      tmp_tasks_datas = (tasks_data *)l->data;// TODO : fix a status for group tasks 
      if(tmp_tasks_datas->type == TASKS_TYPE_TASK ){
 	     /* now, we switch according to 'status' field */
-             g_date_set_dmy (&date_start, 
+         g_date_set_dmy (&date_start, 
                   tmp_tasks_datas->start_nthDay, tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
-             g_date_set_dmy (&date_end, 
+         g_date_set_dmy (&date_end, 
                   tmp_tasks_datas->end_nthDay, tmp_tasks_datas->end_nthMonth, tmp_tasks_datas->end_nthYear);
              
-             startDate = misc_convert_date_to_locale_str (&date_start);
-             endDate = misc_convert_date_to_locale_str (&date_end);
-             human_date = misc_convert_date_to_friendly_str (&date_start);
-	     switch(tmp_tasks_datas->status) {
+         startDate = misc_convert_date_to_locale_str (&date_start);
+         endDate = misc_convert_date_to_locale_str (&date_end);
+         human_date = misc_convert_date_to_friendly_str (&date_start);
+	    switch(tmp_tasks_datas->status) {
 		case TASKS_STATUS_RUN:{
                    box  = GTK_WIDGET(gtk_builder_get_object (data->builder, "listboxTasksRun"));
                    row = dashboard_new_widget (tmp_tasks_datas->name, g_strdup_printf (_("from %s to %s"), human_date, endDate), 

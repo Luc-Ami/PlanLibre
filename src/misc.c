@@ -106,7 +106,7 @@ void misc_init_vars (APP_data *data)
   /* tasks */
   data->tasksList = NULL;
   data->groups = NULL;
-  data->curTasks=-1; /* idem for tasks */
+  data->curTasks = -1; /* idem for tasks */
   data->treeViewTasksRsc = NULL;
   data->treeViewTasksTsk = NULL;
   data->treeViewReportMail = NULL;
@@ -124,6 +124,10 @@ void misc_init_vars (APP_data *data)
   data->properties.org_name = NULL;
   data->properties.proj_website = NULL;
   data->properties.logo = NULL;
+  data->properties.labelDashCol0 = g_strdup_printf ("%s", _("To Do"));
+  data->properties.labelDashCol1 = g_strdup_printf ("%s", _("In progress"));
+  data->properties.labelDashCol2 = g_strdup_printf ("%s", _("Overdue"));  
+  data->properties.labelDashCol3 = g_strdup_printf ("%s", _("Completed"));    
   /* now, we set-up default 'date' strings */
   /* we get the current date */
   g_date_set_time_t (&current_date, time (NULL)); /* date of today */

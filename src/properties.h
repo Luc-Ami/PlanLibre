@@ -21,6 +21,7 @@ GtkWidget *properties_create_dialog (APP_data *data);
 void properties_modify (APP_data *data);
 void properties_free_all (APP_data *data);
 void properties_reset_organization_logo (GtkButton *button, APP_data *data);
+void properties_set_default_dashboard (APP_data *data);
 void properties_set_default_dates (APP_data *data);
 void properties_set_default_schedules (APP_data *data);
 void properties_shift_dates (gint shift, APP_data *data);

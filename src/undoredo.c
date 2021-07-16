@@ -48,7 +48,7 @@ static gint get_undo_current_op_code (APP_data *data)
   undo_datas *tmp_undo_datas;
   
   if(undoList) {
-    GList *l= g_list_last (undoList);
+    GList *l = g_list_last (undoList);
     tmp_undo_datas = (undo_datas *)l->data;
     ret = tmp_undo_datas->opCode;
   }
@@ -72,7 +72,7 @@ static void undo_free_content (GList *l)
   tmp_undo_datas = (undo_datas *)l->data;
   op = tmp_undo_datas->opCode;
 
-  if(op>=0 && op<LAST_TASKS_OP) {/* tasks */
+  if(op >= 0 && op < LAST_TASKS_OP) {/* tasks */
       if(tmp_undo_datas->datas!=NULL) {
                tmpTsk = tmp_undo_datas->datas;
                if(tmpTsk->name)
@@ -100,7 +100,7 @@ static void undo_free_content (GList *l)
       }/* endif groups */
   }/* endif op for tasks */
 
-  if(op>LAST_TASKS_OP && op<LAST_RSC_OP) {/* rsc */
+  if(op > LAST_TASKS_OP && op < LAST_RSC_OP) {/* rsc */
       if(tmp_undo_datas->datas!=NULL) {
          rsc_datas *tmpRsc;
          tmpRsc = tmp_undo_datas->datas;
@@ -128,8 +128,8 @@ static void undo_free_content (GList *l)
       }/* endif list */
   }/* endif op for rsc */
 
-  if(op>LAST_RSC_OP && op<LAST_MISC_OP) {/* misc */
-      if(op==OP_MODIFY_PROP) {
+  if(op > LAST_RSC_OP && op < LAST_MISC_OP) {/* misc */
+      if(op == OP_MODIFY_PROP) {
          rsc_properties *tmp;
          tmp = tmp_undo_datas->datas;
          if(tmp->title)
@@ -152,6 +152,17 @@ static void undo_free_content (GList *l)
             g_free (tmp->org_name);
          if(tmp->proj_website)
             g_free (tmp->proj_website);
+            
+         if(tmp->labelDashCol0)
+            g_free (tmp->labelDashCol0);
+         if(tmp->labelDashCol1)
+            g_free (tmp->labelDashCol1);
+         if(tmp->labelDashCol2)
+            g_free (tmp->labelDashCol2);
+         if(tmp->labelDashCol3)
+            g_free (tmp->labelDashCol3);
+
+            
          if(tmp->start_date)
             g_free (tmp->start_date);
          if(tmp->end_date)
@@ -161,7 +172,7 @@ static void undo_free_content (GList *l)
          g_free (tmp);
       }/* endif modif prop */
 
-      if(op==OP_MODIFY_CAL) {
+      if(op == OP_MODIFY_CAL) {
          for(i=0;i<g_list_length (tmp_undo_datas->list);i++) {
             l1 = g_list_nth (tmp_undo_datas->list, i);
             cal = (calendar *)l1->data;
@@ -500,7 +511,7 @@ static void undo_pop_rsc (gint op, APP_data *data)
         case OP_CLONE_RSC:{
           rsc_remove_tasks_widgets (tmp_undo_datas->id, data);
           links_remove_all_rsc_links (tmp_undo_datas->id, data);
-          rsc_remove (rank, boxRsc, data);
+          rsc_remove (rank, GTK_LIST_BOX (boxRsc), data);
           assign_remove_all_tasks (data);
           assign_draw_all_visuals (data);
           report_clear_text (data->buffer, "left");
@@ -837,7 +848,7 @@ static gint undo_pop_tasks (gint op, APP_data *data)
           break;
         }
         case OP_INSERT_GROUP:{
-          tasks_remove (rank, GTK_LIST_BOX(boxTasks), data);
+          tasks_remove (rank, GTK_LIST_BOX (boxTasks), data);
           break;
         } 
         case OP_MODIFY_GROUP:{
@@ -877,7 +888,7 @@ static gint undo_pop_tasks (gint op, APP_data *data)
                       /* update widget */
                       pix = gdk_pixbuf_new_from_file_at_size (find_pixmap_file ("groupedtsk.png"), 
                           TASKS_RSC_AVATAR_SIZE, TASKS_RSC_AVATAR_SIZE, &err);
-                      gtk_image_set_from_pixbuf (tmp_tsk->cGroup, pix);
+                      gtk_image_set_from_pixbuf (GTK_IMAGE(tmp_tsk->cGroup), pix);
                       g_object_unref (pix);
                       g_object_set (tmp_tsk->cadre, "margin-left", 32, NULL);
                   }/* endif */
@@ -988,6 +999,21 @@ static void undo_pop_misc (gint op, APP_data *data)
           if(data->properties.proj_website)
              g_free (data->properties.proj_website);
           data->properties.proj_website = g_strdup_printf ("%s", tmp->proj_website);
+          
+          if(data->properties.labelDashCol0)
+            g_free (data->properties.labelDashCol0);
+          if(data->properties.labelDashCol1)
+            g_free (data->properties.labelDashCol1);
+          if(data->properties.labelDashCol2)
+            g_free (data->properties.labelDashCol2);
+          if(data->properties.labelDashCol3)
+            g_free (data->properties.labelDashCol3);
+          
+          data->properties.labelDashCol0 = g_strdup_printf ("%s", tmp->labelDashCol0);
+          data->properties.labelDashCol1 = g_strdup_printf ("%s", tmp->labelDashCol1);
+          data->properties.labelDashCol2 = g_strdup_printf ("%s", tmp->labelDashCol2);
+          data->properties.labelDashCol3 = g_strdup_printf ("%s", tmp->labelDashCol3);
+          
           data->properties.budget = tmp->budget;
           data->properties.scheduleStart = tmp->scheduleStart;
           data->properties.scheduleEnd = tmp->scheduleEnd;
@@ -1012,6 +1038,7 @@ static void undo_pop_misc (gint op, APP_data *data)
           timeline_draw_calendar_ruler (gtk_adjustment_get_value (adjustment), data);
           timeline_remove_all_tasks (data);
           timeline_draw_all_tasks (data);
+          dashboard_update_column_labels (data);
           misc_display_app_status (TRUE, data);
 // TODO transférer vers redo 
           break;

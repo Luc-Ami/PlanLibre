@@ -121,6 +121,10 @@ typedef struct {
   gchar *org_name;
   gchar *proj_website;
   gchar *units;
+  gchar *labelDashCol0;
+  gchar *labelDashCol1;  
+  gchar *labelDashCol2;
+  gchar *labelDashCol3;    
   gdouble budget;
   GdkPixbuf *logo;
   gchar *start_date;
