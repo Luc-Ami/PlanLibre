@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlanLibre 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-11 10:55+0200\n"
+"POT-Creation-Date: 2021-07-16 17:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: amiluc_bis@yahoo;fr\n"
@@ -101,15 +101,15 @@ msgstr " %s settings auto-generated - Do not edit!"
 msgid " --"
 msgstr " --"
 
-#: ui/main_ribbon.ui:4135 ui/main.ui:3547
+#: ui/main_ribbon.ui:4135 ui/main.ui:3553
 msgid " <big><b>Completed </b></big>"
 msgstr " <big><b>Achevé </b></big>"
 
-#: ui/main_ribbon.ui:3957 ui/main.ui:3369
+#: ui/main_ribbon.ui:3957 ui/main.ui:3371
 msgid " <big><b>In progress </b></big>"
 msgstr " <big><b>En cours </b></big>"
 
-#: ui/main_ribbon.ui:4046 ui/main.ui:3458
+#: ui/main_ribbon.ui:4046 ui/main.ui:3462
 msgid " <big><b>Overdue </b></big>"
 msgstr " <big><b>En retard </b></big>"
 
@@ -149,8 +149,8 @@ msgid " Id "
 msgstr "Identifiant"
 
 #: ui/main_ribbon.ui:3891 ui/main_ribbon.ui:3981 ui/main_ribbon.ui:4070
-#: ui/main_ribbon.ui:4159 ui/main.ui:3303 ui/main.ui:3393 ui/main.ui:3482
-#: ui/main.ui:3571
+#: ui/main_ribbon.ui:4159 ui/main.ui:3305 ui/main.ui:3397 ui/main.ui:3488
+#: ui/main.ui:3579
 msgid " None "
 msgstr "Aucun"
 
@@ -353,7 +353,7 @@ msgstr "%x"
 msgid "&"
 msgstr "&"
 
-#: ui/ressources1.ui:564 ui/ressources.ui:516
+#: ui/ressources.ui:516
 msgid "(raw)materials"
 msgstr "Matériaux"
 
@@ -391,12 +391,11 @@ msgstr "/"
 msgid "0"
 msgstr "0"
 
-#: ui/properties.ui:541 ui/ressources1.ui:292 ui/ressources.ui:296
-#: ui/tasks.ui:506
+#: ui/properties.ui:515 ui/ressources.ui:296 ui/tasks.ui:506
 msgid "0,00"
 msgstr "0,00"
 
-#: ui/main_ribbon.ui:4903 ui/main.ui:4396
+#: ui/main_ribbon.ui:4903 ui/main.ui:4404
 msgid "00:00"
 msgstr "00:00"
 
@@ -621,7 +620,7 @@ msgstr "<b>> tâches démarrant demain : </b>"
 msgid "<b>Automated emails</b>"
 msgstr "<b>Courriels automatisés</b>"
 
-#: ui/properties.ui:502
+#: ui/properties.ui:477
 msgid "<b>Budget :</b>"
 msgstr "<b>Budget :</b>"
 
@@ -702,7 +701,11 @@ msgstr ""
 msgid "<b>Current starting date</b>"
 msgstr "<b>Date de début actuelle</b>"
 
-#: ui/ressources1.ui:674 ui/ressources.ui:759
+#: ui/properties.ui:917
+msgid "<b>Dashboard categories :</b>"
+msgstr "<b>Catégories du tableau  :</b>"
+
+#: ui/ressources.ui:759
 msgid "<b>Date and Time management :</b>"
 msgstr "<b>Gestion date et temps :</b>"
 
@@ -710,7 +713,7 @@ msgstr "<b>Gestion date et temps :</b>"
 msgid "<b>Day : </b>"
 msgstr "<b>Jour : </b>"
 
-#: ui/properties.ui:228 ui/ressources1.ui:237 ui/ressources.ui:243
+#: ui/properties.ui:227 ui/ressources.ui:243
 msgid "<b>Description :</b>"
 msgstr "<b>Description :</b>"
 
@@ -1092,7 +1095,7 @@ msgstr "<b>Première période</b>"
 msgid "<b>Fourth period</b>"
 msgstr "<b>Quatrième période</b>"
 
-#: ui/properties.ui:98
+#: ui/properties.ui:97
 msgid "<b>Identification :</b>"
 msgstr "<b>Identification :</b>"
 
@@ -1219,7 +1222,7 @@ msgstr "<b>Tâches à venir :</b>"
 msgid "<b>Tasks</b>"
 msgstr "<b>Tâches</b>"
 
-#: ui/properties.ui:915
+#: ui/properties.ui:583
 msgid "<b>Team :</b>"
 msgstr "<b>Équipe :</b>"
 
@@ -1315,10 +1318,6 @@ msgstr "<big><b>Dernier envoi auto. de courriels : </b></big>"
 msgid "<big><b>Resource</b></big>"
 msgstr "<big><b>Ressource</b></big>"
 
-#: ui/ressources1.ui:181
-msgid "<big><b>Ressource</b></big>"
-msgstr "<big><b>Ressource</b></big>"
-
 #: mail.c:1346
 msgid "<big><b>Send a calendar/agenda by email</b></big>"
 msgstr "<big><b>Envoyer un calendrier/agenda par courriel</b></big>"
@@ -1355,7 +1354,7 @@ msgstr "<big><big><big>Nombre total de tâches : </big></big></big>"
 msgid "<big><big><big>noname</big></big></big>"
 msgstr "<big><big><big>sans_nom</big></big></big>"
 
-#: ui/main_ribbon.ui:4821 ui/main.ui:4314
+#: ui/main_ribbon.ui:4821 ui/main.ui:4322
 msgid "<i> Here you can see various tips </i>"
 msgstr "<i> Ici vous pouvez voir différentes astuces </i>"
 
@@ -1408,7 +1407,7 @@ msgstr "<i>Définissez la nouvelle <b>date de début</b> de votre projet.</i>"
 msgid "<i>Empty</i>"
 msgstr "<i>Vide</i>"
 
-#: ui/ressources1.ui:194 ui/ressources.ui:201
+#: ui/ressources.ui:201
 msgid ""
 "<i>Here, you can add a <b>new</b> ressource or <b>modify</b> an existing one."
 "</i>"
@@ -1504,6 +1503,14 @@ msgstr "<i>Temps passé %.2d:%.2d</i>"
 msgid "<i>Time spent %s</i>"
 msgstr "<i>temps passé %s</i>"
 
+#: ui/properties.ui:1053
+msgid ""
+"<i>You can modify column's titles used by dashboard view. Titles are stored "
+"in project's file.</i>"
+msgstr ""
+"<i>Vous pouvez modifier le titre des colonnes de la vue tableau. Les titres "
+"sont stockés dans le fichier du projet.</i>"
+
 #: ui/taskrepeat.ui:1028
 msgid "<i>of :</i>"
 msgstr "<i>de :</i>"
@@ -1512,7 +1519,7 @@ msgstr "<i>de :</i>"
 msgid "<i>or ...</i>"
 msgstr "<i>ou ...</i>"
 
-#: ui/properties.ui:362
+#: ui/properties.ui:349
 msgid "<i>to</i>"
 msgstr "<i>à</i>"
 
@@ -1638,7 +1645,7 @@ msgstr "Ajouter un nouveau calendrier vide"
 msgid "Allow PlanLibre access to my Trello® account :"
 msgstr "Autoriser PlanLibre à accéder à mon compte Trello®:"
 
-#: ui/properties.ui:524
+#: ui/properties.ui:499
 msgid "Amount : "
 msgstr "Montant :"
 
@@ -1662,7 +1669,7 @@ msgstr ""
 "Veuillez vérifier votre mot de passe et/ou votre\n"
 "connexion Internet !"
 
-#: ressources.c:166 ui/ressources1.ui:561 ui/ressources.ui:513
+#: ressources.c:166 ui/ressources.ui:513
 msgid "Animal work force"
 msgstr "Force de travail animale"
 
@@ -1723,7 +1730,7 @@ msgstr "Comme membre du projet %s, \r\n"
 msgid "Ask before quit "
 msgstr "Demander avant de quiter"
 
-#: ui/main_ribbon.ui:4538 ui/main.ui:3946
+#: ui/main_ribbon.ui:4538 ui/main.ui:3954
 msgid "Assignments"
 msgstr "Affectations"
 
@@ -1748,7 +1755,7 @@ msgstr "Août"
 msgid "Auto save every 5 minutes"
 msgstr "Enregistrement automatique toutes les 5 minutes"
 
-#: ui/main_ribbon.ui:4847 ui/main.ui:4340
+#: ui/main_ribbon.ui:4847 ui/main.ui:4348
 msgid "Autosaving is activated"
 msgstr "Sauvegarde automatique aciivée"
 
@@ -1760,7 +1767,7 @@ msgstr "Avatar"
 msgid "Avg"
 msgstr "Moy"
 
-#: ui/ressources1.ui:466 ui/ressources.ui:426
+#: ui/ressources.ui:426
 msgid "Belongs to : "
 msgstr "Appartient à :"
 
@@ -1842,7 +1849,7 @@ msgstr "_Annuler"
 msgid "Calendar :"
 msgstr "Calendrier :"
 
-#: ui/ressources1.ui:894 ui/ressources.ui:965
+#: ui/ressources.ui:965
 msgid "Calendar : "
 msgstr "Calendrier :"
 
@@ -1886,7 +1893,7 @@ msgstr "Catégorie :"
 msgid "Change user token ..."
 msgstr "Changer jeton utilisateur ..."
 
-#: ui/ressources1.ui:687 ui/ressources.ui:773
+#: ui/ressources.ui:773
 msgid "Check or uncheck day(s) according to ressource's schedule"
 msgstr "Cochez ou décochez les jours en fonction du calendrier de la ressource"
 
@@ -1902,7 +1909,7 @@ msgstr "Cochez/décochez pour utiliser ou non une ressource"
 msgid "Check this button in order to set a limit to repeating process"
 msgstr "Cochez ce bouton pour fixer une limite au nombre de répétitions"
 
-#: ui/ressources1.ui:599 ui/ressources.ui:534
+#: ui/ressources.ui:534
 msgid "Choose a color to identify this ressource"
 msgstr "Choisissez une couleur pour identifier cette ressource"
 
@@ -1914,7 +1921,7 @@ msgstr "Choisir une fréquence"
 msgid "Choose a month in order to define a valid date"
 msgstr "Choisissez un mois pour définir une date valide"
 
-#: ui/ressources1.ui:906 ui/ressources.ui:978
+#: ui/ressources.ui:978
 msgid ""
 "Choose here a calendar (if nothing is choosen, the default main calendar "
 "will be used)"
@@ -1922,7 +1929,7 @@ msgstr ""
 "Choisissez ici un calendrier (si aucun n'est choisi, c'est le calendrier "
 "principal par défaut qui sera utlisé)"
 
-#: ui/ressources1.ui:339 ui/ressources.ui:339
+#: ui/ressources.ui:339
 msgid ""
 "Choose here the rate for computing ressource's costs.\n"
 "For weeks and months, we use standard accounting conventions."
@@ -1947,7 +1954,7 @@ msgid "Click here and type your message."
 msgstr "Cliquez ici puis tapez votre message"
 
 #: ui/main_ribbon.ui:2575 ui/main_ribbon.ui:4471 ui/main.ui:2034
-#: ui/main.ui:3879
+#: ui/main.ui:3887
 msgid "Click here for more export options"
 msgstr "Cliquez ici pour voir plus d'options d'exportation"
 
@@ -2025,7 +2032,15 @@ msgstr ""
 "200% signifie doubler la taille,\n"
 "100% taille normale."
 
-#: ui/main_ribbon.ui:3596 ui/main.ui:3036
+#: ui/main.ui:3036
+msgid ""
+"Click here to clone more than 1 time the selected resource.\n"
+"<i>This button is inactive until a resource is selected.</i>"
+msgstr ""
+"Cliquez ici pour cloner plus d'1 fois la ressource sélectionnée.\n"
+"<i>Ce bouton est inactif tant qu'aucune ressource n'est sélectionnée.</i>"
+
+#: ui/main_ribbon.ui:3596
 msgid ""
 "Click here to clone more than 1 time the selected ressource.\n"
 "<i>This button is inactive until a ressource is selected.</i>"
@@ -2033,7 +2048,15 @@ msgstr ""
 "Cliquez ici pour cloner plus d'1 fois la ressource sélectionnée.\n"
 "<i>Ce bouton est inactif tant qu'aucune ressource n'est sélectionnée.</i>"
 
-#: ui/main_ribbon.ui:3543 ui/main.ui:2983
+#: ui/main.ui:2983
+msgid ""
+"Click here to clone the selected resource.\n"
+"<i>This button is inactive until a resource is selected.</i>"
+msgstr ""
+"Cliquez ici pour cloner la ressource sélectionnée.\n"
+"<i>Ce bouton est inactif jusqu'à ce qu'une ressource soit sélectionnée.</i>"
+
+#: ui/main_ribbon.ui:3543
 msgid ""
 "Click here to clone the selected ressource.\n"
 "<i>This button is inactive until a ressource is selected.</i>"
@@ -2071,7 +2094,23 @@ msgstr ""
 msgid "Click here to mark period between those dates"
 msgstr "Cliquez ici pour marquer la période entre les deux dates"
 
-#: ui/main_ribbon.ui:3477 ui/main.ui:2927
+#: ui/main.ui:2927
+msgid ""
+"Click here to modify or remove\n"
+"the selected resource.\n"
+"A dialog will be displayed.\n"
+"<i>This button is inactive until a \n"
+"resource is selected.</i>\n"
+"Shortcut <b>[f2]</b>"
+msgstr ""
+"Cliquez ici pour modifier ou supprimer\n"
+"la ressource sélectionnée.\n"
+"Un dialogue sera affiché.\n"
+"<i>Ce bouton reste inactif jusqu'à ce\n"
+"qu'une ressource soit sélectionnée.</i>\n"
+"Raccourci <b>[f2]</b>"
+
+#: ui/main_ribbon.ui:3477
 msgid ""
 "Click here to modify or remove\n"
 "the selected ressource.\n"
@@ -2137,7 +2176,17 @@ msgstr ""
 msgid "Click here to revert all changes"
 msgstr "Cliquez ici pour annuler tous les changements"
 
-#: ui/main_ribbon.ui:3427 ui/main.ui:2887
+#: ui/main.ui:2887
+msgid ""
+"Click here to set-up a new resource.\n"
+"A dialog will be displayed.\n"
+"Shortcut <b>[f3]</b>"
+msgstr ""
+"Cliquez ici pour créer une nouvelle ressource.\n"
+"Un dialogue sera affiché.\n"
+"Raccourci <b>[f3]</b>"
+
+#: ui/main_ribbon.ui:3427
 msgid ""
 "Click here to set-up a new ressource.\n"
 "A dialog will be displayed.\n"
@@ -2215,24 +2264,20 @@ msgstr ""
 "Cliquez sur ce bouton pour définir une nouvelle tâche. \n"
 "Raccourci <b>[f3]</b>"
 
-#: ui/main_ribbon.ui:4338 ui/main.ui:3746
+#: ui/main_ribbon.ui:4338 ui/main.ui:3754
 msgid "Click this buton to jump to next month"
 msgstr "Cliquez sur ce bouton pour sauter au mois suivant"
 
-#: ui/main_ribbon.ui:4274 ui/main.ui:3682
+#: ui/main_ribbon.ui:4274 ui/main.ui:3690
 msgid "Click this buton to jump to previous month"
 msgstr "Cliquez sur ce bouton pour sauter au mois précédent"
 
-#: ui/properties.ui:266 ui/properties.ui:396 ui/timeshift.ui:181
+#: ui/properties.ui:264 ui/properties.ui:380 ui/timeshift.ui:181
 msgid "Click this button to change date"
 msgstr "Cliquez ce bouton pour changer la date"
 
 #: ui/ressources.ui:311
 msgid "Click this button to choose or change resource's icon"
-msgstr "Cliquer sur ce bouton pour choisir ou changer l'icône de la ressource"
-
-#: ui/ressources1.ui:309
-msgid "Click this button to choose or change ressource's icon"
 msgstr "Cliquer sur ce bouton pour choisir ou changer l'icône de la ressource"
 
 #: ui/ressources.ui:529
@@ -2261,7 +2306,7 @@ msgstr "Cloner"
 msgid "Collaborate"
 msgstr "Collaborer"
 
-#: ui/ressources1.ui:581 ui/ressources.ui:547 ui/tasks.ui:550
+#: ui/ressources.ui:547 ui/tasks.ui:550
 msgid "Color : "
 msgstr "Couleur :"
 
@@ -2269,11 +2314,27 @@ msgstr "Couleur :"
 msgid "Column"
 msgstr "Colonne"
 
-#: trello.c:496 ui/tasks.ui:467
+#: ui/properties.ui:948
+msgid "Column #1"
+msgstr "Colonne n°1"
+
+#: ui/properties.ui:959
+msgid "Column #2"
+msgstr "Colonne n°2"
+
+#: ui/properties.ui:970
+msgid "Column #3"
+msgstr "Colonne n°3"
+
+#: ui/properties.ui:981
+msgid "Column #4"
+msgstr "Colonne n°4"
+
+#: trello.c:496 ui/properties.ui:1033 ui/tasks.ui:467
 msgid "Completed"
 msgstr "Achevé"
 
-#: ui/ressources1.ui:401 ui/ressources.ui:561
+#: ui/ressources.ui:561
 msgid "Cost : "
 msgstr "Coût :"
 
@@ -2307,7 +2368,7 @@ msgstr "JJ:MM:AA"
 msgid "Daily schedules"
 msgstr "Horaires quotidiens"
 
-#: ui/main_ribbon.ui:4233 ui/main.ui:3645
+#: ui/main_ribbon.ui:4233 ui/main.ui:3653
 msgid "Dashboard"
 msgstr "Tableau"
 
@@ -2347,7 +2408,7 @@ msgstr "Heure fin quotidienne par défaut"
 msgid "Default daily starting time"
 msgstr "Heure début quotidienne par défaut"
 
-#: ui/properties.ui:421
+#: ui/properties.ui:402
 msgid "Default schedule : <i>from</i>"
 msgstr "Horaire par défaut : <i>de</i>"
 
@@ -2490,11 +2551,11 @@ msgstr "Vide"
 msgid "Ending date :"
 msgstr "Date de fin :"
 
-#: ui/properties.ui:381
+#: ui/properties.ui:366
 msgid "Ending date : "
 msgstr "Date de fin :"
 
-#: ressources.c:170 ui/ressources1.ui:562 ui/ressources.ui:514
+#: ressources.c:170 ui/ressources.ui:514
 msgid "Equipment"
 msgstr "Équipement"
 
@@ -2537,7 +2598,7 @@ msgid "Export as Image"
 msgstr "Exporter comme image"
 
 #: ui/main_ribbon.ui:2553 ui/main_ribbon.ui:4449 ui/main.ui:2012
-#: ui/main.ui:3857
+#: ui/main.ui:3865
 msgid "Export as PDF"
 msgstr "Exporter comme PDF"
 
@@ -2549,7 +2610,7 @@ msgstr "Exporter comme fichier calendrier/agenda"
 msgid "Export as drawing"
 msgstr "Exporter comme croquis"
 
-#: ui/main_ribbon.ui:4420 ui/main.ui:3828
+#: ui/main_ribbon.ui:4420 ui/main.ui:3836
 msgid "Export assignments as PDF"
 msgstr "Exporter affectations comme PDF"
 
@@ -2619,7 +2680,7 @@ msgstr ""
 "Exportation vers Trello réussie.\n"
 "Félicitations !"
 
-#: ui/main_ribbon.ui:4601 ui/main.ui:4105
+#: ui/main_ribbon.ui:4601 ui/main.ui:4113
 msgid "Export to file"
 msgstr "Exporter vers fichier"
 
@@ -2647,7 +2708,7 @@ msgstr "Ve"
 msgid "Fri."
 msgstr "Ven."
 
-#: ui/calendars.ui:1162 ui/ressources1.ui:802 ui/ressources.ui:880
+#: ui/calendars.ui:1162 ui/ressources.ui:880
 msgid "Friday"
 msgstr "Vendredi"
 
@@ -2667,15 +2728,15 @@ msgstr "D'une administration publique"
 msgid "G"
 msgstr "G"
 
-#: ui/properties.ui:328
+#: ui/properties.ui:319
 msgid "GPS coordinates  : "
 msgstr "Coordonnées GPS :"
 
-#: ui/main_ribbon.ui:481 ui/main.ui:494 ui/main.ui:4006
+#: ui/main_ribbon.ui:481 ui/main.ui:494 ui/main.ui:4014
 msgid "Global activity analysis"
 msgstr "Analyse globale de l'activité"
 
-#: ui/main_ribbon.ui:490 ui/main.ui:503 ui/main.ui:4054
+#: ui/main_ribbon.ui:490 ui/main.ui:503 ui/main.ui:4062
 msgid "Global cost analysis"
 msgstr "Analyse globale des coûts"
 
@@ -2729,11 +2790,11 @@ msgstr "Haute"
 msgid "Home"
 msgstr "Accueil"
 
-#: ui/ressources1.ui:962 ui/ressources.ui:1034
+#: ui/ressources.ui:1034
 msgid "Hrs."
 msgstr "Hrs."
 
-#: ressources.c:162 ui/ressources1.ui:560 ui/ressources.ui:512
+#: ressources.c:162 ui/ressources.ui:512
 msgid "Human work force"
 msgstr "Force de travail humain"
 
@@ -2772,7 +2833,7 @@ msgstr ""
 "Vous pouvez contrôler la nouvelle date de fin avec le menu <b>projet/"
 "propriétés</b>."
 
-#: report.c:324
+#: report.c:324 ui/properties.ui:1007
 msgid "In progress"
 msgstr "En cours"
 
@@ -2780,7 +2841,7 @@ msgstr "En cours"
 msgid "Increase duration by one day "
 msgstr "Augmenter la durée d'une journée"
 
-#: ui/ressources1.ui:487 ui/ressources.ui:446
+#: ui/ressources.ui:446
 msgid "Independant"
 msgstr "Indépendant"
 
@@ -2882,7 +2943,7 @@ msgid "L%d/%d"
 msgstr "L%d/%d"
 
 #: callbacks.c:1837 callbacks.c:1931 callbacks.c:2304 ui/main_ribbon.ui:4791
-#: ui/main.ui:4284
+#: ui/main.ui:4292
 msgid "L--"
 msgstr "L--"
 
@@ -2894,7 +2955,7 @@ msgstr "Lien"
 msgid "List of keyboard shortcuts used by PLanLibre"
 msgstr "Liste des raccourcis claviers utilisés par PlanLibre"
 
-#: ui/properties.ui:291
+#: ui/properties.ui:286
 msgid "Location  : "
 msgstr "Emplacement :"
 
@@ -2902,7 +2963,7 @@ msgstr "Emplacement :"
 msgid "Location : "
 msgstr "Emplacement :"
 
-#: ui/properties.ui:304
+#: ui/properties.ui:298
 msgid "Location in human readable form"
 msgstr "Emplacement sous forme lisible pour un humain"
 
@@ -2914,7 +2975,7 @@ msgstr "Emplacement inconnu"
 msgid "Low"
 msgstr "Basse"
 
-#: ui/ressources1.ui:368 ui/ressources.ui:575
+#: ui/ressources.ui:575
 msgid "Mail : "
 msgstr "Courriel :"
 
@@ -2930,11 +2991,11 @@ msgstr "Calendrier principal"
 msgid "Manage calendars and working hours"
 msgstr "Gérer calendriers et horaires de travail"
 
-#: ui/properties.ui:644
+#: ui/properties.ui:627
 msgid "Manager's mail : "
 msgstr "Courriel gestionnaire :"
 
-#: ui/properties.ui:662
+#: ui/properties.ui:643
 msgid "Manager's phone : "
 msgstr "Téléphone gestionnaire :"
 
@@ -2974,7 +3035,7 @@ msgstr "Marquer tous les mercredis entre les dates de début et fin"
 msgid "Material"
 msgstr "Matériel"
 
-#: ui/ressources1.ui:928 ui/ressources.ui:999
+#: ui/ressources.ui:999
 msgid "Maximum daily working time : "
 msgstr "Temps maximum de travail quotidien"
 
@@ -2994,7 +3055,7 @@ msgstr "Message"
 msgid "Milestone"
 msgstr "Jalon"
 
-#: ui/ressources1.ui:995 ui/ressources.ui:1067
+#: ui/ressources.ui:1067
 msgid "Min."
 msgstr "Min."
 
@@ -3026,7 +3087,7 @@ msgstr "Modifier une tâche"
 msgid "Mon."
 msgstr "Lun."
 
-#: ui/calendars.ui:1158 ui/ressources1.ui:718 ui/ressources.ui:804
+#: ui/calendars.ui:1158 ui/ressources.ui:804
 msgid "Monday"
 msgstr "Lundi"
 
@@ -3070,8 +3131,7 @@ msgstr "N"
 msgid "N/A"
 msgstr "N/D"
 
-#: ui/milestone.ui:90 ui/ressources1.ui:384 ui/ressources.ui:366
-#: ui/tasks.ui:107
+#: ui/milestone.ui:90 ui/ressources.ui:366 ui/tasks.ui:107
 msgid "Name : "
 msgstr "Nom :"
 
@@ -3135,7 +3195,7 @@ msgstr "Nouvelle ressource"
 msgid "New task"
 msgstr "Nouvelle tâche"
 
-#: ui/main_ribbon.ui:4378 ui/main.ui:3786
+#: ui/main_ribbon.ui:4378 ui/main.ui:3794
 msgid "Next month"
 msgstr "Mois suivant"
 
@@ -3167,7 +3227,7 @@ msgstr "Pas de résumé"
 msgid "Nobody"
 msgstr "Personne"
 
-#: ui/ressources1.ui:489 ui/ressources.ui:448
+#: ui/ressources.ui:448
 msgid "Non profit organization"
 msgstr "Organisation sans but lucratif"
 
@@ -3273,23 +3333,23 @@ msgstr "Ouvrir un fichier récent"
 msgid "Open project ..."
 msgstr "Ouvrir un projet ..."
 
-#: ui/properties.ui:680
+#: ui/properties.ui:659
 msgid "Organization : "
 msgstr "Organisation : "
 
-#: ui/properties.ui:838
+#: ui/properties.ui:794
 msgid "Organization logo : "
 msgstr "Logo de l'organisation :"
 
-#: ui/properties.ui:765
+#: ui/properties.ui:728
 msgid "Organization/project website :"
 msgstr "Site internet de l'organisation/du projet"
 
-#: ui/ressources1.ui:485 ui/ressources.ui:444
+#: ui/ressources.ui:444
 msgid "Our Organization"
 msgstr "Notre organisation"
 
-#: export.c:807 report.c:320 trello.c:493 ui/tasks.ui:468
+#: export.c:807 report.c:320 trello.c:493 ui/properties.ui:1020 ui/tasks.ui:468
 msgid "Overdue"
 msgstr "En retard"
 
@@ -3317,11 +3377,11 @@ msgstr "PgSuiv."
 msgid "PgPrev"
 msgstr "PgPréc."
 
-#: ui/ressources1.ui:509 ui/ressources.ui:466
+#: ui/ressources.ui:466
 msgid "Phone : "
 msgstr "Téléphone :"
 
-#: ui/ressources1.ui:417 ui/ressources.ui:381
+#: ui/ressources.ui:381
 msgid "Photo : "
 msgstr "Photo : "
 
@@ -3357,7 +3417,7 @@ msgstr "Fichiers XML PlanLibre"
 msgid "Planning utility written in GTK+ and licensed under GPL v.3"
 msgstr "Utilitaire de planification écrit en GTK+ et sous licence GPL v.3"
 
-#: ressources.c:146 ui/ressources1.ui:492 ui/ressources.ui:451
+#: ressources.c:146 ui/ressources.ui:451
 msgid "Platform worker"
 msgstr "Travailleur de plateforme"
 
@@ -3374,7 +3434,7 @@ msgstr ""
 "Soyez donc prudent dans leur utilisation.\n"
 "\n"
 
-#: ui/ressources1.ui:940 ui/ressources.ui:1012
+#: ui/ressources.ui:1012
 msgid ""
 "Please type here how nany hours are worked by day (only the \"hour\" part). "
 msgstr ""
@@ -3397,7 +3457,7 @@ msgstr ""
 msgid "Port"
 msgstr "Port"
 
-#: ui/main_ribbon.ui:4286 ui/main.ui:3694
+#: ui/main_ribbon.ui:4286 ui/main.ui:3702
 msgid "Prev. month"
 msgstr "Mois précéd."
 
@@ -3421,7 +3481,7 @@ msgstr "Priorité  basse"
 msgid "Priority medium"
 msgstr "Priorité moyenne"
 
-#: ui/ressources1.ui:486 ui/ressources.ui:445
+#: ui/ressources.ui:445
 msgid "Profit organization"
 msgstr "organisation à but lucratif"
 
@@ -3429,7 +3489,7 @@ msgstr "organisation à but lucratif"
 msgid "Progress (%) :"
 msgstr "Réalisé (%)"
 
-#: ui/main_ribbon.ui:4935 ui/main.ui:4428
+#: ui/main_ribbon.ui:4935 ui/main.ui:4436
 msgid "Progress : "
 msgstr "Réalisé"
 
@@ -3466,7 +3526,7 @@ msgstr "Coordonnées GPS du projet - optionnel"
 msgid "Project's main location"
 msgstr "Emplacement principal du projet"
 
-#: ui/properties.ui:626
+#: ui/properties.ui:611
 msgid "Project's manager : "
 msgstr "Gestionnaire du projet :"
 
@@ -3482,7 +3542,7 @@ msgstr "Demander avant d'écraser un fichier existant"
 msgid "Properties"
 msgstr "Propriétés"
 
-#: ui/ressources1.ui:491 ui/ressources.ui:450
+#: ui/ressources.ui:450
 msgid "Public administration"
 msgstr "Administration publique"
 
@@ -3534,11 +3594,11 @@ msgstr "Réduire la durée d'une journée"
 msgid "Reload last backup of current project"
 msgstr "Recharge la dernière sauvegarde du projet en cours"
 
-#: ui/ressources1.ui:433 ui/ressources.ui:395
+#: ui/ressources.ui:395
 msgid "Reminder : "
 msgstr "Rappel :"
 
-#: ui/ressources1.ui:75 ui/ressources.ui:82
+#: ui/ressources.ui:82
 msgid "Remove ressource"
 msgstr "Enlever la ressource"
 
@@ -3550,7 +3610,7 @@ msgstr "Enlever le calendrier sélectionné"
 msgid "Repeat selected task"
 msgstr "Répéter la tâche sélectionnée"
 
-#: ui/main_ribbon.ui:471 ui/main_ribbon.ui:4723 ui/main.ui:484 ui/main.ui:4216
+#: ui/main_ribbon.ui:471 ui/main_ribbon.ui:4723 ui/main.ui:484 ui/main.ui:4224
 #: ui/settings.ui:358
 msgid "Reports"
 msgstr "Rapports"
@@ -3559,15 +3619,19 @@ msgstr "Rapports"
 msgid "Reset all marked days"
 msgstr "R-A-Z des jours marqués"
 
-#: ui/properties.ui:882
+#: ui/properties.ui:860
 msgid "Reset logo"
 msgstr "R-A-Z du logo"
+
+#: ui/main.ui:3228
+msgid "Resources"
+msgstr "Ressources"
 
 #: mail.c:318 tasksdialogs.c:781
 msgid "Ressource name "
 msgstr "Nom de la ressource"
 
-#: tasks.c:450 ui/main_ribbon.ui:3800 ui/main.ui:3228
+#: tasks.c:450 ui/main_ribbon.ui:3800
 msgid "Ressources"
 msgstr "Ressources"
 
@@ -3620,7 +3684,7 @@ msgstr "Sa"
 msgid "Sat."
 msgstr "Sam."
 
-#: ui/calendars.ui:1163 ui/ressources1.ui:823 ui/ressources.ui:899
+#: ui/calendars.ui:1163 ui/ressources.ui:899
 msgid "Saturday"
 msgstr "Samedi"
 
@@ -3656,7 +3720,7 @@ msgstr "Enregistrer le projet sous ..."
 msgid "Scholar"
 msgstr "Enseignement"
 
-#: ui/ressources1.ui:490 ui/ressources.ui:449
+#: ui/ressources.ui:449
 msgid "Schollar organization"
 msgstr "Organisation d'enseignement"
 
@@ -3680,7 +3744,7 @@ msgstr "Envoyer un rapport aux participants ..."
 msgid "Send agenda"
 msgstr "Envoyer agenda"
 
-#: ui/main_ribbon.ui:4650 ui/main.ui:4156
+#: ui/main_ribbon.ui:4650 ui/main.ui:4164
 msgid "Send by email"
 msgstr "Envoyer par courriel"
 
@@ -3968,7 +4032,7 @@ msgstr "Fichiers CSV de tableurs"
 msgid "Starting date :"
 msgstr "Date de début :"
 
-#: ui/properties.ui:251
+#: ui/properties.ui:250
 msgid "Starting date : "
 msgstr "Date de début :"
 
@@ -3984,7 +4048,7 @@ msgstr "Di"
 msgid "Subject : "
 msgstr "Sujet :"
 
-#: ui/properties.ui:144
+#: ui/properties.ui:143
 msgid "Summary : "
 msgstr "Résumé :"
 
@@ -3992,11 +4056,11 @@ msgstr "Résumé :"
 msgid "Sun."
 msgstr "Dim."
 
-#: ui/calendars.ui:1164 ui/ressources1.ui:843 ui/ressources.ui:917
+#: ui/calendars.ui:1164 ui/ressources.ui:917
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: ui/ressources1.ui:563 ui/ressources.ui:515
+#: ui/ressources.ui:515
 msgid "Surface"
 msgstr "Surface"
 
@@ -4201,7 +4265,7 @@ msgstr "Jeu."
 msgid "Thunderbird CSV files"
 msgstr "Fichier CSV de Thunderbird"
 
-#: ui/calendars.ui:1161 ui/ressources1.ui:781 ui/ressources.ui:861
+#: ui/calendars.ui:1161 ui/ressources.ui:861
 msgid "Thursday"
 msgstr "Jeudi"
 
@@ -4213,11 +4277,11 @@ msgstr "Chronologie"
 msgid "Timer"
 msgstr "Chrono"
 
-#: ui/main_ribbon.ui:4885 ui/main.ui:4378
+#: ui/main_ribbon.ui:4885 ui/main.ui:4386
 msgid "Timer : "
 msgstr "Chrono :"
 
-#: ui/properties.ui:127
+#: ui/properties.ui:126
 msgid "Title :"
 msgstr "Titre :"
 
@@ -4234,7 +4298,7 @@ msgstr ""
 msgid "To"
 msgstr "A"
 
-#: trello.c:487
+#: trello.c:487 ui/properties.ui:994
 msgid "To Do"
 msgstr "A venir"
 
@@ -4274,11 +4338,11 @@ msgstr "Ma"
 msgid "Tue."
 msgstr "Mar."
 
-#: ui/calendars.ui:1159 ui/ressources1.ui:739 ui/ressources.ui:823
+#: ui/calendars.ui:1159 ui/ressources.ui:823
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: ui/properties.ui:576
+#: ui/properties.ui:546
 msgid "Type a currency identifier, for example USD, EUR ..."
 msgstr "Tapez un identifiant de devise, par exemple USD, EUR ..."
 
@@ -4286,7 +4350,15 @@ msgstr "Tapez un identifiant de devise, par exemple USD, EUR ..."
 msgid "Type here a word or a part of word."
 msgstr "Tapez ici un mot ou une partie de mot"
 
-#: ui/main_ribbon.ui:3642 ui/main.ui:3082
+#: ui/main.ui:3082
+msgid ""
+"Type here how much times\n"
+"current resource should be cloned (minimum = 2)"
+msgstr ""
+"Tapez ici le nombre de fois que\n"
+"la ressource courante sera clonée (minimum = 2)"
+
+#: ui/main_ribbon.ui:3642
 msgid ""
 "Type here how much times\n"
 "current ressource should be cloned (minimum = 2)"
@@ -4294,7 +4366,7 @@ msgstr ""
 "Tapez ici le nombre de fois que\n"
 "la ressource courante sera clonée (minimum = 2)"
 
-#: ui/ressources1.ui:974 ui/ressources.ui:1046
+#: ui/ressources.ui:1046
 msgid "Type here the \"minutes\" part if relevant, between 0 and 59."
 msgstr "Tapez ici si nécessaire la partie  \"minutes\", entre 0 et 59."
 
@@ -4362,7 +4434,7 @@ msgstr "Tapez votre courriel"
 msgid "Undo last operation"
 msgstr "Annuler la dernière opération"
 
-#: ui/properties.ui:563
+#: ui/properties.ui:534
 msgid "Units : "
 msgstr "Unités :"
 
@@ -4390,7 +4462,7 @@ msgstr "Utilisez ce calendrier pour choisir la nouvelle date de début"
 msgid "User identifier "
 msgstr "Identifiant utilisateur"
 
-#: ressources.c:130 ui/ressources1.ui:488 ui/ressources.ui:447
+#: ressources.c:130 ui/ressources.ui:447
 msgid "Voluntary"
 msgstr "Bénévole"
 
@@ -4440,7 +4512,7 @@ msgstr "Nous avons noté que cette tâche apparaît, aujourd'hui, en retard.\r\n
 msgid "Wed."
 msgstr "Mer."
 
-#: ui/calendars.ui:1160 ui/ressources1.ui:760 ui/ressources.ui:842
+#: ui/calendars.ui:1160 ui/ressources.ui:842
 msgid "Wednesday"
 msgstr "Mercredi"
 
@@ -4456,7 +4528,7 @@ msgstr "Fichiers RTF pour traitement de texte"
 msgid "Work time"
 msgstr "Temps de travail"
 
-#: ui/ressources1.ui:702 ui/ressources.ui:787
+#: ui/ressources.ui:787
 msgid "Working days : "
 msgstr "Jours de travail :"
 
@@ -4583,8 +4655,8 @@ msgstr "achevée hier"
 msgid "date"
 msgstr "date"
 
-#: ui/calendars.ui:939 ui/calendars.ui:968 ui/properties.ui:262
-#: ui/properties.ui:392 ui/tasks.ui:520
+#: ui/calendars.ui:939 ui/calendars.ui:968 ui/properties.ui:260
+#: ui/properties.ui:376 ui/tasks.ui:520
 msgid "date ..."
 msgstr "date ..."
 
@@ -4604,7 +4676,7 @@ msgstr "f2"
 msgid "f3"
 msgstr "f3"
 
-#: ui/ressources1.ui:351 ui/ressources.ui:351
+#: ui/ressources.ui:351
 msgid "fixed"
 msgstr "fixé"
 
@@ -4622,7 +4694,7 @@ msgstr "d'une autre organisation commerciale"
 msgid "from our organization"
 msgstr "de notre organisation"
 
-#: ui/properties.ui:693
+#: ui/properties.ui:671
 msgid "his/her name"
 msgstr "son nom"
 
@@ -4709,19 +4781,19 @@ msgstr "uniquement pour les participants commençant une tâche demain"
 msgid "overdue"
 msgstr "en retard"
 
-#: ui/ressources1.ui:348 ui/ressources.ui:348
+#: ui/ressources.ui:348
 msgid "per day"
 msgstr "par jour"
 
-#: ui/ressources1.ui:347 ui/ressources.ui:347
+#: ui/ressources.ui:347
 msgid "per hour"
 msgstr "par heure"
 
-#: ui/ressources1.ui:350 ui/ressources.ui:350
+#: ui/ressources.ui:350
 msgid "per month (30 days)"
 msgstr "par mois (30 jours)"
 
-#: ui/ressources1.ui:349 ui/ressources.ui:349
+#: ui/ressources.ui:349
 msgid "per week (5 days)"
 msgstr "par semaine (5 jours)"
 
@@ -4741,7 +4813,7 @@ msgstr "envoyer pour les tâches se terminant aujourd'hui"
 msgid "send for tasks starting tomorrow"
 msgstr "envoyer pour les tâches commençant demain"
 
-#: ui/main.ui:4445
+#: ui/main.ui:4453
 msgid "sending ..."
 msgstr "Envoi ..."
 
@@ -4789,7 +4861,7 @@ msgstr "titre"
 msgid "to"
 msgstr "à"
 
-#: ui/ressources1.ui:541 ui/ressources.ui:494
+#: ui/ressources.ui:494
 msgid "type : "
 msgstr "type : "
 
@@ -4875,6 +4947,13 @@ msgstr "Votre identifiant ou adresse de courriel"
 #: ui/settings.ui:1280
 msgid "your password on mail server"
 msgstr "Votre mot de passe sur le serveur de courriel"
+
+#~ msgid "<big><b>Ressource</b></big>"
+#~ msgstr "<big><b>Ressource</b></big>"
+
+#~ msgid "Click this button to choose or change ressource's icon"
+#~ msgstr ""
+#~ "Cliquer sur ce bouton pour choisir ou changer l'icône de la ressource"
 
 #~ msgid "%.2f per unknown rate -  quantity=%.2f"
 #~ msgstr "%.2f par taux inconnu -  quantity=%.2f"

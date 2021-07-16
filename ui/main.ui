@@ -2884,7 +2884,7 @@ CSV format</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
-                        <property name="tooltip-markup" translatable="yes">Click here to set-up a new ressource.
+                        <property name="tooltip-markup" translatable="yes">Click here to set-up a new resource.
 A dialog will be displayed.
 Shortcut &lt;b&gt;[f3]&lt;/b&gt;</property>
                         <signal name="clicked" handler="on_button_add_ressources_activate" swapped="no"/>
@@ -2925,10 +2925,10 @@ Shortcut &lt;b&gt;[f3]&lt;/b&gt;</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="tooltip-markup" translatable="yes">Click here to modify or remove
-the selected ressource.
+the selected resource.
 A dialog will be displayed.
 &lt;i&gt;This button is inactive until a 
-ressource is selected.&lt;/i&gt;
+resource is selected.&lt;/i&gt;
 Shortcut &lt;b&gt;[f2]&lt;/b&gt;</property>
                         <signal name="clicked" handler="on_button_modify_ressources_activate" swapped="no"/>
                         <child>
@@ -2980,8 +2980,8 @@ Shortcut &lt;b&gt;[f2]&lt;/b&gt;</property>
                         <property name="sensitive">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
-                        <property name="tooltip-markup" translatable="yes">Click here to clone the selected ressource.
-&lt;i&gt;This button is inactive until a ressource is selected.&lt;/i&gt;</property>
+                        <property name="tooltip-markup" translatable="yes">Click here to clone the selected resource.
+&lt;i&gt;This button is inactive until a resource is selected.&lt;/i&gt;</property>
                         <signal name="clicked" handler="on_button_clone_ressources_activate" swapped="no"/>
                         <child>
                           <object class="GtkBox" id="box72">
@@ -3033,8 +3033,8 @@ Shortcut &lt;b&gt;[f2]&lt;/b&gt;</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="receives-default">True</property>
-                            <property name="tooltip-markup" translatable="yes">Click here to clone more than 1 time the selected ressource.
-&lt;i&gt;This button is inactive until a ressource is selected.&lt;/i&gt;</property>
+                            <property name="tooltip-markup" translatable="yes">Click here to clone more than 1 time the selected resource.
+&lt;i&gt;This button is inactive until a resource is selected.&lt;/i&gt;</property>
                             <signal name="clicked" handler="on_button_multiply_ressources_activate" swapped="no"/>
                             <child>
                               <object class="GtkBox" id="box68">
@@ -3080,7 +3080,7 @@ Shortcut &lt;b&gt;[f2]&lt;/b&gt;</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="tooltip-text" translatable="yes">Type here how much times
-current ressource should be cloned (minimum = 2)</property>
+current resource should be cloned (minimum = 2)</property>
                             <property name="margin-left">2</property>
                             <property name="text" translatable="yes">2</property>
                             <property name="adjustment">adjusMpy</property>
@@ -3225,7 +3225,7 @@ current ressource should be cloned (minimum = 2)</property>
                   <object class="GtkImage" id="imgRsc">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="tooltip-text" translatable="yes">Ressources</property>
+                    <property name="tooltip-text" translatable="yes">Resources</property>
                     <property name="icon-name">address-book-new</property>
                   </object>
                   <packing>
