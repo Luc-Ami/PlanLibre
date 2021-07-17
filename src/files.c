@@ -2087,3 +2087,253 @@ gint files_copy_snapshot (gchar *path_to_source, APP_data *data)
 }
 
 
+/**********************************
+  save current project datas 
+  in an XML compliant file
+**********************************/
+void save_to_project (gchar *filename, APP_data *data)
+{
+	GDate current_date;
+	GDateTime *my_time;
+	struct lconv *locali;
+    gchar buff[256], buffer[100];/* for gdouble conversions */
+    xmlDocPtr doc = NULL;       /* document pointer */
+    xmlNodePtr root_node = NULL, node = NULL, node1 = NULL;/* node pointers */
+    /* project - see here : https://docs.microsoft.com/en-us/office-project/xml-data-interchange/project-elements-and-xml-structure?view=project-client-2016 */
+    xmlNodePtr save_version_node = NULL;
+    xmlNodePtr uuid_node = NULL, title_node = NULL, subject_node = NULL, company_node = NULL;
+    xmlNodePtr manager_node = NULL;
+    xmlNodePtr schedule_from_start_node = NULL, start_date_node = NULL, finish_date_node = NULL;
+    xmlNodePtr critical_slack_limit_node = NULL, currency_digits_node = NULL, currency_symbol_node = NULL, currency_code_node = NULL;
+    xmlNodePtr calendarUID_node = NULL, default_start_time_node = NULL, MinutesPerDay_node = NULL;
+    xmlNodePtr DefaultTaskType_node = NULL, DefaultStandardRate_node = NULL, DefaultOvertimeRate_node = NULL;
+    xmlNodePtr DurationFormat_node = NULL, WorkFormat_node = NULL, EditableActualCosts_node = NULL, HonorConstraints_node = NULL;
+    xmlNodePtr EarnedValueMethod_node = NULL, InsertedProjectsLikeSummary_node = NULL, MultipleCriticalPaths_node = NULL, NewTasksEffortDriven_node = NULL;
+    xmlNodePtr NewTasksEstimated_node = NULL, SplitsInProgressTasks_node = NULL, SpreadActualCost_node = NULL, SpreadPercentComplete_node = NULL;
+    xmlNodePtr TaskUpdatesResource_node = NULL, FiscalYearStart_node = NULL, WeekStartDay_node = NULL, MoveCompletedEndsBack_node = NULL; 
+    xmlNodePtr MoveRemainingStartsBack_node = NULL, MoveRemainingStartsForward_node = NULL, MoveCompletedEndsForward_node = NULL;
+    xmlNodePtr BaselineForEarnedValue_node = NULL, AutoAddNewResourcesAndTasks_node = NULL, CurrentDate_node = NULL, MicrosoftProjectServerURL_node = NULL;
+    xmlNodePtr Autolink_node = NULL, NewTaskStartDate_node = NULL, DefaultTaskEVMethod_node = NULL, ProjectExternallyEdited_node = NULL;
+    xmlNodePtr ActualsInSync_node = NULL, RemoveFileProperties_node = NULL, AdminProject_node = NULL, ExtendedAttribute_node = NULL;
+    
+    
+    xmlNodePtr properties_node =NULL, rsc_node = NULL, tasks_node = NULL, partner_node = NULL, data_node = NULL;/* node pointers */
+    xmlNodePtr links_node = NULL, calendars_node = NULL;
+    gint i, j, ret;
+
+    /* get current date */
+    g_date_set_time_t (&current_date, time (NULL)); /* date of today */
+    /* get current time, should be unrefed once used */
+    my_time = g_date_time_new_now_local ();
+    /* get currency */
+    locali = localeconv ();
+
+    /* avoid re-entrant call */
+    fStartedSaving = TRUE;
+
+    LIBXML_TEST_VERSION;
+    /* 
+     * Creates a new document, a node and set it as a root node
+     */
+    doc = xmlNewDoc (BAD_CAST "1.0");
+    root_node = xmlNewNode (NULL, BAD_CAST "Project");
+    xmlDocSetRootElement (doc, root_node);
+    /*
+     * Creates a DTD declaration. Isn't mandatory. 
+     */
+    xmlCreateIntSubset (doc, BAD_CAST "PlanLibre", NULL, BAD_CAST "PlanLibre.dtd");
+    
+    /* we build the main nodes */
+    /* save version */
+    save_version_node = xmlNewChild (root_node, NULL, BAD_CAST "Saveversion", NULL);
+    xmlNodeSetContent (save_version_node, BAD_CAST "12");/* 12 for project 2007 */
+    
+    /* UUID */
+    uuid_node = xmlNewChild (root_node, NULL, BAD_CAST "UID", NULL);
+    xmlNodeSetContent (uuid_node, BAD_CAST "1");/* ???? */
+   
+    /* title */
+    title_node = xmlNewChild (root_node, NULL, BAD_CAST "Title", NULL);
+    xmlNodeSetContent (title_node, BAD_CAST data->properties.title);    
+    /* subject */
+    subject_node = xmlNewChild (root_node, NULL, BAD_CAST "Subject", NULL);
+    xmlNodeSetContent (subject_node, BAD_CAST data->properties.summary);
+    /* Company */
+    company_node = xmlNewChild (root_node, NULL, BAD_CAST "Company", NULL);
+    xmlNodeSetContent (company_node, BAD_CAST data->properties.org_name);    
+    /* Manager */
+    manager_node = xmlNewChild (root_node, NULL, BAD_CAST "Manager", NULL);
+    xmlNodeSetContent (manager_node, BAD_CAST data->properties.manager_name);
+    /* schedule from start */
+    schedule_from_start_node = xmlNewChild (root_node, NULL, BAD_CAST "ScheduleFromStart", NULL);
+    xmlNodeSetContent (schedule_from_start_node, BAD_CAST "1");
+        
+    /* start date - required if schedule from start value is TRUE (1) */
+    start_date_node = xmlNewChild (root_node, NULL, BAD_CAST "StartDate", NULL);
+    xmlNodeSetContent (start_date_node, BAD_CAST     
+                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
+                      );
+    /* finish date */
+    finish_date_node = xmlNewChild (root_node, NULL, BAD_CAST "FinishDate", NULL);// TODO mettre parv défaut ide date début
+    xmlNodeSetContent (finish_date_node, BAD_CAST     
+                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
+                      );
+
+    /* critical slack limit */
+    critical_slack_limit_node = xmlNewChild (root_node, NULL, BAD_CAST "CriticalSlackLimit", NULL);
+    xmlNodeSetContent (critical_slack_limit_node, BAD_CAST "0");    
+    /* currency digits */
+    currency_digits_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencyDigits", NULL);
+    xmlNodeSetContent (currency_digits_node, BAD_CAST "2"); 
+    /* currency symbol */
+    currency_symbol_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencySymbol", NULL);
+    if(data->properties.units)
+        xmlNodeSetContent (currency_symbol_node, BAD_CAST locali->currency_symbol); 
+    else
+        xmlNodeSetContent (currency_symbol_node, BAD_CAST locali->int_curr_symbol); 
+    //     printf ("%s\n", locali->int_curr_symbol);  
+    /* currency code must have 3 chars len and mandatory */
+    currency_code_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencyCode", NULL); 
+    xmlNodeSetContent (currency_code_node, BAD_CAST g_strdup_printf ("%.3s", locali->int_curr_symbol));// tODO, à lire dans le système
+    /* calendar UID */
+    calendarUID_node =  xmlNewChild (root_node, NULL, BAD_CAST "CalendarUID", NULL); 
+    xmlNodeSetContent (calendarUID_node, BAD_CAST "1"); 
+    /* default start time for new tasks */
+    default_start_time_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultStartTime", NULL); 
+    xmlNodeSetContent (default_start_time_node, BAD_CAST "08:00:00"); /* TODO !!! */
+    /* minutes worked by day */
+    MinutesPerDay_node = xmlNewChild (root_node, NULL, BAD_CAST "MinutesPerDay", NULL); 
+    xmlNodeSetContent (MinutesPerDay_node, BAD_CAST "480"); /* TODO !!! */
+    /* default new tasks */
+    DefaultTaskType_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultTaskType", NULL); 
+    xmlNodeSetContent (DefaultTaskType_node, BAD_CAST "0"); 
+    /* default standard rate for new resources */
+    DefaultStandardRate_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultStandardRate", NULL);
+    xmlNodeSetContent (DefaultStandardRate_node, BAD_CAST "15");
+    /* default overtime rate for new resources */
+    DefaultOvertimeRate_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultOvertimeRate", NULL);
+    xmlNodeSetContent (DefaultOvertimeRate_node, BAD_CAST "18");    
+    /* default duration mode - 7 means "days" */
+    DurationFormat_node = xmlNewChild (root_node, NULL, BAD_CAST "DurationFormat", NULL);
+    xmlNodeSetContent (DurationFormat_node, BAD_CAST "7");   
+    /* default work format - 2 means hours */
+    WorkFormat_node = xmlNewChild (root_node, NULL, BAD_CAST "WorkFormat", NULL);
+    xmlNodeSetContent (WorkFormat_node, BAD_CAST "2");   
+    /* actual costs */
+    EditableActualCosts_node = xmlNewChild (root_node, NULL, BAD_CAST "EditableActualCosts", NULL);
+    xmlNodeSetContent (EditableActualCosts_node, BAD_CAST "0");      
+    /* constraints */
+    HonorConstraints_node = xmlNewChild (root_node, NULL, BAD_CAST "HonorConstraints", NULL);
+    xmlNodeSetContent (HonorConstraints_node, BAD_CAST "0");
+    /* value method */
+    EarnedValueMethod_node = xmlNewChild (root_node, NULL, BAD_CAST "EarnedValueMethod", NULL);
+    xmlNodeSetContent (EarnedValueMethod_node, BAD_CAST "0");         
+    /* inserted projects */
+    InsertedProjectsLikeSummary_node = xmlNewChild (root_node, NULL, BAD_CAST "InsertedProjectsLikeSummary", NULL);
+    xmlNodeSetContent (InsertedProjectsLikeSummary_node, BAD_CAST "0");
+    /* critical path */
+    MultipleCriticalPaths_node = xmlNewChild (root_node, NULL, BAD_CAST "MultipleCriticalPaths", NULL);
+    xmlNodeSetContent (MultipleCriticalPaths_node, BAD_CAST "0");
+    /* flag tasj effort driven */    
+    NewTasksEffortDriven_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTasksEffortDriven", NULL);
+    xmlNodeSetContent (NewTasksEffortDriven_node, BAD_CAST "0");            
+    /* allow or not estimated duration for new tasks */
+    NewTasksEstimated_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTasksEstimated", NULL);
+    xmlNodeSetContent (NewTasksEstimated_node, BAD_CAST "1");       
+    /* split tasks */
+    SplitsInProgressTasks_node = xmlNewChild (root_node, NULL, BAD_CAST "SplitsInProgressTasks", NULL);
+    xmlNodeSetContent (SplitsInProgressTasks_node, BAD_CAST "0");    
+    /* spread costs */
+    SpreadActualCost_node = xmlNewChild (root_node, NULL, BAD_CAST "SpreadActualCost", NULL);
+    xmlNodeSetContent (SpreadActualCost_node, BAD_CAST "0");      
+    /* percents completed flag */
+    SpreadPercentComplete_node = xmlNewChild (root_node, NULL, BAD_CAST "SpreadPercentComplete", NULL);
+    xmlNodeSetContent (SpreadPercentComplete_node, BAD_CAST "0");     
+    /* flag update tasks and resources */
+    TaskUpdatesResource_node = xmlNewChild (root_node, NULL, BAD_CAST "TaskUpdatesResource", NULL);
+    xmlNodeSetContent (TaskUpdatesResource_node, BAD_CAST "1");     
+    /* fiscal year */
+    FiscalYearStart_node = xmlNewChild (root_node, NULL, BAD_CAST "FiscalYearStart", NULL);
+    xmlNodeSetContent (FiscalYearStart_node, BAD_CAST "0");     
+    /* start day for week, 1 means monday */
+    WeekStartDay_node = xmlNewChild (root_node, NULL, BAD_CAST "WeekStartDay", NULL);
+    xmlNodeSetContent (WeekStartDay_node, BAD_CAST "1");     
+    /* ---- */
+    MoveCompletedEndsBack_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveCompletedEndsBack", NULL);
+    xmlNodeSetContent (MoveCompletedEndsBack_node, BAD_CAST "0");     
+    /* --- */
+    MoveRemainingStartsBack_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveRemainingStartsBack", NULL);
+    xmlNodeSetContent (MoveRemainingStartsBack_node, BAD_CAST "0");    
+    /* ----*/ 
+    MoveRemainingStartsForward_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveRemainingStartsForward", NULL);
+    xmlNodeSetContent (MoveRemainingStartsForward_node, BAD_CAST "0");    
+    /* --- */
+    MoveCompletedEndsForward_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveCompletedEndsForward", NULL);
+    xmlNodeSetContent (MoveCompletedEndsForward_node, BAD_CAST "0");    
+    /* --- */
+    BaselineForEarnedValue_node = xmlNewChild (root_node, NULL, BAD_CAST "BaselineForEarnedValue", NULL);
+    xmlNodeSetContent (BaselineForEarnedValue_node, BAD_CAST "0");
+    /* --- */
+    AutoAddNewResourcesAndTasks_node = xmlNewChild (root_node, NULL, BAD_CAST "AutoAddNewResourcesAndTasks", NULL);
+    xmlNodeSetContent (AutoAddNewResourcesAndTasks_node, BAD_CAST "1");    
+    /* current date : when this file has been generated */
+    CurrentDate_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrentDate", NULL);
+    xmlNodeSetContent (CurrentDate_node, BAD_CAST 
+                       g_strdup_printf ("%d-%02d-%02dT%02d:%02d:00", g_date_get_year (&current_date), g_date_get_month (&current_date), 
+                                        g_date_get_day (&current_date),
+                                        g_date_time_get_hour (my_time),
+                                        g_date_time_get_minute (my_time)
+                       ));  
+    
+    g_date_time_unref (my_time); 
+    /* */
+    MicrosoftProjectServerURL_node = xmlNewChild (root_node, NULL, BAD_CAST "MicrosoftProjectServerURL", NULL);
+    xmlNodeSetContent (MicrosoftProjectServerURL_node, BAD_CAST "1");    
+    /* */
+    Autolink_node = xmlNewChild (root_node, NULL, BAD_CAST "Autolink", NULL);
+    xmlNodeSetContent (Autolink_node, BAD_CAST "1");     
+    /* date choosen when a new task is defined */
+    NewTaskStartDate_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTaskStartDate", NULL);
+    xmlNodeSetContent (NewTaskStartDate_node, BAD_CAST "0");    
+    /* */
+    DefaultTaskEVMethod_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultTaskEVMethod", NULL);
+    xmlNodeSetContent (DefaultTaskEVMethod_node, BAD_CAST "0");    
+    /* */
+    ProjectExternallyEdited_node = xmlNewChild (root_node, NULL, BAD_CAST "ProjectExternallyEdited", NULL);
+    xmlNodeSetContent (ProjectExternallyEdited_node, BAD_CAST "0");         
+    /* */
+    ActualsInSync_node = xmlNewChild (root_node, NULL, BAD_CAST "ActualsInSync", NULL);
+    xmlNodeSetContent (ActualsInSync_node, BAD_CAST "0");     
+    /* */
+    RemoveFileProperties_node = xmlNewChild (root_node, NULL, BAD_CAST "RemoveFileProperties", NULL);
+    xmlNodeSetContent (RemoveFileProperties_node, BAD_CAST "0");     
+    /* flag for 'administrative' projects */
+    AdminProject_node = xmlNewChild (root_node, NULL, BAD_CAST "AdminProject", NULL);
+    xmlNodeSetContent (AdminProject_node, BAD_CAST "0");     
+    /* */
+    ExtendedAttribute_node = xmlNewChild (root_node, NULL, BAD_CAST "ExtendedAttribute", NULL);
+    xmlNodeSetContent (ExtendedAttribute_node, BAD_CAST "");
+
+    
+    /* ressources */
+    rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Ressources", NULL);
+  //  ret = save_ressources (rsc_node, data);
+
+ 
+
+    /* Dumping document to file */
+    xmlSaveFormatFileEnc (filename, doc, "UTF-8", 1);
+
+    /*free the document */
+    xmlFreeDoc (doc);
+
+    /* Free the global variables that may
+     have been allocated by the parser. */
+    xmlCleanupParser ();
+    /* set-up flags */
+    data->fProjectModified = FALSE; 
+    data->fProjectHasName = TRUE;
+    misc_display_app_status (FALSE, data);
+
+    fStartedSaving = FALSE;
+}

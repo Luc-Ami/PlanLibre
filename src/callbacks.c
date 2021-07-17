@@ -1658,6 +1658,10 @@ on_file_save_activate (GtkMenuItem *menuitem, APP_data *data)
   if(data->fProjectHasName == TRUE) {
              path_to_file = g_key_file_get_string (keyString, "application", "current-file", NULL);
              save (path_to_file, data);
+             
+             /* temporarire !!! */
+             save_to_project (g_strdup_printf ("%s.xml", path_to_file), data);
+             
              g_free (path_to_file);
              data->fProjectModified = FALSE;
              return;
