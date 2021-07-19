@@ -1761,22 +1761,22 @@ static gint save_calendars (xmlNodePtr calendars_node, APP_data *data)
      /* schedules */
      for(j=0;j<7;j++) {
         schedule_object = xmlNewChild (calendars_object, NULL, BAD_CAST g_strdup_printf ("Schedule%d", j), NULL);
-        for(k=0;k<4;k++) {
+        for(k = 0; k < 4; k++) {
           period_object = xmlNewChild (schedule_object, NULL, BAD_CAST g_strdup_printf ("Period%d", k), NULL); 
-	  val = 0;
-	  if(tmp_calendars_datas->fDays[j][k])
-	      val = 1;
+	      val = 0;
+	      if(tmp_calendars_datas->fDays[j][k])
+	          val = 1;
           hour1 = tmp_calendars_datas->schedules[j][k][0];
           hour2 = tmp_calendars_datas->schedules[j][k][1];
-// printf("sauve valeurs en mémoire jour=%d période)%d start =%d end=%d\n", j, k, tmp_calendars_datas->schedules[j][k][0], tmp_calendars_datas->schedules[j][k][1]);
+
           if(hour1>1438)
             hour1 = 1438;
           if(hour2>1439)
             hour2 = 1439;
  
-	  xmlNewProp (period_object, BAD_CAST "use", BAD_CAST  g_strdup_printf ("%d", val));
-	  xmlNewProp (period_object, BAD_CAST "start", BAD_CAST  g_strdup_printf ("%d", hour1));
-	  xmlNewProp (period_object, BAD_CAST "end", BAD_CAST  g_strdup_printf ("%d", hour2));
+	      xmlNewProp (period_object, BAD_CAST "use", BAD_CAST  g_strdup_printf ("%d", val));
+	      xmlNewProp (period_object, BAD_CAST "start", BAD_CAST  g_strdup_printf ("%d", hour1));
+	      xmlNewProp (period_object, BAD_CAST "end", BAD_CAST  g_strdup_printf ("%d", hour2));
         }/* next k */
      }/* next j */
      /* each days */
@@ -2087,6 +2087,189 @@ gint files_copy_snapshot (gchar *path_to_source, APP_data *data)
 }
 
 
+/*********************************
+  Local function
+  save calendars part to project
+  * xml file
+*********************************/
+static gint save_calendars_to_project (xmlNodePtr calendars_node, APP_data *data)
+{
+  gint i = 0, ret=0, j, k, val, hour1, hour2, flag, day, hour, min;
+  gboolean fschedule = FALSE;
+  gchar buffer[100];/* for gdouble conversions */
+  GList *l, *l1;
+  calendar *tmp_calendars_datas;
+  GError *error = NULL;
+  xmlNodePtr calendars_UID = NULL, calendars_object = NULL, calendar_name = NULL, schedule_object =NULL, period_object = NULL;
+  xmlNodePtr is_base_node = NULL, week_node = NULL, weekday_node = NULL, day_type_node = NULL, day_working_node = NULL;
+  xmlNodePtr working_day_times_node = NULL, working_time_node = NULL, from_time_node = NULL, to_time_node = NULL;
+  xmlNodePtr exceptions_list_node = NULL, exception_node = NULL, occurrences_node = NULL, time_period_node = NULL;
+  xmlNodePtr occur_node = NULL, exception_name_node = NULL, exception_type_node = NULL;
+  xmlNodePtr from_date_node = NULL, to_date_node = NULL;
+  xmlNodePtr days_object = NULL;
+  calendar_element *element;
+
+
+  /* main loop for all defined calendars */
+//   for(i=0 ; i< g_list_length (data->calendars); i++) {
+  for(i = 0; i < 1; i++) {	/* TODO allow access to call calendars */  
+     l = g_list_nth (data->calendars, i);
+     tmp_calendars_datas = (calendar *)l->data;
+     calendars_object = xmlNewChild (calendars_node, NULL, BAD_CAST "Calendar", NULL);
+     calendars_UID = xmlNewChild (calendars_object, NULL, BAD_CAST "UID", NULL);/* I use internal count as UID */
+     /* from Microsoft : For its other parent elements, UID is an integer. UID values are unique only within a project, not across multiple projects. 
+      * it's possible to use the same value for UID and identifier */
+     xmlNodeSetContent (calendars_UID, BAD_CAST "1");/* only for default calendar */   
+     calendar_name = xmlNewChild (calendars_object, NULL, BAD_CAST "Name", NULL);/* I use internal count as UID */       
+     xmlNodeSetContent (calendar_name, BAD_CAST  tmp_calendars_datas->name);       
+     /* flag for base calendar, i.e. default calendar rank 0 for PlanLibre */
+     is_base_node = xmlNewChild (calendars_object, NULL, BAD_CAST "IsBaseCalendar", NULL);/* I use internal count as UID */       
+     flag = 0;
+     if(i==0) {
+		 flag = 1;
+     }
+     xmlNodeSetContent (is_base_node, BAD_CAST  g_strdup_printf ("%d", flag)); 
+     /* sub node  weekdays */
+     week_node = xmlNewChild (calendars_object, NULL, BAD_CAST "WeekDays", NULL);
+     /* now, all days are a sub node of week_node */
+     /* coding : from Sunday = 1 to saturday = 7 ; working day flag 1, non-working flag = 0 */
+     /* for PlanLibre, monday = 0 to sunday = 6 */
+     /* with PlanLibre, schedules are defined for all days of week, and other days are managed like "exceptions" for ms project */
+     
+     for(j=0;j<7;j++) {
+		weekday_node = xmlNewChild (week_node, NULL, BAD_CAST "WeekDay", NULL);
+		day_type_node = xmlNewChild (weekday_node, NULL, BAD_CAST "DayType", NULL);
+		if(j==0)
+		   day = 2;
+		if(j==1)
+		   day = 3;
+		if(j==2)
+		   day = 4;
+		if(j==3)
+		   day = 5;
+		if(j==4)
+		   day = 6;
+		if(j==5)
+		   day = 7;
+		if(j==6)
+		   day = 1;      
+		xmlNodeSetContent (day_type_node, BAD_CAST  g_strdup_printf ("%d", day)); 
+		/* we must set all days as worked because we transode from PlanLibe to Ms project */
+		day_working_node = xmlNewChild (weekday_node, NULL, BAD_CAST "DayWorking", NULL); 
+		xmlNodeSetContent (day_working_node, BAD_CAST  "1");
+		/* if something is defined in schedule, we change working hours, in other cases we use default schedules */
+		working_day_times_node = xmlNewChild (weekday_node, NULL, BAD_CAST "WorkingTimes", NULL);
+		/* Planlibre allows to defineup to  4 periods of work by day */
+		fschedule = FALSE;
+		for(k=0;k<4;k++) {
+		  if(tmp_calendars_datas->fDays[j][k]) {
+			    fschedule = TRUE;	
+				/* we must test if any of 4 period is defined - in other cases ? */
+				working_time_node = xmlNewChild (working_day_times_node, NULL, BAD_CAST "WorkingTime", NULL);
+				hour1 = tmp_calendars_datas->schedules[j][k][0];
+				hour2 = tmp_calendars_datas->schedules[j][k][1];
+				if(hour1>1438)
+					hour1 = 1438;
+				if(hour2>1439)
+					hour2 = 1439;
+				/* now we convert in HH:MM:SS format */
+				hour = hour1/60;
+				min = hour1-60*hour;
+				from_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "FromTime", NULL);
+				xmlNodeSetContent (from_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+				
+				hour = hour2/60;
+				min = hour2-60*hour;
+				to_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "ToTime", NULL);
+				xmlNodeSetContent (to_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+	        }
+        }/* next k */
+       if(!fschedule) {
+		  /* we use global schedule deined in properties */
+		  working_time_node = xmlNewChild (working_day_times_node, NULL, BAD_CAST "WorkingTime", NULL);
+		  hour1 = data->properties.scheduleStart;
+		  hour2 = data->properties.scheduleEnd;
+		  if(hour1>1438)
+					hour1 = 1438;
+	 	  if(hour2>1439)
+					hour2 = 1439;
+		  /* now we convert in HH:MM:SS format */
+		  hour = hour1/60;
+		  min = hour1-60*hour;
+		  from_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "FromTime", NULL);
+		  xmlNodeSetContent (from_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+				
+		  hour = hour2/60;
+		  min = hour2-60*hour;
+		  to_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "ToTime", NULL);
+		  xmlNodeSetContent (to_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));   
+	   } 
+	 } /* next j */
+     /* each days - equivalent "exceptions" for MS Project */
+     if(g_list_length (tmp_calendars_datas->list) > 0) {
+		 
+		exceptions_list_node = xmlNewChild (calendars_object, NULL, BAD_CAST "Exceptions", NULL);
+		 
+        for(j = 0; j < g_list_length (tmp_calendars_datas->list); j++) {
+   //    days_object = xmlNewChild (calendars_object, NULL, BAD_CAST g_strdup_printf ("Day%d", j), NULL);
+         l1 = g_list_nth (tmp_calendars_datas->list, j);
+         element = (calendar_element *) l1->data;
+         exception_node = xmlNewChild (exceptions_list_node, NULL, BAD_CAST "Exception", NULL);
+         occurrences_node = xmlNewChild (exception_node, NULL, BAD_CAST "EnteredByOccurrences", NULL); 
+         xmlNodeSetContent (occurrences_node, BAD_CAST  "0");  
+         time_period_node = xmlNewChild (exception_node, NULL, BAD_CAST "TimePeriod", NULL); 
+         /* detail of period */
+         from_date_node = xmlNewChild (time_period_node, NULL, BAD_CAST "FromDate", NULL);
+         //         <FromDate>2007-11-22T00:00:00</FromDate>
+         xmlNodeSetContent (from_date_node, BAD_CAST  
+                          g_strdup_printf ("%d-%02d-%02dT00:00:00", element->year, element->month, element->day)
+                           );           
+         to_date_node = xmlNewChild (time_period_node, NULL, BAD_CAST "ToDate", NULL);
+         xmlNodeSetContent (to_date_node, BAD_CAST  
+                          g_strdup_printf ("%d-%02d-%02dT23:59:00", element->year, element->month, element->day)
+                           );          
+         
+         occur_node = xmlNewChild (exception_node, NULL, BAD_CAST "Occurrences", NULL);  
+         xmlNodeSetContent (occur_node, BAD_CAST  "1");  
+                 
+         exception_name_node = xmlNewChild (exception_node, NULL, BAD_CAST "Name", NULL);            
+         
+         /* PlanLibre will only use type 1, fixed date */
+         
+         exception_type_node = xmlNewChild (exception_node, NULL, BAD_CAST "Type", NULL);
+         xmlNodeSetContent (exception_type_node, BAD_CAST  "1");
+         /* day worked or not ? */
+         		/* we must set all days as worked because we transode from PlanLibe to Ms project */
+		 day_working_node = xmlNewChild (exception_node, NULL, BAD_CAST "DayWorking", NULL);
+		 if(element->type == 1) {
+		     xmlNodeSetContent (day_working_node, BAD_CAST  "1");
+		     xmlNodeSetContent (exception_name_node, BAD_CAST  "Worked day"); 
+		 }
+		 else {
+		     xmlNodeSetContent (day_working_node, BAD_CAST  "0");
+		     xmlNodeSetContent (exception_name_node, BAD_CAST  "Non Worked");              
+		 }
+         /* here is coding :
+          *   CAL_TYPE_FORCE_WORKED = 1,
+              CAL_TYPE_NON_WORKED,
+               CAL_TYPE_DAY_OFF,
+               CAL_TYPE_HOLIDAYS,
+               CAL_TYPE_ABSENT,
+               CAL_TYPE_PUBLIC_HOLIDAYS
+          * */
+          
+    //   xmlNewProp (days_object, BAD_CAST "type", BAD_CAST  g_strdup_printf ("%d", element->type));
+    //   xmlNewProp (days_object, BAD_CAST "day", BAD_CAST  g_strdup_printf ("%d", element->day));
+    //   xmlNewProp (days_object, BAD_CAST "month", BAD_CAST  g_strdup_printf ("%d", element->month));
+    //   xmlNewProp (days_object, BAD_CAST "year", BAD_CAST  g_strdup_printf ("%d", element->year));
+         }/* next j for all exception days */
+     }/* endif list */
+  }/* next i */
+
+  return ret;
+}
+
+
 /**********************************
   save current project datas 
   in an XML compliant file
@@ -2116,8 +2299,8 @@ void save_to_project (gchar *filename, APP_data *data)
     xmlNodePtr Autolink_node = NULL, NewTaskStartDate_node = NULL, DefaultTaskEVMethod_node = NULL, ProjectExternallyEdited_node = NULL;
     xmlNodePtr ActualsInSync_node = NULL, RemoveFileProperties_node = NULL, AdminProject_node = NULL, ExtendedAttribute_node = NULL;
     
-    
-    xmlNodePtr properties_node =NULL, rsc_node = NULL, tasks_node = NULL, partner_node = NULL, data_node = NULL;/* node pointers */
+    /* sub sections */
+    xmlNodePtr properties_node = NULL, rsc_node = NULL, tasks_node = NULL;
     xmlNodePtr links_node = NULL, calendars_node = NULL;
     gint i, j, ret;
 
@@ -2314,6 +2497,9 @@ void save_to_project (gchar *filename, APP_data *data)
     ExtendedAttribute_node = xmlNewChild (root_node, NULL, BAD_CAST "ExtendedAttribute", NULL);
     xmlNodeSetContent (ExtendedAttribute_node, BAD_CAST "");
 
+    /* calendars */
+    calendars_node = xmlNewChild (root_node, NULL, BAD_CAST "Calendars", NULL);
+    ret = save_calendars_to_project (calendars_node, data);
     
     /* ressources */
     rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Ressources", NULL);

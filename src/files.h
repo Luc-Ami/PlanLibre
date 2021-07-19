@@ -35,4 +35,6 @@ gint files_append_rsc_from_library (gchar *path_to_file, APP_data *data);
 gchar *files_get_project_summary (APP_data *data);
 gint files_copy_snapshot (gchar *path_to_source, APP_data *data);
 
+void save_to_project (gchar *filename, APP_data *data);
+
 #endif /* FILES_H */
