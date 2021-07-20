@@ -22,6 +22,8 @@
 
 
 
-void save_to_project (gchar *filename, APP_data *data);
+gint save_to_project (gchar *filename, APP_data *data);
+gint export_project_XML (APP_data *data);
+
 
 #endif /* MSPROJECT_H */

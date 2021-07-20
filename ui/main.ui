@@ -464,6 +464,15 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkMenuItem" id="menuExportMSProject">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Export project as MS Project® XML</property>
+                        <property name="use-underline">True</property>
+                        <signal name="activate" handler="on_MSProject_export_project_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkMenuItem" id="menuitemExportTrello">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>

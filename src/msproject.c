@@ -33,6 +33,7 @@
 #include "files.h"
 
 #include "calendars.h" 
+#include "msproject.h" 
 
 /*********************************
   Local function
@@ -524,8 +525,9 @@ static gint save_calendars_to_project (xmlNodePtr calendars_node, APP_data *data
   save current project datas 
   in an XML compliant file
 **********************************/
-void save_to_project (gchar *filename, APP_data *data)
+gint save_to_project (gchar *filename, APP_data *data)
 {
+	gint rc = 0;
 	GDate current_date;
 	GDateTime *my_time;
 	struct lconv *locali;
@@ -776,5 +778,51 @@ void save_to_project (gchar *filename, APP_data *data)
     data->fProjectHasName = TRUE;
     misc_display_app_status (FALSE, data);
 
+   return rc;
+}
 
+
+/****************************
+  save tasks in standard 
+  CSV file, separator is
+  semicolon ";"
+*******************************/
+gint export_project_XML (APP_data *data)
+{
+  gint ret = 0;
+  GKeyFile *keyString;
+  gchar *path_to_file, *filename, *tmpFileName;
+  GtkFileFilter *filter = gtk_file_filter_new ();
+
+  gtk_file_filter_add_pattern (filter, "*.xml");
+  gtk_file_filter_set_name (filter, _("MS Project XML files"));
+
+  keyString = g_object_get_data (G_OBJECT(data->appWindow), "config");
+
+  GtkWidget *dialog = create_saveFileDialog ( _("Export project to MS Project XML file ..."), data);
+  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), g_get_home_dir());
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+  /* run dialog for file selection */
+  if(gtk_dialog_run (GTK_DIALOG(dialog)) == GTK_RESPONSE_OK) {
+    filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+    if(!g_str_has_suffix (filename, ".xml" ) && !g_str_has_suffix (filename, ".XML" )) {
+         /* we correct the filename */
+         tmpFileName = g_strdup_printf ("%s.xml", filename);
+         g_free (filename);
+         filename = tmpFileName;
+    }/* endif extension CSV*/
+    /* TODO : check overwrite */
+
+    gtk_widget_destroy (GTK_WIDGET(dialog)); 
+    ret = save_to_project (filename, data);
+    if(ret!=0) {
+        gchar *msg = g_strdup_printf ("%s", _("Sorry !\nAn error happened during file exportation.\nOperation finished with errors. You can try again, or\ncheck your system."));
+        misc_ErrorDialog (data->appWindow, msg);
+        g_free (msg);
+    }
+    g_free (filename);
+  }
+  else
+     gtk_widget_destroy (GTK_WIDGET(dialog)); 
+  return ret;
 }

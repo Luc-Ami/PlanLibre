@@ -90,6 +90,9 @@ on_timeline_export_drawing_activate (GtkMenuItem *menuitem, APP_data *data);
 void
 on_timeline_time_shift_activate (GtkMenuItem *menuitem, APP_data *data);
 void on_trello_export_project_activate (GtkMenuItem *menuitem, APP_data *data);
+void on_MSProject_export_project_activate (GtkMenuItem *menuitem, APP_data *data);
+
+
 void 
    on_group_time_shift_activate (GtkButton *button, APP_data *data);
 void

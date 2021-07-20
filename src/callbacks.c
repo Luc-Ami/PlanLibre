@@ -211,8 +211,8 @@ void on_trello_export_project_activate (GtkMenuItem *menuitem, APP_data *data)
    gint rc = 0;
    GtkWidget *statusProgress;
 
-  statusProgress = GTK_WIDGET(gtk_builder_get_object (data->builder, "boxProgressMail"));
-  gtk_widget_show_all (GTK_WIDGET(statusProgress));
+   statusProgress = GTK_WIDGET(gtk_builder_get_object (data->builder, "boxProgressMail"));
+   gtk_widget_show_all (GTK_WIDGET(statusProgress));
 
    cursor_busy (data->appWindow);
    rc = trello_export_project (data);
@@ -224,6 +224,23 @@ void on_trello_export_project_activate (GtkMenuItem *menuitem, APP_data *data)
       misc_InfoDialog (data->appWindow, _("Export to Trello completed.\nCongratulations !"));
    }
 }
+
+
+/***********************************
+ PUBLIC
+ Export project as MS Project 2007
+ * XML file
+***********************************/
+void on_MSProject_export_project_activate (GtkMenuItem *menuitem, APP_data *data)
+{
+   gint rc = 0;
+ 
+   rc = export_project_XML (data);
+}
+
+
+
+
 /**********************************************
 
 callback : menus/buttons "timeline" clicked
@@ -1659,10 +1676,7 @@ on_file_save_activate (GtkMenuItem *menuitem, APP_data *data)
   if(data->fProjectHasName == TRUE) {
              path_to_file = g_key_file_get_string (keyString, "application", "current-file", NULL);
              save (path_to_file, data);
-             
-             /* temporarire !!! */
-             save_to_project (g_strdup_printf ("%s.xml", path_to_file), data);
-             
+                        
              g_free (path_to_file);
              data->fProjectModified = FALSE;
              return;
