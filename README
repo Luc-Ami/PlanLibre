@@ -10,7 +10,9 @@ Dependancies :
 - uui
 - goocanvas2.0
 - json-glib
-- lib-gnome-jeyring
+- lib-gnome-keyring
+- libxml-2
+- libcurl
 
 
 How to compile ?
