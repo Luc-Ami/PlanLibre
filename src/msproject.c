@@ -1,0 +1,780 @@
+/************************************************************
+  functions to manage ms project xml files
+
+
+
+#include <libxml/encoding.h>
+#include <libxml/xmlwriter.h>
+****************************/
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+/* translations */
+#include <libintl.h>
+#include <locale.h>
+#include <string.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <string.h>
+#include <glib/gstdio.h> /* g_fopen, etc */
+#include <libxml/encoding.h>
+#include <libxml/xmlwriter.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <libxml/xpath.h>
+#include "support.h" /* glade requirement */
+#include "links.h"
+#include "tasks.h"
+#include "tasksutils.h"
+#include "ressources.h"
+
+
+#include "files.h"
+
+#include "calendars.h" 
+
+/*********************************
+  Local function
+  save calendars part to project
+  * xml file
+*********************************/
+static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
+{
+  gint i = 0, ret = 0, wbs_count = 0, priority, hour1, min1, hour2, min2;
+  GDate current_date;
+  GDateTime *my_time;
+  gchar buffer[100];/* for gdouble conversions */
+  gchar *startDate = NULL, *endDate = NULL;
+  GDate start_date, end_date;
+  GList *l;
+  tasks_data *tmp_tasks_datas;
+  GError *error = NULL;
+  xmlNodePtr tasks_object = NULL, UID_node = NULL, id_node = NULL, name_node = NULL, type_node = NULL, is_null_node = NULL;
+  xmlNodePtr milestone_node = NULL, creation_node = NULL, wbs_node = NULL, outline_number_node = NULL, outline_level_node = NULL;
+  xmlNodePtr priority_node = NULL, start_node = NULL, finish_node = NULL, duration_node = NULL, duration_format_node = NULL;
+  xmlNodePtr resume_node = NULL, effort_node = NULL, recur_node = NULL, over_node = NULL, estimated_node = NULL; 
+  xmlNodePtr summary_node = NULL, critical_node = NULL, sub_node = NULL, sub_read_node = NULL, external_node = NULL;
+  xmlNodePtr fixed_accrual_node = NULL, remain_dur_node = NULL, constraint_type_node = NULL, cal_UID_node = NULL;
+  xmlNodePtr constraint_date_node = NULL, level_assign_node = NULL, leval_can_split_node = NULL, leval_delay_node = NULL;
+  xmlNodePtr level_delay_format_mode = NULL, ignore_rsc_cal_mode = NULL, hidebar_node = NULL, rollup_node = NULL;
+  xmlNodePtr earned_value_node = NULL;
+  
+  g_date_set_time_t (&current_date, time (NULL)); /* date of today */
+  /* get current time, should be unrefed once used */
+  my_time = g_date_time_new_now_local ();  
+  /* main loop */
+
+  for(i = 0; i < g_list_length (data->tasksList); i++) {
+     l = g_list_nth (data->tasksList, i);
+     tmp_tasks_datas = (tasks_data *)l->data;
+         
+     /* if the task is a group, we don't manage it for now */
+     if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
+		 /* task start of declaration */
+		 tasks_object = xmlNewChild (tasks_node, NULL, BAD_CAST "Task", NULL);
+		 /* task identifier */
+		 UID_node = xmlNewChild (tasks_object, NULL, BAD_CAST "UID", NULL);
+		 id_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ID", NULL);
+		 
+		 xmlNodeSetContent (UID_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id));
+		 xmlNodeSetContent (id_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id));      
+		 
+		 /* name */
+		 name_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Name", NULL);
+		 if(tmp_tasks_datas->name) {
+			xmlNodeSetContent (name_node,  BAD_CAST g_strdup_printf ("%s", tmp_tasks_datas->name));
+		 }
+		 else {
+			xmlNodeSetContent (name_node,  BAD_CAST g_strdup_printf ("T%d", tmp_tasks_datas->id));
+		 }
+		 /* type */
+		 type_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Type", NULL);
+		 xmlNodeSetContent (type_node, BAD_CAST "0");/* fixed units */
+		 /* flag */
+		 is_null_node = xmlNewChild (tasks_object, NULL, BAD_CAST "IsNull", NULL);
+		 xmlNodeSetContent (is_null_node, BAD_CAST "0");
+		 /* creation date, not critical */
+		 creation_node = xmlNewChild (tasks_object, NULL, BAD_CAST "CreateDate", NULL);
+		 xmlNodeSetContent (creation_node, BAD_CAST 
+						   g_strdup_printf ("%d-%02d-%02dT%02d:%02d:00", g_date_get_year (&current_date), g_date_get_month (&current_date), 
+											g_date_get_day (&current_date),
+											g_date_time_get_hour (my_time),
+											g_date_time_get_minute (my_time)
+						   ));
+						   
+		 /* WBS - very simplified for now */
+		 if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
+			wbs_count++;
+			wbs_node = xmlNewChild (tasks_object, NULL, BAD_CAST "WBS", NULL);
+			xmlNodeSetContent (wbs_node, BAD_CAST  g_strdup_printf ("%d", wbs_count));
+		 }
+		 /* same, outline number simplified for now */
+		 if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
+			outline_number_node = xmlNewChild (tasks_object, NULL, BAD_CAST "OutlineNumber", NULL);
+			xmlNodeSetContent (outline_number_node, BAD_CAST  g_strdup_printf ("%d", wbs_count));
+		 }
+		 /* same for outline level fixed at level 1 */
+		 if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
+			outline_level_node = xmlNewChild (tasks_object, NULL, BAD_CAST "OutlineLevel", NULL);
+			xmlNodeSetContent (outline_level_node, BAD_CAST  g_strdup_printf ("%d", 1));
+		 }     
+		  
+
+		 /* priority for Project, midle level = 500 >500 is a higher level */
+		 /* for planlibre, 0 = high, 1 = medium, 2 = low */
+		 priority_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Priority", NULL);
+		 switch(tmp_tasks_datas->priority) {
+			case 0: {
+				priority = 1000;
+				break;
+			}
+			case 1: {
+				priority = 500;
+				break;
+			}
+			case 2: {
+				priority = 100;
+				break;
+			}
+			default: {
+				priority = 500;
+			}
+		 }/* end switch */
+		 xmlNodeSetContent (priority_node, BAD_CAST  g_strdup_printf ("%d", priority)); 
+	 
+		 /* start - TODO correct starting hour */
+		 hour1 = data->properties.scheduleStart/60;
+		 min1 =  data->properties.scheduleStart - 60*hour1;
+	   
+		 start_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Start", NULL);
+		 xmlNodeSetContent (start_node, BAD_CAST  g_strdup_printf ("%02d:%02d:%02dT%02d:%02d:00",
+								  tmp_tasks_datas->start_nthYear,
+								  tmp_tasks_datas->start_nthMonth,
+								  tmp_tasks_datas->start_nthDay,
+								  hour1, min1)
+		 
+						   );      
+		 /* finish - don't used for now */ 
+		 hour2 = data->properties.scheduleEnd/60;
+		 min2 =  data->properties.scheduleEnd - 60*hour2;
+		 
+		 finish_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Finish", NULL);
+		 xmlNodeSetContent (finish_node, BAD_CAST  g_strdup_printf ("%02d:%02d:%02dT%02d:%02d:00",
+								  tmp_tasks_datas->end_nthYear,
+								  tmp_tasks_datas->end_nthMonth,
+								  tmp_tasks_datas->end_nthDay,
+								  hour2, min2)
+		 
+						   );       
+		 /* duration */
+		 duration_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Duration", NULL);
+		 min1 = tmp_tasks_datas->days*(data->properties.scheduleEnd-data->properties.scheduleStart); /* here we have a time in minutes */
+		 min1 = min1 + 60*tmp_tasks_datas->minutes;
+		 hour2 = min1/60;
+		 min2 = min1-60*hour2;
+		 if(tmp_tasks_datas->type == TASKS_TYPE_MILESTONE) {
+			hour2 = 0;
+			min2 = 0; 
+	     }
+		 xmlNodeSetContent (duration_node, BAD_CAST  g_strdup_printf ("PT%dH%dM0S", hour2, min2));
+		 /* duration format */
+		 duration_format_node = xmlNewChild (tasks_object, NULL, BAD_CAST "DurationFormat", NULL);
+		 xmlNodeSetContent (duration_format_node, BAD_CAST  "5");/* 5 means hours */                                          
+		 /* test if Milestone - Gnome Planner requires deault value */
+		 milestone_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Milestone", NULL);     
+		 if(tmp_tasks_datas->type == TASKS_TYPE_MILESTONE) {
+			xmlNodeSetContent (milestone_node, BAD_CAST "1");		 
+		 }
+		 else {
+			xmlNodeSetContent (milestone_node, BAD_CAST "0");
+		 }	
+		 /* resume or not a task */
+		 resume_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ResumeValid", NULL);      
+		 xmlNodeSetContent (resume_node, BAD_CAST "0");	     
+		 /* effort drivent flag */
+		 effort_node = xmlNewChild (tasks_object, NULL, BAD_CAST "EffortDriven", NULL);      
+		 xmlNodeSetContent (effort_node, BAD_CAST "1");	      
+		 /* recurring flag */
+		 recur_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Recurring", NULL);      
+		 xmlNodeSetContent (recur_node, BAD_CAST "0");
+		 /* overallocating flag - equivalent to oberload for PlanLibre, like in lanLibre, it's allowed */
+		 over_node = xmlNewChild (tasks_object, NULL, BAD_CAST "OverAllocated", NULL);      
+		 xmlNodeSetContent (over_node, BAD_CAST "1");     
+		 /* set flag duration as estimated */
+		 estimated_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Estimated", NULL);      
+		 xmlNodeSetContent (estimated_node, BAD_CAST "1");     
+		 /* summary ? */
+		 summary_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Summary", NULL);      
+		 xmlNodeSetContent (summary_node, BAD_CAST "0");     
+		 /* flag for critical path */      
+		 critical_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Critical", NULL);      
+		 xmlNodeSetContent (critical_node, BAD_CAST "1");     
+		 /* flags sub project */
+		 sub_node = xmlNewChild (tasks_object, NULL, BAD_CAST "IsSubproject", NULL);      
+		 xmlNodeSetContent (sub_node, BAD_CAST "0");      
+		 sub_read_node = xmlNewChild (tasks_object, NULL, BAD_CAST "IsSubprojectReadOnly", NULL);      
+		 xmlNodeSetContent (sub_read_node, BAD_CAST "0");
+		 external_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ExternalTask", NULL);      
+		 xmlNodeSetContent (external_node, BAD_CAST "0");
+		 /* fixed costs accrual ??? */
+		 fixed_accrual_node = xmlNewChild (tasks_object, NULL, BAD_CAST "FixedCostAccrual", NULL);      
+		 xmlNodeSetContent (fixed_accrual_node, BAD_CAST "2");     
+		 /* remaining duration to complete task - TODO to improve because PlanLibre can manage that */
+		 remain_dur_node = xmlNewChild (tasks_object, NULL, BAD_CAST "RemainingDuration", NULL);        
+		 xmlNodeSetContent (remain_dur_node, BAD_CAST  g_strdup_printf ("PT%dH%dM0S", hour2, min2));     
+		 /* constraints on start and finsih dates  TODO for now I use only as soon as code 0, finish no later = 7 start not earlier 4 must start on 2*/
+		 constraint_type_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ConstraintType", NULL);  
+		 xmlNodeSetContent (constraint_type_node, BAD_CAST "0");           
+		 /* calendar UID, not used for now TODO */
+		 cal_UID_node = xmlNewChild (tasks_object, NULL, BAD_CAST "CalendarUID", NULL);  
+		 xmlNodeSetContent (cal_UID_node, BAD_CAST "-1");           
+		 /* constraint date - to improve, PlanLibre can manage it */
+		 constraint_date_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ConstraintDate", NULL);       
+		 xmlNodeSetContent (constraint_date_node, BAD_CAST "1970-01-01T00:00:00");      
+		 /* flag for assignments */
+		 level_assign_node = xmlNewChild (tasks_object, NULL, BAD_CAST "LevelAssignments", NULL);       
+		 xmlNodeSetContent (level_assign_node, BAD_CAST "0"); 
+		 leval_can_split_node = xmlNewChild (tasks_object, NULL, BAD_CAST "LevelingCanSplit", NULL);       
+		 xmlNodeSetContent (leval_can_split_node, BAD_CAST "0");  
+		 /* leveling delay management */
+		 leval_delay_node = xmlNewChild (tasks_object, NULL, BAD_CAST "LevelingDelay", NULL);       
+		 xmlNodeSetContent (leval_delay_node, BAD_CAST "0");     
+		 level_delay_format_mode = xmlNewChild (tasks_object, NULL, BAD_CAST "LevelingDelayFormat", NULL);       
+		 xmlNodeSetContent (level_delay_format_mode, BAD_CAST "20");  
+		 /* flag ignore reources */
+		 ignore_rsc_cal_mode = xmlNewChild (tasks_object, NULL, BAD_CAST "IgnoreResourceCalendar", NULL);       
+		 xmlNodeSetContent (ignore_rsc_cal_mode, BAD_CAST "0");     
+		 /* hidebar flag */
+		 hidebar_node = xmlNewChild (tasks_object, NULL, BAD_CAST "HideBar", NULL);       
+		 xmlNodeSetContent (hidebar_node, BAD_CAST "0");  
+		 /* rollup flag */
+		 rollup_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Rollup", NULL);       
+		 xmlNodeSetContent (rollup_node, BAD_CAST "0");
+		 earned_value_node = xmlNewChild (tasks_object, NULL, BAD_CAST "EarnedValueMethod", NULL); /* 0 means use % completed */      
+		 xmlNodeSetContent (earned_value_node, BAD_CAST "0");
+	   
+     
+       
+     /* type */
+  //   xmlNewProp (tasks_object, BAD_CAST "Type", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->type));
+     /* timer value */
+  //   xmlNewProp (tasks_object, BAD_CAST "Timer_value", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->timer_val));
+     /*  status */
+  //   xmlNewProp (tasks_object, BAD_CAST "Status", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->status));
+     /*  priority */
+  //   xmlNewProp (tasks_object, BAD_CAST "Priority", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->priority));
+     /*  category */
+  //   xmlNewProp (tasks_object, BAD_CAST "Category", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->category));
+     /*  progress value */
+  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->progress );
+  //   xmlNewProp (tasks_object, BAD_CAST "Progress", BAD_CAST buffer);
+     /* color */
+  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.red );
+  //   xmlNewProp (tasks_object, BAD_CAST "Color_red", BAD_CAST buffer);
+  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.green );
+  //   xmlNewProp (tasks_object, BAD_CAST "Color_green", BAD_CAST buffer);
+  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.blue );
+   //  xmlNewProp (tasks_object, BAD_CAST "Color_blue", BAD_CAST buffer);
+     /* dates */
+  //   startDate = misc_convert_date_to_str (tmp_tasks_datas->start_nthDay, 
+                                       //    tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
+  /*   g_date_set_dmy (&start_date, tmp_tasks_datas->start_nthDay, 
+                                           tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
+     if(startDate) {
+        xmlNewProp (tasks_object, BAD_CAST "Start_date", BAD_CAST g_strdup_printf ("%s", startDate));
+     }
+     else {
+	    xmlNewProp (tasks_object, BAD_CAST "Start_date", BAD_CAST "");
+     }
+     xmlNewProp (tasks_object, BAD_CAST "Start_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthDay));
+     xmlNewProp (tasks_object, BAD_CAST "Start_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthMonth));
+     xmlNewProp (tasks_object, BAD_CAST "Start_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthYear));
+
+     g_date_set_dmy (&end_date, tmp_tasks_datas->end_nthDay, 
+                                           tmp_tasks_datas->end_nthMonth, tmp_tasks_datas->end_nthYear);
+     endDate = misc_convert_date_to_str(tmp_tasks_datas->end_nthDay, tmp_tasks_datas->end_nthMonth, tmp_tasks_datas->end_nthYear);
+     if(endDate) {
+        xmlNewProp (tasks_object, BAD_CAST "End_date", BAD_CAST g_strdup_printf ("%s", endDate));
+     }
+     else {
+        xmlNewProp (tasks_object, BAD_CAST "End_date", BAD_CAST "");
+     }
+     xmlNewProp (tasks_object, BAD_CAST "End_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthDay));
+     xmlNewProp (tasks_object, BAD_CAST "End_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthMonth));
+     xmlNewProp (tasks_object, BAD_CAST "End_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthYear));
+     /* deadline and not before date */
+ /*    xmlNewProp (tasks_object, BAD_CAST "Lim_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthDay));
+     xmlNewProp (tasks_object, BAD_CAST "Lim_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthMonth));
+     xmlNewProp (tasks_object, BAD_CAST "Lim_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthYear));
+     /* delays */
+ /*    xmlNewProp (tasks_object, BAD_CAST "Delay", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->delay));
+     g_free (startDate);
+     g_free (endDate);
+     startDate = NULL;
+     endDate = NULL;
+     /* if sart == end we must add 1 day to end */
+/*
+     gint cmp1 = g_date_compare (&start_date, &end_date);
+     if(cmp1<=0) {
+        g_date_set_dmy (&end_date, tmp_tasks_datas->start_nthDay, 
+                                           tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
+        g_date_add_days (&end_date, 1);
+        tmp_tasks_datas->end_nthDay = g_date_get_day (&end_date);
+        tmp_tasks_datas->end_nthMonth = g_date_get_month (&end_date);
+        tmp_tasks_datas->end_nthYear = g_date_get_year (&end_date);
+     }
+*/
+
+     /* duration, in hours */
+  /*   xmlNewProp (tasks_object, BAD_CAST "Duration", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->durationMode));
+     xmlNewProp (tasks_object, BAD_CAST "Days", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->days));
+     xmlNewProp (tasks_object, BAD_CAST "Hours", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->hours));
+     xmlNewProp (tasks_object, BAD_CAST "Minutes", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->minutes));
+     /* calendar */
+  //   xmlNewProp (tasks_object, BAD_CAST "Calendar", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->calendar));
+     /* group */
+  //   xmlNewProp (tasks_object, BAD_CAST "Group", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->group));
+    }/* endif not group */
+  }/* next i */
+ 
+  
+  return ret;
+}
+
+/*********************************
+  Local function
+  save calendars part to project
+  * xml file
+*********************************/
+static gint save_calendars_to_project (xmlNodePtr calendars_node, APP_data *data)
+{
+  gint i = 0, ret=0, j, k, val, hour1, hour2, flag, day, hour, min;
+  gboolean fschedule = FALSE;
+  gchar buffer[100];/* for gdouble conversions */
+  GList *l, *l1;
+  calendar *tmp_calendars_datas;
+  GError *error = NULL;
+  xmlNodePtr calendars_UID = NULL, calendars_object = NULL, calendar_name = NULL, schedule_object =NULL, period_object = NULL;
+  xmlNodePtr is_base_node = NULL, week_node = NULL, weekday_node = NULL, day_type_node = NULL, day_working_node = NULL;
+  xmlNodePtr working_day_times_node = NULL, working_time_node = NULL, from_time_node = NULL, to_time_node = NULL;
+  xmlNodePtr exceptions_list_node = NULL, exception_node = NULL, occurrences_node = NULL, time_period_node = NULL;
+  xmlNodePtr occur_node = NULL, exception_name_node = NULL, exception_type_node = NULL;
+  xmlNodePtr from_date_node = NULL, to_date_node = NULL;
+  xmlNodePtr days_object = NULL;
+  calendar_element *element;
+
+
+  /* main loop for all defined calendars */
+//   for(i=0 ; i< g_list_length (data->calendars); i++) {
+  for(i = 0; i < 1; i++) {	/* TODO allow access to call calendars */  
+     l = g_list_nth (data->calendars, i);
+     tmp_calendars_datas = (calendar *)l->data;
+     calendars_object = xmlNewChild (calendars_node, NULL, BAD_CAST "Calendar", NULL);
+     calendars_UID = xmlNewChild (calendars_object, NULL, BAD_CAST "UID", NULL);/* I use internal count as UID */
+     /* from Microsoft : For its other parent elements, UID is an integer. UID values are unique only within a project, not across multiple projects. 
+      * it's possible to use the same value for UID and identifier */
+     xmlNodeSetContent (calendars_UID, BAD_CAST "1");/* only for default calendar */   
+     calendar_name = xmlNewChild (calendars_object, NULL, BAD_CAST "Name", NULL);/* I use internal count as UID */       
+     xmlNodeSetContent (calendar_name, BAD_CAST  tmp_calendars_datas->name);       
+     /* flag for base calendar, i.e. default calendar rank 0 for PlanLibre */
+     is_base_node = xmlNewChild (calendars_object, NULL, BAD_CAST "IsBaseCalendar", NULL);/* I use internal count as UID */       
+     flag = 0;
+     if(i==0) {
+		 flag = 1;
+     }
+     xmlNodeSetContent (is_base_node, BAD_CAST  g_strdup_printf ("%d", flag)); 
+     /* sub node  weekdays */
+     week_node = xmlNewChild (calendars_object, NULL, BAD_CAST "WeekDays", NULL);
+     /* now, all days are a sub node of week_node */
+     /* coding : from Sunday = 1 to saturday = 7 ; working day flag 1, non-working flag = 0 */
+     /* for PlanLibre, monday = 0 to sunday = 6 */
+     /* with PlanLibre, schedules are defined for all days of week, and other days are managed like "exceptions" for ms project */
+     
+     for(j=0;j<7;j++) {
+		weekday_node = xmlNewChild (week_node, NULL, BAD_CAST "WeekDay", NULL);
+		day_type_node = xmlNewChild (weekday_node, NULL, BAD_CAST "DayType", NULL);
+		if(j==0)
+		   day = 2;
+		if(j==1)
+		   day = 3;
+		if(j==2)
+		   day = 4;
+		if(j==3)
+		   day = 5;
+		if(j==4)
+		   day = 6;
+		if(j==5)
+		   day = 7;
+		if(j==6)
+		   day = 1;      
+		xmlNodeSetContent (day_type_node, BAD_CAST  g_strdup_printf ("%d", day)); 
+		/* we must set all days as worked because we transode from PlanLibe to Ms project */
+		day_working_node = xmlNewChild (weekday_node, NULL, BAD_CAST "DayWorking", NULL); 
+		xmlNodeSetContent (day_working_node, BAD_CAST  "1");
+		/* if something is defined in schedule, we change working hours, in other cases we use default schedules */
+		working_day_times_node = xmlNewChild (weekday_node, NULL, BAD_CAST "WorkingTimes", NULL);
+		/* Planlibre allows to defineup to  4 periods of work by day */
+		fschedule = FALSE;
+		for(k=0;k<4;k++) {
+		  if(tmp_calendars_datas->fDays[j][k]) {
+			    fschedule = TRUE;	
+				/* we must test if any of 4 period is defined - in other cases ? */
+				working_time_node = xmlNewChild (working_day_times_node, NULL, BAD_CAST "WorkingTime", NULL);
+				hour1 = tmp_calendars_datas->schedules[j][k][0];
+				hour2 = tmp_calendars_datas->schedules[j][k][1];
+				if(hour1>1438)
+					hour1 = 1438;
+				if(hour2>1439)
+					hour2 = 1439;
+				/* now we convert in HH:MM:SS format */
+				hour = hour1/60;
+				min = hour1-60*hour;
+				from_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "FromTime", NULL);
+				xmlNodeSetContent (from_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+				
+				hour = hour2/60;
+				min = hour2-60*hour;
+				to_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "ToTime", NULL);
+				xmlNodeSetContent (to_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+	        }
+        }/* next k */
+       if(!fschedule) {
+		  /* we use global schedule deined in properties */
+		  working_time_node = xmlNewChild (working_day_times_node, NULL, BAD_CAST "WorkingTime", NULL);
+		  hour1 = data->properties.scheduleStart;
+		  hour2 = data->properties.scheduleEnd;
+		  if(hour1>1438)
+					hour1 = 1438;
+	 	  if(hour2>1439)
+					hour2 = 1439;
+		  /* now we convert in HH:MM:SS format */
+		  hour = hour1/60;
+		  min = hour1-60*hour;
+		  from_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "FromTime", NULL);
+		  xmlNodeSetContent (from_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));
+				
+		  hour = hour2/60;
+		  min = hour2-60*hour;
+		  to_time_node = xmlNewChild (working_time_node, NULL, BAD_CAST "ToTime", NULL);
+		  xmlNodeSetContent (to_time_node, BAD_CAST  g_strdup_printf ("%02d:%02d:00", hour, min));   
+	   } 
+	 } /* next j */
+     /* each days - equivalent "exceptions" for MS Project */
+     if(g_list_length (tmp_calendars_datas->list) > 0) {
+		 
+	   exceptions_list_node = xmlNewChild (calendars_object, NULL, BAD_CAST "Exceptions", NULL);
+		 
+       for(j = 0; j < g_list_length (tmp_calendars_datas->list); j++) {
+         l1 = g_list_nth (tmp_calendars_datas->list, j);
+         element = (calendar_element *) l1->data;
+         exception_node = xmlNewChild (exceptions_list_node, NULL, BAD_CAST "Exception", NULL);
+         occurrences_node = xmlNewChild (exception_node, NULL, BAD_CAST "EnteredByOccurrences", NULL); 
+         xmlNodeSetContent (occurrences_node, BAD_CAST  "0");  
+         time_period_node = xmlNewChild (exception_node, NULL, BAD_CAST "TimePeriod", NULL); 
+         /* detail of period */
+         from_date_node = xmlNewChild (time_period_node, NULL, BAD_CAST "FromDate", NULL);
+         //         <FromDate>2007-11-22T00:00:00</FromDate>
+         xmlNodeSetContent (from_date_node, BAD_CAST  
+                          g_strdup_printf ("%d-%02d-%02dT00:00:00", element->year, element->month, element->day)
+                           );           
+         to_date_node = xmlNewChild (time_period_node, NULL, BAD_CAST "ToDate", NULL);
+         xmlNodeSetContent (to_date_node, BAD_CAST  
+                          g_strdup_printf ("%d-%02d-%02dT23:59:00", element->year, element->month, element->day)
+                           );          
+         
+         occur_node = xmlNewChild (exception_node, NULL, BAD_CAST "Occurrences", NULL);  
+         xmlNodeSetContent (occur_node, BAD_CAST  "1");  
+                 
+         exception_name_node = xmlNewChild (exception_node, NULL, BAD_CAST "Name", NULL);            
+         
+         /* PlanLibre will only use type 1, fixed date */
+         
+         exception_type_node = xmlNewChild (exception_node, NULL, BAD_CAST "Type", NULL);
+         xmlNodeSetContent (exception_type_node, BAD_CAST  "1");
+         /* day worked or not ? */
+         /* we must set all days as worked because we transode from PlanLibe to Ms project */
+         /* here is coding :
+            CAL_TYPE_FORCE_WORKED = 1,
+              CAL_TYPE_NON_WORKED,
+               CAL_TYPE_DAY_OFF,
+               CAL_TYPE_HOLIDAYS,
+               CAL_TYPE_ABSENT,
+               CAL_TYPE_PUBLIC_HOLIDAYS
+         */
+		 day_working_node = xmlNewChild (exception_node, NULL, BAD_CAST "DayWorking", NULL);
+		 if(element->type == 1) {
+		     xmlNodeSetContent (day_working_node, BAD_CAST  "1");
+		     xmlNodeSetContent (exception_name_node, BAD_CAST  g_strdup_printf ("%s", _("Worked day"))); 
+		 }
+		 else {
+		     xmlNodeSetContent (day_working_node, BAD_CAST  "0");
+		     xmlNodeSetContent (exception_name_node, BAD_CAST  g_strdup_printf ("%s", _("Non Worked")));              
+		 }
+
+       }/* next j for all exception days */
+     }/* endif list */
+  }/* next i */
+
+  return ret;
+}
+
+
+/**********************************
+  save current project datas 
+  in an XML compliant file
+**********************************/
+void save_to_project (gchar *filename, APP_data *data)
+{
+	GDate current_date;
+	GDateTime *my_time;
+	struct lconv *locali;
+    gchar buff[256], buffer[100];/* for gdouble conversions */
+    xmlDocPtr doc = NULL;       /* document pointer */
+    xmlNodePtr root_node = NULL, node = NULL, node1 = NULL;/* node pointers */
+    /* project - see here : https://docs.microsoft.com/en-us/office-project/xml-data-interchange/project-elements-and-xml-structure?view=project-client-2016 */
+    xmlNodePtr save_version_node = NULL;
+    xmlNodePtr uuid_node = NULL, title_node = NULL, subject_node = NULL, company_node = NULL;
+    xmlNodePtr manager_node = NULL;
+    xmlNodePtr schedule_from_start_node = NULL, start_date_node = NULL, finish_date_node = NULL;
+    xmlNodePtr critical_slack_limit_node = NULL, currency_digits_node = NULL, currency_symbol_node = NULL, currency_code_node = NULL;
+    xmlNodePtr calendarUID_node = NULL, default_start_time_node = NULL, MinutesPerDay_node = NULL;
+    xmlNodePtr DefaultTaskType_node = NULL, DefaultStandardRate_node = NULL, DefaultOvertimeRate_node = NULL;
+    xmlNodePtr DurationFormat_node = NULL, WorkFormat_node = NULL, EditableActualCosts_node = NULL, HonorConstraints_node = NULL;
+    xmlNodePtr EarnedValueMethod_node = NULL, InsertedProjectsLikeSummary_node = NULL, MultipleCriticalPaths_node = NULL, NewTasksEffortDriven_node = NULL;
+    xmlNodePtr NewTasksEstimated_node = NULL, SplitsInProgressTasks_node = NULL, SpreadActualCost_node = NULL, SpreadPercentComplete_node = NULL;
+    xmlNodePtr TaskUpdatesResource_node = NULL, FiscalYearStart_node = NULL, WeekStartDay_node = NULL, MoveCompletedEndsBack_node = NULL; 
+    xmlNodePtr MoveRemainingStartsBack_node = NULL, MoveRemainingStartsForward_node = NULL, MoveCompletedEndsForward_node = NULL;
+    xmlNodePtr BaselineForEarnedValue_node = NULL, AutoAddNewResourcesAndTasks_node = NULL, CurrentDate_node = NULL, MicrosoftProjectServerURL_node = NULL;
+    xmlNodePtr Autolink_node = NULL, NewTaskStartDate_node = NULL, DefaultTaskEVMethod_node = NULL, ProjectExternallyEdited_node = NULL;
+    xmlNodePtr ActualsInSync_node = NULL, RemoveFileProperties_node = NULL, AdminProject_node = NULL, ExtendedAttribute_node = NULL;
+    
+    /* sub sections */
+    xmlNodePtr properties_node = NULL, rsc_node = NULL, tasks_node = NULL;
+    xmlNodePtr links_node = NULL, calendars_node = NULL;
+    gint i, j, ret;
+
+    /* get current date */
+    g_date_set_time_t (&current_date, time (NULL)); /* date of today */
+    /* get current time, should be unrefed once used */
+    my_time = g_date_time_new_now_local ();
+    /* get currency */
+    locali = localeconv ();
+
+ 
+
+    LIBXML_TEST_VERSION;
+    /* 
+     * Creates a new document, a node and set it as a root node
+     */
+    doc = xmlNewDoc (BAD_CAST "1.0");
+    root_node = xmlNewNode (NULL, BAD_CAST "Project");
+    xmlDocSetRootElement (doc, root_node);
+    xmlNewProp (root_node, BAD_CAST "xmlns", BAD_CAST "http://schemas.microsoft.com/project");
+    //xmlNodeSetContent (root_node, BAD_CAST " xmlns=\"http://schemas.microsoft.com/project\"&#62;");
+   
+    /*
+     *NEVER  Creates a DTD declaration. Isn't mandatory. 
+     */
+   // xmlCreateIntSubset (doc, BAD_CAST "PlanLibre", NULL, BAD_CAST "PlanLibre.dtd");
+    
+    /* we build the main nodes */
+    /* save version */
+    save_version_node = xmlNewChild (root_node, NULL, BAD_CAST "Saveversion", NULL);
+    xmlNodeSetContent (save_version_node, BAD_CAST "12");/* 12 for project 2007 */
+    
+    /* UUID */
+    uuid_node = xmlNewChild (root_node, NULL, BAD_CAST "UID", NULL);
+    xmlNodeSetContent (uuid_node, BAD_CAST "1");/* ???? */
+   
+    /* title */
+    title_node = xmlNewChild (root_node, NULL, BAD_CAST "Title", NULL);
+    xmlNodeSetContent (title_node, BAD_CAST data->properties.title);    
+    /* subject */
+    subject_node = xmlNewChild (root_node, NULL, BAD_CAST "Subject", NULL);
+    xmlNodeSetContent (subject_node, BAD_CAST data->properties.summary);
+    /* Company */
+    company_node = xmlNewChild (root_node, NULL, BAD_CAST "Company", NULL);
+    xmlNodeSetContent (company_node, BAD_CAST data->properties.org_name);    
+    /* Manager */
+    manager_node = xmlNewChild (root_node, NULL, BAD_CAST "Manager", NULL);
+    xmlNodeSetContent (manager_node, BAD_CAST data->properties.manager_name);
+    /* schedule from start */
+    schedule_from_start_node = xmlNewChild (root_node, NULL, BAD_CAST "ScheduleFromStart", NULL);
+    xmlNodeSetContent (schedule_from_start_node, BAD_CAST "1");
+        
+    /* start date - required if schedule from start value is TRUE (1) */
+    start_date_node = xmlNewChild (root_node, NULL, BAD_CAST "StartDate", NULL);
+    xmlNodeSetContent (start_date_node, BAD_CAST     
+                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
+                      );
+    /* finish date */
+    finish_date_node = xmlNewChild (root_node, NULL, BAD_CAST "FinishDate", NULL);// TODO mettre parv défaut ide date début
+    xmlNodeSetContent (finish_date_node, BAD_CAST     
+                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
+                      );
+
+    /* critical slack limit */
+    critical_slack_limit_node = xmlNewChild (root_node, NULL, BAD_CAST "CriticalSlackLimit", NULL);
+    xmlNodeSetContent (critical_slack_limit_node, BAD_CAST "0");    
+    /* currency digits */
+    currency_digits_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencyDigits", NULL);
+    xmlNodeSetContent (currency_digits_node, BAD_CAST "2"); 
+    /* currency symbol */
+    currency_symbol_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencySymbol", NULL);
+    if(data->properties.units)
+        xmlNodeSetContent (currency_symbol_node, BAD_CAST locali->currency_symbol); 
+    else
+        xmlNodeSetContent (currency_symbol_node, BAD_CAST locali->int_curr_symbol); 
+    //     printf ("%s\n", locali->int_curr_symbol);  
+    /* currency code must have 3 chars len and mandatory */
+    currency_code_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencyCode", NULL); 
+    xmlNodeSetContent (currency_code_node, BAD_CAST g_strdup_printf ("%.3s", locali->int_curr_symbol));// tODO, à lire dans le système
+    /* calendar UID */
+    calendarUID_node =  xmlNewChild (root_node, NULL, BAD_CAST "CalendarUID", NULL); 
+    xmlNodeSetContent (calendarUID_node, BAD_CAST "1"); 
+    /* default start time for new tasks */
+    default_start_time_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultStartTime", NULL); 
+    xmlNodeSetContent (default_start_time_node, BAD_CAST "08:00:00"); /* TODO !!! */
+    /* minutes worked by day */
+    MinutesPerDay_node = xmlNewChild (root_node, NULL, BAD_CAST "MinutesPerDay", NULL); 
+    xmlNodeSetContent (MinutesPerDay_node, BAD_CAST "480"); /* TODO !!! */
+    /* default new tasks */
+    DefaultTaskType_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultTaskType", NULL); 
+    xmlNodeSetContent (DefaultTaskType_node, BAD_CAST "0"); 
+    /* default standard rate for new resources */
+    DefaultStandardRate_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultStandardRate", NULL);
+    xmlNodeSetContent (DefaultStandardRate_node, BAD_CAST "15");
+    /* default overtime rate for new resources */
+    DefaultOvertimeRate_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultOvertimeRate", NULL);
+    xmlNodeSetContent (DefaultOvertimeRate_node, BAD_CAST "18");    
+    /* default duration mode - 7 means "days" */
+    DurationFormat_node = xmlNewChild (root_node, NULL, BAD_CAST "DurationFormat", NULL);
+    xmlNodeSetContent (DurationFormat_node, BAD_CAST "7");   
+    /* default work format - 2 means hours */
+    WorkFormat_node = xmlNewChild (root_node, NULL, BAD_CAST "WorkFormat", NULL);
+    xmlNodeSetContent (WorkFormat_node, BAD_CAST "2");   
+    /* actual costs */
+    EditableActualCosts_node = xmlNewChild (root_node, NULL, BAD_CAST "EditableActualCosts", NULL);
+    xmlNodeSetContent (EditableActualCosts_node, BAD_CAST "0");      
+    /* constraints */
+    HonorConstraints_node = xmlNewChild (root_node, NULL, BAD_CAST "HonorConstraints", NULL);
+    xmlNodeSetContent (HonorConstraints_node, BAD_CAST "0");
+    /* value method */
+    EarnedValueMethod_node = xmlNewChild (root_node, NULL, BAD_CAST "EarnedValueMethod", NULL);
+    xmlNodeSetContent (EarnedValueMethod_node, BAD_CAST "0");         
+    /* inserted projects */
+    InsertedProjectsLikeSummary_node = xmlNewChild (root_node, NULL, BAD_CAST "InsertedProjectsLikeSummary", NULL);
+    xmlNodeSetContent (InsertedProjectsLikeSummary_node, BAD_CAST "0");
+    /* critical path */
+    MultipleCriticalPaths_node = xmlNewChild (root_node, NULL, BAD_CAST "MultipleCriticalPaths", NULL);
+    xmlNodeSetContent (MultipleCriticalPaths_node, BAD_CAST "0");
+    /* flag tasj effort driven */    
+    NewTasksEffortDriven_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTasksEffortDriven", NULL);
+    xmlNodeSetContent (NewTasksEffortDriven_node, BAD_CAST "0");            
+    /* allow or not estimated duration for new tasks */
+    NewTasksEstimated_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTasksEstimated", NULL);
+    xmlNodeSetContent (NewTasksEstimated_node, BAD_CAST "1");       
+    /* split tasks */
+    SplitsInProgressTasks_node = xmlNewChild (root_node, NULL, BAD_CAST "SplitsInProgressTasks", NULL);
+    xmlNodeSetContent (SplitsInProgressTasks_node, BAD_CAST "0");    
+    /* spread costs */
+    SpreadActualCost_node = xmlNewChild (root_node, NULL, BAD_CAST "SpreadActualCost", NULL);
+    xmlNodeSetContent (SpreadActualCost_node, BAD_CAST "0");      
+    /* percents completed flag */
+    SpreadPercentComplete_node = xmlNewChild (root_node, NULL, BAD_CAST "SpreadPercentComplete", NULL);
+    xmlNodeSetContent (SpreadPercentComplete_node, BAD_CAST "0");     
+    /* flag update tasks and resources */
+    TaskUpdatesResource_node = xmlNewChild (root_node, NULL, BAD_CAST "TaskUpdatesResource", NULL);
+    xmlNodeSetContent (TaskUpdatesResource_node, BAD_CAST "1");     
+    /* fiscal year */
+    FiscalYearStart_node = xmlNewChild (root_node, NULL, BAD_CAST "FiscalYearStart", NULL);
+    xmlNodeSetContent (FiscalYearStart_node, BAD_CAST "0");     
+    /* start day for week, 1 means monday */
+    WeekStartDay_node = xmlNewChild (root_node, NULL, BAD_CAST "WeekStartDay", NULL);
+    xmlNodeSetContent (WeekStartDay_node, BAD_CAST "1");     
+    /* ---- */
+    MoveCompletedEndsBack_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveCompletedEndsBack", NULL);
+    xmlNodeSetContent (MoveCompletedEndsBack_node, BAD_CAST "0");     
+    /* --- */
+    MoveRemainingStartsBack_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveRemainingStartsBack", NULL);
+    xmlNodeSetContent (MoveRemainingStartsBack_node, BAD_CAST "0");    
+    /* ----*/ 
+    MoveRemainingStartsForward_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveRemainingStartsForward", NULL);
+    xmlNodeSetContent (MoveRemainingStartsForward_node, BAD_CAST "0");    
+    /* --- */
+    MoveCompletedEndsForward_node = xmlNewChild (root_node, NULL, BAD_CAST "MoveCompletedEndsForward", NULL);
+    xmlNodeSetContent (MoveCompletedEndsForward_node, BAD_CAST "0");    
+    /* --- */
+    BaselineForEarnedValue_node = xmlNewChild (root_node, NULL, BAD_CAST "BaselineForEarnedValue", NULL);
+    xmlNodeSetContent (BaselineForEarnedValue_node, BAD_CAST "0");
+    /* --- */
+    AutoAddNewResourcesAndTasks_node = xmlNewChild (root_node, NULL, BAD_CAST "AutoAddNewResourcesAndTasks", NULL);
+    xmlNodeSetContent (AutoAddNewResourcesAndTasks_node, BAD_CAST "1");    
+    /* current date : when this file has been generated */
+    CurrentDate_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrentDate", NULL);
+    xmlNodeSetContent (CurrentDate_node, BAD_CAST 
+                       g_strdup_printf ("%d-%02d-%02dT%02d:%02d:00", g_date_get_year (&current_date), g_date_get_month (&current_date), 
+                                        g_date_get_day (&current_date),
+                                        g_date_time_get_hour (my_time),
+                                        g_date_time_get_minute (my_time)
+                       ));  
+    
+    g_date_time_unref (my_time); 
+    /* */
+    MicrosoftProjectServerURL_node = xmlNewChild (root_node, NULL, BAD_CAST "MicrosoftProjectServerURL", NULL);
+    xmlNodeSetContent (MicrosoftProjectServerURL_node, BAD_CAST "1");    
+    /* */
+    Autolink_node = xmlNewChild (root_node, NULL, BAD_CAST "Autolink", NULL);
+    xmlNodeSetContent (Autolink_node, BAD_CAST "1");     
+    /* date choosen when a new task is defined */
+    NewTaskStartDate_node = xmlNewChild (root_node, NULL, BAD_CAST "NewTaskStartDate", NULL);
+    xmlNodeSetContent (NewTaskStartDate_node, BAD_CAST "0");    
+    /* */
+    DefaultTaskEVMethod_node = xmlNewChild (root_node, NULL, BAD_CAST "DefaultTaskEVMethod", NULL);
+    xmlNodeSetContent (DefaultTaskEVMethod_node, BAD_CAST "0");    
+    /* */
+    ProjectExternallyEdited_node = xmlNewChild (root_node, NULL, BAD_CAST "ProjectExternallyEdited", NULL);
+    xmlNodeSetContent (ProjectExternallyEdited_node, BAD_CAST "0");         
+    /* */
+    ActualsInSync_node = xmlNewChild (root_node, NULL, BAD_CAST "ActualsInSync", NULL);
+    xmlNodeSetContent (ActualsInSync_node, BAD_CAST "0");     
+    /* */
+    RemoveFileProperties_node = xmlNewChild (root_node, NULL, BAD_CAST "RemoveFileProperties", NULL);
+    xmlNodeSetContent (RemoveFileProperties_node, BAD_CAST "0");     
+    /* flag for 'administrative' projects */
+    AdminProject_node = xmlNewChild (root_node, NULL, BAD_CAST "AdminProject", NULL);
+    xmlNodeSetContent (AdminProject_node, BAD_CAST "0");     
+    /* */
+    ExtendedAttribute_node = xmlNewChild (root_node, NULL, BAD_CAST "ExtendedAttribute", NULL);
+    xmlNodeSetContent (ExtendedAttribute_node, BAD_CAST "");
+
+    /* calendars */
+    calendars_node = xmlNewChild (root_node, NULL, BAD_CAST "Calendars", NULL);
+    ret = save_calendars_to_project (calendars_node, data);
+    
+    /* tasks */
+    tasks_node =  xmlNewChild (root_node, NULL, BAD_CAST "Tasks", NULL);
+    ret = save_tasks_to_project (tasks_node, data);
+    /* ressources */
+    rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Ressources", NULL);
+  //  ret = save_ressources (rsc_node, data);
+
+ 
+
+    /* Dumping document to file */
+    xmlSaveFormatFileEnc (filename, doc, "UTF-8", 1);
+
+    /*free the document */
+    xmlFreeDoc (doc);
+
+    /* Free the global variables that may
+     have been allocated by the parser. */
+    xmlCleanupParser ();
+    /* set-up flags */
+    data->fProjectModified = FALSE; 
+    data->fProjectHasName = TRUE;
+    misc_display_app_status (FALSE, data);
+
+
+}

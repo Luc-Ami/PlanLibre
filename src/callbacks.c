@@ -46,6 +46,7 @@
 #include "home.h"
 #include "links.h"
 #include "savestate.h"
+#include "msproject.h"
 
 /******************************
   PUBLIC : same CB

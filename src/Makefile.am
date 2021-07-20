@@ -29,6 +29,7 @@ planlibre_SOURCES = \
 	settings.c settings.h \
 	mail.c mail.h \
 	secret.c secret.h \
+	msproject.c msproject.h \	
 	calendars.c calendars.h \
 	dashboard.c dashboard.h \
 	savestate.c savestate.h \
