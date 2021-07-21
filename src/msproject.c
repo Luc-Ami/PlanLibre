@@ -35,9 +35,177 @@
 #include "calendars.h" 
 #include "msproject.h" 
 
+
 /*********************************
   Local function
-  save calendars part to project
+  save resources part to project
+  * xml file
+*********************************/
+static gint save_resources_to_project (xmlNodePtr rsc_node, APP_data *data)
+{
+  gint i = 0, ret = 0;
+  gchar buffer[100];/* for gdouble conversions */
+  GDate current_date;
+  GDateTime *my_time;  
+  GList *l;
+  GError *error = NULL;
+  xmlNodePtr rsc_object = NULL, rsc_object_sub = NULL, name_node = NULL, UID_node = NULL, id_node = NULL;
+  xmlNodePtr isnull_node = NULL, type_node = NULL, initials_node = NULL, email_node = NULL, notes_node = NULL;
+  xmlNodePtr overalloc_node = NULL, creation_node = NULL, std_rate_node = NULL, std_rate_fmt_node = NULL, overtime_rate_node = NULL;
+  xmlNodePtr max_units_node = NULL, calendar_UID_node = NULL;
+  
+  rsc_datas *tmp_rsc_datas;
+
+  g_date_set_time_t (&current_date, time (NULL)); /* date of today */
+  /* get current time, should be unrefed once used */
+  my_time = g_date_time_new_now_local ();  
+  /* main loop */
+
+  for(i = 0; i < g_list_length (data->rscList); i++) {
+     l = g_list_nth (data->rscList, i);
+     tmp_rsc_datas = (rsc_datas *)l->data;
+     rsc_object = xmlNewChild (rsc_node, NULL, BAD_CAST "Resource", NULL);
+     /* UID and Id for current resource */
+     UID_node = xmlNewChild (rsc_object, NULL, BAD_CAST "UID", NULL);
+     id_node = xmlNewChild (rsc_object, NULL, BAD_CAST "ID", NULL);
+		 
+     xmlNodeSetContent (UID_node, BAD_CAST g_strdup_printf ("%d", tmp_rsc_datas->id));
+	 xmlNodeSetContent (id_node, BAD_CAST g_strdup_printf ("%d", tmp_rsc_datas->id));      
+     
+     /* name */
+     name_node = xmlNewChild (rsc_object, NULL, BAD_CAST "Name", NULL);
+     /* initials */
+     initials_node = xmlNewChild (rsc_object, NULL, BAD_CAST "Initials", NULL);
+     if(tmp_rsc_datas->name) {
+        xmlNodeSetContent (name_node,  BAD_CAST g_strdup_printf ("%s",tmp_rsc_datas->name));
+        xmlNodeSetContent (initials_node,  BAD_CAST g_strdup_printf ("%.2s",tmp_rsc_datas->name));
+     }
+     else {
+        xmlNodeSetContent (name_node,  BAD_CAST _("Noname"));
+        xmlNodeSetContent (initials_node,  BAD_CAST _("??"));
+     }
+     
+     /* flags */
+     isnull_node = xmlNewChild (rsc_object, NULL, BAD_CAST "IsNull", NULL);
+     xmlNodeSetContent (isnull_node, BAD_CAST "0");
+     /* type - 0 material, 1 work force 2 cost - PlanLibre 0 human, 1 animal >=2 materials */
+     type_node = xmlNewChild (rsc_object, NULL, BAD_CAST "Type", NULL);
+     if(tmp_rsc_datas->type<2) {
+         xmlNodeSetContent (type_node, BAD_CAST "1");
+     }
+     else {
+         xmlNodeSetContent (type_node, BAD_CAST "0");		 
+	 }
+     /* email */
+     email_node = xmlNewChild (rsc_object, NULL, BAD_CAST "EmailAddress", NULL);
+     if(tmp_rsc_datas->mail) {
+        xmlNodeSetContent (email_node,  BAD_CAST g_strdup_printf ("%s",tmp_rsc_datas->mail));
+     }
+     else {
+        xmlNodeSetContent (email_node,  BAD_CAST "");
+     }
+
+     /* max units */
+     max_units_node = xmlNewChild (rsc_object, NULL, BAD_CAST "MaxUnits", NULL);     
+     g_ascii_dtostr (buffer, 50, tmp_rsc_datas->quantity);
+     xmlNodeSetContent (max_units_node, BAD_CAST buffer);
+  
+     /* notes - reminder */
+     notes_node = xmlNewChild (rsc_object, NULL, BAD_CAST "Notes", NULL);     
+     if(tmp_rsc_datas->reminder) {
+        xmlNodeSetContent (notes_node, BAD_CAST g_strdup_printf ("%s",tmp_rsc_datas->reminder));
+     }
+     else {
+        xmlNodeSetContent (notes_node, BAD_CAST "");
+     }
+     
+     /* OverAllocated == concurrent usage for PlanLibre */
+     overalloc_node = xmlNewChild (rsc_object, NULL, BAD_CAST "OverAllocated", NULL);     
+     if(tmp_rsc_datas->fAllowConcurrent) {    
+		xmlNodeSetContent (overalloc_node, BAD_CAST "1"); 
+	 }
+	 else {
+		xmlNodeSetContent (overalloc_node, BAD_CAST "0"); 
+     }
+     
+     /* creation date, not critical */
+	 creation_node = xmlNewChild (rsc_object, NULL, BAD_CAST "CreationDate", NULL);
+	 xmlNodeSetContent (creation_node, BAD_CAST 
+						   g_strdup_printf ("%d-%02d-%02dT%02d:%02d:00", g_date_get_year (&current_date), g_date_get_month (&current_date), 
+											g_date_get_day (&current_date),
+											g_date_time_get_hour (my_time),
+											g_date_time_get_minute (my_time)
+						   ));
+     
+     
+     /* integer & float */
+     /*  affiliate */
+  //   xmlNewProp (rsc_object, BAD_CAST "Affiliate", BAD_CAST g_strdup_printf ("%d",tmp_rsc_datas->affiliate));
+
+
+     /*  cost value : standard rate for Ms project */
+     std_rate_node = xmlNewChild (rsc_object, NULL, BAD_CAST "StandardRate", NULL);        
+     g_ascii_dtostr (buffer, 50, tmp_rsc_datas->cost);
+     xmlNodeSetContent (std_rate_node, BAD_CAST buffer);
+     /*  cost_type 
+		#define RSC_COST_HOUR 0
+		#define RSC_COST_DAY 1
+		#define RSC_COST_WEEK 2
+		#define RSC_COST_MONTH 3
+		#define RSC_COST_FIXED 4 */     
+     /* rate format : 2 for hours, 8 for material resources */
+     std_rate_fmt_node = xmlNewChild (rsc_object, NULL, BAD_CAST "StandardRateFormat", NULL);
+     switch(tmp_rsc_datas->cost_type<2) { 
+		case 0: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "2");     
+           break;
+        }
+		case 1: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "3");     
+           break;
+        }
+        case 2: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "4");     
+           break;
+        }
+		case 3: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "5");     
+           break;
+        }
+		case 4: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "8");     
+           break;
+        }                        
+		default: {        
+           xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "2");     
+        }        
+     }/* end switch */
+     /* overtime rate - for convenience 20% more for all resources */
+     overtime_rate_node = xmlNewChild (rsc_object, NULL, BAD_CAST "OvertimeRate", NULL);
+     g_ascii_dtostr (buffer, 50, tmp_rsc_datas->cost *1.2);
+     xmlNodeSetContent (overtime_rate_node, BAD_CAST buffer);     
+
+     /* calendar, fow now only standard, default */    
+  //   calendar_UID_node = xmlNewChild (rsc_object, NULL, BAD_CAST "CalendarUID", NULL);
+  //   xmlNodeSetContent (calendar_UID_node, BAD_CAST "1");  
+ 	 
+ 
+
+  //   xmlNewProp (rsc_object, BAD_CAST "calendar", BAD_CAST g_strdup_printf ("%d", tmp_rsc_datas->calendar));
+ //    xmlNewProp (rsc_object, BAD_CAST "hours", BAD_CAST g_strdup_printf ("%d", tmp_rsc_datas->day_hours));
+ //    xmlNewProp (rsc_object, BAD_CAST "minutes", BAD_CAST g_strdup_printf ("%d", tmp_rsc_datas->day_mins));
+
+ 
+  }/* next i */
+  return ret;
+}
+
+
+
+
+/*********************************
+  Local function
+  save tasks part to project
   * xml file
 *********************************/
 static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
@@ -487,7 +655,7 @@ static gint save_calendars_to_project (xmlNodePtr calendars_node, APP_data *data
          occur_node = xmlNewChild (exception_node, NULL, BAD_CAST "Occurrences", NULL);  
          xmlNodeSetContent (occur_node, BAD_CAST  "1");  
                  
-         exception_name_node = xmlNewChild (exception_node, NULL, BAD_CAST "Name", NULL);            
+    //     exception_name_node = xmlNewChild (exception_node, NULL, BAD_CAST "Name", NULL);            
          
          /* PlanLibre will only use type 1, fixed date */
          
@@ -586,8 +754,8 @@ gint save_to_project (gchar *filename, APP_data *data)
     xmlNodeSetContent (save_version_node, BAD_CAST "12");/* 12 for project 2007 */
     
     /* UUID */
-    uuid_node = xmlNewChild (root_node, NULL, BAD_CAST "UID", NULL);
-    xmlNodeSetContent (uuid_node, BAD_CAST "1");/* ???? */
+  //  uuid_node = xmlNewChild (root_node, NULL, BAD_CAST "UID", NULL);
+ //   xmlNodeSetContent (uuid_node, BAD_CAST "1");/* ???? */
    
     /* title */
     title_node = xmlNewChild (root_node, NULL, BAD_CAST "Title", NULL);
@@ -632,7 +800,7 @@ gint save_to_project (gchar *filename, APP_data *data)
     /* currency code must have 3 chars len and mandatory */
     currency_code_node = xmlNewChild (root_node, NULL, BAD_CAST "CurrencyCode", NULL); 
     xmlNodeSetContent (currency_code_node, BAD_CAST g_strdup_printf ("%.3s", locali->int_curr_symbol));// tODO, à lire dans le système
-    /* calendar UID */
+    /* calendar UID - it seems to be the number of calendars defined, not and UID */
     calendarUID_node =  xmlNewChild (root_node, NULL, BAD_CAST "CalendarUID", NULL); 
     xmlNodeSetContent (calendarUID_node, BAD_CAST "1"); 
     /* default start time for new tasks */
@@ -759,8 +927,8 @@ gint save_to_project (gchar *filename, APP_data *data)
     tasks_node =  xmlNewChild (root_node, NULL, BAD_CAST "Tasks", NULL);
     ret = save_tasks_to_project (tasks_node, data);
     /* ressources */
-    rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Ressources", NULL);
-  //  ret = save_ressources (rsc_node, data);
+    rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Resources", NULL);
+    ret = save_resources_to_project (rsc_node, data);
 
  
 
