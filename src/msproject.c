@@ -28,13 +28,64 @@
 #include "tasks.h"
 #include "tasksutils.h"
 #include "ressources.h"
-
+#include "misc.h"
 
 #include "files.h"
 
 #include "calendars.h" 
 #include "msproject.h" 
 
+
+/*********************************
+  Local function
+  save assignments part to project
+  * xml file
+*********************************/
+static gint save_assign_to_project (xmlNodePtr assign_node, APP_data *data)
+{
+  gint i = 0, j, ret = 0, rscId, link, highId;
+  gchar buffer[100];/* for gdouble conversions */
+  GDate current_date;
+  GDateTime *my_time;  
+  GList *l, *l2;
+  GError *error = NULL;
+  rsc_datas *tmp_rsc_datas;
+  tasks_data *tmp_tasks_datas;
+  xmlNodePtr assign_object = NULL, task_UID_node = NULL, rsc_UID_node = NULL, assign_UID_node = NULL;      
+  /* under PlanLibre, assignments are managed as links  */
+  /* and for MS Project, links/assignments requires UID */
+
+  highId = misc_get_highest_id (data);
+  for(i = 0; i<g_list_length (data->rscList); i++) {
+     l = g_list_nth (data->rscList, i);
+     tmp_rsc_datas = (rsc_datas *)l->data;
+     rscId = tmp_rsc_datas->id;
+     /* RscId will become resourceUID under ms project */
+     /* now we do loop inside tasks list, and, in case of current resource is used, we build an element */
+     for(j = 0; j < g_list_length (data->tasksList); j++) {
+        l2 = g_list_nth (data->tasksList, j);
+        tmp_tasks_datas = (tasks_data *)l2->data;		 
+        /* now, we check if ressource 'id' is used by current task */
+        link = links_check_element (tmp_tasks_datas->id, rscId, data);
+        /* if link >= 0 thus we can set up a new Assignment element */
+        if(link >= 0) {
+			/* we have to set an unique UID for the assignment itself */
+			highId++;			
+			assign_object = xmlNewChild (assign_node, NULL, BAD_CAST "Assignment", NULL);
+		    assign_UID_node = xmlNewChild (assign_object, NULL, BAD_CAST "UID", NULL);
+		    xmlNodeSetContent (assign_UID_node, BAD_CAST g_strdup_printf ("%d", highId));
+		    task_UID_node = xmlNewChild (assign_object, NULL, BAD_CAST "TaskUID", NULL); 
+		    xmlNodeSetContent (task_UID_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id)); 
+			rsc_UID_node = xmlNewChild (assign_object, NULL, BAD_CAST "ResourceUID", NULL);
+		    xmlNodeSetContent (rsc_UID_node, BAD_CAST g_strdup_printf ("%d", rscId)); 			
+			
+	    }/* endif link */
+	 }/* next j */
+    
+  }/* next i */  
+  
+  return ret;	
+}	
 
 /*********************************
   Local function
@@ -720,7 +771,7 @@ gint save_to_project (gchar *filename, APP_data *data)
     xmlNodePtr ActualsInSync_node = NULL, RemoveFileProperties_node = NULL, AdminProject_node = NULL, ExtendedAttribute_node = NULL;
     
     /* sub sections */
-    xmlNodePtr properties_node = NULL, rsc_node = NULL, tasks_node = NULL;
+    xmlNodePtr properties_node = NULL, rsc_node = NULL, tasks_node = NULL, assign_node = NULL;
     xmlNodePtr links_node = NULL, calendars_node = NULL;
     gint i, j, ret;
 
@@ -929,7 +980,9 @@ gint save_to_project (gchar *filename, APP_data *data)
     /* ressources */
     rsc_node = xmlNewChild (root_node, NULL, BAD_CAST "Resources", NULL);
     ret = save_resources_to_project (rsc_node, data);
-
+    /* assignments for resources */
+    assign_node = xmlNewChild (root_node, NULL, BAD_CAST "Assignments", NULL);
+    ret = save_assign_to_project (assign_node, data);
  
 
     /* Dumping document to file */
