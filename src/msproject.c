@@ -43,7 +43,8 @@
 *********************************/
 static gint save_assign_to_project (xmlNodePtr assign_node, APP_data *data)
 {
-  gint i = 0, j, ret = 0, rscId, link, highId;
+  gint i = 0, j, ret = 0, rscId, link, highId = 1;
+  gint  hour1, min1, hour2, min2;
   gchar buffer[100];/* for gdouble conversions */
   GDate current_date;
   GDateTime *my_time;  
@@ -51,11 +52,14 @@ static gint save_assign_to_project (xmlNodePtr assign_node, APP_data *data)
   GError *error = NULL;
   rsc_datas *tmp_rsc_datas;
   tasks_data *tmp_tasks_datas;
-  xmlNodePtr assign_object = NULL, task_UID_node = NULL, rsc_UID_node = NULL, assign_UID_node = NULL;      
+  xmlNodePtr assign_object = NULL, task_UID_node = NULL, rsc_UID_node = NULL, assign_UID_node = NULL, assign_over_node = NULL;
+  xmlNodePtr assign_start_node = NULL, assign_finish_node = NULL, assign_units_node = NULL, assign_work_node = NULL;
+  xmlNodePtr time_phase_node = NULL, type_node = NULL, UID_phase_node = NULL, phase_start_node = NULL, phase_finish_node = NULL;
+  xmlNodePtr phase_value_node = NULL, phase_unit_node = NULL;
   /* under PlanLibre, assignments are managed as links  */
   /* and for MS Project, links/assignments requires UID */
 
-  highId = misc_get_highest_id (data);
+  // highId = misc_get_highest_id (data);/* useless assign UIDS are traten separatly by ms project */
   for(i = 0; i<g_list_length (data->rscList); i++) {
      l = g_list_nth (data->rscList, i);
      tmp_rsc_datas = (rsc_datas *)l->data;
@@ -78,7 +82,104 @@ static gint save_assign_to_project (xmlNodePtr assign_node, APP_data *data)
 		    xmlNodeSetContent (task_UID_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id)); 
 			rsc_UID_node = xmlNewChild (assign_object, NULL, BAD_CAST "ResourceUID", NULL);
 		    xmlNodeSetContent (rsc_UID_node, BAD_CAST g_strdup_printf ("%d", rscId)); 			
-			
+			assign_over_node = xmlNewChild (assign_object, NULL, BAD_CAST "OverAllocated", NULL);
+		    xmlNodeSetContent (assign_over_node, BAD_CAST "0");
+		    /* start - TODO correct starting hour for current resource */
+			assign_start_node = xmlNewChild (assign_object, NULL, BAD_CAST "Start", NULL);
+		    hour1 = data->properties.scheduleStart/60;
+		    min1 =  data->properties.scheduleStart - 60*hour1;		    
+		    
+		    xmlNodeSetContent (assign_start_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
+								  tmp_tasks_datas->start_nthYear,
+								  tmp_tasks_datas->start_nthMonth,
+								  tmp_tasks_datas->start_nthDay,
+								  hour1, min1)
+		 
+						   ); 
+		    /* end - TODO correct starting hour for current resource */
+		    hour2 = data->properties.scheduleEnd/60;
+		    min2 =  data->properties.scheduleEnd - 60*hour2;
+		 		    
+		    assign_finish_node = xmlNewChild (assign_object, NULL, BAD_CAST "Finish", NULL);
+		    xmlNodeSetContent (assign_finish_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
+								  tmp_tasks_datas->end_nthYear,
+								  tmp_tasks_datas->end_nthMonth,
+								  tmp_tasks_datas->end_nthDay,
+								  hour2, min2)
+		 
+						   ); 
+			/* units */		    
+		    assign_units_node = xmlNewChild (assign_object, NULL, BAD_CAST "Units", NULL);	
+		    xmlNodeSetContent (assign_units_node, BAD_CAST "1");/* hours */
+		    /* work */
+		    assign_work_node = xmlNewChild (assign_object, NULL, BAD_CAST "Work", NULL);
+		    min1 = tmp_tasks_datas->days*(data->properties.scheduleEnd-data->properties.scheduleStart); /* here we have a time in minutes */
+		    min1 = min1 + 60*tmp_tasks_datas->minutes;
+		    hour2 = min1/60;
+		    min2 = min1-60*hour2;
+		    if(tmp_tasks_datas->type == TASKS_TYPE_MILESTONE) {
+			   hour2 = 0;
+			   min2 = 0; 
+	        }
+		    xmlNodeSetContent (assign_work_node, BAD_CAST  g_strdup_printf ("PT%dH%dM0S", hour2, min2));			    			    					   	    
+		    /* and now we must compute periods ! */
+		    /*
+		                 <TimephasedData>
+                <Type>1</Type>
+                <UID>2</UID>
+                <Start>2021-07-23T10:00:00</Start>
+                <Finish>2021-07-24T10:00:00</Finish>
+                <Unit>3</Unit>
+                <Value>PT8H0M0S</Value>
+            </TimephasedData>
+		  */
+		    /* for now, we use only ONE time phase */
+		    time_phase_node = xmlNewChild (assign_object, NULL, BAD_CAST "TimephasedData", NULL);
+		    type_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "Type", NULL);
+		    xmlNodeSetContent (type_node, BAD_CAST "1");
+		    UID_phase_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "UID", NULL);
+		    xmlNodeSetContent (UID_phase_node, BAD_CAST g_strdup_printf ("%d", highId));/* strictly same as assignment UID */		   
+		    
+		    /* start - TODO correct starting hour for current resource */
+		    hour1 = data->properties.scheduleStart/60;
+		    min1 =  data->properties.scheduleStart - 60*hour1;		    
+		    
+		    phase_start_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "Start", NULL);
+		    xmlNodeSetContent (phase_start_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
+								  tmp_tasks_datas->start_nthYear,
+								  tmp_tasks_datas->start_nthMonth,
+								  tmp_tasks_datas->start_nthDay,
+								  hour1, min1)
+		 
+						   ); 
+
+		    /* finish - don't used for now */ 
+		    hour2 = data->properties.scheduleEnd/60;
+		    min2 =  data->properties.scheduleEnd - 60*hour2;
+		 		    
+		    phase_finish_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "Finish", NULL);
+		    xmlNodeSetContent (phase_finish_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
+								  tmp_tasks_datas->end_nthYear,
+								  tmp_tasks_datas->end_nthMonth,
+								  tmp_tasks_datas->end_nthDay,
+								  hour1, min1)
+		 
+						   ); 
+		    
+		    phase_unit_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "Unit", NULL);
+		    xmlNodeSetContent (phase_unit_node, BAD_CAST "1");/* hours */
+		    /* duration */		    		    
+		    phase_value_node = xmlNewChild (time_phase_node, NULL, BAD_CAST "Value", NULL);
+		    min1 = tmp_tasks_datas->days*(data->properties.scheduleEnd-data->properties.scheduleStart); /* here we have a time in minutes */
+		    min1 = min1 + 60*tmp_tasks_datas->minutes;
+		    hour2 = min1/60;
+		    min2 = min1-60*hour2;
+		    if(tmp_tasks_datas->type == TASKS_TYPE_MILESTONE) {
+			   hour2 = 0;
+			   min2 = 0; 
+	        }
+		    xmlNodeSetContent (phase_value_node, BAD_CAST  g_strdup_printf ("PT%dH%dM0S", hour2, min2));		    
+
 	    }/* endif link */
 	 }/* next j */
     
@@ -206,7 +307,7 @@ static gint save_resources_to_project (xmlNodePtr rsc_node, APP_data *data)
 		#define RSC_COST_FIXED 4 */     
      /* rate format : 2 for hours, 8 for material resources */
      std_rate_fmt_node = xmlNewChild (rsc_object, NULL, BAD_CAST "StandardRateFormat", NULL);
-     switch(tmp_rsc_datas->cost_type<2) { 
+     switch(tmp_rsc_datas->cost_type) { 
 		case 0: {        
            xmlNodeSetContent (std_rate_fmt_node, BAD_CAST "2");     
            break;
@@ -252,6 +353,41 @@ static gint save_resources_to_project (xmlNodePtr rsc_node, APP_data *data)
 }
 
 
+/*******************************
+   LOCAL : check if a task
+    use any task, emit xml 
+    * datas if OK 
+*******************************/
+static gint project_check_task_linked (xmlNodePtr tasks_object, gint tsk, APP_data *data)
+{
+  gint ret = -1, i = 0, sender;
+  GList *l;
+  gint links_list_len = g_list_length (data->linksList);
+  link_datas *tmp_links_datas;
+  xmlNodePtr pred_node = NULL, pred_UID_node = NULL, type_node = NULL, cross_project_node = NULL;
+
+  /* we test if task is sender anywhere  */
+  while( i<links_list_len ) {
+     l = g_list_nth (data->linksList, i);
+     tmp_links_datas = (link_datas *)l->data;
+     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type == LINK_TYPE_TSK_TSK)) {
+        ret = i;
+        sender = tmp_links_datas->sender;
+        pred_node = xmlNewChild (tasks_object, NULL, BAD_CAST "PredecessorLink", NULL); 
+        pred_UID_node = xmlNewChild (pred_node, NULL, BAD_CAST "PredecessorUID", NULL); 
+        xmlNodeSetContent (pred_UID_node, BAD_CAST g_strdup_printf ("%d", sender));
+        type_node = xmlNewChild (pred_node, NULL, BAD_CAST "Type", NULL); 
+        xmlNodeSetContent (type_node, BAD_CAST "1");/* link finish to start */
+        cross_project_node = xmlNewChild (pred_node, NULL, BAD_CAST "CrossProject", NULL);
+        xmlNodeSetContent (cross_project_node, BAD_CAST "0");/* flag, not member of another project */
+        
+                
+     }
+     i++;
+  }/* wend */ 
+
+  return ret;
+}
 
 
 /*********************************
@@ -261,7 +397,7 @@ static gint save_resources_to_project (xmlNodePtr rsc_node, APP_data *data)
 *********************************/
 static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 {
-  gint i = 0, ret = 0, wbs_count = 0, priority, hour1, min1, hour2, min2;
+  gint i = 0, j, ret = 0, wbs_count = 0, priority, hour1, min1, hour2, min2, found;
   GDate current_date;
   GDateTime *my_time;
   gchar buffer[100];/* for gdouble conversions */
@@ -296,7 +432,7 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 /* task identifier */
 		 UID_node = xmlNewChild (tasks_object, NULL, BAD_CAST "UID", NULL);
 		 id_node = xmlNewChild (tasks_object, NULL, BAD_CAST "ID", NULL);
-		 
+		 /* we can't really use the true ID, because something seems wrong with various applications (Planner, ProjectLibre, but not MOOS) when the UID if later than the POSITION */
 		 xmlNodeSetContent (UID_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id));
 		 xmlNodeSetContent (id_node, BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->id));      
 		 
@@ -327,7 +463,8 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
 			wbs_count++;
 			wbs_node = xmlNewChild (tasks_object, NULL, BAD_CAST "WBS", NULL);
-			xmlNodeSetContent (wbs_node, BAD_CAST  g_strdup_printf ("%d", wbs_count));
+		//	xmlNodeSetContent (wbs_node, BAD_CAST  g_strdup_printf ("%d", wbs_count));
+						xmlNodeSetContent (wbs_node, BAD_CAST  "");
 		 }
 		 /* same, outline number simplified for now */
 		 if(tmp_tasks_datas->type != TASKS_TYPE_GROUP) {
@@ -368,7 +505,7 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 min1 =  data->properties.scheduleStart - 60*hour1;
 	   
 		 start_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Start", NULL);
-		 xmlNodeSetContent (start_node, BAD_CAST  g_strdup_printf ("%02d:%02d:%02dT%02d:%02d:00",
+		 xmlNodeSetContent (start_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
 								  tmp_tasks_datas->start_nthYear,
 								  tmp_tasks_datas->start_nthMonth,
 								  tmp_tasks_datas->start_nthDay,
@@ -380,13 +517,15 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 min2 =  data->properties.scheduleEnd - 60*hour2;
 		 
 		 finish_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Finish", NULL);
-		 xmlNodeSetContent (finish_node, BAD_CAST  g_strdup_printf ("%02d:%02d:%02dT%02d:%02d:00",
+		 xmlNodeSetContent (finish_node, BAD_CAST  g_strdup_printf ("%02d-%02d-%02dT%02d:%02d:00",
 								  tmp_tasks_datas->end_nthYear,
 								  tmp_tasks_datas->end_nthMonth,
 								  tmp_tasks_datas->end_nthDay,
 								  hour2, min2)
 		 
-						   );       
+						   );     
+						   
+
 		 /* duration */
 		 duration_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Duration", NULL);
 		 min1 = tmp_tasks_datas->days*(data->properties.scheduleEnd-data->properties.scheduleStart); /* here we have a time in minutes */
@@ -420,10 +559,10 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 xmlNodeSetContent (recur_node, BAD_CAST "0");
 		 /* overallocating flag - equivalent to oberload for PlanLibre, like in lanLibre, it's allowed */
 		 over_node = xmlNewChild (tasks_object, NULL, BAD_CAST "OverAllocated", NULL);      
-		 xmlNodeSetContent (over_node, BAD_CAST "1");     
+		 xmlNodeSetContent (over_node, BAD_CAST "0");     
 		 /* set flag duration as estimated */
 		 estimated_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Estimated", NULL);      
-		 xmlNodeSetContent (estimated_node, BAD_CAST "1");     
+		 xmlNodeSetContent (estimated_node, BAD_CAST "0");     
 		 /* summary ? */
 		 summary_node = xmlNewChild (tasks_object, NULL, BAD_CAST "Summary", NULL);      
 		 xmlNodeSetContent (summary_node, BAD_CAST "0");     
@@ -474,87 +613,10 @@ static gint save_tasks_to_project (xmlNodePtr tasks_node, APP_data *data)
 		 earned_value_node = xmlNewChild (tasks_object, NULL, BAD_CAST "EarnedValueMethod", NULL); /* 0 means use % completed */      
 		 xmlNodeSetContent (earned_value_node, BAD_CAST "0");
 	   
-     
-       
-     /* type */
-  //   xmlNewProp (tasks_object, BAD_CAST "Type", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->type));
-     /* timer value */
-  //   xmlNewProp (tasks_object, BAD_CAST "Timer_value", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->timer_val));
-     /*  status */
-  //   xmlNewProp (tasks_object, BAD_CAST "Status", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->status));
-     /*  priority */
-  //   xmlNewProp (tasks_object, BAD_CAST "Priority", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->priority));
-     /*  category */
-  //   xmlNewProp (tasks_object, BAD_CAST "Category", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->category));
-     /*  progress value */
-  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->progress );
-  //   xmlNewProp (tasks_object, BAD_CAST "Progress", BAD_CAST buffer);
-     /* color */
-  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.red );
-  //   xmlNewProp (tasks_object, BAD_CAST "Color_red", BAD_CAST buffer);
-  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.green );
-  //   xmlNewProp (tasks_object, BAD_CAST "Color_green", BAD_CAST buffer);
-  //   g_ascii_dtostr (buffer, 50, tmp_tasks_datas->color.blue );
-   //  xmlNewProp (tasks_object, BAD_CAST "Color_blue", BAD_CAST buffer);
-     /* dates */
-  //   startDate = misc_convert_date_to_str (tmp_tasks_datas->start_nthDay, 
-                                       //    tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
-  /*   g_date_set_dmy (&start_date, tmp_tasks_datas->start_nthDay, 
-                                           tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
-     if(startDate) {
-        xmlNewProp (tasks_object, BAD_CAST "Start_date", BAD_CAST g_strdup_printf ("%s", startDate));
-     }
-     else {
-	    xmlNewProp (tasks_object, BAD_CAST "Start_date", BAD_CAST "");
-     }
-     xmlNewProp (tasks_object, BAD_CAST "Start_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthDay));
-     xmlNewProp (tasks_object, BAD_CAST "Start_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthMonth));
-     xmlNewProp (tasks_object, BAD_CAST "Start_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->start_nthYear));
-
-     g_date_set_dmy (&end_date, tmp_tasks_datas->end_nthDay, 
-                                           tmp_tasks_datas->end_nthMonth, tmp_tasks_datas->end_nthYear);
-     endDate = misc_convert_date_to_str(tmp_tasks_datas->end_nthDay, tmp_tasks_datas->end_nthMonth, tmp_tasks_datas->end_nthYear);
-     if(endDate) {
-        xmlNewProp (tasks_object, BAD_CAST "End_date", BAD_CAST g_strdup_printf ("%s", endDate));
-     }
-     else {
-        xmlNewProp (tasks_object, BAD_CAST "End_date", BAD_CAST "");
-     }
-     xmlNewProp (tasks_object, BAD_CAST "End_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthDay));
-     xmlNewProp (tasks_object, BAD_CAST "End_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthMonth));
-     xmlNewProp (tasks_object, BAD_CAST "End_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->end_nthYear));
-     /* deadline and not before date */
- /*    xmlNewProp (tasks_object, BAD_CAST "Lim_date_day", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthDay));
-     xmlNewProp (tasks_object, BAD_CAST "Lim_date_month", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthMonth));
-     xmlNewProp (tasks_object, BAD_CAST "Lim_date_year", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->lim_nthYear));
-     /* delays */
- /*    xmlNewProp (tasks_object, BAD_CAST "Delay", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->delay));
-     g_free (startDate);
-     g_free (endDate);
-     startDate = NULL;
-     endDate = NULL;
-     /* if sart == end we must add 1 day to end */
-/*
-     gint cmp1 = g_date_compare (&start_date, &end_date);
-     if(cmp1<=0) {
-        g_date_set_dmy (&end_date, tmp_tasks_datas->start_nthDay, 
-                                           tmp_tasks_datas->start_nthMonth, tmp_tasks_datas->start_nthYear);
-        g_date_add_days (&end_date, 1);
-        tmp_tasks_datas->end_nthDay = g_date_get_day (&end_date);
-        tmp_tasks_datas->end_nthMonth = g_date_get_month (&end_date);
-        tmp_tasks_datas->end_nthYear = g_date_get_year (&end_date);
-     }
-*/
-
-     /* duration, in hours */
-  /*   xmlNewProp (tasks_object, BAD_CAST "Duration", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->durationMode));
-     xmlNewProp (tasks_object, BAD_CAST "Days", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->days));
-     xmlNewProp (tasks_object, BAD_CAST "Hours", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->hours));
-     xmlNewProp (tasks_object, BAD_CAST "Minutes", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->minutes));
-     /* calendar */
-  //   xmlNewProp (tasks_object, BAD_CAST "Calendar", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->calendar));
-     /* group */
-  //   xmlNewProp (tasks_object, BAD_CAST "Group", BAD_CAST g_strdup_printf ("%d", tmp_tasks_datas->group));
+	     /* predecessors ? If we found predecessor(s) we add links  
+	      * we do loop on index j in order to detect links with current task as a receiver 
+	      * TODO : for now, PlanLibre uses only FS links, i.e. type 1 for MS project */
+         found = project_check_task_linked (tasks_object, tmp_tasks_datas->id, data);
     }/* endif not group */
   }/* next i */
  
@@ -743,6 +805,9 @@ static gint save_calendars_to_project (xmlNodePtr calendars_node, APP_data *data
 /**********************************
   save current project datas 
   in an XML compliant file
+  * 
+  * data types are defined here :
+  * 
 **********************************/
 gint save_to_project (gchar *filename, APP_data *data)
 {
@@ -829,10 +894,11 @@ gint save_to_project (gchar *filename, APP_data *data)
     xmlNodeSetContent (start_date_node, BAD_CAST     
                        g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
                       );
-    /* finish date */
+    /* finish date - the finish date is computed with latest task */
+    
     finish_date_node = xmlNewChild (root_node, NULL, BAD_CAST "FinishDate", NULL);// TODO mettre parv défaut ide date début
     xmlNodeSetContent (finish_date_node, BAD_CAST     
-                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.start_nthYear, data->properties.start_nthMonth, data->properties.start_nthDay)
+                       g_strdup_printf ("%d-%02d-%02dT00:00:00", data->properties.end_nthYear, data->properties.end_nthMonth, data->properties.end_nthDay)
                       );
 
     /* critical slack limit */
