@@ -121,11 +121,11 @@ gint links_check_task_linked (gint tsk, APP_data *data)
   gint links_list_len = g_list_length (data->linksList);
   link_datas *tmp_links_datas;
 
-  /* we test if ressource is sender anywhere  */
+  /* we test if task is sender anywhere  */
   while( (i<links_list_len) && (ret<0 ) ) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *)l->data;
-     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type==LINK_TYPE_TSK_TSK))
+     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type == LINK_TYPE_TSK_TSK))
         ret = i;
      i++;
   }/* wend */ 
@@ -171,7 +171,7 @@ gint links_check_task_predecessors (gint tsk, APP_data *data)
   while( (i<links_list_len) && (ret<0 ) ) {
      l = g_list_nth (data->linksList, i);
      tmp_links_datas = (link_datas *)l->data;
-     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type==LINK_TYPE_TSK_TSK))
+     if((tmp_links_datas->receiver == tsk) && (tmp_links_datas->type == LINK_TYPE_TSK_TSK))
         ret = i;
      i++;
   }/* wend */ 
