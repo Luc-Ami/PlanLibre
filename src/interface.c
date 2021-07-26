@@ -188,7 +188,7 @@ GtkWidget *create_aboutPlanlibre (APP_data *data_app)
       gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(dialog), about_icon_pixbuf);
       g_object_unref (G_OBJECT(about_icon_pixbuf));
   }
-  //gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(dialog),"");
+  gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(dialog), PACKAGE_VERSION);/* PACKAGE version from config.h */
   gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(dialog),"");
   gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG(dialog), 
      _("Planning utility written in GTK+ and licensed under GPL v.3"));

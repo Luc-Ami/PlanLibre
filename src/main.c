@@ -125,6 +125,9 @@ int main (int argc, char *argv[]) {
   /* we parse datas from config file - we get the configuration file   */
   app_data.gConfigFile = g_build_filename (g_get_user_config_dir (), 
                        "/planlibre/", PLANLIBRE_CONFIG, NULL); /* Create hidden directory to store PlanLibre config datas */
+                       
+  /* get infos from config.h */
+  printf ("version %s \n", PACKAGE_VERSION);/* first autoge,sh then .c:confure and finally make modify config.h */                     
   /* we check if the directory already exists */
   if(!g_file_test (app_data.gConfigFile, G_FILE_TEST_EXISTS)) {
      printf("* PlanLibre critical : config.ini file absent or corrupted ! *\n");
