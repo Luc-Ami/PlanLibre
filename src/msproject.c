@@ -123,7 +123,7 @@ static gint save_assign_to_project (xmlNodePtr assign_node, APP_data *data)
 	        }
 		    xmlNodeSetContent (assign_work_node, BAD_CAST  g_strdup_printf ("PT%dH%dM0S", hour2, min2));			    			    					   	    
 		    /* and now we must compute periods ! */
-		    /*
+		    /****
 		                 <TimephasedData>
                 <Type>1</Type>
                 <UID>2</UID>
